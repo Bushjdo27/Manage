@@ -26,8 +26,8 @@ export const createFoodOption = async (data) => {
     }
 }
 
-export const updateFoodOption = async (data) => {
-    let payload = await updateFoodOptions(data);
+export const updateFoodOption = async (id ,data) => {
+    let payload = await updateFoodOptions(id,data);
 
     return {
         type: FOOD_OPTIONS_UPDATE,

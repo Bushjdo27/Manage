@@ -28,8 +28,8 @@ export const createCategory = async (data) => {
     }
 }
 
-export const updateCategory = async (data) => {
-    let payload = await updateCategories(data);
+export const updateCategory = async (id, data) => {
+    let payload = await updateCategories(id ,data);
 
     return {
         type: CATEGOREIS_UPDATE,
