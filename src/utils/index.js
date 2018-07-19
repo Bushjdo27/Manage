@@ -81,12 +81,13 @@ export const getListCategories = async () => {
     console.log(result.data)
 }
 
-export const createCategories = async (files) => {
+export const createCategories = async (category) => {
+    const { name, category_type, restaurant_id, files } = category
     let data = {
         category: {
-            name: 'Bushjdo Category',
-            category_type: 'menu',
-            restaurant_id: 1,
+            name,
+            category_type,
+            restaurant_id,
             photo_attributes: {
                 photo: files
             }
@@ -98,12 +99,13 @@ export const createCategories = async (files) => {
 }
 
 
-export const updateCategories = async (id) => {
+export const updateCategories = async (category) => {
+    const { name, category_type, restaurant_id, files } = category
     let data = {
         category: {
-            name: 'Bushjdo Category updated',
-            category_type: 'menu',
-            restaurant_id: 1,
+            name,
+            category_type,
+            restaurant_id,
         }
     }
 
@@ -125,15 +127,16 @@ export const getListFoods = async () => {
     console.log(result)
 }
 
-export const createFoods = async (files) => {
+export const createFoods = async (food) => {
+    const { category_id, name, description, price, files } = food;
     let data = {
         food: {
-            category_id: 1,
-            name: 'Bushjdo Foods',
-            description: 'Best food from bushjdo restaurant',
-            price: 100,
+            category_id,
+            name,
+            description,
+            price,
             photo_attributes: {
-                photo: null
+                photo: files
             }
         }
     }
@@ -143,15 +146,16 @@ export const createFoods = async (files) => {
 }
 
 
-export const updateFoods = async (id, files = undefined) => {
+export const updateFoods = async (id, food) => {
+    const { category_id, name, description, price, files } = food;
     let data = {
         food: {
-            category_id: 2,
-            name: 'Bushjdo Foods updated',
-            description: 'Best of the best from bushjdo restaurant',
-            price: 120,
+            category_id,
+            name,
+            description,
+            price,
             photo_attributes: {
-                photo: undefined
+                photo: files
             }
         }
     }
@@ -175,12 +179,13 @@ export const getListFoodsOptions = async () => {
     console.log(result)
 }
 
-export const createFoodOptions = async () => {
+export const createFoodOptions = async (food_options) => {
+    const { food_id, name, price } = food_options
     let data = {
         food_option: {
-            food_id: 525,
-            name: 'Food Option Bushjdo',
-            price: 100,
+            food_id,
+            name,
+            price,
         }
     }
 
@@ -189,12 +194,13 @@ export const createFoodOptions = async () => {
 }
 
 
-export const updateFoodOptions = async (id) => {
+export const updateFoodOptions = async (food_options) => {
+    const { food_id, name, price } = food_options
     let data = {
         food_option: {
-            food_id: 1,
-            name: 'Food Option Bushjdo',
-            price: 120,
+            food_id,
+            name,
+            price,
         }
     }
 
@@ -217,22 +223,24 @@ export const getListOrdersFoodsOptions = async () => {
 
 
 
-export const createOrderFoodOptions = async () => {
+export const createOrderFoodOptions = async (order_food_option) => {
+    const { food_option_id, order_food_id } = order_food_option
     const data = {
         order_food_option: {
-            food_option_id: 1,
-            order_food_id: 1
+            food_option_id,
+            order_food_id
         }
     }
     const result = await Api('post', '/order_food_options', data);
     console.log(result)
 }
 
-export const updateOrderFoodOptions = async (id) => {
+export const updateOrderFoodOptions = async (id, order_food_option) => {
+    const { food_option_id, order_food_id } = order_food_option
     const data = {
         order_food_option: {
-            food_option_id: 2,
-            order_food_id: 2
+            food_option_id,
+            order_food_id
         }
     }
     const result = await Api('patch', `/order_food_options/${id}`, data);
@@ -254,25 +262,27 @@ export const getListOrdersFoods = async () => {
 }
 
 
-export const createOrderFoods = async () => {
+export const createOrderFoods = async (order_food) => {
+    const { order_id, food_id, amount } = order_food
     const data = {
         order_food: {
-            order_id: 1,
-            food_id: 1,
-            amount: 1
+            order_id,
+            food_id,
+            amount
         }
     }
     const result = await Api('post', '/order_foods', data)
     console.log(result)
 }
 
-export const updateOrderFoods = async (id) => {
+export const updateOrderFoods = async (id, order_food) => {
     //phai giu lai Order_id  , neu ko se co loi
+    const { order_id, food_id, amount } = order_food
     const data = {
         order_food: {
-            order_id: 1,
-            food_id: 5,
-            amount: 5
+            order_id,
+            food_id,
+            amount
         }
     }
     const result = await Api('patch', `/order_foods/${id}`, data);
@@ -293,7 +303,8 @@ export const getListPaymentInfos = async () => {
 }
 
 
-export const createPaymentInfos = async () => {
+export const createPaymentInfos = async (payment) => {
+    const { generatable_type, payment_type, generatable } = payment
     console.log("im in create payment utils")
     const data = {
         payment_info: {
@@ -376,6 +387,7 @@ export const createPaymentInfos = async () => {
  */
 
 export const updatePaymentInfos = async (id) => {
+    //const {}
     const data = {
         payment_info: {
             "paypal_account_attributes": {
@@ -404,22 +416,24 @@ export const getListRestaurantUsers = async () => {
     console.log(result)
 }
 
-export const createRestaurantUsers = async () => {
+export const createRestaurantUsers = async (resUser) => {
+    const { user_id, restaurant_id } = resUser
     const data = {
         restaurant_user: {
-            user_id: 3,
-            restaurant_id: 2
+            user_id,
+            restaurant_id
         }
     }
     const result = await Api('post', '/restaurant_users', data);
     console.log(result)
 }
 
-export const updateRestaurantUsers = async (id) => {
+export const updateRestaurantUsers = async (id, resUser) => {
+    const { user_id, restaurant_id } = resUser
     const data = {
         restaurant_user: {
-            user_id: 5,
-            restaurant_id: 5
+            user_id,
+            restaurant_id
         }
     }
     const result = await Api('patch', `/restaurant_users/${id}`, data);
@@ -437,22 +451,24 @@ export const getListRestaurantEmails = async () => {
     const result = await Api('get', '/restaurant_emails')
     console.log(result)
 }
-export const createRestaurantEmails = async () => {
+export const createRestaurantEmails = async (resEmail) => {
+    const { email, restaurant_id } = resEmail
     const data = {
         restaurant_email: {
-            email: 'bushjdo@gmail.com',
-            restaurant_id: 1
+            email,
+            restaurant_id
         }
     }
     const result = await Api('post', '/restaurant_emails', data);
     console.log(result)
 }
 
-export const updateRestaurantEmails = async (id) => {
+export const updateRestaurantEmails = async (id, resEmail) => {
+    const { email, restaurant_id } = resEmail
     const data = {
         restaurant_email: {
-            email: 'bushjdo2@gmail.com',
-            restaurant_id: 1
+            email,
+            restaurant_id
         }
     }
     const result = await Api('patch', `/restaurant_emails/${id}`, data);
@@ -471,32 +487,34 @@ export const getListUsers = async () => {
     console.log(result)
 }
 
-export const createUsers = async () => {
+export const createUsers = async (user) => {
+    const { nickname, name, phone, address, email, password } = user
     const data = {
         user: {
-            nickname: 'Joker',
-            name: 'Bushjdo',
-            phone: '1321365',
+            nickname,
+            name,
+            phone,
             address_attributes: {
-                address: 'tokyo'
+                address
             },
-            email: 'customer3@example.com',
-            password: '123456'
+            email,
+            password
         }
     }
     const result = await Api('post', '/users', data);
     console.log(result)
 }
 
-export const updateUsers = async (id) => {
+export const updateUsers = async (id, user) => {
+    const { nickname, name, phone, address, email, password } = user
     const data = {
         user: {
-            nickname: 'Joker',
-            name: 'Bushjdo',
-            phone: '1321365',
+            nickname,
+            name,
+            phone,
             address_attributes: {
                 id: 6,
-                address: 'tokyo'
+                address
             },
             restaurant_users_attributes: {
                 0: {
@@ -504,8 +522,8 @@ export const updateUsers = async (id) => {
                     restaurant_id: 1
                 }
             },
-            email: 'admin27@gmail.com',
-            password: '123456'
+            email,
+            password
         }
     }
     const result = await Api('patch', `/users/${id}`, data);
@@ -522,31 +540,34 @@ export const getListNotifications = async () => {
 }
 
 
-export const createNotifications = async (files) => {
+export const createNotifications = async (notification) => {
+    const { subject, message, photo, restaurant_id } = notification
     console.log(files)
     const data = {
         notification: {
-            subject: 'Notification Bushjdo',
-            message: 'Integer eget finibus orci. Etiam porttitor eget es…tincidunt. Quisque pharetra eu dui ut ullamcorper',
+            subject,
+            message,
             photo_attributes: {
-                photo: files
+                photo
             },
-            restaurant_id: 1
+            restaurant_id
         }
     }
     const result = await Api('post', '/notifications', data);
     console.log(result)
 }
 
-export const updateNotifications = async (id) => {
+export const updateNotifications = async (id, notification) => {
+    const { subject, message, photo, restaurant_id, id } = notification
     const data = {
         notification: {
-            subject: 'Notification Bushjdo',
-            message: 'Bushjdo has created a notification',
+            subject,
+            message,
             photo_attributes: {
-                photo: null,
-                restaurant_id: 1
-            }
+                photo,
+                id
+            },
+            restaurant_id
         }
     }
     const result = await Api('patch', `/notifications/${id}`, data);
