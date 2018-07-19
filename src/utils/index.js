@@ -1,0 +1,609 @@
+import axios from 'axios';
+
+const corsURL = "https://cors-anywhere.herokuapp.com/";
+
+
+// ================Restaurant =====================
+
+export const getListRestaurant = async () => {
+    console.log("fetching data")
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/restaurants`)
+    //console.log(result.data);
+    console.log(result.data)
+}
+
+export const createRestaurant = async (data2) => {
+    console.log('posting data')
+    let data = {
+        restaurant: {
+            name: 'Bushjdo',
+            facebook_url: '',
+            youtube_url: '',
+            instagram_url: '',
+            restaurant_users_attributes: {
+                0: {
+                    role: 'super_admin',
+                    user_id: 1
+                }
+            },
+            address_attributes: {
+                address: 'dai hoc can tho'
+            },
+            phone: '123456789',
+            bg_photo_attributes: {
+                photo: null
+            },
+            icon_attributes: {
+                photo: null
+            }
+        }
+    }
+    const result = await Api('post', '/restaurants', data)
+    console.log(result)
+}
+
+export const updateRestaurant = async (id, data2 = {}) => {
+    console.log(`/restaurants/${id}`);
+    let data = {
+        restaurant: {
+            name: 'Bushjdo27',
+            facebook_url: '',
+            youtube_url: '',
+            instagram_url: '',
+
+            phone: '12345678999',
+
+        }
+    }
+
+    try {
+        const result = await Api('patch', `/restaurants/${id}`, data)
+        console.log(result)
+    } catch (e) {
+        console.log(e.getMessage)
+    }
+
+}
+
+
+export const deleteRestaurant = async (id) => {
+    console.log(id);
+    console.log(`/restaurants/${id}`);
+    const result = await Api('delete', `/restaurants/${id}`)
+    console.log(result)
+}
+
+
+//====================== Categories Checked !===================
+
+export const getListCategories = async () => {
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/categories`)
+    console.log(result.data)
+}
+
+export const createCategories = async (files) => {
+    let data = {
+        category: {
+            name: 'Bushjdo Category',
+            category_type: 'menu',
+            restaurant_id: 1,
+            photo_attributes: {
+                photo: files
+            }
+        }
+    }
+
+    const result = await Api('post', '/categories', data)
+    console.log(result)
+}
+
+
+export const updateCategories = async (id) => {
+    let data = {
+        category: {
+            name: 'Bushjdo Category updated',
+            category_type: 'menu',
+            restaurant_id: 1,
+        }
+    }
+
+    const result = await Api('patch', `/categories/${id}`, data)
+    console.log(result)
+}
+
+
+export const deleteCategories = async (id) => {
+    const result = await Api('delete', `/categories/${id}`)
+    console.log(result)
+}
+
+
+//============= Foods Checked ==========================
+
+export const getListFoods = async () => {
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/foods`)
+    console.log(result)
+}
+
+export const createFoods = async (files) => {
+    let data = {
+        food: {
+            category_id: 1,
+            name: 'Bushjdo Foods',
+            description: 'Best food from bushjdo restaurant',
+            price: 100,
+            photo_attributes: {
+                photo: null
+            }
+        }
+    }
+
+    const result = await Api('post', `/foods`, data);
+    console.log(result)
+}
+
+
+export const updateFoods = async (id, files = undefined) => {
+    let data = {
+        food: {
+            category_id: 2,
+            name: 'Bushjdo Foods updated',
+            description: 'Best of the best from bushjdo restaurant',
+            price: 120,
+            photo_attributes: {
+                photo: undefined
+            }
+        }
+    }
+
+    const result = await Api('patch', `/foods/${id}`, data);
+    console.log(result)
+}
+
+
+export const deleteFoods = async (id) => {
+    const result = await Api('delete', `/foods/${id}`);
+    console.log(result)
+}
+
+
+//====================== Food Options Checked ====================
+
+
+export const getListFoodsOptions = async () => {
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/food_options`)
+    console.log(result)
+}
+
+export const createFoodOptions = async () => {
+    let data = {
+        food_option: {
+            food_id: 525,
+            name: 'Food Option Bushjdo',
+            price: 100,
+        }
+    }
+
+    const result = await Api('post', `/food_options`, data);
+    console.log(result)
+}
+
+
+export const updateFoodOptions = async (id) => {
+    let data = {
+        food_option: {
+            food_id: 1,
+            name: 'Food Option Bushjdo',
+            price: 120,
+        }
+    }
+
+    const result = await Api('patch', `/food_options/${id}`, data);
+    console.log(result)
+}
+
+
+export const deleteFoodOptions = async (id) => {
+    const result = await Api('delete', `/food_options/${id}`);
+    console.log(result)
+}
+
+//=================== Order Food Options Checked======================
+
+export const getListOrdersFoodsOptions = async () => {
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_food_options`)
+    console.log(result)
+}
+
+
+
+export const createOrderFoodOptions = async () => {
+    const data = {
+        order_food_option: {
+            food_option_id: 1,
+            order_food_id: 1
+        }
+    }
+    const result = await Api('post', '/order_food_options', data);
+    console.log(result)
+}
+
+export const updateOrderFoodOptions = async (id) => {
+    const data = {
+        order_food_option: {
+            food_option_id: 2,
+            order_food_id: 2
+        }
+    }
+    const result = await Api('patch', `/order_food_options/${id}`, data);
+    console.log(result)
+}
+export const deleteOrderFoodOptions = async (id) => {
+    const result = await Api('delete', `/order_food_options/${id}`);
+    console.log(result)
+}
+
+
+//===================== Order Food Checked ============================
+
+
+export const getListOrdersFoods = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/order_foods')
+    console.log(result)
+}
+
+
+export const createOrderFoods = async () => {
+    const data = {
+        order_food: {
+            order_id: 1,
+            food_id: 1,
+            amount: 1
+        }
+    }
+    const result = await Api('post', '/order_foods', data)
+    console.log(result)
+}
+
+export const updateOrderFoods = async (id) => {
+    //phai giu lai Order_id  , neu ko se co loi
+    const data = {
+        order_food: {
+            order_id: 1,
+            food_id: 5,
+            amount: 5
+        }
+    }
+    const result = await Api('patch', `/order_foods/${id}`, data);
+    console.log(result)
+}
+export const deleteOrderFoods = async (id) => {
+    const result = await Api('delete', `/order_foods/${id}`);
+    console.log(result)
+}
+
+
+//===================== payment infos  Error========================
+
+export const getListPaymentInfos = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/payment_infos')
+    console.log(result)
+}
+
+
+export const createPaymentInfos = async () => {
+    console.log("im in create payment utils")
+    const data = {
+        payment_info: {
+            generatable_type: "Restaurant",
+            generatable_id: 1,
+            payment_type: "card",
+            generatable: {
+                id: 1,
+                name: "Monash University",
+                phone: "(03) 95438889"
+            },
+            "card_account_attributes": {
+                full_name: "phuc vo",
+                number: 4111111111111111,
+                expiry_month: 9,
+                expiry_year: 2019,
+                cvv: 123
+            }
+        }
+    }
+
+
+    const data2 = {
+        "payment_info": {
+            "generatable_type": "Restaurant",
+            "generatable_id": 1,
+            "payment_type": "paypal",
+            "generatable": {
+                "id": 1,
+                "name": "Monash University",
+                "phone": "(03) 95438889"
+            },
+            "paypal_account_attributes": {
+                "paypal_email": "asd@gmail.com"
+            }
+
+        }
+    }
+    console.log('======================== Body request =================================')
+    console.log(data)
+    const result = await Api('post', '/payment_infos', data);
+    console.log(result)
+}
+
+/**
+ * 
+ * generatable_type: 'Restaurant',
+            generatable_id: 1,
+            payment_type: 'card',
+            card_account_attributes: {
+                full_name: 'phucvo',
+                number: 4111111111111111,
+                expiry_month: 9,
+                expiry_year: 2019,
+                cvv: 123
+            },
+            paypal_account_attributes: {
+                paypal_email: 'asd@gmail.com'
+            }
+
+
+
+    ====== Paypal ====
+    {
+	"payment_info": {
+			"generatable_type":"Restaurant",
+            "generatable_id": 1,
+            "payment_type": "paypal",
+            "generatable":{
+            	"id":1,
+            	"name":"Monash University",
+            	"phone":"(03) 95438889"
+            },
+            "paypal_account_attributes": {
+                "paypal_email": "asd@gmail.com"
+            }
+            
+		}
+}
+ */
+
+export const updatePaymentInfos = async (id) => {
+    const data = {
+        payment_info: {
+            "paypal_account_attributes": {
+                "paypal_email": "bushjdo@gmail.com"
+            }
+        }
+    }
+    const result = await Api('patch', `/payment_infos/${id}`, data);
+    console.log(result)
+}
+export const deletePaymentInfos = async (id) => {
+    const result = await Api('delete', `/payment_infos/${id}`);
+    console.log(result)
+}
+
+//===================== payment infos  Error========================
+
+
+// ======================= Restaurant User Checked ====================
+
+
+
+export const getListRestaurantUsers = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/restaurant_users')
+    console.log(result)
+}
+
+export const createRestaurantUsers = async () => {
+    const data = {
+        restaurant_user: {
+            user_id: 3,
+            restaurant_id: 2
+        }
+    }
+    const result = await Api('post', '/restaurant_users', data);
+    console.log(result)
+}
+
+export const updateRestaurantUsers = async (id) => {
+    const data = {
+        restaurant_user: {
+            user_id: 5,
+            restaurant_id: 5
+        }
+    }
+    const result = await Api('patch', `/restaurant_users/${id}`, data);
+    console.log(result)
+}
+export const deleteRestaurantUsers = async (id) => {
+    const result = await Api('delete', `/restaurant_users/${id}`);
+    console.log(result)
+}
+
+//=================== Restaurant Emails Checked=================
+
+export const getListRestaurantEmails = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/restaurant_emails')
+    console.log(result)
+}
+export const createRestaurantEmails = async () => {
+    const data = {
+        restaurant_email: {
+            email: 'bushjdo@gmail.com',
+            restaurant_id: 1
+        }
+    }
+    const result = await Api('post', '/restaurant_emails', data);
+    console.log(result)
+}
+
+export const updateRestaurantEmails = async (id) => {
+    const data = {
+        restaurant_email: {
+            email: 'bushjdo2@gmail.com',
+            restaurant_id: 1
+        }
+    }
+    const result = await Api('patch', `/restaurant_emails/${id}`, data);
+    console.log(result)
+}
+export const deleteRestaurantEmails = async (id) => {
+    const result = await Api('delete', `/restaurant_emails/${id}`);
+    console.log(result)
+}
+
+//====================== Users ========================
+// Can chu y xem lai create
+export const getListUsers = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/users')
+    console.log(result)
+}
+
+export const createUsers = async () => {
+    const data = {
+        user: {
+            nickname: 'Joker',
+            name: 'Bushjdo',
+            phone: '1321365',
+            address_attributes: {
+                address: 'tokyo'
+            },
+            email: 'customer3@example.com',
+            password: '123456'
+        }
+    }
+    const result = await Api('post', '/users', data);
+    console.log(result)
+}
+
+export const updateUsers = async (id) => {
+    const data = {
+        user: {
+            nickname: 'Joker',
+            name: 'Bushjdo',
+            phone: '1321365',
+            address_attributes: {
+                id: 6,
+                address: 'tokyo'
+            },
+            restaurant_users_attributes: {
+                0: {
+                    role: 'admin',
+                    restaurant_id: 1
+                }
+            },
+            email: 'admin27@gmail.com',
+            password: '123456'
+        }
+    }
+    const result = await Api('patch', `/users/${id}`, data);
+    console.log(result)
+}
+
+
+//======================== Notifications Checked ========================
+
+export const getListNotifications = async () => {
+    //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
+    const result = await Api('get', '/notifications')
+    console.log(result)
+}
+
+
+export const createNotifications = async (files) => {
+    console.log(files)
+    const data = {
+        notification: {
+            subject: 'Notification Bushjdo',
+            message: 'Integer eget finibus orci. Etiam porttitor eget es…tincidunt. Quisque pharetra eu dui ut ullamcorper',
+            photo_attributes: {
+                photo: files
+            },
+            restaurant_id: 1
+        }
+    }
+    const result = await Api('post', '/notifications', data);
+    console.log(result)
+}
+
+export const updateNotifications = async (id) => {
+    const data = {
+        notification: {
+            subject: 'Notification Bushjdo',
+            message: 'Bushjdo has created a notification',
+            photo_attributes: {
+                photo: null,
+                restaurant_id: 1
+            }
+        }
+    }
+    const result = await Api('patch', `/notifications/${id}`, data);
+    console.log(result)
+}
+export const deleteNotifications = async (id) => {
+    const result = await Api('delete', `/notifications/${id}`);
+    console.log(result)
+}
+
+const Api = async (method, url, data = {}) => {
+
+    let headers = JSON.parse(localStorage.getItem('headers'));
+
+    let result = {};
+    let config = {
+        url: url,
+        baseURL: `${corsURL}http://tastebagdev.herokuapp.com/`,
+        headers: {
+            'Access-Token': 'wrG-7mYwnikTepGqrBh7WA',
+            'Client': 'CxCRfMpvW0w-up--dK_NKA',
+            'Expiry': 1532488988,
+            'Token-Type': 'Bearer',
+            'Uid': 'super_admin@example.com',
+        },
+        method: method,
+        data: data
+    }
+    result = await axios(config);
+    return result;
+
+}
+
+/**
+ * 
+ * headers: {
+            'Access-Token': headers["access-token"],
+            'Client': headers["client"],
+            'Expiry': headers["expiry"],
+            'Token-Type': 'Bearer',
+            'Uid': 'super_admin@example.com',
+        }
+ * 
+ * 
+ * 
+ * export const getAllComments = (id)=>{
+    return async (dispatch)=>{
+            const allComment = await Api('get',`/posts/${id}/comments`);
+            dispatch({type: ALL_COMMENT , payload: allComment.data});
+            return allComment.data;
+    }
+}
+export const addComment = (comment)=>{
+    return async (dispatch)=>{
+        const addComment = await Api('post','/comments',comment);
+        dispatch({type: ADD_COMMENT , payload:addComment.data});
+        return addComment.data;
+    }
+}
+ */
