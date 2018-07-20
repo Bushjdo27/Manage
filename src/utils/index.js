@@ -16,74 +16,74 @@ export const getListRestaurants = async () => {
 export const createRestaurants = async (data2) => {
     console.log('posting data');
     let fd = new FormData();
-    fd.append("restaurant[name]","Bushjdo");
-    fd.append("restaurant[facebook_url]","");
-    fd.append("restaurant[youtube_url]","Bushjdo");
-    fd.append("restaurant[instagram_url]","Bushjdo");
-    fd.append("restaurant[restaurant_users_attributes][0][role]","super_admin");
-    fd.append("restaurant[restaurant_users_attributes][0][user_id]",1);
-    fd.append("restaurant[address_attributes][address]","melbourne");
-    fd.append("restaurant[phone]","Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][photo]",null);
-    fd.append("restaurant[icon_attributes][photo]",null);
-    let data = {
-        restaurant: {
-            name: 'Bushjdo',
-            facebook_url: '',
-            youtube_url: '',
-            instagram_url: '',
-            restaurant_users_attributes: {
-                0: {
-                    role: 'super_admin',
-                    user_id: 1
-                }
-            },
-            address_attributes: {
-                address: 'dai hoc can tho'
-            },
-            phone: '123456789',
-            bg_photo_attributes: {
-                photo: null
-            },
-            icon_attributes: {
-                photo: null
-            }
-        }
-    }
-    const result = await Api('post', '/restaurants', data)
+    fd.append("restaurant[name]", "Bushjdo");
+    fd.append("restaurant[facebook_url]", "");
+    fd.append("restaurant[youtube_url]", "Bushjdo");
+    fd.append("restaurant[instagram_url]", "Bushjdo");
+    fd.append("restaurant[restaurant_users_attributes][0][role]", "super_admin");
+    fd.append("restaurant[restaurant_users_attributes][0][user_id]", 1);
+    fd.append("restaurant[address_attributes][address]", "melbourne");
+    fd.append("restaurant[phone]", "Bushjdo");
+    fd.append("restaurant[bg_photo_attributes][photo]", null);
+    fd.append("restaurant[icon_attributes][photo]", null);
+    // let data = {
+    //     restaurant: {
+    //         name: 'Bushjdo',
+    //         facebook_url: '',
+    //         youtube_url: '',
+    //         instagram_url: '',
+    //         restaurant_users_attributes: {
+    //             0: {
+    //                 role: 'super_admin',
+    //                 user_id: 1
+    //             }
+    //         },
+    //         address_attributes: {
+    //             address: 'dai hoc can tho'
+    //         },
+    //         phone: '123456789',
+    //         bg_photo_attributes: {
+    //             photo: null
+    //         },
+    //         icon_attributes: {
+    //             photo: null
+    //         }
+    //     }
+    // }
+    const result = await Api('post', '/restaurants', fd)
     console.log(result)
     return result.data;
 }
 
 export const updateRestaurants = async (id, data2 = {}) => {
     console.log(`/restaurants/${id}`);
-    let data = {
-        restaurant: {
-            name: 'Bushjdo27',
-            facebook_url: '',
-            youtube_url: '',
-            instagram_url: '',
+    // let data = {
+    //     restaurant: {
+    //         name: 'Bushjdo27',
+    //         facebook_url: '',
+    //         youtube_url: '',
+    //         instagram_url: '',
 
-            phone: '12345678999',
+    //         phone: '12345678999',
 
-        }
-    }
+    //     }
+    // }
     let fd = new FormData();
-    fd.append("restaurant[name]","Bushjdo");
-    fd.append("restaurant[facebook_url]","");
-    fd.append("restaurant[youtube_url]","Bushjdo");
-    fd.append("restaurant[instagram_url]","Bushjdo");
-    fd.append("restaurant[restaurant_users_attributes][0][role]","super_admin");
-    fd.append("restaurant[restaurant_users_attributes][0][user_id]",1);
-    fd.append("restaurant[address_attributes][id]",1);
-    fd.append("restaurant[address_attributes][address]","melbourne");
-    fd.append("restaurant[phone]","Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][id]","Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][photo]",null);
-    fd.append("restaurant[icon_attributes][id]",null);
-    fd.append("restaurant[icon_attributes][photo]",null);
+    fd.append("restaurant[name]", "Bushjdo");
+    fd.append("restaurant[facebook_url]", "");
+    fd.append("restaurant[youtube_url]", "Bushjdo");
+    fd.append("restaurant[instagram_url]", "Bushjdo");
+    fd.append("restaurant[restaurant_users_attributes][0][role]", "super_admin");
+    fd.append("restaurant[restaurant_users_attributes][0][user_id]", 1);
+    fd.append("restaurant[address_attributes][id]", 1);
+    fd.append("restaurant[address_attributes][address]", "melbourne");
+    fd.append("restaurant[phone]", "Bushjdo");
+    fd.append("restaurant[bg_photo_attributes][id]", "Bushjdo");
+    fd.append("restaurant[bg_photo_attributes][photo]", null);
+    fd.append("restaurant[icon_attributes][id]", null);
+    fd.append("restaurant[icon_attributes][photo]", null);
     try {
-        const result = await Api('patch', `/restaurants/${id}`, data)
+        const result = await Api('patch', `/restaurants/${id}`, fd)
         console.log(result)
         return result.data;
     } catch (e) {
@@ -113,20 +113,20 @@ export const getListCategories = async () => {
 export const createCategories = async (category) => {
     const { name, category_type, restaurant_id, files } = category
     let fd = new FormData();
-    fd.append('category[name]',name);
-    fd.append('category[category_type]',category_type);
-    fd.append('category[restaurant_id]',restaurant_id); //2
-    fd.append('category[photo_attributes][photo]',files);
-    let data = {
-        category: {
-            name,
-            category_type,
-            restaurant_id,
-            photo_attributes: {
-                photo: files
-            }
-        }
-    }
+    fd.append('category[name]', name);
+    fd.append('category[category_type]', category_type);
+    fd.append('category[restaurant_id]', restaurant_id); //2
+    fd.append('category[photo_attributes][photo]', files);
+    // let data = {
+    //     category: {
+    //         name,
+    //         category_type,
+    //         restaurant_id,
+    //         photo_attributes: {
+    //             photo: files
+    //         }
+    //     }
+    // }
 
     const result = await Api('post', '/categories', fd)
     console.log(result);
@@ -134,19 +134,19 @@ export const createCategories = async (category) => {
 }
 
 
-export const updateCategories = async (id ,category) => {
+export const updateCategories = async (id, category) => {
     const { name, category_type, restaurant_id, files } = category;
     let fd = new FormData();
-    fd.append('category[name]',name);
-    fd.append('category[category_type]',category_type);
-    fd.append('category[restaurant_id]',restaurant_id); //2
-    let data = {
-        category: {
-            name,
-            category_type,
-            restaurant_id,
-        }
-    }
+    fd.append('category[name]', name);
+    fd.append('category[category_type]', category_type);
+    fd.append('category[restaurant_id]', restaurant_id); //2
+    // let data = {
+    //     category: {
+    //         name,
+    //         category_type,
+    //         restaurant_id,
+    //     }
+    // }
 
     const result = await Api('patch', `/categories/${id}`, fd)
     console.log(result)
@@ -172,49 +172,49 @@ export const getListFoods = async () => {
 export const createFoods = async (food) => {
     const { category_id, name, description, price, files } = food;
     let fd = new FormData();
-    fd.append('food[category_id]',category_id);
-    fd.append('food[name]',name);
-    fd.append('food[description]',description); //2
-    fd.append('food[price]',price); 
-    fd.append('food[photo_attributes][photo]',files); 
-    let data = {
-        food: {
-            category_id,
-            name,
-            description,
-            price,
-            photo_attributes: {
-                photo: files
-            }
-        }
-    }
+    fd.append('food[category_id]', category_id);
+    fd.append('food[name]', name);
+    fd.append('food[description]', description); //2
+    fd.append('food[price]', price);
+    fd.append('food[photo_attributes][photo]', files);
+    // let data = {
+    //     food: {
+    //         category_id,
+    //         name,
+    //         description,
+    //         price,
+    //         photo_attributes: {
+    //             photo: files
+    //         }
+    //     }
+    // }
 
-    const result = await Api('post', `/foods`, data);
+    const result = await Api('post', `/foods`, fd);
     console.log(result)
     return result.data;
 }
 
 
 export const updateFoods = async (id, food) => {
-    const { category_id, name, description, price, files,id_photo } = food;
+    const { category_id, name, description, price, files, id_photo } = food;
     let fd = new FormData();
-    fd.append('food[category_id]',category_id);
-    fd.append('food[name]',name);
-    fd.append('food[description]',description); //2
-    fd.append('food[price]',price); 
-    fd.append('food[photo_attributes][id]',id_photo); 
-    fd.append('food[photo_attributes][photo]',files); 
-    let data = {
-        food: {
-            category_id,
-            name,
-            description,
-            price,
-            photo_attributes: {
-                photo: files
-            }
-        }
-    }
+    fd.append('food[category_id]', category_id);
+    fd.append('food[name]', name);
+    fd.append('food[description]', description); //2
+    fd.append('food[price]', price);
+    fd.append('food[photo_attributes][id]', id_photo);
+    fd.append('food[photo_attributes][photo]', files);
+    // let data = {
+    //     food: {
+    //         category_id,
+    //         name,
+    //         description,
+    //         price,
+    //         photo_attributes: {
+    //             photo: files
+    //         }
+    //     }
+    // }
 
     const result = await Api('patch', `/foods/${id}`, fd);
     console.log(result)
@@ -240,16 +240,16 @@ export const getListFoodsOptions = async () => {
 export const createFoodOptions = async (food_options) => {
     const { food_id, name, price } = food_options;
     let fd = new FormData();
-    fd.append('food_option[food_id]',food_id);
-    fd.append('food_option[name]',name);
-    fd.append('food_option[price]',price); 
-    let data = {
-        food_option: {
-            food_id,
-            name,
-            price,
-        }
-    }
+    fd.append('food_option[food_id]', food_id);
+    fd.append('food_option[name]', name);
+    fd.append('food_option[price]', price);
+    // let data = {
+    //     food_option: {
+    //         food_id,
+    //         name,
+    //         price,
+    //     }
+    // }
 
     const result = await Api('post', `/food_options`, fd);
     console.log(result)
@@ -257,19 +257,19 @@ export const createFoodOptions = async (food_options) => {
 }
 
 
-export const updateFoodOptions = async (id ,food_options) => {
+export const updateFoodOptions = async (id, food_options) => {
     const { food_id, name, price } = food_options;
     let fd = new FormData();
-    fd.append('food_option[food_id]',food_id);
-    fd.append('food_option[name]',name);
-    fd.append('food_option[price]',price); 
-    let data = {
-        food_option: {
-            food_id,
-            name,
-            price,
-        }
-    }
+    fd.append('food_option[food_id]', food_id);
+    fd.append('food_option[name]', name);
+    fd.append('food_option[price]', price);
+    // let data = {
+    //     food_option: {
+    //         food_id,
+    //         name,
+    //         price,
+    //     }
+    // }
 
     const result = await Api('patch', `/food_options/${id}`, fd);
     console.log(result)
@@ -296,14 +296,14 @@ export const getListOrdersFoodsOptions = async () => {
 export const createOrderFoodOptions = async (order_food_option) => {
     const { food_option_id, order_food_id } = order_food_option;
     let fd = new FormData();
-    fd.append('order_food_option[food_option_id]',food_option_id);
-    fd.append('order_food_option[order_food_id]',order_food_id);
-    const data = {
-        order_food_option: {
-            food_option_id,
-            order_food_id
-        }
-    }
+    fd.append('order_food_option[food_option_id]', food_option_id);
+    fd.append('order_food_option[order_food_id]', order_food_id);
+    // const data = {
+    //     order_food_option: {
+    //         food_option_id,
+    //         order_food_id
+    //     }
+    // }
     const result = await Api('post', '/order_food_options', fd);
     console.log(result)
     return result.data;
@@ -312,14 +312,14 @@ export const createOrderFoodOptions = async (order_food_option) => {
 export const updateOrderFoodOptions = async (id, order_food_option) => {
     const { food_option_id, order_food_id } = order_food_option;
     let fd = new FormData();
-    fd.append('order_food_option[food_option_id]',food_option_id);
-    fd.append('order_food_option[order_food_id]',order_food_id);
-    const data = {
-        order_food_option: {
-            food_option_id,
-            order_food_id
-        }
-    }
+    fd.append('order_food_option[food_option_id]', food_option_id);
+    fd.append('order_food_option[order_food_id]', order_food_id);
+    // const data = {
+    //     order_food_option: {
+    //         food_option_id,
+    //         order_food_id
+    //     }
+    // }
     const result = await Api('patch', `/order_food_options/${id}`, fd);
     console.log(result)
     return result.data;
@@ -337,7 +337,7 @@ export const deleteOrderFoodOptions = async (id) => {
 export const getListOrdersFoods = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/order_foods')
-    console.log(result)
+    //console.log(result)
     return result.data;
 }
 
@@ -345,9 +345,9 @@ export const getListOrdersFoods = async () => {
 export const createOrderFoods = async (order_food) => {
     const { order_id, food_id, amount } = order_food
     let fd = new FormData();
-    fd.append('order_food[order_id]',order_id);
-    fd.append('order_food[food_id]',food_id);
-    fd.append('order_food[amount]',amount);
+    fd.append('order_food[order_id]', order_id);
+    fd.append('order_food[food_id]', food_id);
+    fd.append('order_food[amount]', amount);
     const data = {
         order_food: {
             order_id,
@@ -364,16 +364,16 @@ export const updateOrderFoods = async (id, order_food) => {
     //phai giu lai Order_id  , neu ko se co loi
     const { order_id, food_id, amount } = order_food;
     let fd = new FormData();
-    fd.append('order_food[order_id]',order_id);
-    fd.append('order_food[food_id]',food_id);
-    fd.append('order_food[amount]',amount);
-    const data = {
-        order_food: {
-            order_id,
-            food_id,
-            amount
-        }
-    }
+    fd.append('order_food[order_id]', order_id);
+    fd.append('order_food[food_id]', food_id);
+    fd.append('order_food[amount]', amount);
+    // const data = {
+    //     order_food: {
+    //         order_id,
+    //         food_id,
+    //         amount
+    //     }
+    // }
     const result = await Api('patch', `/order_foods/${id}`, fd);
     console.log(result)
     return result.data;
@@ -398,15 +398,15 @@ export const getListPaymentInfos = async () => {
 export const createPaymentInfos = async (payment) => {
     const { generatable_type, payment_type, generatable } = payment;
     const fd = new FormData();
-    fd.append("payment_info[generatable_type]","Restaurant");
-    fd.append("payment_info[generatable_id]",1);
-    fd.append("payment_info[payment_type]",payment_type);
-    fd.append("payment_info[card_account_attributes][full_name]","full name");
-    fd.append("payment_info[card_account_attributes][number]",4111111111111111);
-    fd.append("payment_info[card_account_attributes][expiry_month]",9);
-    fd.append("payment_info[card_account_attributes][expiry_year]",2019);
-    fd.append("payment_info[card_account_attributes][cvv]",123);
-    fd.append("payment_info[paypal_account_attributes][paypal_email]","asd@gmail.com");
+    fd.append("payment_info[generatable_type]", "Restaurant");
+    fd.append("payment_info[generatable_id]", 1);
+    fd.append("payment_info[payment_type]", payment_type);
+    fd.append("payment_info[card_account_attributes][full_name]", "full name");
+    fd.append("payment_info[card_account_attributes][number]", 4111111111111111);
+    fd.append("payment_info[card_account_attributes][expiry_month]", 9);
+    fd.append("payment_info[card_account_attributes][expiry_year]", 2019);
+    fd.append("payment_info[card_account_attributes][cvv]", 123);
+    fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
 
     console.log("im in create payment utils")
     const data = {
@@ -448,7 +448,7 @@ export const createPaymentInfos = async (payment) => {
     }
     console.log('======================== Body request =================================')
     console.log(data)
-    const result = await Api('post', '/payment_infos', data);
+    const result = await Api('post', '/payment_infos', fd);
     console.log(result)
     return result.data;
 }
@@ -490,21 +490,21 @@ export const createPaymentInfos = async (payment) => {
 }
  */
 
-export const updatePaymentInfos = async (id , payment) => {
+export const updatePaymentInfos = async (id, payment) => {
     //const {}
     const { generatable_type, payment_type, generatable } = payment;
     const fd = new FormData();
-    fd.append("payment_info[generatable_type]","Restaurant");
-    fd.append("payment_info[generatable_id]",1);
-    fd.append("payment_info[payment_type]",payment_type);
-    fd.append("payment_info[card_account_attributes][id]",1);
-    fd.append("payment_info[card_account_attributes][full_name]","full name");
-    fd.append("payment_info[card_account_attributes][number]",4111111111111111);
-    fd.append("payment_info[card_account_attributes][expiry_month]",9);
-    fd.append("payment_info[card_account_attributes][expiry_year]",2019);
-    fd.append("payment_info[card_account_attributes][cvv]",123);
-    fd.append("payment_info[paypal_account_attributes][id]",19);
-    fd.append("payment_info[paypal_account_attributes][paypal_email]","asd@gmail.com");
+    fd.append("payment_info[generatable_type]", "Restaurant");
+    fd.append("payment_info[generatable_id]", 1);
+    fd.append("payment_info[payment_type]", payment_type);
+    fd.append("payment_info[card_account_attributes][id]", 1);
+    fd.append("payment_info[card_account_attributes][full_name]", "full name");
+    fd.append("payment_info[card_account_attributes][number]", 4111111111111111);
+    fd.append("payment_info[card_account_attributes][expiry_month]", 9);
+    fd.append("payment_info[card_account_attributes][expiry_year]", 2019);
+    fd.append("payment_info[card_account_attributes][cvv]", 123);
+    fd.append("payment_info[paypal_account_attributes][id]", 19);
+    fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
     const data = {
         payment_info: {
             "paypal_account_attributes": {
@@ -512,7 +512,7 @@ export const updatePaymentInfos = async (id , payment) => {
             }
         }
     }
-    const result = await Api('patch', `/payment_infos/${id}`, data);
+    const result = await Api('patch', `/payment_infos/${id}`, fd);
     console.log(result)
     return result.data;
 }
@@ -541,12 +541,12 @@ export const createRestaurantUsers = async (resUser) => {
     const fd = new FormData();
     fd.append("restaurant_user[user_id]", user_id);
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
-    const data = {
-        restaurant_user: {
-            user_id,
-            restaurant_id
-        }
-    }
+    // const data = {
+    //     restaurant_user: {
+    //         user_id,
+    //         restaurant_id
+    //     }
+    // }
     const result = await Api('post', '/restaurant_users', fd);
     console.log(result)
     return result.data;
@@ -557,12 +557,12 @@ export const updateRestaurantUsers = async (id, resUser) => {
     const fd = new FormData();
     fd.append("restaurant_user[user_id]", user_id);
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
-    const data = {
-        restaurant_user: {
-            user_id,
-            restaurant_id
-        }
-    }
+    // const data = {
+    //     restaurant_user: {
+    //         user_id,
+    //         restaurant_id
+    //     }
+    // }
     const result = await Api('patch', `/restaurant_users/${id}`, fd);
     console.log(result)
     return result.data;
@@ -630,58 +630,58 @@ export const getListUsers = async () => {
 export const createUsers = async (user) => {
     const { nickname, name, phone, address, email, password } = user;
     const fd = new FormData();
-    fd.append("user[nickname]",nickname);
-    fd.append("user[name]",name);
-    fd.append("user[phone]",phone);
-    fd.append("user[address_attributes][address]",address);
-    fd.append("user[restaurant_users_attributes][0][role]",admin);
-    fd.append("user[restaurant_users_attributes][0][restaurant_id]",1);
-    fd.append("user[email]",email);
-    fd.append("user[password]",password);
-    const data = {
-        user: {
-            nickname,
-            name,
-            phone,
-            address_attributes: {
-                address
-            },
-            email,
-            password
-        }
-    }
+    fd.append("user[nickname]", nickname);
+    fd.append("user[name]", name);
+    fd.append("user[phone]", phone);
+    fd.append("user[address_attributes][address]", address);
+    fd.append("user[restaurant_users_attributes][0][role]", "admin");
+    fd.append("user[restaurant_users_attributes][0][restaurant_id]", 1);
+    fd.append("user[email]", email);
+    fd.append("user[password]", password);
+    // const data = {
+    //     user: {
+    //         nickname,
+    //         name,
+    //         phone,
+    //         address_attributes: {
+    //             address
+    //         },
+    //         email,
+    //         password
+    //     }
+    // }
     const result = await Api('post', '/users', fd);
     console.log(result)
     return result.data;
 }
 
 export const updateUsers = async (id, user) => {
-    const { nickname, name, phone, address, address_id ,email, password } = user;
+    const { nickname, name, phone, address, address_id, email, password } = user;
     const fd = new FormData();
-    fd.append("user[nickname]",nickname);
-    fd.append("user[name]",name);
-    fd.append("user[phone]",phone);
-    fd.append("user[address_attributes][id]",address_id);
-    fd.append("user[address_attributes][address]",address);
-    const data = {
-        user: {
-            nickname,
-            name,
-            phone,
-            address_attributes: {
-                id: 6,
-                address
-            },
-            restaurant_users_attributes: {
-                0: {
-                    role: 'admin',
-                    restaurant_id: 1
-                }
-            },
-            email,
-            password
-        }
-    }
+    fd.append("user[nickname]", nickname);
+    fd.append("user[name]", name);
+    fd.append("user[phone]", phone);
+    fd.append("user[address_attributes][id]", address_id);
+    fd.append("user[address_attributes][address]", address);
+    // const data = {
+    //     user: {
+    //         nickname,
+    //         name,
+    //         phone,
+    //         address_attributes: {
+    //             id: 6,
+    //             address
+    //         },
+    //         restaurant_users_attributes: {
+    //             0: {
+    //                 role: 'admin',
+    //                 restaurant_id: 1
+    //             }
+    //         },
+    //         email,
+    //         password
+    //     }
+    // }
     const result = await Api('patch', `/users/${id}`, fd);
     console.log(result)
     return result.data;
@@ -693,7 +693,7 @@ export const updateUsers = async (id, user) => {
 export const getListNotifications = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/notifications');
-    
+
     console.log(result)
     return result.data;
 }
@@ -703,33 +703,33 @@ export const createNotifications = async (notification) => {
     const { subject, message, photo, restaurant_id } = notification
     //console.log(files)
     const fd = new FormData();
-    fd.append("notification[subject]",subject)
-    fd.append("notification[message]",message)
-    fd.append("notification[photo_attributes][photo]",photo)
-    fd.append("notification[restaurant_id]",restaurant_id)
-    const data = {
-        notification: {
-            subject,
-            message,
-            photo_attributes: {
-                photo
-            },
-            restaurant_id
-        }
-    }
-    const result = await Api('post', '/notifications', data);
+    fd.append("notification[subject]", subject)
+    fd.append("notification[message]", message)
+    fd.append("notification[photo_attributes][photo]", photo)
+    fd.append("notification[restaurant_id]", restaurant_id)
+    // const data = {
+    //     notification: {
+    //         subject,
+    //         message,
+    //         photo_attributes: {
+    //             photo
+    //         },
+    //         restaurant_id
+    //     }
+    // }
+    const result = await Api('post', '/notifications', fd);
     console.log(result)
     return result.data;
 }
 
 export const updateNotifications = async (id, notification) => {
-    const { subject, message, photo ,photo_id , restaurant_id, id } = notification;
+    const { subject, message, photo, photo_id, restaurant_id } = notification;
     let fd = new FormData();
-    fd.append("notification[subject]",subject)
-    fd.append("notification[message]",message)
-    fd.append("notification[photo_attributes][id]",photo_id)
-    fd.append("notification[photo_attributes][photo]",photo)
-    fd.append("notification[restaurant_id]",restaurant_id)
+    fd.append("notification[subject]", subject)
+    fd.append("notification[message]", message)
+    fd.append("notification[photo_attributes][id]", photo_id)
+    fd.append("notification[photo_attributes][photo]", photo)
+    fd.append("notification[restaurant_id]", restaurant_id)
     const data = {
         notification: {
             subject,

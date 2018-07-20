@@ -1,0 +1,31 @@
+.form{
+    width: 100%;
+    padding: 2rem 0;
+
+    &__group{
+        @include flex-row-center;
+        @include respond(phone){
+            @include flex-column-center;
+        }
+    }
+    button{
+        border: .1rem solid $color-grey;
+        border-radius: .7rem;
+        margin-top: 3rem;
+        padding: 1rem 5rem;
+        background-color: transparent;
+        color: $color-dark;
+        transition: all .4s;
+        &:hover{
+            transform: translateY(-.7rem);
+            @include shadow;
+            background-color: $color-dark;
+            color: $color-white;
+        }
+
+        &:active{
+            transform: translateY(-.3rem);
+
+        }
+    }
+}

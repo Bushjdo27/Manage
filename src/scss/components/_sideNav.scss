@@ -1,0 +1,37 @@
+.navigation{
+    align-self: stretch;
+    background-color: #000;
+    flex: 0 0 20%;
+    
+    &__list{
+      list-style: none;
+      padding: 3rem 0;
+    }
+    &__item{
+      text-align: center;
+      height: 4rem;
+      //padding: 1rem 0;
+      //background-color: pink;
+      display: flex;
+      //justify-content: center;
+      align-items: center;
+      &:not(:last-child){
+        margin-bottom: 3rem;
+      }
+      
+    }
+    &__link{
+      font-size: 1.6rem;
+      text-decoration: none;
+      padding: 1rem;
+      color: #fff;
+      //display: inline-block;
+      width: 100%;
+      transition: all .2s;
+      &:hover{
+        color: orange;
+        
+        border-bottom: .1rem solid orange;
+      }
+    }
+  }

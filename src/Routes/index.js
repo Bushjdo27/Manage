@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import App from '../App';
-// import DetailResPage from '../pages/DetailResPage';
+import RestaurantPage from '../pages/Restaurant';
 // import AboutPage from '../pages/AboutPage';
 // import ContactPage from '../pages/ContactPage';
 // import OrderDetails from '../pages/OrderDetails'
@@ -14,7 +14,7 @@ class AppRoute extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" component={App} />
+                    <Route exact path="/" component={RestaurantPage} />
                     <Route exact path="/about" component={App} />
                     <Route exact path="/contact" component={App} />
                     <Route exact path="/order" component={App} />
