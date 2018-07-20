@@ -1,0 +1,44 @@
+.u-margin-bottom-large{
+    margin-bottom: 6rem;
+
+}
+.u-margin-bottom-medium{
+    margin-bottom: 4rem;
+    
+}
+.u-margin-bottom-small{
+    margin-bottom: 2rem;
+}
+
+.u-text-white{
+    color: $color-white;
+}
+.u-text-grey{
+    color: $color-grey;
+}
+.u-text-grey-darker{
+    color: $color-grey-darker;
+}
+
+.u-text-primary{
+    color: $color-primary;
+}
+
+.u-bg-primary{
+    background-color: $color-primary
+}
+.u-bg-dark{
+    background-color: $color-dark
+}
+.u-bg-white{
+    background-color: $color-white
+}
+
+.active-item{
+    border-bottom: .2rem solid $color-primary !important
+}
+
+.complete{
+    background-color: $color-primary;
+    color: $color-white;
+}

@@ -1,0 +1,46 @@
+// @font-face {
+//     font-family: Aphrodite_Text;
+//     src: url(./Assets/fonts/Aphrodite_Text.woff) format('woff');
+
+//   }
+
+  @font-face {
+    font-family: 'MyFont';
+    src: local('MyFont'), url(./Assets/fonts/Aphrodite_Text.woff) format('woff');
+  }
+
+@import 'base/_variables.scss';
+@import 'abstracts/_mixins.scss';
+@import 'abstracts/_animate.scss';
+@import 'base/_base.scss';
+@import 'base/_typhography.scss';
+@import 'base/_utilities.scss';
+@import 'layout/_discover.scss';
+@import 'layout/_feeling.scss';
+@import 'layout/_features.scss';
+@import 'layout/_restaurant.scss';
+@import 'layout/_instagram.scss';
+@import 'layout/_footer.scss';
+@import 'layout/_headerSecond.scss';
+@import 'layout/_resInfor.scss';
+@import 'layout/_menu.scss';
+@import 'layout/_about.scss';
+@import 'layout/_contact.scss';
+@import 'layout/_cart.scss';
+@import 'layout/_statusCheckout.scss';
+@import 'layout/_tableOrder.scss';
+@import 'layout/_listMenuCatering.scss';
+@import 'layout/_orderCheckout.scss';
+@import 'layout/_dropdown.scss';
+@import 'layout/_cateringPage.scss';
+@import 'layout/_cateringMenu.scss';
+@import 'layout/_completeLayout.scss';
+@import 'layout/_auth.scss';
+@import 'components/_header.scss';
+@import 'components/_button.scss';
+@import 'components/_input.scss';
+@import 'components/_spinner.scss';
+@import 'components/_itemCart.scss';
+@import 'components/_user.scss';
+@import 'components/_carousel.scss';
+@import 'components/_select.scss';

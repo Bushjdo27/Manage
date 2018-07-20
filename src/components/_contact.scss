@@ -1,0 +1,78 @@
+.contact{
+    @include flex-row-center;
+    padding: 10rem 5rem;
+    @include respond(phone){
+        @include flex-column-center;
+    }
+
+    &__text{
+        @include flex-column-center;
+        flex:1;
+        h3{
+            font-size: 3.5rem;
+            font-family: 'Dosis';
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            width: 27rem;
+            font-weight: 600;
+        }
+        &--single:not(:last-child){
+            margin-bottom: 2rem;
+        }
+        &--single{
+            text-align: left;
+            width: 27rem;
+
+            h3{
+                font-family: 'Poppins';
+                font-size: 2.4rem;
+                text-transform: none;
+            }
+        }
+    }
+
+    &__input{
+        flex:1;
+        
+        h3{
+            font-size: 3.5rem;
+            font-family: 'Dosis';
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            width: 27rem;
+            font-weight: 600;
+        }
+        .form{
+            width: 100%;
+            padding: 2rem 0;
+
+            &__group{
+                @include flex-row-center;
+                @include respond(phone){
+                    @include flex-column-center;
+                }
+            }
+            button{
+                border: .1rem solid $color-grey;
+                border-radius: .7rem;
+                margin-top: 3rem;
+                padding: 1rem 5rem;
+                background-color: transparent;
+                color: $color-dark;
+                transition: all .4s;
+                &:hover{
+                    transform: translateY(-.7rem);
+                    @include shadow;
+                    background-color: $color-dark;
+                    color: $color-white;
+                }
+
+                &:active{
+                    transform: translateY(-.3rem);
+
+                }
+            }
+        }
+        
+    }
+}
