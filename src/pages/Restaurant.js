@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SimpleTable from '../components/SimpleTable'
-import { getListRestaurant } from '../actions/resActions'
+import AdminTable from '../components/AdminTable';
+import AdminControl from '../components/AdminControl'
+import Header from '../components/Header';
+import SideNav from '../components/SideNav'
+import { getListRestaurant } from '../actions/resActions';
+
+
 class RestaurantPage extends Component {
     componentDidMount() {
         console.log("Calling didMount")
@@ -13,7 +18,16 @@ class RestaurantPage extends Component {
     render() {
         return (
             <div>
-                <SimpleTable data={this.props.Restaurants} />
+                <Header />
+                <div className="container">
+                    <SideNav />
+                    <div className="content">
+                        <div className="admin">
+                            <AdminControl />
+                            <AdminTable titleTable={[]} data={[]} />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

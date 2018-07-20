@@ -1,6 +1,6 @@
 .navigation{
     align-self: stretch;
-    background-color: #000;
+    background-color: $color-dark-2;
     flex: 0 0 20%;
     
     &__list{
@@ -9,7 +9,7 @@
     }
     &__item{
       text-align: center;
-      height: 4rem;
+      height: 3rem;
       //padding: 1rem 0;
       //background-color: pink;
       display: flex;
@@ -21,10 +21,10 @@
       
     }
     &__link{
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       text-decoration: none;
       padding: 1rem;
-      color: #fff;
+      color: $color-white;
       //display: inline-block;
       width: 100%;
       transition: all .2s;

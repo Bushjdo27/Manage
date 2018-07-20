@@ -1,7 +1,3 @@
-@font-face {
-  font-family: 'MyFont';
-  src: local("MyFont"), url(./Assets/fonts/Aphrodite_Text.woff) format("woff"); }
-
 @keyframes moveIn {
   0% {
     opacity: 0;
@@ -190,7 +186,7 @@ body {
     .admin__data table thead {
       background-color: #000; }
       .admin__data table thead tr {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         border-right: 0.1rem solid #f7f7f7; }
         .admin__data table thead tr td {
           padding: 1rem 0;
@@ -204,8 +200,8 @@ body {
         font-size: 1.2rem;
         font-style: italic; }
     .admin__data table tbody tr td {
-      padding: 2rem 0;
-      font-size: 1.6rem;
+      padding: 1rem 0;
+      font-size: 1.2rem;
       border-bottom: 0.1rem solid #f7f7f7;
       text-align: center; }
     .admin__data table tbody tr:nth-child(2n) {
@@ -230,13 +226,13 @@ body {
     padding: 3rem 0; }
   .navigation__item {
     text-align: center;
-    height: 4rem;
+    height: 3rem;
     display: flex;
     align-items: center; }
     .navigation__item:not(:last-child) {
       margin-bottom: 3rem; }
   .navigation__link {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     text-decoration: none;
     padding: 1rem;
     color: #fff;
