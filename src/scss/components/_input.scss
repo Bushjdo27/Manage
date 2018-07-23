@@ -1,31 +1,32 @@
-.form{
-    width: 100%;
-    padding: 2rem 0;
-
+.input{
+    border:none;
+    background-color: #f7f7f7;
+    border-radius: .7rem;
+    padding: .5rem 1rem;
+    transition: all .3s;
+    &:hover , &:focus{
+      transform: scale(1.1);
+    }
+    &:focus{
+      outline: none;
+    }
+    
+  }
+  
+  .form{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
     &__group{
-        @include flex-row-center;
-        @include respond(phone){
-            @include flex-column-center;
-        }
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      input{
+        margin-left: 4rem;
+        flex: 1;
+      }
     }
-    button{
-        border: .1rem solid $color-grey;
-        border-radius: .7rem;
-        margin-top: 3rem;
-        padding: 1rem 5rem;
-        background-color: transparent;
-        color: $color-dark;
-        transition: all .4s;
-        &:hover{
-            transform: translateY(-.7rem);
-            @include shadow;
-            background-color: $color-dark;
-            color: $color-white;
-        }
-
-        &:active{
-            transform: translateY(-.3rem);
-
-        }
-    }
-}
+  }

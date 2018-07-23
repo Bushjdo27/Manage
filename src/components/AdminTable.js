@@ -1,23 +1,44 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 class AdminControl extends Component {
     renderTableHead = () => {
         //this.props.titleTable
+        return this.props.titleTable.map((item, index) => {
+            return (
+                <td key={index}>{item}</td>
+            )
+        })
     }
 
     renderTableBody = () => {
         //this.props.data
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.name}</td>
+                        <td>{res.address.address}</td>
+                        <td>{res.phone}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                                </Link>
+                        </td>
+                        <td>Delete</td>
+                    </tr>
+                )
+            })
+        }
     }
     render() {
+        console.log(this.props.data)
         return (
             <div className="admin__data">
                 <table>
                     <thead>
                         <tr>
-                            <td>id</td>
-                            <td>title</td>
-                            <td>description</td>
-                            <td>date</td>
+                            {this.renderTableHead()}
                             <td colSpan="2">Control</td>
                         </tr>
                     </thead>
@@ -27,38 +48,7 @@ class AdminControl extends Component {
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bushjdo Restaurant</td>
-                            <td>Best Restaurant in the world</td>
-                            <td>27/2/1997</td>
-                            <td>Remove</td>
-                            <td>Delete</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Joker Restaurant</td>
-                            <td>Best Restaurant in the USA</td>
-                            <td>28/2/1997</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Lucifer</td>
-                            <td>Best Restaurant in the Asian</td>
-                            <td>29/2/1997</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Lucifer</td>
-                            <td>Best Restaurant in the Asian</td>
-                            <td>29/2/1997</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Lucifer</td>
-                            <td>Best Restaurant in the Asian</td>
-                            <td>29/2/1997</td>
-                        </tr>
+                        {this.renderTableBody()}
                     </tbody>
                 </table>
             </div>

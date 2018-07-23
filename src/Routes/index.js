@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import App from '../App';
 import RestaurantPage from '../pages/Restaurant';
+import EditRestaurant from '../components/Forms/Restaurant/Edit'
 // import AboutPage from '../pages/AboutPage';
 // import ContactPage from '../pages/ContactPage';
 // import OrderDetails from '../pages/OrderDetails'
@@ -15,7 +16,7 @@ class AppRoute extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={RestaurantPage} />
-                    <Route exact path="/about" component={App} />
+                    <Route exact path="/restaurant/:id/" component={EditRestaurant} />
                     <Route exact path="/contact" component={App} />
                     <Route exact path="/order" component={App} />
                     <Route exact path="/catering" component={App} />

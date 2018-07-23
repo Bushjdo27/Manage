@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 
 class AdminControl extends Component {
+
+    handleCreate = () => {
+        this.props.showCreate()
+    }
+    goBack = () => {
+        this.props.back();
+    }
     render() {
         return (
             <div className="admin__control">
                 <div className="admin__control__text">
-                    <span>All</span>
-                    <span>Create</span>
+                    {this.props.isShowBack ?
+                        <span onClick={this.goBack}>Go Back</span>
+                        :
+                        <div>
+                            <span>All</span>
+                            <span onClick={this.handleCreate}>Create</span>
+                        </div>
+
+                    }
                 </div>
-                <div className="admin__control__search">
-                    <input type="text" placeholder="Search for title" />
-                    <button>Search</button>
-                </div>
+                {!this.props.isShowBack &&
+                    <div className="admin__control__search">
+                        <input type="text" placeholder="Search for title" />
+                        <button>Search</button>
+                    </div>
+                }
             </div>
         )
     }
