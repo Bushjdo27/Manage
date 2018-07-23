@@ -11,9 +11,8 @@ class CreateOrderFoodOptions extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input name="foodID" type="number" placeholder="Food ID" />
-                <input name="name" type="text" placeholder="Name" />
-                <input name="price" type="number" placeholder="price" />
+                <input name="foodOptionID" type="number" placeholder="Food ID" />
+                <input name="orderFoodID" type="text" placeholder="Name" />
                 <button type="submit" >Create Order Foods Options</button>
             </form>
         )
