@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import CreateForm from './Create'
 
 class EditRestaurant extends Component {
     render() {
@@ -7,6 +8,7 @@ class EditRestaurant extends Component {
         return (
             <div>
                 <p>{this.props.match.params.id}</p>
+                <CreateForm res={this.props.Restaurant} />
             </div>
         )
     }

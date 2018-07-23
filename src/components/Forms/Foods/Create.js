@@ -3,9 +3,20 @@ import { createFoods } from '../../../utils'
 
 class CreateFoods extends Component {
 
+    constructor(props){
+        this.state = {
+            categoryID: "",
+            name:"",
+            description:"",
+            price: 0,
+            photo: null,
+
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.elements.photo.files[0])
+        //console.log(e.target.elements.photo.files[0])
         createFoods(e.target.elements.photo.files[0])
     }
     render() {
