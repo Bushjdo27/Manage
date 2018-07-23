@@ -23,12 +23,12 @@ class EditRestaurant extends Component {
 // }
 
 const mapStateToProps = (state, props) => {
-    console.log(props.match.params.id)
-    console.log(state.Restaurants)
-    const data = state.Restaurants.find(res => res.id === parseInt(props.match.params.id))
-    console.log(data)
+    // console.log(props.match.params.id)
+    // console.log(state.Restaurants)
+    // const data = state.Restaurants.find(res => res.id === parseInt(props.match.params.id))
+    // console.log(data)
     return {
-        Restaurant: state.Restaurants.find(res => res.id === props.match.params.id)
+        Restaurant: state.Restaurants.find(res => res.id === parseInt(props.match.params.id))
     }
 }
 

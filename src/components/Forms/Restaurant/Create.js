@@ -7,7 +7,11 @@ class CreateRestaurant extends Component {
     constructor() {
         super();
         this.state = {
-            name: this.props.res ? res.name : "",
+
+
+        }
+        /*
+        name: this.props.res ? res.name : "",
             fbUrl: this.props.res ? res.facebook_url : "",
             ytUrl: this.props.res ? res.youtube_url : "",
             instaUrl: this.props.res ? res.instagram_url : "",
@@ -17,39 +21,39 @@ class CreateRestaurant extends Component {
             phone: this.props.res ? res.instagram_url : "",
             photo:this.props.res ? res.instagram_url : null,
             icon: this.props.res ? res.instagram_url : null
-            
-        }
+        
+        */
     }
 
     handleNameChange = () => {
         console.log("Name changing..")
     }
-    handleFBChange = (e)=>{
+    handleFBChange = (e) => {
         const value = e.target.value;
 
     }
-    handleYTChange = (e)=>{
+    handleYTChange = (e) => {
         const value = e.target.value;
     }
-    handleInstaChange = (e)=>{
+    handleInstaChange = (e) => {
         const value = e.target.value;
     }
-    handleRoleChange = (e)=>{
+    handleRoleChange = (e) => {
         const value = e.target.value;
     }
-    handleUserIDChange = (e)=>{
+    handleUserIDChange = (e) => {
         const value = e.target.value;
     }
-    handleAddressChange = (e)=>{
+    handleAddressChange = (e) => {
         const value = e.target.value;
     }
-    handlePhoneChange = (e)=>{
+    handlePhoneChange = (e) => {
         const value = e.target.value;
     }
-    handlePhotoChange = (e)=>{
+    handlePhotoChange = (e) => {
         const value = e.target.value;
     }
-    handleIconChange = (e)=>{
+    handleIconChange = (e) => {
         const value = e.target.value;
     }
 
@@ -58,7 +62,7 @@ class CreateRestaurant extends Component {
     }
 
     render() {
-        const {name , fbUrl , ytUrl , instaUrl ,role ,userId , address ,phone , photo , icon} = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, role, userId, address, phone, photo, icon } = this.state;
         return (
             <div>
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -114,7 +118,7 @@ class CreateRestaurant extends Component {
 
                 </form>
 
-                
+
 
             </div>
 

@@ -9,42 +9,35 @@ import {
     getListRestaurantUsers,
     createRestaurantUsers,
     updateRestaurantUsers,
-    deleteRestaurantUsers
+    deleteRestaurantUsers,
+    checkErrorResponse
 } from '../utils';
 
 
 export const getListRestaurantUser = async () => {
-    let payload = await getListRestaurantUsers();
-    console.log(payload)
-    return {
-        type: RESTAURANT_USER_ALL,
-        payload
+    return async (dispatch) => {
+        let payload = await getListRestaurantUsers();
+        checkErrorResponse(payload, RESTAURANT_USER_ALL, dispatch)
     }
 }
 
 export const createRestaurantUser = async (data) => {
-    let payload = await createRestaurantUsers(data);
-
-    return {
-        type: RESTAURANT_USER_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createRestaurantUsers(data);
+        checkErrorResponse(payload, RESTAURANT_USER_ADD, dispatch)
     }
 }
 
 export const updateRestaurantUser = async (id, data) => {
-    let payload = await updateRestaurantUsers(id, data);
-
-    return {
-        type: RESTAURANT_USER_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updateRestaurantUsers(id, data);
+        checkErrorResponse(payload, RESTAURANT_USER_UPDATE, dispatch)
     }
 }
 
 export const deleteRestaurantUser = async (id) => {
-    let payload = await deleteRestaurantUsers(id);
-
-    return {
-        type: RESTAURANT_USER_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deleteRestaurantUsers(id);
+        checkErrorResponse(payload, RESTAURANT_USER_REMOVE, dispatch)
     }
 }

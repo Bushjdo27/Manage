@@ -9,43 +9,36 @@ import {
     getListPaymentInfos,
     createPaymentInfos,
     updatePaymentInfos,
-    deletePaymentInfos
+    deletePaymentInfos,
+    checkErrorResponse
 } from '../utils';
 
 
 export const getListPaymentInfo = async () => {
-    let payload = await getListPaymentInfos();
-    console.log(payload)
-    return {
-        type: PAYMENT_ALL,
-        payload
+    return async (dispatch) => {
+        let payload = await getListPaymentInfos();
+        checkErrorResponse(payload, PAYMENT_ALL, dispatch)
     }
 }
 
 export const createPaymentInfo = async (data) => {
-    let payload = await createPaymentInfos(data);
-
-    return {
-        type: PAYMENT_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createPaymentInfos(data);
+        checkErrorResponse(payload, PAYMENT_ADD, dispatch)
     }
 }
 
 export const updatePaymentInfo = async (id, data) => {
     // chua change ben utils
-    let payload = await updatePaymentInfos(id, data);
-
-    return {
-        type: PAYMENT_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updatePaymentInfos(id, data);
+        checkErrorResponse(payload, PAYMENT_UPDATE, dispatch)
     }
 }
 
 export const deletePaymentInfo = async (id) => {
-    let payload = await deletePaymentInfos(id);
-
-    return {
-        type: PAYMENT_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deletePaymentInfos(id);
+        checkErrorResponse(payload, PAYMENT_REMOVE, dispatch)
     }
 }

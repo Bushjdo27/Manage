@@ -11,40 +11,32 @@ import {
     updateOrderFoodOptions,
     deleteOrderFoodOptions
 } from '../utils';
-
+import { checkErrorResponse } from '../utils';
 
 export const getOrderFoodOption = async (id) => {
-    let payload = await getListOrdersFoodsOptions();
-    console.log(payload)
-    return {
-        type: ORDER_FOOD_OPTIONS_ALL,
-        payload
+    return async (dispatch) => {
+        let payload = await getListOrdersFoodsOptions();
+        checkErrorResponse(payload, ORDER_FOOD_OPTIONS_ALL, dispatch)
     }
 }
 
 export const createOrderFoodOption = async (data) => {
-    let payload = await createOrderFoodOptions(data);
-
-    return {
-        type: ORDER_FOOD_OPTIONS_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createOrderFoodOptions(data);
+        checkErrorResponse(payload, ORDER_FOOD_OPTIONS_ADD, dispatch)
     }
 }
 
 export const updateOrderFoodOption = async (id, data) => {
-    let payload = await updateOrderFoodOptions(id, data);
-
-    return {
-        type: ORDER_FOOD_OPTIONS_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updateOrderFoodOptions(id, data);
+        checkErrorResponse(payload, ORDER_FOOD_OPTIONS_UPDATE, dispatch)
     }
 }
 
 export const deleteOrderFoodOption = async (id) => {
-    let payload = await deleteOrderFoodOptions(id);
-
-    return {
-        type: ORDER_FOOD_OPTIONS_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deleteOrderFoodOptions(id);
+        checkErrorResponse(payload, ORDER_FOOD_OPTIONS_REMOVE, dispatch)
     }
 }

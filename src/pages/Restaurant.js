@@ -18,10 +18,11 @@ class RestaurantPage extends Component {
     }
     componentDidMount() {
         console.log("Calling didMount")
-        getListRestaurant().then(result => {
-            console.log(result)
-            this.props.dispatch(result)
-        })
+        // getListRestaurant().then(result => {
+        //     console.log(result)
+        //     this.props.dispatch(result)
+        // })
+        this.props.dispatch(getListRestaurant())
     }
 
     renderCreateForm = () => {

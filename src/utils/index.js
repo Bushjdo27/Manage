@@ -26,30 +26,7 @@ export const createRestaurants = async (data2) => {
     fd.append("restaurant[phone]", "Bushjdo");
     fd.append("restaurant[bg_photo_attributes][photo]", null);
     fd.append("restaurant[icon_attributes][photo]", null);
-    // let data = {
-    //     restaurant: {
-    //         name: 'Bushjdo',
-    //         facebook_url: '',
-    //         youtube_url: '',
-    //         instagram_url: '',
-    //         restaurant_users_attributes: {
-    //             0: {
-    //                 role: 'super_admin',
-    //                 user_id: 1
-    //             }
-    //         },
-    //         address_attributes: {
-    //             address: 'dai hoc can tho'
-    //         },
-    //         phone: '123456789',
-    //         bg_photo_attributes: {
-    //             photo: null
-    //         },
-    //         icon_attributes: {
-    //             photo: null
-    //         }
-    //     }
-    // }
+
     const result = await Api('post', '/restaurants', fd)
     console.log(result)
     return result.data;
@@ -57,17 +34,7 @@ export const createRestaurants = async (data2) => {
 
 export const updateRestaurants = async (id, data2 = {}) => {
     console.log(`/restaurants/${id}`);
-    // let data = {
-    //     restaurant: {
-    //         name: 'Bushjdo27',
-    //         facebook_url: '',
-    //         youtube_url: '',
-    //         instagram_url: '',
 
-    //         phone: '12345678999',
-
-    //     }
-    // }
     let fd = new FormData();
     fd.append("restaurant[name]", "Bushjdo");
     fd.append("restaurant[facebook_url]", "");
@@ -618,6 +585,59 @@ export const deleteRestaurantEmails = async (id) => {
     return result.data;
 }
 
+//======================= Restaurant Users ===================
+
+// export const getListRestaurantUsers = async () => {
+//     try {
+//         const result = await Api('get', '/restaurant_users');
+//         return result.data;
+//     } catch (e) {
+//         return null;
+//     }
+
+// }
+
+// export const createRestaurantUsers = async (payload) => {
+//     const { user_id, restaurant_id } = payload
+//     const fd = new FormData();
+//     fd.append("restaurant_user[user_id]", user_id);
+//     fd.append("restaurant_user[restaurant_id]", restaurant_id);
+
+//     try {
+
+//     } catch (e) {
+//         return null;
+//     }
+//     const result = await Api('post', '/restaurant_users', fd);
+//     return result.data;
+// }
+
+// export const updateRestaurantUsers = async (id, payload) => {
+//     const { user_id, restaurant_id } = payload
+//     const fd = new FormData();
+//     fd.append("restaurant_user[user_id]", user_id);
+//     fd.append("restaurant_user[restaurant_id]", restaurant_id);
+
+//     try {
+//         const result = await Api('patch', `/restaurant_users/${id}`, fd)
+//         return result.data;
+//     } catch (e) {
+//         return null;
+//     }
+
+// }
+
+// export const deleteRestaurantUsers = async (id) => {
+//     try {
+//         const result = await Api('delete', `/restaurant_users/${id}`);
+//         return result.data
+//     } catch (e) {
+//         return null;
+//     }
+
+// }
+
+
 //====================== Users ========================
 // Can chu y xem lai create
 export const getListUsers = async () => {
@@ -769,10 +789,31 @@ const Api = async (method, url, data = {}) => {
         method: method,
         data: data
     }
-    result = await axios(config);
-    return result;
+    try {
+        result = await axios(config);
+        return result;
+    } catch (e) {
+        return null
+    }
+
 
 }
+export const checkErrorResponse = (payload, type, dispatch) => {
+    console.log("im in checkError function")
+    if (payload) {
+        console.log("payload not null")
+        dispatch(
+            {
+                type,
+                payload
+            }
+        )
+    }
+    else {
+        dispatch({ type: "Error" })
+    }
+}
+
 
 /**
  * 

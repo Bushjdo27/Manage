@@ -2,6 +2,7 @@ import {
     CATEGOREIS_ALL, CATEGOREIS_ADD, CATEGOREIS_UPDATE, CATEGOREIS_REMOVE
 } from './constantType';
 
+import { checkErrorResponse } from '../utils'
 import {
     getListCategories,
     createCategories,
@@ -9,39 +10,31 @@ import {
     deleteCategories
 } from '../utils';
 
-export const getCategories = async (id) => {
-    console.log(id)
-    let payload = await getListCategories();
-
-    return {
-        type: CATEGOREIS_ALL,
-        payload
+export const getCategories = () => {
+    return async (dispatch) => {
+        let payload = await getListCategories();
+        checkErrorResponse(payload, CATEGOREIS_ALL, dispatch)
     }
 }
 
-export const createCategory = async (data) => {
-    let payload = await createCategories(data);
 
-    return {
-        type: CATEGOREIS_ADD,
-        payload
+export const createCategory = async (data) => {
+    return async (dispatch) => {
+        let payload = await createCategories(data);
+        checkErrorResponse(payload, CATEGOREIS_ADD, dispatch)
     }
 }
 
 export const updateCategory = async (id, data) => {
-    let payload = await updateCategories(id ,data);
-
-    return {
-        type: CATEGOREIS_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updateCategories(id, data);
+        checkErrorResponse(payload, CATEGOREIS_UPDATE, dispatch)
     }
 }
 
 export const deleteCategory = async (id) => {
-    let payload = await deleteCategories(id);
-
-    return {
-        type: CATEGOREIS_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deleteCategories(id);
+        checkErrorResponse(payload, CATEGOREIS_REMOVE, dispatch)
     }
 }

@@ -11,40 +11,32 @@ import {
     updateNotifications,
     deleteNotifications
 } from '../utils';
-
+import { checkErrorResponse } from '../utils';
 
 export const getListNotification = async () => {
-    let payload = await getListNotifications();
-    console.log(payload)
-    return {
-        type: NOTIFICATIONS_ALL,
-        payload
+    return async (dispatch) => {
+        let payload = await getListNotifications();
+        checkErrorResponse(payload, NOTIFICATIONS_ALL, dispatch)
     }
 }
 
 export const createNotification = async (data) => {
-    let payload = await createNotifications(data);
-
-    return {
-        type: NOTIFICATIONS_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createNotifications(data);
+        checkErrorResponse(payload, NOTIFICATIONS_ADD, dispatch)
     }
 }
 
 export const updateNotification = async (id, data) => {
-    let payload = await updateNotifications(id, data);
-
-    return {
-        type: NOTIFICATIONS_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updateNotifications(id, data);
+        checkErrorResponse(payload, NOTIFICATIONS_UPDATE, dispatch)
     }
 }
 
 export const deleteNotification = async (id) => {
-    let payload = await deleteNotifications(id);
-
-    return {
-        type: NOTIFICATIONS_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deleteNotifications(id);
+        checkErrorResponse(payload, NOTIFICATIONS_REMOVE, dispatch)
     }
 }

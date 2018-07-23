@@ -6,40 +6,32 @@ import {
 } from './constantType';
 
 import { getListFoodsOptions, createFoodOptions, updateFoodOptions, deleteFoodOptions } from '../utils';
+import { checkErrorResponse } from '../utils';
 
-
-export const getFoodOption = async (id) => {
-    let payload = await getListFoodsOptions();
-    console.log(payload)
-    return {
-        type: FOOD_OPTIONS_ALL,
-        payload
+export const getFoodOption = async () => {
+    return async (dispatch) => {
+        let payload = await getListFoodsOptions();
+        checkErrorResponse(payload, FOOD_OPTIONS_ALL, dispatch)
     }
 }
 
 export const createFoodOption = async (data) => {
-    let payload = await createFoodOptions(data);
-
-    return {
-        type: FOOD_OPTIONS_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createFoodOptions(data);
+        checkErrorResponse(payload, FOOD_OPTIONS_ADD, dispatch)
     }
 }
 
-export const updateFoodOption = async (id ,data) => {
-    let payload = await updateFoodOptions(id,data);
-
-    return {
-        type: FOOD_OPTIONS_UPDATE,
-        payload
+export const updateFoodOption = async (id, data) => {
+    return async (dispatch) => {
+        let payload = await updateFoodOptions(id, data);
+        checkErrorResponse(payload, FOOD_OPTIONS_UPDATE, dispatch)
     }
 }
 
 export const deleteFoodOption = async (id) => {
-    let payload = await deleteFoodOptions(id);
-
-    return {
-        type: FOOD_OPTIONS_REMOVE,
-        payload
+    return async (dispatch) => {
+        let payload = await deleteFoodOptions(id);
+        checkErrorResponse(payload, FOOD_OPTIONS_REMOVE, dispatch)
     }
 }

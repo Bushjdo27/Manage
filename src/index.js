@@ -8,8 +8,12 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducers from './reducers'
 import registerServiceWorker from './registerServiceWorker';
+import { getCategories } from './actions/categoriesActions'
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+
+//store.dispatch(getCategories())
+//.then(list => store.dispatch(list))
 
 ReactDOM.render(
     <Provider store={store}>

@@ -9,34 +9,29 @@ import {
     getListUsers,
     createUsers,
     updateUsers,
-
+    checkErrorResponse
 } from '../utils';
 
 //deleteRestaurantEmails
 export const getListUser = async () => {
-    let payload = await getListUsers();
-    console.log(payload)
-    return {
-        type: USERS_ALL,
-        payload
+    return async (dispatch) => {
+        let payload = await getListUsers();
+        checkErrorResponse(payload, USERS_ALL, dispatch)
     }
+
 }
 
 export const createUser = async (data) => {
-    let payload = await createUsers(data);
-
-    return {
-        type: USERS_ADD,
-        payload
+    return async (dispatch) => {
+        let payload = await createUsers(data);
+        checkErrorResponse(payload, USERS_ADD, dispatch)
     }
 }
 
 export const updateUser = async (id, data) => {
-    let payload = await updateUsers(id, data);
-
-    return {
-        type: USERS_UPDATE,
-        payload
+    return async (dispatch) => {
+        let payload = await updateUsers(id, data);
+        checkErrorResponse(payload, USERS_UPDATE, dispatch)
     }
 }
 
