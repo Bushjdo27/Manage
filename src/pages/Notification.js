@@ -4,11 +4,11 @@ import AdminTable from '../components/AdminTable';
 import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
-import { getListRestaurant } from '../actions/resActions';
+import { getListNotification } from '../actions/notificationActions';
 import CreateForm from '../components/Forms/Restaurant/Create'
 
 
-class RestaurantPage extends Component {
+class NotificationPage extends Component {
 
     constructor(props) {
         super(props);
@@ -17,12 +17,7 @@ class RestaurantPage extends Component {
         }
     }
     componentDidMount() {
-        console.log("Calling didMount")
-        // getListRestaurant().then(result => {
-        //     console.log(result)
-        //     this.props.dispatch(result)
-        // })
-        this.props.dispatch(getListRestaurant())
+        this.props.dispatch(getListNotification())
     }
 
     renderCreateForm = () => {
@@ -41,7 +36,7 @@ class RestaurantPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant" titleTable={['name', "address", "phone", "updated"]} data={this.props.Restaurants} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Notification" titleTable={['name', "type", "updated", "photo"]} data={this.props.Notifications} />
                             }
 
                         </div>
@@ -55,8 +50,8 @@ class RestaurantPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Restaurants: state.Restaurants
+        Notifications: state.Notifications
     }
 }
 
-export default connect(mapStateToProps)(RestaurantPage)
+export default connect(mapStateToProps)(NotificationPage)

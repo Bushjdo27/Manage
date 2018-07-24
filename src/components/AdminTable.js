@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-class AdminControl extends Component {
+import { Link } from 'react-router-dom';
+import {deleteRestaurant} from '../actions/resActions'
+import {deleteCategory} from '../actions/categoriesActions'
+class AdminTable extends Component {
     renderTableHead = () => {
         //this.props.titleTable
         return this.props.titleTable.map((item, index) => {
@@ -10,8 +12,7 @@ class AdminControl extends Component {
         })
     }
 
-    renderTableBody = () => {
-        //this.props.data
+    typeRestaurant = ()=>{
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -23,12 +24,63 @@ class AdminControl extends Component {
                         <td>
                             <Link to={`/restaurant/${res.id}/`}>
                                 Edit
-                                </Link>
+                            </Link>
                         </td>
-                        <td>Delete</td>
+                        <td onClick={this.handleRemove}>Delete</td>
                     </tr>
                 )
             })
+        }
+    }
+
+    typeCategory = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.name}</td>
+                        <td>{res.type}</td>
+                        <td>{res.updated_at}</td>
+                        <td>{res.photo.photo_url}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={this.handleRemove}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+    renderTableBody = () => {
+        //this.props.data
+        const {type} = this.props;
+
+        switch(type){
+            case 'Restaurant':
+                return typeRestaurant()
+            case 'Category':
+                return typeCategory()
+
+            default:
+                return []
+
+        }
+    }
+
+    handleRemove = ()=>{
+        const {type} = this.props;
+
+        switch(type){
+            case 'Restaurant':
+                return typeRestaurant()
+            case 'Category':
+                return typeCategory()
+
+            default:
+                return []
+
         }
     }
     render() {
@@ -57,4 +109,4 @@ class AdminControl extends Component {
 }
 
 
-export default AdminControl;
+export default AdminTable;

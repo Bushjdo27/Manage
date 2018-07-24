@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import App from '../App';
 import RestaurantPage from '../pages/Restaurant';
-import EditRestaurant from '../components/Forms/Restaurant/Edit'
+import EditRestaurant from '../components/Forms/Restaurant/Edit';
+import CategoryPage from '../pages/Category';
 // import AboutPage from '../pages/AboutPage';
 // import ContactPage from '../pages/ContactPage';
 // import OrderDetails from '../pages/OrderDetails'
@@ -17,7 +18,7 @@ class AppRoute extends Component {
                 <Switch>
                     <Route exact path="/" component={RestaurantPage} />
                     <Route exact path="/restaurant/:id/" component={EditRestaurant} />
-                    <Route exact path="/contact" component={App} />
+                    <Route exact path="/caterogy" component={CategoryPage} />
                     <Route exact path="/order" component={App} />
                     <Route exact path="/catering" component={App} />
                     <Route exact path="/login" component={App} />
