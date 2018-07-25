@@ -46,6 +46,11 @@ export const CATEGOREIS_ADD = "CATEGOREIS_ADD";
 export const CATEGOREIS_UPDATE = "CATEGOREIS_UPDATE";
 export const CATEGOREIS_REMOVE = "CATEGOREIS_REMOVE";
 
+export const ORDER_ALL = "ORDER_ALL";
+export const ORDER_ADD = "ORDER_ADD";
+export const ORDER_UPDATE = "ORDER_UPDATE";
+export const ORDER_REMOVE = "ORDER_REMOVE";
+
 export const ORDER_FOOD_ALL = "ORDER_FOOD_ALL";
 export const ORDER_FOOD_ADD = "ORDER_FOOD_ADD";
 export const ORDER_FOOD_UPDATE = "ORDER_FOOD_UPDATE";

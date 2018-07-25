@@ -36,7 +36,7 @@ class RestaurantUserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['name', "type", "updated", "photo"]} data={this.props.Categories} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['name', "type", "updated", "photo"]} data={this.props.Restaurant_Users} />
                             }
 
                         </div>
@@ -50,7 +50,7 @@ class RestaurantUserPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Categories: state.Categories
+        Restaurant_Users: state.Restaurant_Users
     }
 }
 
