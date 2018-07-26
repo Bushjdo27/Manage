@@ -16,7 +16,6 @@ class AdminControl extends Component {
                         <span onClick={this.goBack}>Go Back</span>
                         :
                         <div>
-                            <span>All</span>
                             <span onClick={this.handleCreate}>Create</span>
                         </div>
 

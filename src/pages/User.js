@@ -17,7 +17,7 @@ class UserPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListRestaurantEmail())
+        this.props.dispatch(getListUser())
     }
 
     renderCreateForm = () => {
@@ -36,7 +36,7 @@ class UserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="User" titleTable={['name', "type", "updated", "photo"]} data={this.props.Users} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="User" titleTable={['email', "password change", "updated"]} data={this.props.Users} />
                             }
 
                         </div>

@@ -36,7 +36,7 @@ class FoodPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Food" titleTable={['name', "type", "updated", "photo"]} data={this.props.Foods} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Food" titleTable={['name', "description", "price", "updated"]} data={this.props.Foods} />
                             }
 
                         </div>

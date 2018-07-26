@@ -9,32 +9,32 @@ import {
     getListNotifications,
     createNotifications,
     updateNotifications,
-    deleteNotifications
+    deleteNotifications,
+    checkErrorResponse
 } from '../utils';
-import { checkErrorResponse } from '../utils';
 
-export const getListNotification = async () => {
+export const getListNotification = () => {
     return async (dispatch) => {
         let payload = await getListNotifications();
         checkErrorResponse(payload, NOTIFICATIONS_ALL, dispatch)
     }
 }
 
-export const createNotification = async (data) => {
+export const createNotification = (data) => {
     return async (dispatch) => {
         let payload = await createNotifications(data);
         checkErrorResponse(payload, NOTIFICATIONS_ADD, dispatch)
     }
 }
 
-export const updateNotification = async (id, data) => {
+export const updateNotification = (id, data) => {
     return async (dispatch) => {
         let payload = await updateNotifications(id, data);
         checkErrorResponse(payload, NOTIFICATIONS_UPDATE, dispatch)
     }
 }
 
-export const deleteNotification = async (id) => {
+export const deleteNotification = (id) => {
     return async (dispatch) => {
         let payload = await deleteNotifications(id);
         checkErrorResponse(payload, NOTIFICATIONS_REMOVE, dispatch)

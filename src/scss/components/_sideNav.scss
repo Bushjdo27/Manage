@@ -30,9 +30,8 @@
       width: 100%;
       transition: all .2s;
       &:hover{
-        color: orange;
-        
-        border-bottom: .1rem solid orange;
+        color: $color-primary;
+        font-size: 1.6rem
       }
     }
   }

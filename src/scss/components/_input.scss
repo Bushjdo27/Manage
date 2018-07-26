@@ -1,32 +1,61 @@
-.input{
+.input:not([type="file"]){
     border:none;
     background-color: #f7f7f7;
     border-radius: .7rem;
     padding: .5rem 1rem;
     transition: all .3s;
-    &:hover , &:focus{
-      transform: scale(1.1);
+    &:hover{
+      transform: scale(1.05);
     }
     &:focus{
       outline: none;
     }
     
   }
-  
-  .form{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    flex-direction: column;
-    &__group{
+  .container-form{
+    padding-top: 4rem;
+    background-color: $color-grey;
+    padding-bottom: 6rem;
+    .form{
       width: 50%;
+      padding: 3rem 0;
+      background-color: #fff;
+      margin: auto;
+      border-radius: .7rem;
+      box-shadow: 0rem 1rem 3rem rgba(0,0,0,0.3);
       display: flex;
-      justify-content: space-between;
+      justify-content:center;
       align-items: center;
-      margin-top: 2rem;
-      input{
-        margin-left: 4rem;
-        flex: 1;
+      flex-direction: column;
+      &__group{
+        width: 100%;
+        padding: 0 4rem;
+        height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+  
+        label{
+          width: 18%;
+          font-size: 1rem;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+        input{
+          margin-left: 4rem;
+          flex: 1;
+          padding: 1.5rem 1rem;
+  
+          &:focus{
+            background-color: $color-white;
+            border: .1rem solid #2998ff ;
+            border-radius: .7rem;
+            outline: none;
+            
+          }
+        }
       }
     }
   }
+  

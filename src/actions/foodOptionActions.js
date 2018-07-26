@@ -5,31 +5,31 @@ import {
     FOOD_OPTIONS_REMOVE
 } from './constantType';
 
-import { getListFoodsOptions, createFoodOptions, updateFoodOptions, deleteFoodOptions } from '../utils';
-import { checkErrorResponse } from '../utils';
+import { getListFoodsOptions, createFoodOptions, updateFoodOptions, deleteFoodOptions, checkErrorResponse } from '../utils';
 
-export const getFoodOption = async () => {
+
+export const getFoodOption = () => {
     return async (dispatch) => {
         let payload = await getListFoodsOptions();
         checkErrorResponse(payload, FOOD_OPTIONS_ALL, dispatch)
     }
 }
 
-export const createFoodOption = async (data) => {
+export const createFoodOption = (data) => {
     return async (dispatch) => {
         let payload = await createFoodOptions(data);
         checkErrorResponse(payload, FOOD_OPTIONS_ADD, dispatch)
     }
 }
 
-export const updateFoodOption = async (id, data) => {
+export const updateFoodOption = (id, data) => {
     return async (dispatch) => {
         let payload = await updateFoodOptions(id, data);
         checkErrorResponse(payload, FOOD_OPTIONS_UPDATE, dispatch)
     }
 }
 
-export const deleteFoodOption = async (id) => {
+export const deleteFoodOption = (id) => {
     return async (dispatch) => {
         let payload = await deleteFoodOptions(id);
         checkErrorResponse(payload, FOOD_OPTIONS_REMOVE, dispatch)

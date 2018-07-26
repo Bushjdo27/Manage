@@ -21,24 +21,24 @@ export const getListRestaurant = () => {
     }
 }
 
-export const createRestaurant = async (data) => {
+export const createRestaurant = (data) => {
     return async (dispatch) => {
         let payload = await createRestaurants();
         checkErrorResponse(payload, RESTAURANT_ADD, dispatch)
     }
 }
 
-export const updateRestaurant = async (id, data) => {
+export const updateRestaurant = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurants(id, data);
-        checkErrorResponse(payload, RESTAURANT_ADD, dispatch)
+        checkErrorResponse(payload, RESTAURANT_UPDATE, dispatch)
     }
 }
 
-export const deleteRestaurant = async (id) => {
+export const deleteRestaurant = (id) => {
 
     return async (dispatch) => {
         let payload = await deleteRestaurants(id);
-        checkErrorResponse(payload, RESTAURANT_ADD, dispatch)
+        checkErrorResponse(payload, RESTAURANT_REMOVE, dispatch)
     }
 }

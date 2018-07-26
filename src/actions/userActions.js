@@ -13,7 +13,7 @@ import {
 } from '../utils';
 
 //deleteRestaurantEmails
-export const getListUser = async () => {
+export const getListUser = () => {
     return async (dispatch) => {
         let payload = await getListUsers();
         checkErrorResponse(payload, USERS_ALL, dispatch)
@@ -21,17 +21,23 @@ export const getListUser = async () => {
 
 }
 
-export const createUser = async (data) => {
+export const createUser = (data) => {
     return async (dispatch) => {
         let payload = await createUsers(data);
         checkErrorResponse(payload, USERS_ADD, dispatch)
     }
 }
 
-export const updateUser = async (id, data) => {
+export const updateUser = (id, data) => {
     return async (dispatch) => {
         let payload = await updateUsers(id, data);
         checkErrorResponse(payload, USERS_UPDATE, dispatch)
+    }
+}
+
+export const deleteUser = (id)=>{
+    return async (dispatch) =>{
+        
     }
 }
 

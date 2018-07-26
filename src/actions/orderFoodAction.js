@@ -9,32 +9,32 @@ import {
     getListOrdersFoods,
     createOrderFoods,
     updateOrderFoods,
-    deleteOrderFoods
+    deleteOrderFoods,
+    checkErrorResponse
 } from '../utils';
-import { checkErrorResponse } from '../utils';
 
-export const getOrderFood = async () => {
+export const getOrderFood = () => {
     return async (dispatch) => {
         let payload = await getListOrdersFoods();
         checkErrorResponse(payload, ORDER_FOOD_ALL, dispatch)
     }
 }
 
-export const createOrderFood = async (data) => {
+export const createOrderFood = (data) => {
     return async (dispatch) => {
         let payload = await createOrderFoods(data);
         checkErrorResponse(payload, ORDER_FOOD_ADD, dispatch)
     }
 }
 
-export const updateOrderFood = async (id, data) => {
+export const updateOrderFood = (id, data) => {
     return async (dispatch) => {
         let payload = await updateOrderFoods(id, data);
         checkErrorResponse(payload, ORDER_FOOD_UPDATE, dispatch)
     }
 }
 
-export const deleteOrderFood = async (id) => {
+export const deleteOrderFood = (id) => {
     return async (dispatch) => {
         let payload = await deleteOrderFoods(id);
         checkErrorResponse(payload, ORDER_FOOD_REMOVE, dispatch)

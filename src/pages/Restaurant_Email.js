@@ -36,7 +36,7 @@ class RestaurantEmailPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_Email" titleTable={['name', "type", "updated", "photo"]} data={this.props.Restaurant_Email} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_Email" titleTable={['email', "restaurant id", "updated"]} data={this.props.Restaurant_Email} />
                             }
 
                         </div>

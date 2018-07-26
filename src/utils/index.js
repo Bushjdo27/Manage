@@ -202,6 +202,7 @@ export const deleteFoods = async (id) => {
 export const getListFoodsOptions = async () => {
     const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/food_options`)
     console.log(result)
+    return result
 }
 
 export const createFoodOptions = async (food_options) => {
@@ -913,9 +914,9 @@ const Api = async (method, url, data = {}) => {
         url: url,
         baseURL: `${corsURL}http://tastebagdev.herokuapp.com/`,
         headers: {
-            'Access-Token': 'wrG-7mYwnikTepGqrBh7WA',
-            'Client': 'CxCRfMpvW0w-up--dK_NKA',
-            'Expiry': 1532488988,
+            'Access-Token': 'Sosl2U77TC70OovFN9lxCg',
+            'Client': 'KzIQrNc9tI0JwHRnvtXqDg',
+            'Expiry': 1533807534,
             'Token-Type': 'Bearer',
             'Uid': 'super_admin@example.com',
         },
@@ -938,7 +939,7 @@ export const checkErrorResponse = (payload, type, dispatch) => {
         dispatch(
             {
                 type,
-                payload
+                payload: payload.data
             }
         )
     }

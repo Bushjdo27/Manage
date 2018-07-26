@@ -14,28 +14,28 @@ import {
 
 
 
-export const getListOrder = async () => {
+export const getListOrder = () => {
     return async (dispatch) => {
         let payload = await getListOrders();
         checkErrorResponse(payload, ORDER_ALL, dispatch)
     }
 }
 
-export const createOrder = async (data) => {
+export const createOrder = (data) => {
     return async (dispatch) => {
         let payload = await createOrders(data);
         checkErrorResponse(payload, ORDER_ADD, dispatch)
     }
 }
 
-export const updateOrder = async (id, data) => {
+export const updateOrder = (id, data) => {
     return async (dispatch) => {
         let payload = await updateOrders(id, data);
         checkErrorResponse(payload, ORDER_UPDATE, dispatch)
     }
 }
 
-export const deleteOrder = async (id) => {
+export const deleteOrder = (id) => {
     return async (dispatch) => {
         let payload = await deleteOrders(id);
         checkErrorResponse(payload, ORDER_REMOVE, dispatch)

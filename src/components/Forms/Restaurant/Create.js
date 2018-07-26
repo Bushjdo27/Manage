@@ -64,7 +64,7 @@ class CreateRestaurant extends Component {
     render() {
         const { name, fbUrl, ytUrl, instaUrl, role, userId, address, phone, photo, icon } = this.state;
         return (
-            <div>
+            <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Name : </label>

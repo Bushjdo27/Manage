@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CreateForm from './Create'
+import CreateForm from './Create';
+import Header from '../../Header'
 
 class EditRestaurant extends Component {
     render() {
         console.log(this.props.Restaurant)
         return (
             <div>
-                <p>{this.props.match.params.id}</p>
+                <Header />
                 <CreateForm res={this.props.Restaurant} />
             </div>
         )

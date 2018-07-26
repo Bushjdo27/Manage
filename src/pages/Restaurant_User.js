@@ -36,7 +36,7 @@ class RestaurantUserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['name', "type", "updated", "photo"]} data={this.props.Restaurant_Users} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['user id', "role", "restaurant id" ,"updated"]} data={this.props.Restaurant_Users} />
                             }
 
                         </div>

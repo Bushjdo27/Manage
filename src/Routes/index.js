@@ -4,6 +4,18 @@ import App from '../App';
 import RestaurantPage from '../pages/Restaurant';
 import EditRestaurant from '../components/Forms/Restaurant/Edit';
 import CategoryPage from '../pages/Category';
+import Food_OptionPage from '../pages/Food_Option';
+import FoodPage from '../pages/Food';
+import NotificationPage from '../pages/Notification';
+import Order_Food_OptionPage from '../pages/Order_Food_Option';
+import Order_Food from '../pages/Order_Food';
+import OrderPage from '../pages/Order';
+import PaymentPage from '../pages/Payment';
+import Restaurant_EmailPage from '../pages/Restaurant_Email';
+import Restaurant_UserPage from '../pages/Restaurant_User';
+import UserPage from '../pages/User';
+
+
 // import AboutPage from '../pages/AboutPage';
 // import ContactPage from '../pages/ContactPage';
 // import OrderDetails from '../pages/OrderDetails'
@@ -19,11 +31,19 @@ class AppRoute extends Component {
                     <Route exact path="/" component={RestaurantPage} />
                     <Route exact path="/restaurant/:id/" component={EditRestaurant} />
                     <Route exact path="/caterogy" component={CategoryPage} />
-                    <Route exact path="/order" component={App} />
-                    <Route exact path="/catering" component={App} />
+
+                    <Route exact path="/food_options" component={Food_OptionPage} />
+                    <Route exact path="/foods" component={FoodPage} />
+                    <Route exact path="/notification" component={NotificationPage} />
+
+                    <Route exact path="/order" component={OrderPage} />
+                    <Route exact path="/order_food" component={Order_Food} />
+                    <Route exact path="/order_food_option" component={Order_Food_OptionPage} />
+                    <Route exact path="/payment" component={PaymentPage} />
+                    <Route exact path="/restaurant_emails" component={Restaurant_EmailPage} />
+                    <Route exact path="/restaurant_users" component={Restaurant_UserPage} />
+                    <Route exact path="/users" component={UserPage} />
                     <Route exact path="/login" component={App} />
-                    <Route exact path="/restaurant/:res_name/" component={App} />
-                    <Route exact path="/restaurant/:res_name/catering" component={App} />
                     <Route render={() => {
                         return (
                             <section style={

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {deleteRestaurant} from '../actions/resActions'
-import {deleteCategory} from '../actions/categoriesActions'
+import { deleteRestaurant } from '../actions/resActions'
+import { deleteCategory } from '../actions/categoriesActions'
+import { deleteFood } from '../actions/foodActions'
+import { deleteFoodOption } from '../actions/foodOptionActions'
+import { deletePaymentInfo } from '../actions/paymentActions'
+import { deleteRestaurantUser } from '../actions/restaurantUsersActions'
+import { deleteRestaurantEmail } from '../actions/restaurantEmailActions'
+import {deleteUser} from '../actions/userActions'
+import {deleteNotification} from '../actions/notificationActions'
+import { connect } from 'react-redux'
 class AdminTable extends Component {
     renderTableHead = () => {
         //this.props.titleTable
@@ -12,7 +20,7 @@ class AdminTable extends Component {
         })
     }
 
-    typeRestaurant = ()=>{
+    typeRestaurant = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -26,20 +34,20 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={this.handleRemove}>Delete</td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
                     </tr>
                 )
             })
         }
     }
 
-    typeCategory = ()=>{
+    typeCategory = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
                     <tr key={res.id}>
                         <td>{res.name}</td>
-                        <td>{res.type}</td>
+                        <td>{res.category_type}</td>
                         <td>{res.updated_at}</td>
                         <td>{res.photo.photo_url}</td>
                         <td>
@@ -47,7 +55,173 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={this.handleRemove}>Delete</td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeFood = () => {
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.name}</td>
+                        <td>{res.description}</td>
+                        <td>{res.price}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeFoodOptions = () => {
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.name}</td>
+                        <td>{res.price}</td>
+                        <td>{res.food_id}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeOrderFoodOptions = () => {
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.name}</td>
+                        <td>{res.price}</td>
+                        <td>{res.food_id}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typePayments = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.generatable.name}</td>
+                        <td>{res.payment_type}</td>
+                        <td>{res.card_account.full_name}</td>
+                        <td>{res.card_account.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeRestaurantUsers = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.user_id}</td>
+                        <td>{res.role}</td>
+                        <td>{res.restaurant_id}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeRestaurantEmails = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.email}</td>
+                        <td>{res.restaurant_id}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeUsers = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.email}</td>
+                        <td>{res.allow_password_change ? "True" : "False"}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeNotifications = ()=>{
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.subject}</td>
+                        <td>{res.message.substring(0, 50)}...</td>
+                        <td>{res.restaurant_id}</td>
+                        <td>{res.updated_at}</td>
+                        <td>
+                            <Link to={`/restaurant/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
                     </tr>
                 )
             })
@@ -55,29 +229,67 @@ class AdminTable extends Component {
     }
     renderTableBody = () => {
         //this.props.data
-        const {type} = this.props;
+        const { type } = this.props;
 
-        switch(type){
+        switch (type) {
             case 'Restaurant':
-                return typeRestaurant()
+                return this.typeRestaurant()
             case 'Category':
-                return typeCategory()
+                return this.typeCategory()
 
+            case 'Food':
+                return this.typeFood()
+            
+            case 'Food_Option':
+                return this.typeFoodOptions()
+            case 'Payment':
+                return this.typePayments()
+            case 'Restaurant_User':
+                return this.typeRestaurantUsers()
+            case 'Restaurant_Email':
+                return this.typeRestaurantEmails()
+
+            case 'User':
+                return this.typeUsers()
+            case 'Notification':
+                return this.typeNotifications()
             default:
                 return []
 
         }
     }
 
-    handleRemove = ()=>{
-        const {type} = this.props;
+    handleRemove = (id) => {
+        const { type } = this.props;
 
-        switch(type){
+        switch (type) {
             case 'Restaurant':
-                return typeRestaurant()
+                this.props.dispatch(deleteRestaurant(id))
+                return
             case 'Category':
-                return typeCategory()
+                this.props.dispatch(deleteCategory(id))
+                return
 
+            case 'Food':
+                this.props.dispatch(deleteFood(id))
+                return
+            case 'Food_Option':
+                this.props.dispatch(deleteFoodOption(id))
+                return
+            case 'Payment':
+                this.props.dispatch(deletePaymentInfo(id))
+                return
+            case 'Restaurant_User':
+                this.props.dispatch(deleteRestaurantUser(id))
+                return
+            case 'Restaurant_Email':
+                this.props.dispatch(deleteRestaurantEmail(id))
+                return
+            case 'User':
+                this.props.dispatch(deleteUser(id))
+                return
+            case 'Notification':
+                this.props.dispatch()
             default:
                 return []
 
@@ -109,4 +321,4 @@ class AdminTable extends Component {
 }
 
 
-export default AdminTable;
+export default connect()(AdminTable);

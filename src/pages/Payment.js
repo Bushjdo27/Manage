@@ -36,7 +36,7 @@ class PaymentPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Payment" titleTable={['name', "type", "updated", "photo"]} data={this.props.Payments} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Payment" titleTable={['Restaurant', "type","card name" , "updated"]} data={this.props.Payments} />
                             }
 
                         </div>
