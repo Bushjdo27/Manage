@@ -5,7 +5,7 @@ import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListPaymentInfo } from '../actions/paymentActions';
-import CreateForm from '../components/Forms/Restaurant/Create'
+import CreateForm from '../components/Forms/Payment/Create'
 
 
 class PaymentPage extends Component {
@@ -36,7 +36,7 @@ class PaymentPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Payment" titleTable={['Restaurant', "type","card name" , "updated"]} data={this.props.Payments} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Payment" titleTable={['Restaurant', "type", "card name", "updated"]} data={this.props.Payments} />
                             }
 
                         </div>

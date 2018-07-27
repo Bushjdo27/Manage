@@ -1,28 +1,23 @@
 import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
-
+import { connect } from 'react-redux'
 
 class CreateRestaurant extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-
-
+            name: props.data ? props.data.name : "",
+            fbUrl: props.data ? props.data.facebook_url : "",
+            ytUrl: props.data ? props.data.youtube_url : "",
+            instaUrl: props.data ? props.data.instagram_url : "",
+            role: props.data ? props.data.instagram_url : "",
+            userId: props.data ? props.data.instagram_url : 0,
+            address: props.data ? props.data.address.address : "",
+            phone: props.data ? props.data.phone : "",
+            photo: props.data ? props.data.instagram_url : null,
+            icon: props.data ? props.data.instagram_url : null
         }
-        /*
-        name: this.props.res ? res.name : "",
-            fbUrl: this.props.res ? res.facebook_url : "",
-            ytUrl: this.props.res ? res.youtube_url : "",
-            instaUrl: this.props.res ? res.instagram_url : "",
-            role: this.props.res ? res.instagram_url : "",
-            userId: this.props.res ? res.instagram_url: 0,
-            address: this.props.res ?res.instagram_url : "",
-            phone: this.props.res ? res.instagram_url : "",
-            photo:this.props.res ? res.instagram_url : null,
-            icon: this.props.res ? res.instagram_url : null
-        
-        */
     }
 
     handleNameChange = () => {
@@ -30,31 +25,76 @@ class CreateRestaurant extends Component {
     }
     handleFBChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                fbUrl: value
+            }
+        })
 
     }
     handleYTChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                ytUrl: value
+            }
+        })
     }
     handleInstaChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                instaUrl: value
+            }
+        })
     }
     handleRoleChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                role: value
+            }
+        })
     }
     handleUserIDChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                userId: value
+            }
+        })
     }
     handleAddressChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                address: value
+            }
+        })
     }
     handlePhoneChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                phone: value
+            }
+        })
     }
     handlePhotoChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                photo: value
+            }
+        })
     }
     handleIconChange = (e) => {
         const value = e.target.value;
+        this.setState(() => {
+            return {
+                icon: value
+            }
+        })
     }
 
     handleSubmit = (e) => {
@@ -108,12 +148,12 @@ class CreateRestaurant extends Component {
 
                     <div className="form__group">
                         <label>photo : </label>
-                        <input className="input" type="file" name="photo" value={photo} onChange={this.handlePhotoChange} />
+                        <input className="input" type="file" name="photo" onChange={this.handlePhotoChange} />
                     </div>
 
                     <div className="form__group">
                         <label>Icon : </label>
-                        <input className="input" type="file" name="icon" value={icon} onChange={this.handleIconChange} />
+                        <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
 
                 </form>
@@ -126,7 +166,7 @@ class CreateRestaurant extends Component {
     }
 }
 
-export default CreateRestaurant;
+export default connect()(CreateRestaurant);
 
 /*
 

@@ -5,7 +5,7 @@ import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getFoodOption } from '../actions/foodOptionActions';
-import CreateForm from '../components/Forms/Restaurant/Create'
+import CreateForm from '../components/Forms/Food_Options/Create'
 
 
 class FoodOptionPage extends Component {
@@ -36,7 +36,7 @@ class FoodOptionPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Food_Option" titleTable={['name', "price","Food ID" ,"updated"]} data={this.props.Food_Options} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Food_Option" titleTable={['name', "price", "Food ID", "updated"]} data={this.props.Food_Options} />
                             }
 
                         </div>

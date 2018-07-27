@@ -5,7 +5,7 @@ import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getOrderFoodOption } from '../actions/orderFoodOptionActions';
-import CreateForm from '../components/Forms/Restaurant/Create'
+import CreateForm from '../components/Forms/Order_Food_Options/Create'
 
 
 class OrderFoodOptionPage extends Component {

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { createRestaurantUsers } from '../../../utils'
-
+import { connect } from 'react-redux'
 class CreateRestaurantUser extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user_id: props.data ? props.data.user_id : 0,
+            restaurant_id: props.data ? props.data.restaurant_id : 0
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -10,10 +19,11 @@ class CreateRestaurantUser extends Component {
         createRestaurantUsers()
     }
     render() {
+        const { user_id, restaurant_id } = this.state
         return (
             <form onSubmit={this.handleSubmit}>
-                <input name="userID" type="number" placeholder="User ID" />
-                <input name="resID" type="number" placeholder="Restaurant ID" />
+                <input name="user_id" value={user_id} type="number" placeholder="User ID" />
+                <input name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
                 <button type="submit" >Create Restaurant User</button>
             </form>
         )
@@ -22,4 +32,4 @@ class CreateRestaurantUser extends Component {
 }
 
 
-export default CreateRestaurantUser
+export default connect()(CreateRestaurantUser)

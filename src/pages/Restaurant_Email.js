@@ -5,7 +5,7 @@ import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurantEmail } from '../actions/restaurantEmailActions';
-import CreateForm from '../components/Forms/Restaurant/Create'
+import CreateForm from '../components/Forms/Restaurant_Email/Create'
 
 
 class RestaurantEmailPage extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createOrderFoodOptions } from '../../../utils'
-
+import { connect } from 'react-redux'
 class CreateOrderFoodOptions extends Component {
 
     handleSubmit = (e) => {
@@ -21,4 +21,4 @@ class CreateOrderFoodOptions extends Component {
 }
 
 
-export default CreateOrderFoodOptions
+export default connect()(CreateOrderFoodOptions)

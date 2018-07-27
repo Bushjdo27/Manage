@@ -5,7 +5,7 @@ import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurantUser } from '../actions/restaurantUsersActions';
-import CreateForm from '../components/Forms/Restaurant/Create'
+import CreateForm from '../components/Forms/Restaurant_User/Create'
 
 
 class RestaurantUserPage extends Component {
@@ -36,7 +36,7 @@ class RestaurantUserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['user id', "role", "restaurant id" ,"updated"]} data={this.props.Restaurant_Users} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Restaurant_User" titleTable={['user id', "role", "restaurant id", "updated"]} data={this.props.Restaurant_Users} />
                             }
 
                         </div>

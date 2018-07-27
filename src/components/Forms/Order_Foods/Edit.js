@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Form from './Create'
+import Form from './Create';
+import Header from '../../Header'
 
 const EditFoodOptions = (props) => {
     return (
         <div>
-            <Form data={props.Order_Food} />
+            <Header />
+            <Form type="edit" data={props.Order_Food} />
         </div>
     )
 }

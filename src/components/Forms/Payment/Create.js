@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createPaymentInfos } from '../../../utils'
-
+import { connect } from 'react-redux'
 class CreatePayment extends Component {
 
     handleSubmit = (e) => {
@@ -21,4 +21,4 @@ class CreatePayment extends Component {
 }
 
 
-export default CreatePayment
+export default connect()(CreatePayment)

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { createFoodOptions } from '../../../utils';
 //import {getFoodOption} from '../../../actions/foodOptionActions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 class CreateFoodOptions extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            foodID: 0,
-            name:"",
-            price:""
+            foodID: props.data ? props.food_id : 0,
+            name: props.data ? props.name : "",
+            price: props.data ? props.price : ""
         }
     }
 
@@ -21,7 +21,7 @@ class CreateFoodOptions extends Component {
         createFoodOptions()
     }
     render() {
-        const {foodID , name , price} = this.state;
+        const { foodID, name, price } = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
                 <input name="foodID" value={foodID} type="number" placeholder="Food ID" />
@@ -34,10 +34,6 @@ class CreateFoodOptions extends Component {
 
 }
 
-const mapStateToProps = (state , props) =>{
-    return {
-        
-    }
-}
+
 
 export default connect()(CreateFoodOptions);

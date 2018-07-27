@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Form from './Create'
+import Form from './Create';
+import Header from '../../Header'
 
-const EditCategories = (props) => {
-    return (
-        <div>
-            <Form data={props.Category} />
-        </div>
-    )
+class EditCategories extends Component {
+    render() {
+        return (
+            <div>
+                <Header />
+                <Form type="edit" res={this.props.Restaurant} />
+            </div>
+        )
+    }
 }
 
 
