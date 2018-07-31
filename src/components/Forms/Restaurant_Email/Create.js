@@ -19,11 +19,21 @@ class CreateRestaurantEmail extends Component {
     render() {
         const { email, restaurant_id } = this.state;
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input name="email" value={email} type="email" placeholder="Email" />
-                <input name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
-                <button type="submit" >Create Restaurant Email</button>
-            </form>
+            <div className="container-form">
+                <form className="form" onSubmit={this.handleSubmit}>
+                    <div className="form__group">
+                        <label>Email : </label>
+                        <input className="input" name="email" value={email} type="email" placeholder="Email" />
+                    </div><div className="form__group">
+                        <label>Restaurant ID : </label>
+                        <input className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
+                    </div>
+
+
+                    <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
+                </form>
+            </div>
+
         )
     }
 

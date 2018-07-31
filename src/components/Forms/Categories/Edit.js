@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Form from './Create';
 import Header from '../../Header'
@@ -8,7 +8,7 @@ class EditCategories extends Component {
         return (
             <div>
                 <Header />
-                <Form type="edit" res={this.props.Restaurant} />
+                <Form type="edit" data={this.props.Category} />
             </div>
         )
     }
@@ -17,7 +17,7 @@ class EditCategories extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        Category: state.Categories.find(item => parseInt(item.id === props.match.params.id))
+        Category: state.Categories.find(item => item.id === parseInt(props.match.params.id, 10))
     }
 }
 

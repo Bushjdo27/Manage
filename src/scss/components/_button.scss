@@ -1,0 +1,16 @@
+button[type="submit"]{
+    margin: 3rem 0;
+    border: none;
+    border-radius: .7rem;
+    padding: 1rem 3rem;
+    background-color: transparent;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all .4s;
+    &:hover{
+        transform: translateY(-.7rem);
+        box-shadow: 0rem 1rem 3rem rgba(0,0,0,.05);
+        background-color: $color-dark-3;
+        color: $color-white
+    }
+}

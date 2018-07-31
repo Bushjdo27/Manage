@@ -52,7 +52,7 @@ class CreateNotification extends Component {
                         <input className="input" name="resID" type="number" placeholder="Restaurant ID" value={resID} onChange={this.handleResIDChange} />
                     </div>
 
-                    <button type="submit" >Create Notification</button>
+                    <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>
                 </form>
             </div>
 

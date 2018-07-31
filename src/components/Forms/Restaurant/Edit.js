@@ -16,7 +16,7 @@ class EditRestaurant extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        Restaurant: state.Restaurants.find(res => res.id === parseInt(props.match.params.id))
+        Restaurant: state.Restaurants.find(res => res.id === parseInt(props.match.params.id, 10))
     }
 }
 

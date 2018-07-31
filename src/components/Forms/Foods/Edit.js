@@ -14,7 +14,7 @@ const EditFoodOptions = (props) => {
 
 const mapStateToProps = (state, props) => {
     return {
-        Food: state.Foods.find(item => item.id === parseInt(props.match.params.id))
+        Food: state.Foods.find(item => item.id === parseInt(props.match.params.id, 10))
     }
 }
 

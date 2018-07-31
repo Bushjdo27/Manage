@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Create'
 import Header from '../../Header'
-const EditFoodOptions = (props) => {
+const EditUser = (props) => {
     return (
         <div>
             <Header />
-            <Form type="edit" data={props.Restaurant_User} />
+            <Form type="edit" data={props.User} />
         </div>
     )
 }
@@ -14,8 +14,8 @@ const EditFoodOptions = (props) => {
 
 const mapStateToProps = (state, props) => {
     return {
-        Restaurant_User: state.Restaurant_Users.find(item => item.id === parseInt(props.match.params.id, 10))
+        User: state.Users.find(item => item.id === parseInt(props.match.params.id, 10))
     }
 }
 
-export default connect(mapStateToProps)(EditFoodOptions)
+export default connect(mapStateToProps)(EditUser)

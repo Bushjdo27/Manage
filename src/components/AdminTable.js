@@ -7,8 +7,8 @@ import { deleteFoodOption } from '../actions/foodOptionActions'
 import { deletePaymentInfo } from '../actions/paymentActions'
 import { deleteRestaurantUser } from '../actions/restaurantUsersActions'
 import { deleteRestaurantEmail } from '../actions/restaurantEmailActions'
-import {deleteUser} from '../actions/userActions'
-import {deleteNotification} from '../actions/notificationActions'
+import { deleteUser } from '../actions/userActions'
+import { deleteNotification } from '../actions/notificationActions'
 import { connect } from 'react-redux'
 class AdminTable extends Component {
     renderTableHead = () => {
@@ -51,7 +51,7 @@ class AdminTable extends Component {
                         <td>{res.updated_at}</td>
                         <td>{res.photo.photo_url}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/caterogy/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -72,7 +72,7 @@ class AdminTable extends Component {
                         <td>{res.price}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/foods/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -93,7 +93,7 @@ class AdminTable extends Component {
                         <td>{res.food_id}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/food_options/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -114,7 +114,7 @@ class AdminTable extends Component {
                         <td>{res.food_id}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/order_food_option/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -125,7 +125,7 @@ class AdminTable extends Component {
         }
     }
 
-    typePayments = ()=>{
+    typePayments = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -135,7 +135,7 @@ class AdminTable extends Component {
                         <td>{res.card_account.full_name}</td>
                         <td>{res.card_account.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/payment/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -146,7 +146,7 @@ class AdminTable extends Component {
         }
     }
 
-    typeRestaurantUsers = ()=>{
+    typeRestaurantUsers = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -156,7 +156,7 @@ class AdminTable extends Component {
                         <td>{res.restaurant_id}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/restaurant_users/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -167,7 +167,7 @@ class AdminTable extends Component {
         }
     }
 
-    typeRestaurantEmails = ()=>{
+    typeRestaurantEmails = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -176,7 +176,7 @@ class AdminTable extends Component {
                         <td>{res.restaurant_id}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/restaurant_emails/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -187,7 +187,7 @@ class AdminTable extends Component {
         }
     }
 
-    typeUsers = ()=>{
+    typeUsers = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -196,7 +196,7 @@ class AdminTable extends Component {
                         <td>{res.allow_password_change ? "True" : "False"}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/users/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -207,7 +207,7 @@ class AdminTable extends Component {
         }
     }
 
-    typeNotifications = ()=>{
+    typeNotifications = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -217,7 +217,7 @@ class AdminTable extends Component {
                         <td>{res.restaurant_id}</td>
                         <td>{res.updated_at}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
+                            <Link to={`/notification/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -239,7 +239,7 @@ class AdminTable extends Component {
 
             case 'Food':
                 return this.typeFood()
-            
+
             case 'Food_Option':
                 return this.typeFoodOptions()
             case 'Payment':
@@ -265,31 +265,32 @@ class AdminTable extends Component {
         switch (type) {
             case 'Restaurant':
                 this.props.dispatch(deleteRestaurant(id))
-                return
+                break;
             case 'Category':
                 this.props.dispatch(deleteCategory(id))
-                return
+                break;
 
             case 'Food':
                 this.props.dispatch(deleteFood(id))
-                return
+                break;
             case 'Food_Option':
                 this.props.dispatch(deleteFoodOption(id))
-                return
+                break;
             case 'Payment':
                 this.props.dispatch(deletePaymentInfo(id))
-                return
+                break;
             case 'Restaurant_User':
                 this.props.dispatch(deleteRestaurantUser(id))
-                return
+                break;
             case 'Restaurant_Email':
                 this.props.dispatch(deleteRestaurantEmail(id))
-                return
+                break;
             case 'User':
                 this.props.dispatch(deleteUser(id))
-                return
+                break;
             case 'Notification':
-                this.props.dispatch()
+                this.props.dispatch(deleteNotification(id))
+                break;
             default:
                 return []
 

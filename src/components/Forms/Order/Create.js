@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { createPaymentInfos } from '../../../utils'
+import { createOrder } from '../../../actions/orderActions'
 import { connect } from 'react-redux'
-class CreatePayment extends Component {
+class CreateOrder extends Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class CreatePayment extends Component {
         e.preventDefault();
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
-        createPaymentInfos()
+        createOrder()
     }
     render() {
         return (
@@ -25,7 +25,7 @@ class CreatePayment extends Component {
                         <input className="input" name="resID" type="number" placeholder="Restaurant ID" />
                     </div>
 
-                    <button type="submit" >{this.props.data ? 'Edit Payment' : 'Create Payment'}</button>
+                    <button type="submit" >{this.props.data ? 'Edit Order' : 'Create Order'}</button>
                 </form>
             </div>
 
@@ -35,4 +35,4 @@ class CreatePayment extends Component {
 }
 
 
-export default connect()(CreatePayment)
+export default connect()(CreateOrder)

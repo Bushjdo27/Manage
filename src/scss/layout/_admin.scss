@@ -97,7 +97,17 @@
               font-size: 1.2rem;
               border-bottom: .1rem solid $color-grey;
               text-align: center;
+
+              a{
+                text-decoration: none;
+                color: $color-dark-3
+              }
+              &:last-child{
+                cursor: pointer;
+              }
             }
+
+            
             &:nth-child(2n){
               background-color: $color-grey;
             }

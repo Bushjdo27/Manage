@@ -14,7 +14,7 @@ const EditFoodOptions = (props) => {
 
 const mapStateToProps = (state, props) => {
     return {
-        Payment: state.Payments.find(item => item.id === parseInt(props.match.params.id))
+        Payment: state.Payments.find(item => item.id === parseInt(props.match.params.id, 10))
     }
 }
 

@@ -22,7 +22,7 @@ class CreateFoods extends Component {
     render() {
         const { categoryID, name, description, price } = this.state
         return (
-            <div>
+            <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Category ID : </label>
@@ -45,7 +45,7 @@ class CreateFoods extends Component {
                         <input className="input" name="photo" type="file" />
                     </div>
 
-                    <button type="submit" >Create Foods</button>
+                    <button type="submit" >{this.props.data ? 'Edit Foods' : 'Create Foods'}</button>
                 </form>
             </div>
 

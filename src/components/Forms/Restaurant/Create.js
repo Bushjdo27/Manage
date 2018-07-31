@@ -155,6 +155,7 @@ class CreateRestaurant extends Component {
                         <label>Icon : </label>
                         <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
+                    <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>
 
                 </form>
 

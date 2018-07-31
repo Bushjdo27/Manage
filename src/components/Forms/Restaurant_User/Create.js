@@ -21,11 +21,20 @@ class CreateRestaurantUser extends Component {
     render() {
         const { user_id, restaurant_id } = this.state
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input name="user_id" value={user_id} type="number" placeholder="User ID" />
-                <input name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
-                <button type="submit" >Create Restaurant User</button>
-            </form>
+            <div className="container-form">
+                <form className="form" onSubmit={this.handleSubmit}>
+                    <div className="form__group">
+                        <label>User ID : </label>
+                        <input className="input" name="user_id" value={user_id} type="number" placeholder="User ID" />
+                    </div>
+                    <div className="form__group">
+                        <label>Restaurant ID : </label>
+                        <input className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
+                    </div>
+                    <button type="submit" >{this.props.data ? 'Edit Restaurant User' : 'Create Restaurant User'}</button>
+                </form>
+            </div>
+
         )
     }
 

@@ -23,7 +23,7 @@ class CreateCategories extends Component {
     render() {
         const { name, category_type, restaurant_id } = this.state;
         return (
-            <div>
+            <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Name : </label>
@@ -37,12 +37,12 @@ class CreateCategories extends Component {
                         <label>Restaurant ID : </label>
                         <input className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
                     </div>
-                    <div>
+                    <div className="form__group">
                         <label>Photo: </label>
                         <input className="input" name="photo" type="file" />
                     </div>
 
-                    <button type="submit" >Create Category</button>
+                    <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                 </form>
             </div>
 
