@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { createCategories } from '../../../utils'
-import { connect } from 'react-redux'
+import { createCategory , updateCategory } from '../../../actions/categoriesActions';
+import { connect } from 'react-redux';
+
+//checked
 class CreateCategories extends Component {
 
     constructor(props) {
@@ -12,13 +14,33 @@ class CreateCategories extends Component {
         }
     }
 
+    handleChangeName = (e)=>{
+        const name = e.target.value;
+        this.setState(()=>({name}))
+    }
+
+    handleChangeType = (e)=>{
+        const category_type = e.target.value;
+        this.setState(()=>({category_type}))
+    }
+
+    handleChangeResId = (e)=>{
+        const restaurant_id = e.target.value;
+        this.setState(()=>({restaurant_id}))
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.elements.photo.files[0])
-        //const fd = new FormData()
-        // fd.append('image',e.target.elements.photo.files[0],"contact")
-        // console.log(fd)
-        createCategories(e.target.elements.photo.files[0])
+        console.log("Submiting..");
+        const {name , category_type , restaurant_id } = this.state;
+        if(this.props.data){
+            this.props.dispatch(updateCategory(this.props.data.id , this.state))
+        }else{
+            const data = { name, category_type, restaurant_id, files: e.target.elements.photo.files[0] }
+        
+            this.props.dispatch(createCategory(data))
+        }
+        
     }
     render() {
         const { name, category_type, restaurant_id } = this.state;
@@ -27,20 +49,23 @@ class CreateCategories extends Component {
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Name : </label>
-                        <input className="input" value={name} name="name" type="text" placeholder="Category name" />
+                        <input onChange={this.handleChangeName} className="input" value={name} name="name" type="text" placeholder="Category name" />
                     </div>
                     <div className="form__group">
                         <label>Name : </label>
-                        <input className="input" value={category_type} name="category_type" type="text" placeholder="Category Type" />
+                        <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type : only menu or catering" />
                     </div>
                     <div className="form__group">
                         <label>Restaurant ID : </label>
-                        <input className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
+                        <input onChange={this.handleChangeResId} className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
                     </div>
-                    <div className="form__group">
-                        <label>Photo: </label>
-                        <input className="input" name="photo" type="file" />
-                    </div>
+                    
+                    {!this.props.data && 
+                        <div className="form__group">
+                            <label>Photo: </label>
+                            <input className="input" name="photo" type="file" />
+                        </div>
+                    }
 
                     <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                 </form>

@@ -18,21 +18,24 @@ export const getCategories = () => {
 }
 
 
-export const createCategory = async (data) => {
+export const createCategory = (data) => {
+    console.log("in create category")
     return async (dispatch) => {
+        console.log('prepare call utils....')
         let payload = await createCategories(data);
+        console.log("got payload")
         checkErrorResponse(payload, CATEGOREIS_ADD, dispatch)
     }
 }
 
-export const updateCategory = async (id, data) => {
+export const updateCategory = (id, data) => {
     return async (dispatch) => {
         let payload = await updateCategories(id, data);
         checkErrorResponse(payload, CATEGOREIS_UPDATE, dispatch)
     }
 }
 
-export const deleteCategory = async (id) => {
+export const deleteCategory = (id) => {
     return async (dispatch) => {
         let payload = await deleteCategories(id);
         checkErrorResponse(payload, CATEGOREIS_REMOVE, dispatch)

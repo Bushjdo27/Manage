@@ -94,7 +94,7 @@ export const createCategories = async (category) => {
     //         }
     //     }
     // }
-
+    console.log("sending to api")
     const result = await Api('post', '/categories', fd)
     console.log(result);
     return result
@@ -102,7 +102,7 @@ export const createCategories = async (category) => {
 
 
 export const updateCategories = async (id, category) => {
-    const { name, category_type, restaurant_id, files } = category;
+    const { name, category_type, restaurant_id} = category;
     let fd = new FormData();
     fd.append('category[name]', name);
     fd.append('category[category_type]', category_type);
@@ -171,6 +171,8 @@ export const updateFoods = async (id, food) => {
     fd.append('food[price]', price);
     fd.append('food[photo_attributes][id]', id_photo);
     fd.append('food[photo_attributes][photo]', files);
+
+    //fd.append('food[photo_attributes][id]food[photo_attributes][photo]' , value?)
     // let data = {
     //     food: {
     //         category_id,

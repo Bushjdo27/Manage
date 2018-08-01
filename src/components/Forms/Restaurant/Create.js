@@ -98,7 +98,8 @@ class CreateRestaurant extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log("on click submit")
+        e.preventDefault();
+        
     }
 
     render() {

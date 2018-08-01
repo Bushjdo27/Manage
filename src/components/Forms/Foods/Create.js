@@ -1,44 +1,75 @@
 import React, { Component } from 'react';
-import { createFoods } from '../../../utils'
-import { connect } from 'react-redux'
+import { createFood , updateFood } from '../../../actions/foodActions'
+import { connect } from 'react-redux';
+
+// van de voi update
 class CreateFoods extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            categoryID: props.data ? props.data.category_id : "",
+            category_id: props.data ? props.data.category_id : "",
             name: props.data ? props.data.name : "",
             description: props.data ? props.data.description : "",
             price: props.data ? props.data.price : 0,
             photo: ""
         }
     }
+    
+    handleCateIDChange = (e)=>{
+        const value = e.target.value;
+        this.setState(()=>({category_id:value}))
+
+    }
+    handleNameChange = (e)=>{
+        const value = e.target.value;
+        this.setState(()=>({name:value}))
+
+    }
+    handleDescriptionChange = (e)=>{
+        const value = e.target.value;
+        this.setState(()=>({description:value}))
+
+    }
+
+    handlePriceChange = (e)=>{
+        const value = e.target.value;
+        this.setState(()=>({price:value}))
+
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(e.target.elements.photo.files[0])
-        createFoods(e.target.elements.photo.files[0])
+        console.log("submiting...")
+        //createFoods(e.target.elements.photo.files[0]);
+        const {category_id , name , description ,price} = this.state
+        if(this.props.data){
+            this.props.dispatch(updateFood(this.props.data.id , {...this.state , files:e.target.elements.photo.files[0],id_photo:this.props.data.photo.id}))
+        }else{
+            const data = { category_id, name, description, price, files:e.target.elements.photo.files[0] }
+            this.props.dispatch(createFood(data))
+        }
     }
     render() {
-        const { categoryID, name, description, price } = this.state
+        const { category_id, name, description, price } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Category ID : </label>
-                        <input className="input" value={categoryID} name="categoryID" type="number" placeholder="Category ID" />
+                        <input onChange={this.handleCateIDChange} className="input" value={category_id} name="categoryID" type="number" placeholder="Category ID" />
                     </div>
                     <div className="form__group">
                         <label>Name : </label>
-                        <input className="input" value={name} name="name" type="text" placeholder="Name" />
+                        <input onChange={this.handleNameChange} className="input" value={name} name="name" type="text" placeholder="Name" />
                     </div>
                     <div className="form__group">
                         <label>Description : </label>
-                        <input className="input" value={description} name="description" type="text" placeholder="descriptions" />
+                        <input onChange={this.handleDescriptionChange} className="input" value={description} name="description" type="text" placeholder="descriptions" />
                     </div>
                     <div className="form__group">
                         <label>Price : </label>
-                        <input className="input" value={price} name="price" type="number" placeholder="price" />
+                        <input onChange={this.handlePriceChange} className="input" value={price} name="price" type="number" placeholder="price" />
                     </div>
                     <div className="form__group">
                         <label>Photo : </label>
