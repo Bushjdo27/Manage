@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createNotifications } from '../../../utils'
+import { createNotification, updateNotification } from '../../../actions/notificationActions'
 import { connect } from 'react-redux'
 class CreateNotification extends Component {
 
@@ -8,29 +8,38 @@ class CreateNotification extends Component {
         this.state = {
             subject: props.data ? props.data.subject : '',
             message: props.data ? props.data.message : '',
-            resID: props.data ? props.data.restaurant_id : ''
+            restaurant_id: props.data ? props.data.restaurant_id : ''
 
         }
     }
 
-    handleSubjectChange = () => {
+    handleSubjectChange = (e) => {
+        const value = e.target.value;
+        this.setState(() => ({ subject: value }))
 
     }
-    handleMessageChange = () => {
-
+    handleMessageChange = (e) => {
+        const value = e.target.value;
+        this.setState(() => ({ message: value }))
     }
     handleResIDChange = (e) => {
-
+        const value = e.target.value;
+        this.setState(() => ({ restaurant_id: value }))
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
-        createNotifications(e.target.elements.photo.files[0])
+        //createNotifications(e.target.elements.photo.files[0])
+        if (this.props.data) {
+            this.props.dispatch(updateNotification(this.props.data.id, this.state))
+        } else {
+            this.props.dispatch(createNotification(this.state))
+        }
     }
     render() {
-        const { subject, message, resID } = this.state
+        const { subject, message, restaurant_id } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -49,7 +58,7 @@ class CreateNotification extends Component {
                     </div>
                     <div className="form__group">
                         <label>Restaurant ID : </label>
-                        <input className="input" name="resID" type="number" placeholder="Restaurant ID" value={resID} onChange={this.handleResIDChange} />
+                        <input className="input" name="restaurant_id" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleResIDChange} />
                     </div>
 
                     <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>

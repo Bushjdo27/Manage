@@ -102,7 +102,7 @@ export const createCategories = async (category) => {
 
 
 export const updateCategories = async (id, category) => {
-    const { name, category_type, restaurant_id} = category;
+    const { name, category_type, restaurant_id } = category;
     let fd = new FormData();
     fd.append('category[name]', name);
     fd.append('category[category_type]', category_type);
@@ -490,16 +490,16 @@ export const getListPaymentInfos = async () => {
 
 
 export const createPaymentInfos = async (payment) => {
-    const { generatable_type, payment_type, generatable } = payment;
+    const { restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
     const fd = new FormData();
     fd.append("payment_info[generatable_type]", "Restaurant");
-    fd.append("payment_info[generatable_id]", 1);
+    fd.append("payment_info[generatable_id]", restaurant_id);
     fd.append("payment_info[payment_type]", payment_type);
-    fd.append("payment_info[card_account_attributes][full_name]", "full name");
-    fd.append("payment_info[card_account_attributes][number]", 4111111111111111);
-    fd.append("payment_info[card_account_attributes][expiry_month]", 9);
-    fd.append("payment_info[card_account_attributes][expiry_year]", 2019);
-    fd.append("payment_info[card_account_attributes][cvv]", 123);
+    fd.append("payment_info[card_account_attributes][full_name]", full_name);
+    fd.append("payment_info[card_account_attributes][number]", card_number);
+    fd.append("payment_info[card_account_attributes][expiry_month]", expiry_month);
+    fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
+    fd.append("payment_info[card_account_attributes][cvv]", cvv);
     fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
 
     console.log("im in create payment utils")
@@ -586,13 +586,13 @@ export const createPaymentInfos = async (payment) => {
 
 export const updatePaymentInfos = async (id, payment) => {
     //const {}
-    const { generatable_type, payment_type, generatable } = payment;
+    const { restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
     const fd = new FormData();
     fd.append("payment_info[generatable_type]", "Restaurant");
-    fd.append("payment_info[generatable_id]", 1);
+    fd.append("payment_info[generatable_id]", restaurant_id);
     fd.append("payment_info[payment_type]", payment_type);
     fd.append("payment_info[card_account_attributes][id]", 1);
-    fd.append("payment_info[card_account_attributes][full_name]", "full name");
+    fd.append("payment_info[card_account_attributes][full_name]", full_name);
     fd.append("payment_info[card_account_attributes][number]", 4111111111111111);
     fd.append("payment_info[card_account_attributes][expiry_month]", 9);
     fd.append("payment_info[card_account_attributes][expiry_year]", 2019);

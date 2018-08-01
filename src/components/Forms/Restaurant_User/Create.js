@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createRestaurantUsers } from '../../../utils'
+import { createRestaurantUser, updateRestaurantUser } from '../../../actions/restaurantUsersActions'
 import { connect } from 'react-redux'
 class CreateRestaurantUser extends Component {
 
@@ -7,16 +7,31 @@ class CreateRestaurantUser extends Component {
         super(props);
 
         this.state = {
-            user_id: props.data ? props.data.user_id : 0,
-            restaurant_id: props.data ? props.data.restaurant_id : 0
+            user_id: props.data ? parseInt(props.data.user_id, 10) : 0,
+            restaurant_id: props.data ? parseInt(props.data.restaurant_id, 10) : 0
         }
+    }
+
+    handleUserIDChange = (e) => {
+        const value = e.target.value;
+        this.setState(() => ({ user_id: value }))
+    }
+
+    handleRestIdChange = (e) => {
+        const value = e.target.value;
+        this.setState(() => ({ restaurant_id: value }))
+
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
-        createRestaurantUsers()
+        if (this.props.data) {
+            this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state))
+        } else {
+            this.props.dispatch(createRestaurantUser(this.state))
+        }
     }
     render() {
         const { user_id, restaurant_id } = this.state
@@ -25,11 +40,11 @@ class CreateRestaurantUser extends Component {
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>User ID : </label>
-                        <input className="input" name="user_id" value={user_id} type="number" placeholder="User ID" />
+                        <input className="input" onChange={this.handleUserIDChange} name="user_id" value={user_id} type="number" placeholder="User ID" />
                     </div>
                     <div className="form__group">
                         <label>Restaurant ID : </label>
-                        <input className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
+                        <input className="input" onChange={this.handleRestIdChange} name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
                     </div>
                     <button type="submit" >{this.props.data ? 'Edit Restaurant User' : 'Create Restaurant User'}</button>
                 </form>
