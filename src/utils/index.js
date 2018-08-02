@@ -442,13 +442,6 @@ export const createOrderFoods = async (order_food) => {
     fd.append('order_food[order_id]', order_id);
     fd.append('order_food[food_id]', food_id);
     fd.append('order_food[amount]', amount);
-    const data = {
-        order_food: {
-            order_id,
-            food_id,
-            amount
-        }
-    }
     const result = await Api('post', '/order_foods', fd)
     console.log(result)
     return result;
@@ -503,7 +496,29 @@ export const createPaymentInfos = async (payment) => {
     fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
 
     console.log("im in create payment utils")
-    const data = {
+
+    const result = await Api('post', '/payment_infos', fd);
+    console.log(result)
+    return result;
+}
+
+/**
+ * 
+ * generatable_type: 'Restaurant',
+            generatable_id: 1,
+            payment_type: 'card',
+            card_account_attributes: {
+                full_name: 'phucvo',
+                number: 4111111111111111,
+                expiry_month: 9,
+                expiry_year: 2019,
+                cvv: 123
+            },
+            paypal_account_attributes: {
+                paypal_email: 'asd@gmail.com'
+            }
+
+const data = {
         payment_info: {
             generatable_type: "Restaurant",
             generatable_id: 1,
@@ -542,28 +557,6 @@ export const createPaymentInfos = async (payment) => {
     }
     console.log('======================== Body request =================================')
     console.log(data)
-    const result = await Api('post', '/payment_infos', fd);
-    console.log(result)
-    return result;
-}
-
-/**
- * 
- * generatable_type: 'Restaurant',
-            generatable_id: 1,
-            payment_type: 'card',
-            card_account_attributes: {
-                full_name: 'phucvo',
-                number: 4111111111111111,
-                expiry_month: 9,
-                expiry_year: 2019,
-                cvv: 123
-            },
-            paypal_account_attributes: {
-                paypal_email: 'asd@gmail.com'
-            }
-
-
 
     ====== Paypal ====
     {
@@ -593,19 +586,19 @@ export const updatePaymentInfos = async (id, payment) => {
     fd.append("payment_info[payment_type]", payment_type);
     fd.append("payment_info[card_account_attributes][id]", 1);
     fd.append("payment_info[card_account_attributes][full_name]", full_name);
-    fd.append("payment_info[card_account_attributes][number]", 4111111111111111);
-    fd.append("payment_info[card_account_attributes][expiry_month]", 9);
-    fd.append("payment_info[card_account_attributes][expiry_year]", 2019);
-    fd.append("payment_info[card_account_attributes][cvv]", 123);
+    fd.append("payment_info[card_account_attributes][number]", card_number);
+    fd.append("payment_info[card_account_attributes][expiry_month]", expiry_month);
+    fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
+    fd.append("payment_info[card_account_attributes][cvv]", cvv);
     fd.append("payment_info[paypal_account_attributes][id]", 19);
     fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
-    const data = {
-        payment_info: {
-            "paypal_account_attributes": {
-                "paypal_email": "bushjdo@gmail.com"
-            }
-        }
-    }
+    // const data = {
+    //     payment_info: {
+    //         "paypal_account_attributes": {
+    //             "paypal_email": "bushjdo@gmail.com"
+    //         }
+    //     }
+    // }
     const result = await Api('patch', `/payment_infos/${id}`, fd);
     console.log(result)
     return result;
@@ -680,12 +673,12 @@ export const createRestaurantEmails = async (resEmail) => {
     const fd = new FormData();
     fd.append("restaurant_email[email]", email);
     fd.append("restaurant_email[restaurant_id]", restaurant_id);
-    const data = {
-        restaurant_email: {
-            email,
-            restaurant_id
-        }
-    }
+    // const data = {
+    //     restaurant_email: {
+    //         email,
+    //         restaurant_id
+    //     }
+    // }
     const result = await Api('post', '/restaurant_emails', fd);
     console.log(result)
     return result;
@@ -696,12 +689,12 @@ export const updateRestaurantEmails = async (id, resEmail) => {
     const fd = new FormData();
     fd.append("restaurant_email[email]", email);
     fd.append("restaurant_email[restaurant_id]", restaurant_id);
-    const data = {
-        restaurant_email: {
-            email,
-            restaurant_id
-        }
-    }
+    // const data = {
+    //     restaurant_email: {
+    //         email,
+    //         restaurant_id
+    //     }
+    // }
     const result = await Api('patch', `/restaurant_emails/${id}`, fd);
     console.log(result)
     return result;
@@ -877,17 +870,17 @@ export const updateNotifications = async (id, notification) => {
     fd.append("notification[photo_attributes][id]", photo_id)
     fd.append("notification[photo_attributes][photo]", photo)
     fd.append("notification[restaurant_id]", restaurant_id)
-    const data = {
-        notification: {
-            subject,
-            message,
-            photo_attributes: {
-                photo,
-                id
-            },
-            restaurant_id
-        }
-    }
+    // const data = {
+    //     notification: {
+    //         subject,
+    //         message,
+    //         photo_attributes: {
+    //             photo,
+    //             id
+    //         },
+    //         restaurant_id
+    //     }
+    // }
     const result = await Api('patch', `/notifications/${id}`, fd);
     console.log(result)
     return result;
@@ -909,7 +902,7 @@ export const isEmpty = (obj) => {
 
 const Api = async (method, url, data = {}) => {
 
-    let headers = JSON.parse(localStorage.getItem('headers'));
+    //let headers = JSON.parse(localStorage.getItem('headers'));
 
     let result = {};
     let config = {

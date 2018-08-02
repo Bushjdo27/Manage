@@ -103,7 +103,7 @@ class CreateRestaurant extends Component {
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, role, userId, address, phone, photo, icon } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, role, userId, address, phone } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

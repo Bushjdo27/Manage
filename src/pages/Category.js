@@ -14,10 +14,30 @@ class CategoryPage extends Component {
         super(props);
         this.state = {
             showCreate: false,
+            search: "",
+            data: props.Categories
         }
     }
     componentDidMount() {
         this.props.dispatch(getCategories())
+    }
+
+    handleSearch = (search) => {
+        console.log(search)
+        this.setState(() => ({ search }))
+    }
+
+    data = () => {
+        const { search } = this.state;
+        if (search.length > 0) {
+            const data = this.props.Categories.filter((item) => {
+                return item.name.includes(search)
+            });
+            console.log(data)
+            //this.setState(()=>({data})) Menu Item 1
+            return data;
+        }
+        return this.props.Categories
     }
 
     renderCreateForm = () => {
@@ -34,9 +54,9 @@ class CategoryPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.props.Categories} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

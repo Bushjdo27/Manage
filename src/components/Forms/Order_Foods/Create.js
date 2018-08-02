@@ -35,7 +35,7 @@ class CreateOrderFood extends Component {
         if (this.props.data) {
             this.props.dispatch(updateOrderFood(this.props.data.id, this.state))
         } else {
-            this.props.dispatch(updateOrderFood(this.state))
+            this.props.dispatch(createOrderFood(this.state))
         }
     }
     render() {

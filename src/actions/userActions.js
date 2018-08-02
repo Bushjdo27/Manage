@@ -2,9 +2,9 @@ import {
     USERS_ALL,
     USERS_ADD,
     USERS_UPDATE,
-    USERS_REMOVE
-} from './constantType';
 
+} from './constantType';
+//USERS_REMOVE
 import {
     getListUsers,
     createUsers,
@@ -35,17 +35,8 @@ export const updateUser = (id, data) => {
     }
 }
 
-export const deleteUser = (id)=>{
-    return async (dispatch) =>{
-        
+export const deleteUser = (id) => {
+    return async (dispatch) => {
+
     }
 }
-
-// export const deleteRestaurantEmail = async (id) => {
-//     let payload = await deleteRestaurantEmails(id);
-
-//     return {
-//         type: USERS_REMOVE,
-//         payload
-//     }
-// }

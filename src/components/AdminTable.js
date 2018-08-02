@@ -324,7 +324,7 @@ class AdminTable extends Component {
         }
     }
     render() {
-        console.log(this.props.data)
+        console.log(this.props.search)
         return (
             <div className="admin__data">
                 <table>

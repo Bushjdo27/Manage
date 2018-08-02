@@ -23,8 +23,8 @@ class AdminControl extends Component {
                 </div>
                 {!this.props.isShowBack &&
                     <div className="admin__control__search">
-                        <input type="text" placeholder="Search for title" />
-                        <button>Search</button>
+                        <input type="text" placeholder="Search for title" onChange={(e) => { this.props.query(e.target.value) }} />
+
                     </div>
                 }
             </div>
