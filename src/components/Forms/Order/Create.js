@@ -6,6 +6,14 @@ class CreateOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            restaurant_id: 0,
+            user_id: 0,
+            first_name: "",
+            last_name: "",
+            company_name: "",
+            email: "",
+            phone: "",
+            address: "",
 
         }
     }

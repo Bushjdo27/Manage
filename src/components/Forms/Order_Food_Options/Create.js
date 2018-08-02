@@ -6,7 +6,8 @@ class CreateOrderFoodOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            food_options_id: 0,
+            order_food_id: 0
         }
     }
 

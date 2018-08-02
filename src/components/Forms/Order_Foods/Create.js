@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createOrderFoods } from '../../../utils'
+import { createOrderFood, updateOrderFood } from '../../../actions/orderFoodAction'
 import { connect } from 'react-redux'
 class CreateOrderFood extends Component {
 
@@ -29,26 +29,31 @@ class CreateOrderFood extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create order food')
+        //console.log('in create order food')
         //console.log(e.target.elements.photo.files[0])
-        createOrderFoods()
+        //createOrderFoods()
+        if (this.props.data) {
+            this.props.dispatch(updateOrderFood(this.props.data.id, this.state))
+        } else {
+            this.props.dispatch(updateOrderFood(this.state))
+        }
     }
     render() {
         const { order_id, food_id, amount } = this.state
         return (
             <div className="container-form">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="form">
                     <div className="form__group">
                         <label>Order ID : </label>
-                        <input name="orderId" type="text" placeholder="Order ID" value={order_id} onChange={this.handleOrderIdChange} />
+                        <input className="input" name="orderId" type="text" placeholder="Order ID" value={order_id} onChange={this.handleOrderIdChange} />
                     </div>
                     <div className="form__group">
                         <label>Food ID : </label>
-                        <input name="foodID" type="number" placeholder="Food ID" value={food_id} onChange={this.handleFoodIdChange} />
+                        <input className="input" name="foodID" type="number" placeholder="Food ID" value={food_id} onChange={this.handleFoodIdChange} />
                     </div>
                     <div className="form__group">
                         <label>Amount : </label>
-                        <input name="amount" type="number" placeholder="Amount" value={amount} onChange={this.handleAmountChange} />
+                        <input className="input" name="amount" type="number" placeholder="Amount" value={amount} onChange={this.handleAmountChange} />
                     </div>
                     <button type="submit" >{this.props.data ? 'Edit Order Foods' : 'Create Order Foods'}</button>
                 </form>

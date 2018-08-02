@@ -9,6 +9,7 @@ import { deleteRestaurantUser } from '../actions/restaurantUsersActions'
 import { deleteRestaurantEmail } from '../actions/restaurantEmailActions'
 import { deleteUser } from '../actions/userActions'
 import { deleteNotification } from '../actions/notificationActions'
+import { deleteOrderFood } from '../actions/orderFoodAction'
 import { connect } from 'react-redux'
 class AdminTable extends Component {
     renderTableHead = () => {
@@ -94,6 +95,27 @@ class AdminTable extends Component {
                         <td>{res.updated_at}</td>
                         <td>
                             <Link to={`/food_options/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    typeOrderFoods = () => {
+        if (this.props.data.length > 0) {
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.food_id}</td>
+                        <td>{res.amount}</td>
+                        <td>{res.price}</td>
+                        <td>{res.created_at}</td>
+                        <td>
+                            <Link to={`/order_foods/${res.id}/`}>
                                 Edit
                             </Link>
                         </td>
@@ -253,6 +275,8 @@ class AdminTable extends Component {
                 return this.typeUsers()
             case 'Notification':
                 return this.typeNotifications()
+            case 'Order_Food':
+                return this.typeOrderFoods()
             default:
                 return []
 
@@ -290,6 +314,9 @@ class AdminTable extends Component {
                 break;
             case 'Notification':
                 this.props.dispatch(deleteNotification(id))
+                break;
+            case 'Order_Food':
+                this.props.dispatch(deleteOrderFood(id))
                 break;
             default:
                 return []
