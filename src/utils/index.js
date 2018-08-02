@@ -909,9 +909,9 @@ const Api = async (method, url, data = {}) => {
         url: url,
         baseURL: `${corsURL}http://tastebagdev.herokuapp.com/`,
         headers: {
-            'Access-Token': 'Sosl2U77TC70OovFN9lxCg',
-            'Client': 'KzIQrNc9tI0JwHRnvtXqDg',
-            'Expiry': 1533807534,
+            'Access-Token': 'rT34W7Y7uFzJ93VWO_7ZqA',
+            'Client': 'rwOb9e1xCFtK81GdxlOCRA',
+            'Expiry': 1534433613,
             'Token-Type': 'Bearer',
             'Uid': 'super_admin@example.com',
         },
@@ -943,7 +943,13 @@ export const checkErrorResponse = (payload, type, dispatch) => {
     }
 }
 
-
+export const pagination = (arr , page = 1 , itemPerPage = 5) =>{
+    //render result of current page
+    const start = (page -1) * itemPerPage;
+    const end = page * itemPerPage;
+  
+    return arr.slice(start , end)
+  }
 /**
  * 
  * headers: {

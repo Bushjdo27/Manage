@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListUser } from '../actions/userActions';
 import CreateForm from '../components/Forms/User/Create'
-
+import {pagination} from '../utils/index'
 
 class UserPage extends Component {
 
@@ -14,10 +14,41 @@ class UserPage extends Component {
         super(props);
         this.state = {
             showCreate: false,
+            search: "",
+            currentPage: 1,
         }
     }
     componentDidMount() {
         this.props.dispatch(getListUser())
+    }
+
+    handleNext = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }))
+    }
+
+    handlePrev = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
+    }
+
+    handleSearch = (search) => {
+        console.log(search)
+        this.setState(() => ({ search }))
+    }
+
+    data = () => {
+        const { search } = this.state;
+        if (search.length > 0) {
+            const data = this.props.Users.filter((item) => {
+                return item.name.includes(search)
+            });
+            console.log(data)
+            //this.setState(()=>({data})) Menu Item 1
+            return data;
+        }
+        return pagination(this.props.Users , currentPage , 5)
+        //return this.props.Users
     }
 
     renderCreateForm = () => {
@@ -36,7 +67,7 @@ class UserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="User" titleTable={['email', "password change", "updated"]} data={this.props.Users} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="User" titleTable={['email', "password change", "updated"]} data={this.data()} />
                             }
 
                         </div>

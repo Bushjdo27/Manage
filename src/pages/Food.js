@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getFoods } from '../actions/foodActions';
 import CreateForm from '../components/Forms/Foods/Create'
-
+import {pagination} from '../utils/index'
 
 class FoodPage extends Component {
 
@@ -14,11 +14,42 @@ class FoodPage extends Component {
         super(props);
         this.state = {
             showCreate: false,
+            search: "",
+            currentPage: 1,
         }
     }
     componentDidMount() {
         this.props.dispatch(getFoods())
     }
+
+    handleNext = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }))
+    }
+
+    handlePrev = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
+    }
+    handleSearch = (search) => {
+        console.log(search)
+        this.setState(() => ({ search }))
+    }
+
+    data = () => {
+        const { search } = this.state;
+        if (search.length > 0) {
+            const data = this.props.Foods.filter((item) => {
+                return item.name.includes(search)
+            });
+            console.log(data)
+            //this.setState(()=>({data})) Menu Item 1
+            return data;
+        }
+        return pagination(this.props.Foods , currentPage , 5)
+        //return this.props.Foods
+    }
+
 
     renderCreateForm = () => {
         this.setState(() => ({ showCreate: true }))
@@ -36,7 +67,7 @@ class FoodPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable type="Food" titleTable={['name', "description", "price", "updated"]} data={this.props.Foods} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
                             }
 
                         </div>

@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getCategories } from '../actions/categoriesActions';
 import CreateForm from '../components/Forms/Categories/Create'
-
+import {pagination} from '../utils/index'
 
 class CategoryPage extends Component {
 
@@ -15,7 +15,7 @@ class CategoryPage extends Component {
         this.state = {
             showCreate: false,
             search: "",
-            data: props.Categories
+            currentPage: 1,
         }
     }
     componentDidMount() {
@@ -26,9 +26,18 @@ class CategoryPage extends Component {
         console.log(search)
         this.setState(() => ({ search }))
     }
+    handleNext = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }))
+    }
+
+    handlePrev = () => {
+        //console.log()
+        this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
+    }
 
     data = () => {
-        const { search } = this.state;
+        const { search , currentPage} = this.state;
         if (search.length > 0) {
             const data = this.props.Categories.filter((item) => {
                 return item.name.includes(search)
@@ -37,7 +46,8 @@ class CategoryPage extends Component {
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        return this.props.Categories
+        
+        return pagination(this.props.Categories , currentPage , 5)
     }
 
     renderCreateForm = () => {
@@ -56,7 +66,7 @@ class CategoryPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

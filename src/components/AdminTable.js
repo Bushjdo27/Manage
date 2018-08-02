@@ -324,7 +324,6 @@ class AdminTable extends Component {
         }
     }
     render() {
-        console.log(this.props.search)
         return (
             <div className="admin__data">
                 <table>
@@ -343,6 +342,11 @@ class AdminTable extends Component {
                         {this.renderTableBody()}
                     </tbody>
                 </table>
+
+                <div className="admin__data__control">
+                    <button className="admin__data__control--button" onClick={this.props.prev}>Prev</button>
+                    <button className="admin__data__control--button" onClick={this.props.next}>Next</button>
+                </div>
             </div>
         )
     }
