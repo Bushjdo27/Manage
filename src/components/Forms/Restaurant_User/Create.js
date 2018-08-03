@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantUser, updateRestaurantUser } from '../../../actions/restaurantUsersActions'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+//checked
 class CreateRestaurantUser extends Component {
 
     constructor(props) {

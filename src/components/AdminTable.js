@@ -105,6 +105,75 @@ class AdminTable extends Component {
         }
     }
 
+    typeOrder = () => {
+        if (this.props.data.length > 0) {
+            // const infor = this.props.data((res) => {
+
+            // })
+            return this.props.data.map((res) => {
+                return (
+                    <tr key={res.id}>
+                        <td>{res.email}</td>
+                        <td>{`${res.first_name} ,${res.last_name}`}</td>
+                        <td>
+                            <div style={{ textAlign: 'left' }}>
+                                <p>
+                                    <strong>Phone : </strong>
+                                    <span>{res.phone}</span>
+                                </p>
+                                <p>
+                                    <strong>Address : </strong>
+                                    <span>{res.address.address}</span>
+                                </p>
+                                <div>
+                                    {res.order_foods.map((food, index) => {
+                                        return (
+                                            <div key={index}>
+                                                <p style={{ margin: "1rem 0" }}><strong> ----------- Food ----------- </strong></p>
+                                                <p>
+                                                    <strong>Amount : </strong>
+                                                    <span>{food.amount}</span>
+                                                </p>
+                                                <p style={{ margin: "1rem 0" }}><strong> ----------- Options ----------- </strong></p>
+                                                {food.order_food_options.length > 0 ?
+                                                    food.order_food_options.map((option, index) => {
+                                                        return (
+                                                            <div key={index}>
+                                                                <p>
+                                                                    <strong>Name : </strong>
+                                                                    <span>{option.food_option_id}</span>
+                                                                </p>
+                                                                <p>
+                                                                    <strong>Price : </strong>
+                                                                    <span>{option.price}</span>
+                                                                </p>
+                                                            </div>
+                                                        )
+                                                    })
+                                                    :
+                                                    <p>No Options</p>
+                                                }
+
+
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </td>
+                        <td>{res.total_price}</td>
+                        <td>
+                            <Link to={`/order_foods/${res.id}/`}>
+                                Edit
+                            </Link>
+                        </td>
+                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                    </tr>
+                )
+            })
+        }
+    }
+
     typeOrderFoods = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
@@ -277,6 +346,8 @@ class AdminTable extends Component {
                 return this.typeNotifications()
             case 'Order_Food':
                 return this.typeOrderFoods()
+            case 'Order':
+                return this.typeOrder()
             default:
                 return []
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createFood, updateFood } from '../../../actions/foodActions'
 import { connect } from 'react-redux';
 
-// van de voi update
+// checked
 class CreateFoods extends Component {
 
     constructor(props) {
@@ -18,7 +18,7 @@ class CreateFoods extends Component {
 
     handleCateIDChange = (e) => {
         console.log(e.target.value)
-        const value = e.target.value;
+        const value = parseInt(e.target.value, 10);
         this.setState(() => ({ category_id: value }))
 
     }
@@ -39,6 +39,14 @@ class CreateFoods extends Component {
 
     }
 
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.data_food.map((item, index) => {
+                return <option key={index} value={item.category_id}>{item.category.name}</option>
+            })
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         console.log("submiting...")
@@ -48,19 +56,19 @@ class CreateFoods extends Component {
             this.props.dispatch(updateFood(this.props.data.id, { ...this.state, files: e.target.elements.photo.files[0], id_photo: this.props.data.photo.id }))
         } else {
             const data = { category_id, name, description, price, files: e.target.elements.photo.files[0] }
-            this.props.dispatch(createFood(data))
+            this.props.dispatch(createFood(data)).then(() => { console.log("complete create") })
         }
     }
     render() {
-        const { category_id, name, description, price } = this.state
+        const { name, description, price } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Category ID : </label>
+                        <label>Category : </label>
                         <select className="input" onChange={this.handleCateIDChange}>
                             <option value="">Select Category</option>
-                            <option value={1}>Bushjdo Category</option>
+                            {this.renderOptions()}
                         </select>
                     </div>
                     <div className="form__group">
@@ -89,6 +97,11 @@ class CreateFoods extends Component {
 
 }
 
+const mapStateToProps = (state) => {
+    return {
+        data_food: state.Foods
+    }
+}
 
-export default connect()(CreateFoods)
+export default connect(mapStateToProps)(CreateFoods)
 //<input onChange={this.handleCateIDChange} className="input" value={category_id} name="categoryID" type="number" placeholder="Category ID" />

@@ -331,6 +331,8 @@ body {
       .container-form .form__group select.input {
         flex: 1;
         margin-left: 4rem; }
+        .container-form .form__group select.input:hover {
+          transform: scale(1); }
 
 button[type="submit"] {
   margin: 3rem 0;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 //import { createPaymentInfos } from '../../../utils'
 import { createPaymentInfo, updatePaymentInfo } from '../../../actions/paymentActions'
 import { connect } from 'react-redux'
+
+//checked
 class CreatePayment extends Component {
 
     constructor(props) {
@@ -54,7 +56,7 @@ class CreatePayment extends Component {
         //createPaymentInfos()
 
         if (this.props.data) {
-            this.props.dispatch(updatePaymentInfo(this.props.data.id, this.state))
+            this.props.dispatch(updatePaymentInfo(this.props.data.id, { ...this.state, card_id: this.props.data.card_account.id }))
         } else {
             this.props.dispatch(createPaymentInfo(this.state))
         }
@@ -76,22 +78,26 @@ class CreatePayment extends Component {
                         <label>Full Name : </label>
                         <input value={full_name} onChange={this.handleFullNameChange} className="input" name="fullName" type="text" placeholder="Full Name" />
                     </div>
-                    <div className="form__group">
-                        <label>Card Number : </label>
-                        <input value={card_number} onChange={this.handleCardNumberChange} className="input" name="card_number" type="number" placeholder="Restaurant ID" />
-                    </div>
-                    <div className="form__group">
-                        <label>Expire Month : </label>
-                        <input value={expiry_month} onChange={this.handleExpMonthChange} className="input" name="resID" type="number" placeholder="Expire Month" />
-                    </div>
-                    <div className="form__group">
-                        <label>Expire Year : </label>
-                        <input value={expiry_year} onChange={this.handleExpYearChange} className="input" name="resID" type="number" placeholder="Expire Year" />
-                    </div>
-                    <div className="form__group">
-                        <label>CVV : </label>
-                        <input value={cvv} onChange={this.handleCVVChange} className="input" name="resID" type="number" placeholder="CVV" />
-                    </div>
+                    {!this.props.data &&
+                        <div style={{ width: "100%" }}>
+                            <div className="form__group">
+                                <label>Card Number : </label>
+                                <input value={card_number} onChange={this.handleCardNumberChange} className="input" name="card_number" type="number" placeholder="Restaurant ID" />
+                            </div>
+                            <div className="form__group">
+                                <label>Expire Month : </label>
+                                <input value={expiry_month} onChange={this.handleExpMonthChange} className="input" name="resID" type="number" placeholder="Expire Month" />
+                            </div>
+                            <div className="form__group">
+                                <label>Expire Year : </label>
+                                <input value={expiry_year} onChange={this.handleExpYearChange} className="input" name="resID" type="number" placeholder="Expire Year" />
+                            </div>
+                            <div className="form__group">
+                                <label>CVV : </label>
+                                <input value={cvv} onChange={this.handleCVVChange} className="input" name="resID" type="number" placeholder="CVV" />
+                            </div>
+                        </div>
+                    }
 
 
 

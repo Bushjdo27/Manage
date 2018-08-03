@@ -432,7 +432,7 @@ export const deleteOrderFoodOptions = async (id) => {
 export const getListOrdersFoods = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/order_foods')
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
@@ -506,20 +506,22 @@ export const createPaymentInfos = async (payment) => {
 
 export const updatePaymentInfos = async (id, payment) => {
     //const {}
-    const { restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
+    console.log(payment)
+    const { card_id, restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
     const fd = new FormData();
     fd.append("payment_info[generatable_type]", "Restaurant");
-    fd.append("payment_info[generatable_id]", restaurant_id);
     fd.append("payment_info[payment_type]", payment_type);
-    fd.append("payment_info[card_account_attributes][id]", 1);
+    fd.append("payment_info[card_account_attributes][id]", card_id);
+    //fd.append("payment_info[generatable_id]", restaurant_id);
+
     fd.append("payment_info[card_account_attributes][full_name]", full_name);
-    fd.append("payment_info[card_account_attributes][number]", card_number);
-    fd.append("payment_info[card_account_attributes][expiry_month]", expiry_month);
-    fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
-    fd.append("payment_info[card_account_attributes][cvv]", cvv);
-    fd.append("payment_info[paypal_account_attributes][id]", 19);
-    fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
-    // const data = {
+    //fd.append("payment_info[card_account_attributes][number]", null);
+    // fd.append("payment_info[card_account_attributes][expiry_month]", expiry_month);
+    // fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
+    // fd.append("payment_info[card_account_attributes][cvv]", cvv);
+    // fd.append("payment_info[paypal_account_attributes][id]", 19);
+    // fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
+    // // const data = {
     //     payment_info: {
     //         "paypal_account_attributes": {
     //             "paypal_email": "bushjdo@gmail.com"

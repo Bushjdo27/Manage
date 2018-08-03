@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantEmail, updateRestaurantEmail } from '../../../actions/restaurantEmailActions'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+//checked
 class CreateRestaurantEmail extends Component {
 
     constructor(props) {
