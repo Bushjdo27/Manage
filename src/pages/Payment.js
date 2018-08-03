@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListPaymentInfo } from '../actions/paymentActions';
 import CreateForm from '../components/Forms/Payment/Create'
-import {pagination} from '../utils/index'
+import { pagination } from '../utils/index'
 
 class PaymentPage extends Component {
 
@@ -37,16 +37,16 @@ class PaymentPage extends Component {
     }
 
     data = () => {
-        const { search } = this.state;
+        const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Payments.filter((item) => {
-                return item.name.includes(search)
+                return item.generatable.name.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        return pagination(this.props.Payments , currentPage , 5)
+        return pagination(this.props.Payments, currentPage, 5)
         //return this.props.Payments
     }
 
@@ -64,9 +64,9 @@ class PaymentPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"restaurant"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="Payment" titleTable={['Restaurant', "type", "card name", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Payments.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Payment" titleTable={['Restaurant', "type", "card name", "updated"]} data={this.data()} />
                             }
 
                         </div>

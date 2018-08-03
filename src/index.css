@@ -211,6 +211,39 @@ body {
         cursor: pointer; }
     .admin__data table tbody tr:nth-child(2n) {
       background-color: #f7f7f7; }
+  .admin__data__control {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10rem; }
+    .admin__data__control--button {
+      outline: none;
+      background-color: transparent;
+      border: none;
+      width: 10rem;
+      display: inline-block;
+      border-radius: .7rem;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.2rem;
+      box-shadow: 0rem 1rem 3rem rgba(0, 0, 0, 0.07);
+      cursor: pointer;
+      transition: all .3s; }
+      .admin__data__control--button:hover {
+        background-color: #02B7E9;
+        color: #fff;
+        transform: translateY(-0.4rem);
+        box-shadow: 0rem 2rem 3rem rgba(0, 0, 0, 0.3); }
+      .admin__data__control--button:not(:last-child) {
+        margin-right: 2rem; }
+      .admin__data__control--button:disabled {
+        background-color: #f7f7f7;
+        color: #333;
+        box-shadow: 0rem 0rem 0rem white; }
+      .admin__data__control--button:disabled:hover {
+        color: #333;
+        transform: translateY(0);
+        box-shadow: 0 0 0 0; }
 
 .header {
   width: 100%;
@@ -295,6 +328,9 @@ body {
           border: .1rem solid #2998ff;
           border-radius: .7rem;
           outline: none; }
+      .container-form .form__group select.input {
+        flex: 1;
+        margin-left: 4rem; }
 
 button[type="submit"] {
   margin: 3rem 0;

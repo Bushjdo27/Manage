@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListOrder } from '../actions/orderActions';
 import CreateForm from '../components/Forms/Restaurant/Create'
-import {pagination} from '../utils/index'
+import { pagination } from '../utils/index'
 // lam viec voi action
 
 class OrderPage extends Component {
@@ -38,16 +38,16 @@ class OrderPage extends Component {
     }
 
     data = () => {
-        const { search } = this.state;
+        const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Orders.filter((item) => {
-                return item.name.includes(search)
+                return item.name.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        return pagination(this.props.Orders , currentPage , 5)
+        return pagination(this.props.Orders, currentPage, 5)
         //return this.props.Orders
     }
 
@@ -65,9 +65,9 @@ class OrderPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Orders.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

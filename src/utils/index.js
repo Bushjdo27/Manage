@@ -256,7 +256,8 @@ export const deleteFoodOptions = async (id) => {
 
 //==================== Order ==============================
 export const getListOrders = async () => {
-    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/orders`)
+
+    const result = await Api('get', '/orders')
     console.log(result)
     return result;
 }
@@ -502,80 +503,6 @@ export const createPaymentInfos = async (payment) => {
     return result;
 }
 
-/**
- * 
- * generatable_type: 'Restaurant',
-            generatable_id: 1,
-            payment_type: 'card',
-            card_account_attributes: {
-                full_name: 'phucvo',
-                number: 4111111111111111,
-                expiry_month: 9,
-                expiry_year: 2019,
-                cvv: 123
-            },
-            paypal_account_attributes: {
-                paypal_email: 'asd@gmail.com'
-            }
-
-const data = {
-        payment_info: {
-            generatable_type: "Restaurant",
-            generatable_id: 1,
-            payment_type: "card",
-            generatable: {
-                id: 1,
-                name: "Monash University",
-                phone: "(03) 95438889"
-            },
-            "card_account_attributes": {
-                full_name: "phuc vo",
-                number: 4111111111111111,
-                expiry_month: 9,
-                expiry_year: 2019,
-                cvv: 123
-            }
-        }
-    }
-
-
-    const data2 = {
-        "payment_info": {
-            "generatable_type": "Restaurant",
-            "generatable_id": 1,
-            "payment_type": "paypal",
-            "generatable": {
-                "id": 1,
-                "name": "Monash University",
-                "phone": "(03) 95438889"
-            },
-            "paypal_account_attributes": {
-                "paypal_email": "asd@gmail.com"
-            }
-
-        }
-    }
-    console.log('======================== Body request =================================')
-    console.log(data)
-
-    ====== Paypal ====
-    {
-	"payment_info": {
-			"generatable_type":"Restaurant",
-            "generatable_id": 1,
-            "payment_type": "paypal",
-            "generatable":{
-            	"id":1,
-            	"name":"Monash University",
-            	"phone":"(03) 95438889"
-            },
-            "paypal_account_attributes": {
-                "paypal_email": "asd@gmail.com"
-            }
-            
-		}
-}
- */
 
 export const updatePaymentInfos = async (id, payment) => {
     //const {}
@@ -705,57 +632,6 @@ export const deleteRestaurantEmails = async (id) => {
     return result;
 }
 
-//======================= Restaurant Users ===================
-
-// export const getListRestaurantUsers = async () => {
-//     try {
-//         const result = await Api('get', '/restaurant_users');
-//         return result;
-//     } catch (e) {
-//         return null;
-//     }
-
-// }
-
-// export const createRestaurantUsers = async (payload) => {
-//     const { user_id, restaurant_id } = payload
-//     const fd = new FormData();
-//     fd.append("restaurant_user[user_id]", user_id);
-//     fd.append("restaurant_user[restaurant_id]", restaurant_id);
-
-//     try {
-
-//     } catch (e) {
-//         return null;
-//     }
-//     const result = await Api('post', '/restaurant_users', fd);
-//     return result;
-// }
-
-// export const updateRestaurantUsers = async (id, payload) => {
-//     const { user_id, restaurant_id } = payload
-//     const fd = new FormData();
-//     fd.append("restaurant_user[user_id]", user_id);
-//     fd.append("restaurant_user[restaurant_id]", restaurant_id);
-
-//     try {
-//         const result = await Api('patch', `/restaurant_users/${id}`, fd)
-//         return result;
-//     } catch (e) {
-//         return null;
-//     }
-
-// }
-
-// export const deleteRestaurantUsers = async (id) => {
-//     try {
-//         const result = await Api('delete', `/restaurant_users/${id}`);
-//         return result
-//     } catch (e) {
-//         return null;
-//     }
-
-// }
 
 
 //====================== Users ========================
@@ -909,9 +785,9 @@ const Api = async (method, url, data = {}) => {
         url: url,
         baseURL: `${corsURL}http://tastebagdev.herokuapp.com/`,
         headers: {
-            'Access-Token': 'rT34W7Y7uFzJ93VWO_7ZqA',
-            'Client': 'rwOb9e1xCFtK81GdxlOCRA',
-            'Expiry': 1534433613,
+            'Access-Token': 'zziON5mxJQeo_SvpMtgpYQ',
+            'Client': 'R20cWAikp4WxYMa8NWuoMg',
+            'Expiry': 1534472736,
             'Token-Type': 'Bearer',
             'Uid': 'super_admin@example.com',
         },
@@ -943,13 +819,13 @@ export const checkErrorResponse = (payload, type, dispatch) => {
     }
 }
 
-export const pagination = (arr , page = 1 , itemPerPage = 5) =>{
+export const pagination = (arr, page = 1, itemPerPage = 5) => {
     //render result of current page
-    const start = (page -1) * itemPerPage;
+    const start = (page - 1) * itemPerPage;
     const end = page * itemPerPage;
-  
-    return arr.slice(start , end)
-  }
+
+    return arr.slice(start, end)
+}
 /**
  * 
  * headers: {

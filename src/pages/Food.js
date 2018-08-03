@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getFoods } from '../actions/foodActions';
 import CreateForm from '../components/Forms/Foods/Create'
-import {pagination} from '../utils/index'
+import { pagination } from '../utils/index'
 
 class FoodPage extends Component {
 
@@ -37,16 +37,16 @@ class FoodPage extends Component {
     }
 
     data = () => {
-        const { search } = this.state;
+        const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Foods.filter((item) => {
-                return item.name.includes(search)
+                return item.name.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        return pagination(this.props.Foods , currentPage , 5)
+        return pagination(this.props.Foods, currentPage, 5)
         //return this.props.Foods
     }
 
@@ -65,9 +65,9 @@ class FoodPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
                             }
 
                         </div>

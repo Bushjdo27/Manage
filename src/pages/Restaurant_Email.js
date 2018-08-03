@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurantEmail } from '../actions/restaurantEmailActions';
 import CreateForm from '../components/Forms/Restaurant_Email/Create'
-import {pagination} from '../utils/index'
+import { pagination } from '../utils/index'
 
 class RestaurantEmailPage extends Component {
 
@@ -37,16 +37,16 @@ class RestaurantEmailPage extends Component {
     }
 
     data = () => {
-        const { search } = this.state;
+        const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Restaurant_Email.filter((item) => {
-                return item.name.includes(search)
+                return item.email.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        return pagination(this.props.Restaurant_Email , currentPage , 5)
+        return pagination(this.props.Restaurant_Email, currentPage, 5)
         //return this.props.Restaurant_Email
     }
 
@@ -64,9 +64,9 @@ class RestaurantEmailPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"email"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} type="Restaurant_Email" titleTable={['email', "restaurant id", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurant_Email.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant_Email" titleTable={['email', "restaurant id", "updated"]} data={this.data()} />
                             }
 
                         </div>

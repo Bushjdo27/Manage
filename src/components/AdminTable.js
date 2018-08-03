@@ -27,9 +27,9 @@ class AdminTable extends Component {
                 return (
                     <tr key={res.id}>
                         <td>{res.name}</td>
-                        <td>{res.address.address}</td>
+                        <td>{res.address.address.substring(0, 50)}</td>
                         <td>{res.phone}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/restaurant/${res.id}/`}>
                                 Edit
@@ -49,8 +49,8 @@ class AdminTable extends Component {
                     <tr key={res.id}>
                         <td>{res.name}</td>
                         <td>{res.category_type}</td>
-                        <td>{res.updated_at}</td>
-                        <td>{res.photo.photo_url}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.photo.photo_url.substring(0, 50)}</td>
                         <td>
                             <Link to={`/caterogy/${res.id}/`}>
                                 Edit
@@ -69,9 +69,9 @@ class AdminTable extends Component {
                 return (
                     <tr key={res.id}>
                         <td>{res.name}</td>
-                        <td>{res.description}</td>
+                        <td>{res.description.substring(0, 50)}</td>
                         <td>{res.price}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/foods/${res.id}/`}>
                                 Edit
@@ -92,7 +92,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.price}</td>
                         <td>{res.food_id}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/food_options/${res.id}/`}>
                                 Edit
@@ -113,7 +113,7 @@ class AdminTable extends Component {
                         <td>{res.food_id}</td>
                         <td>{res.amount}</td>
                         <td>{res.price}</td>
-                        <td>{res.created_at}</td>
+                        <td>{res.created_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/order_foods/${res.id}/`}>
                                 Edit
@@ -134,7 +134,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.price}</td>
                         <td>{res.food_id}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/order_food_option/${res.id}/`}>
                                 Edit
@@ -155,7 +155,7 @@ class AdminTable extends Component {
                         <td>{res.generatable.name}</td>
                         <td>{res.payment_type}</td>
                         <td>{res.card_account.full_name}</td>
-                        <td>{res.card_account.updated_at}</td>
+                        <td>{res.card_account.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/payment/${res.id}/`}>
                                 Edit
@@ -176,7 +176,7 @@ class AdminTable extends Component {
                         <td>{res.user_id}</td>
                         <td>{res.role}</td>
                         <td>{res.restaurant_id}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/restaurant_users/${res.id}/`}>
                                 Edit
@@ -196,7 +196,7 @@ class AdminTable extends Component {
                     <tr key={res.id}>
                         <td>{res.email}</td>
                         <td>{res.restaurant_id}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/restaurant_emails/${res.id}/`}>
                                 Edit
@@ -216,7 +216,7 @@ class AdminTable extends Component {
                     <tr key={res.id}>
                         <td>{res.email}</td>
                         <td>{res.allow_password_change ? "True" : "False"}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/users/${res.id}/`}>
                                 Edit
@@ -237,7 +237,7 @@ class AdminTable extends Component {
                         <td>{res.subject}</td>
                         <td>{res.message.substring(0, 50)}...</td>
                         <td>{res.restaurant_id}</td>
-                        <td>{res.updated_at}</td>
+                        <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
                             <Link to={`/notification/${res.id}/`}>
                                 Edit
@@ -324,6 +324,8 @@ class AdminTable extends Component {
         }
     }
     render() {
+        console.log(this.props.canPrev);
+        console.log(this.props.canNext)
         return (
             <div className="admin__data">
                 <table>
@@ -344,8 +346,8 @@ class AdminTable extends Component {
                 </table>
 
                 <div className="admin__data__control">
-                    <button className="admin__data__control--button" onClick={this.props.prev}>Prev</button>
-                    <button className="admin__data__control--button" onClick={this.props.next}>Next</button>
+                    <button disabled={this.props.canPrev} className="admin__data__control--button" onClick={this.props.prev}>Prev</button>
+                    <button disabled={this.props.canNext} className="admin__data__control--button" onClick={this.props.next}>Next</button>
                 </div>
             </div>
         )

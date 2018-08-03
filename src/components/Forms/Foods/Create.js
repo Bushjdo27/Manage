@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createFood , updateFood } from '../../../actions/foodActions'
+import { createFood, updateFood } from '../../../actions/foodActions'
 import { connect } from 'react-redux';
 
 // van de voi update
@@ -15,26 +15,27 @@ class CreateFoods extends Component {
             photo: ""
         }
     }
-    
-    handleCateIDChange = (e)=>{
+
+    handleCateIDChange = (e) => {
+        console.log(e.target.value)
         const value = e.target.value;
-        this.setState(()=>({category_id:value}))
+        this.setState(() => ({ category_id: value }))
 
     }
-    handleNameChange = (e)=>{
+    handleNameChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({name:value}))
+        this.setState(() => ({ name: value }))
 
     }
-    handleDescriptionChange = (e)=>{
+    handleDescriptionChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({description:value}))
+        this.setState(() => ({ description: value }))
 
     }
 
-    handlePriceChange = (e)=>{
+    handlePriceChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({price:value}))
+        this.setState(() => ({ price: value }))
 
     }
 
@@ -42,11 +43,11 @@ class CreateFoods extends Component {
         e.preventDefault();
         console.log("submiting...")
         //createFoods(e.target.elements.photo.files[0]);
-        const {category_id , name , description ,price} = this.state
-        if(this.props.data){
-            this.props.dispatch(updateFood(this.props.data.id , {...this.state , files:e.target.elements.photo.files[0],id_photo:this.props.data.photo.id}))
-        }else{
-            const data = { category_id, name, description, price, files:e.target.elements.photo.files[0] }
+        const { category_id, name, description, price } = this.state
+        if (this.props.data) {
+            this.props.dispatch(updateFood(this.props.data.id, { ...this.state, files: e.target.elements.photo.files[0], id_photo: this.props.data.photo.id }))
+        } else {
+            const data = { category_id, name, description, price, files: e.target.elements.photo.files[0] }
             this.props.dispatch(createFood(data))
         }
     }
@@ -57,7 +58,10 @@ class CreateFoods extends Component {
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Category ID : </label>
-                        <input onChange={this.handleCateIDChange} className="input" value={category_id} name="categoryID" type="number" placeholder="Category ID" />
+                        <select className="input" onChange={this.handleCateIDChange}>
+                            <option value="">Select Category</option>
+                            <option value={1}>Bushjdo Category</option>
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Name : </label>
@@ -87,3 +91,4 @@ class CreateFoods extends Component {
 
 
 export default connect()(CreateFoods)
+//<input onChange={this.handleCateIDChange} className="input" value={category_id} name="categoryID" type="number" placeholder="Category ID" />

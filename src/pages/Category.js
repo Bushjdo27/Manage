@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getCategories } from '../actions/categoriesActions';
 import CreateForm from '../components/Forms/Categories/Create'
-import {pagination} from '../utils/index'
+import { pagination } from '../utils/index'
 
 class CategoryPage extends Component {
 
@@ -37,17 +37,17 @@ class CategoryPage extends Component {
     }
 
     data = () => {
-        const { search , currentPage} = this.state;
+        const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Categories.filter((item) => {
-                return item.name.includes(search)
+                return item.name.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
-        
-        return pagination(this.props.Categories , currentPage , 5)
+
+        return pagination(this.props.Categories, currentPage, 5)
     }
 
     renderCreateForm = () => {
@@ -64,9 +64,9 @@ class CategoryPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Categories.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>
