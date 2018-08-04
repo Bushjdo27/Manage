@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'MyFont';
+  src: local("MyFont"), url(./assets/fonts/Aphrodite_Text.woff) format("woff"); }
+
 @keyframes moveIn {
   0% {
     opacity: 0;
@@ -251,9 +255,14 @@ body {
   padding: 2rem;
   text-align: center; }
   .header__title {
-    font-size: 3.2rem; }
+    font-size: 3.2rem;
+    font-family: 'MyFont';
+    font-weight: normal;
+    color: #EAA750; }
   .header__subtitle {
-    font-size: 2.2rem; }
+    font-size: 2.2rem;
+    font-family: 'MyFont';
+    font-weight: normal; }
 
 .navigation {
   align-self: stretch;

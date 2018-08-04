@@ -4,10 +4,10 @@
 
 //   }
 
-  // @font-face {
-  //   font-family: 'MyFont';
-  //   src: local('MyFont'), url(./Assets/fonts/Aphrodite_Text.woff) format('woff');
-  // }
+@font-face {
+  font-family: 'MyFont';
+  src: local('MyFont'), url(./assets/fonts/Aphrodite_Text.woff) format('woff');
+}
 
 @import 'base/_variables.scss';
 @import 'abstracts/_mixins.scss';

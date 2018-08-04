@@ -5,10 +5,15 @@
     text-align:center;
     &__title{
       font-size: 3.2rem;
+      font-family: 'MyFont';
+      font-weight: normal;
+      color: $color-primary;
       
     }
     &__subtitle{
       font-size: 2.2rem;
+      font-family: 'MyFont';
+      font-weight: normal;
     }
     
   }
