@@ -20,7 +20,7 @@ export const Restaurant_Email = (state = [], action) => {
                 return item
             })
         case RESTAURANT_EMAIL_REMOVE:
-            return state.filter(item => item.id === action.payload.id)
+            return state.filter(item => !(item.id === action.payload.id))
         default:
             return state;
     }

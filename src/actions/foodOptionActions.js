@@ -32,6 +32,7 @@ export const updateFoodOption = (id, data) => {
 export const deleteFoodOption = (id) => {
     return async (dispatch) => {
         let payload = await deleteFoodOptions(id);
-        checkErrorResponse(payload, FOOD_OPTIONS_REMOVE, dispatch)
+        //checkErrorResponse(payload, FOOD_OPTIONS_REMOVE, dispatch)
+        dispatch({ type: FOOD_OPTIONS_REMOVE, payload: { id } })
     }
 }

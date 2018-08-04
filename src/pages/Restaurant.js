@@ -24,7 +24,9 @@ class RestaurantPage extends Component {
         //     console.log(result)
         //     this.props.dispatch(result)
         // })
-        this.props.dispatch(getListRestaurant())
+        this.props.dispatch(getListRestaurant()).then(() => {
+            console.log("Get success , im in then function")
+        })
     }
     handleSearch = (search) => {
         console.log(search)

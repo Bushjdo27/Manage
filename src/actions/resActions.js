@@ -39,6 +39,7 @@ export const deleteRestaurant = (id) => {
 
     return async (dispatch) => {
         let payload = await deleteRestaurants(id);
-        checkErrorResponse(payload, RESTAURANT_REMOVE, dispatch)
+        //checkErrorResponse(payload, RESTAURANT_REMOVE, dispatch)
+        dispatch({ type: RESTAURANT_REMOVE, payload: { id } })
     }
 }

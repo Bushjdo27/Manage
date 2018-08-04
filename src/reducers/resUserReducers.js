@@ -21,7 +21,7 @@ export const Restaurant_Users = (state = [], action) => {
                 return item
             })
         case RESTAURANT_USER_REMOVE:
-            return state.filter(item => item.id === action.payload.id)
+            return state.filter(item => !(item.id === action.payload.id))
         default:
             return state;
     }

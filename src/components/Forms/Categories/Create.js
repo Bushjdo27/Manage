@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { createCategory , updateCategory } from '../../../actions/categoriesActions';
+import { createCategory, updateCategory } from '../../../actions/categoriesActions';
 import { connect } from 'react-redux';
-
+import Spinner from '../../Spinner'
 //checked
 class CreateCategories extends Component {
 
@@ -11,36 +11,39 @@ class CreateCategories extends Component {
             name: props.data ? props.data.name : "",
             category_type: props.data ? props.data.category_type : "",
             restaurant_id: props.data ? props.data.restaurant_id : 0,
+            loading: false,
+            clickSumit: false
         }
     }
 
-    handleChangeName = (e)=>{
+    handleChangeName = (e) => {
         const name = e.target.value;
-        this.setState(()=>({name}))
+        this.setState(() => ({ name }))
     }
 
-    handleChangeType = (e)=>{
+    handleChangeType = (e) => {
         const category_type = e.target.value;
-        this.setState(()=>({category_type}))
+        this.setState(() => ({ category_type }))
     }
 
-    handleChangeResId = (e)=>{
+    handleChangeResId = (e) => {
         const restaurant_id = e.target.value;
-        this.setState(()=>({restaurant_id}))
+        this.setState(() => ({ restaurant_id }))
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log("Submiting..");
-        const {name , category_type , restaurant_id } = this.state;
-        if(this.props.data){
-            this.props.dispatch(updateCategory(this.props.data.id , this.state))
-        }else{
+        const { name, category_type, restaurant_id } = this.state;
+        if (this.props.data) {
+            this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+            this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.setState(() => { this.setState(() => ({ clickSumit: false })) }) })
+        } else {
             const data = { name, category_type, restaurant_id, files: e.target.elements.photo.files[0] }
-        
-            this.props.dispatch(createCategory(data))
+            this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+            this.props.dispatch(createCategory(data)).then(() => { this.setState(() => { this.setState(() => ({ clickSumit: false })) }) })
         }
-        
+
     }
     render() {
         const { name, category_type, restaurant_id } = this.state;
@@ -59,15 +62,17 @@ class CreateCategories extends Component {
                         <label>Restaurant ID : </label>
                         <input onChange={this.handleChangeResId} className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
                     </div>
-                    
-                    {!this.props.data && 
+
+                    {!this.props.data &&
                         <div className="form__group">
                             <label>Photo: </label>
                             <input className="input" name="photo" type="file" />
                         </div>
                     }
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
+                    }
 
-                    <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                 </form>
             </div>
 

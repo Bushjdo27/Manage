@@ -21,7 +21,7 @@ export const Orders = (state = [], action) => {
                 return item
             })
         case ORDER_REMOVE:
-            return state.filter(item => item.id === action.payload.id)
+            return state.filter(item => !(item.id === action.payload.id))
         default:
             return state;
     }

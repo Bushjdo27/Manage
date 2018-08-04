@@ -10,8 +10,11 @@ import { deleteRestaurantEmail } from '../actions/restaurantEmailActions'
 import { deleteUser } from '../actions/userActions'
 import { deleteNotification } from '../actions/notificationActions'
 import { deleteOrderFood } from '../actions/orderFoodAction'
+import { deleteOrder } from '../actions/orderActions'
 import { connect } from 'react-redux'
 class AdminTable extends Component {
+
+
     renderTableHead = () => {
         //this.props.titleTable
         return this.props.titleTable.map((item, index) => {
@@ -105,12 +108,43 @@ class AdminTable extends Component {
         }
     }
 
+
+    filterDataOrderFoods = (data) => {
+        let result = [];
+        data.forEach((item) => {
+            for (let i = 0; i < item.order_foods.length; i++) {
+                console.log(item.order_foods[i])
+                result.push({ data: item.order_foods[i] })
+            }
+        })
+
+        return result
+
+    }
+    filterDataOrderFoodOptions = (data) => {
+        let result = [];
+        data.forEach((item) => {
+
+
+            item.order_foods.forEach((option) => {
+                for (let j = 0; j < option.order_food_options.length; j++) {
+                    console.log(option.order_food_options[j])
+                    result.push({ data: option.order_food_options[j] })
+                }
+
+            })
+        })
+
+        return result
+
+    }
+
+
     typeOrder = () => {
         if (this.props.data.length > 0) {
-            // const infor = this.props.data((res) => {
-
-            // })
-            return this.props.data.map((res) => {
+            const foods = this.filterDataOrderFoods(this.props.data)
+            const options = this.filterDataOrderFoodOptions(this.props.data)
+            return this.props.data.map((res, index) => {
                 return (
                     <tr key={res.id}>
                         <td>{res.email}</td>
@@ -125,42 +159,45 @@ class AdminTable extends Component {
                                     <strong>Address : </strong>
                                     <span>{res.address.address}</span>
                                 </p>
-                                <div>
-                                    {res.order_foods.map((food, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <p style={{ margin: "1rem 0" }}><strong> ----------- Food ----------- </strong></p>
-                                                <p>
-                                                    <strong>Amount : </strong>
-                                                    <span>{food.amount}</span>
-                                                </p>
-                                                <p style={{ margin: "1rem 0" }}><strong> ----------- Options ----------- </strong></p>
-                                                {food.order_food_options.length > 0 ?
-                                                    food.order_food_options.map((option, index) => {
-                                                        return (
-                                                            <div key={index}>
-                                                                <p>
-                                                                    <strong>Name : </strong>
-                                                                    <span>{option.food_option_id}</span>
-                                                                </p>
-                                                                <p>
-                                                                    <strong>Price : </strong>
-                                                                    <span>{option.price}</span>
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    })
-                                                    :
-                                                    <p>No Options</p>
-                                                }
 
-
-                                            </div>
-                                        )
-                                    })}
-                                </div>
                             </div>
+
+
                         </td>
+                        <td>
+                            <p>
+                                <strong>Amount : </strong>
+                                <span>{foods[index] && foods[index].data.amount}</span>
+                            </p>
+                            <p>
+                                <strong>Price : </strong>
+                                <span>{foods[index] && foods[index].data.price}</span>
+                            </p>
+                            <p>
+                                <strong>Food : </strong>
+                                <span>{foods[index] && foods[index].data.food_id}</span>
+                            </p>
+                        </td>
+
+                        <td>
+                            {options.length > 0 ?
+                                <div>
+                                    <p>
+                                        <strong>Name : </strong>
+                                        <span>{options[index] && options[index].data.food_option_id}</span>
+                                    </p>
+                                    <p>
+                                        <strong>Price : </strong>
+                                        <span>{options[index] && options[index].data.price}</span>
+                                    </p>
+                                </div>
+
+
+                                : <p>No Options</p>}
+
+                        </td>
+
+
                         <td>{res.total_price}</td>
                         <td>
                             <Link to={`/order_foods/${res.id}/`}>
@@ -174,8 +211,10 @@ class AdminTable extends Component {
         }
     }
 
+
     typeOrderFoods = () => {
         if (this.props.data.length > 0) {
+
             return this.props.data.map((res) => {
                 return (
                     <tr key={res.id}>
@@ -388,6 +427,9 @@ class AdminTable extends Component {
                 break;
             case 'Order_Food':
                 this.props.dispatch(deleteOrderFood(id))
+                break;
+            case 'Order':
+                this.props.dispatch(deleteOrder(id))
                 break;
             default:
                 return []

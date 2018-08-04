@@ -20,7 +20,7 @@ export const Users = (state = [], action) => {
                 return item
             })
         case USERS_REMOVE:
-            return state.filter(item => item.id === action.payload.id)
+            return state.filter(item => !(item.id === action.payload.id))
         default:
             return state;
     }

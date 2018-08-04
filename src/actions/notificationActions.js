@@ -37,6 +37,7 @@ export const updateNotification = (id, data) => {
 export const deleteNotification = (id) => {
     return async (dispatch) => {
         let payload = await deleteNotifications(id);
-        checkErrorResponse(payload, NOTIFICATIONS_REMOVE, dispatch)
+        //checkErrorResponse(payload, NOTIFICATIONS_REMOVE, dispatch)
+        dispatch({ type: NOTIFICATIONS_REMOVE, payload: { id } })
     }
 }

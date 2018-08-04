@@ -39,5 +39,6 @@ export const deleteRestaurantEmail = (id) => {
     return async (dispatch) => {
         let payload = await deleteRestaurantEmails(id);
         checkErrorResponse(payload, RESTAURANT_EMAIL_REMOVE, dispatch)
+        dispatch({ type: RESTAURANT_EMAIL_REMOVE, payload: { id } })
     }
 }
