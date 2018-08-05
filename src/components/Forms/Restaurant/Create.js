@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { createRestaurant, updateRestaurant } from '../../../actions/resActions'
 
 class CreateRestaurant extends Component {
 
@@ -11,17 +12,19 @@ class CreateRestaurant extends Component {
             fbUrl: props.data ? props.data.facebook_url : "",
             ytUrl: props.data ? props.data.youtube_url : "",
             instaUrl: props.data ? props.data.instagram_url : "",
-            role: props.data ? props.data.instagram_url : "",
-            userId: props.data ? props.data.instagram_url : 0,
             address: props.data ? props.data.address.address : "",
             phone: props.data ? props.data.phone : "",
-            photo: props.data ? props.data.instagram_url : null,
-            icon: props.data ? props.data.instagram_url : null
         }
     }
 
-    handleNameChange = () => {
+    handleNameChange = (e) => {
         console.log("Name changing..")
+        const value = e.target.value;
+        this.setState(() => {
+            return {
+                name: value
+            }
+        })
     }
     handleFBChange = (e) => {
         const value = e.target.value;
@@ -48,22 +51,7 @@ class CreateRestaurant extends Component {
             }
         })
     }
-    handleRoleChange = (e) => {
-        const value = e.target.value;
-        this.setState(() => {
-            return {
-                role: value
-            }
-        })
-    }
-    handleUserIDChange = (e) => {
-        const value = e.target.value;
-        this.setState(() => {
-            return {
-                userId: value
-            }
-        })
-    }
+
     handleAddressChange = (e) => {
         const value = e.target.value;
         this.setState(() => {
@@ -99,11 +87,16 @@ class CreateRestaurant extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        
+        //e.target.elements.photo.files[0]
+        if (this.props.data) {
+            this.props.dispatch(updateRestaurant(this.props.data.id, { ...this.state, address_id: this.props.data.address.id, photo_id: this.props.data.bg_photo.id, photo: e.target.elements.photo.files[0], icon_id: this.props.data.icon.id, icon: e.target.elements.icon.files[0] })).then(() => { this.props.back() })
+        } else {
+            this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
+        }
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, role, userId, address, phone } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -125,16 +118,6 @@ class CreateRestaurant extends Component {
                     <div className="form__group">
                         <label>Instagram Url : </label>
                         <input className="input" type="text" name="insta" value={instaUrl} onChange={this.handleInstaChange} placeholder="Instagram Url" />
-                    </div>
-
-                    <div className="form__group">
-                        <label>Role : </label>
-                        <input className="input" type="text" name="role" value={role} onChange={this.handleRoleChange} placeholder="User Role" />
-                    </div>
-
-                    <div className="form__group">
-                        <label>User ID : </label>
-                        <input className="input" type="number" name="user_id" value={userId} onChange={this.handleUserIDChange} placeholder="User ID" />
                     </div>
 
                     <div className="form__group">

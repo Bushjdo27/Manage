@@ -23,7 +23,7 @@ export const getListRestaurant = () => {
 
 export const createRestaurant = (data) => {
     return async (dispatch) => {
-        let payload = await createRestaurants();
+        let payload = await createRestaurants(data);
         checkErrorResponse(payload, RESTAURANT_ADD, dispatch)
     }
 }

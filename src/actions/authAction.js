@@ -2,16 +2,15 @@ import {
     AUTH_SIGN_IN,
     AUTH_SIGN_OUT
 } from './constantType';
-import { signIn, getUser, signOut } from '../utils'
+import { signIn, signOut } from '../utils'
 
 export const authSignIn = async (req) => {
     //const userData = await axios.post('')
-    const data = await signIn(req.email, req.password);
+    const res = await signIn(req.email, req.password);
     //console.log(`${data.headers}`)
     const user = {
-        headers: data.headers,
-        email: data.data.data.email,
-        uid: data.data.data.uid
+        email: res.data.email,
+        uid: res.data.uid
     }
     //console.log(data)
     //console.log(user)
@@ -29,21 +28,6 @@ export const SignOut = () => {
     }
 }
 
-
-export const isLogin = () => {
-    const user = getUser();
-    if (user != null) {
-        return {
-            type: AUTH_SIGN_IN,
-            payload: user
-        }
-    } else {
-        return {
-            type: AUTH_SIGN_IN,
-            payload: {}
-        }
-    }
-}
 
 
 //======= Order =======

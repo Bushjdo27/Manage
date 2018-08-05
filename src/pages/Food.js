@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getFoods } from '../actions/foodActions';
 import CreateForm from '../components/Forms/Foods/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class FoodPage extends Component {
 
@@ -19,7 +19,12 @@ class FoodPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getFoods())
+
+        if (isLogin()) {
+            this.props.dispatch(getFoods())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -34,6 +39,9 @@ class FoodPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -65,9 +73,9 @@ class FoodPage extends Component {
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
+                            <AdminControl  showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
                             }
 
                         </div>

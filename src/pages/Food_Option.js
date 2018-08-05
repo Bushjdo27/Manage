@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getFoodOption } from '../actions/foodOptionActions';
 import CreateForm from '../components/Forms/Food_Options/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class FoodOptionPage extends Component {
 
@@ -19,7 +19,12 @@ class FoodOptionPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getFoodOption())
+
+        if (isLogin()) {
+            this.props.dispatch(getFoodOption())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -35,6 +40,9 @@ class FoodOptionPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -67,7 +75,7 @@ class FoodOptionPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Food_Options.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food_Option" titleTable={['name', "price", "Food ID", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Food_Options.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food_Option" titleTable={['name', "price", "Food ID", "updated"]} data={this.data()} />
                             }
 
                         </div>

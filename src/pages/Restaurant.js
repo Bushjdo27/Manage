@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurant } from '../actions/resActions';
 import CreateForm from '../components/Forms/Restaurant/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class RestaurantPage extends Component {
 
@@ -24,9 +24,12 @@ class RestaurantPage extends Component {
         //     console.log(result)
         //     this.props.dispatch(result)
         // })
-        this.props.dispatch(getListRestaurant()).then(() => {
-            console.log("Get success , im in then function")
-        })
+        if (isLogin()) {
+            this.props.dispatch(getListRestaurant())
+        } else {
+            this.props.history.push('/login')
+        }
+
     }
     handleSearch = (search) => {
         console.log(search)
@@ -41,6 +44,9 @@ class RestaurantPage extends Component {
     handlePrev = () => {
         //console.log()
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
+    }
+    hideCreateForm = () => {
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -63,6 +69,9 @@ class RestaurantPage extends Component {
     handleBack = () => {
         this.setState(() => ({ showCreate: false }))
     }
+    backToTable = () => {
+        console.log("submit done")
+    }
     render() {
         return (
             <div>
@@ -73,7 +82,7 @@ class RestaurantPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurants.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant" titleTable={['name', "address", "phone", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} back={this.backToTable} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurants.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant" titleTable={['name', "address", "phone", "updated"]} data={this.data()} />
                             }
 
                         </div>

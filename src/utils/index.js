@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { HEADERS, USER, AUTH_SIGN_IN } from '../actions/constantType'
 const corsURL = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -13,42 +13,44 @@ export const getListRestaurants = async () => {
     return result;
 }
 
-export const createRestaurants = async (data2) => {
+export const createRestaurants = async (data) => {
     console.log('posting data');
+    console.log(data)
+    const { name, fbUrl, ytUrl, instaUrl, address, phone, photo, icon } = data
     let fd = new FormData();
-    fd.append("restaurant[name]", "Bushjdo");
-    fd.append("restaurant[facebook_url]", "");
-    fd.append("restaurant[youtube_url]", "Bushjdo");
-    fd.append("restaurant[instagram_url]", "Bushjdo");
+    fd.append("restaurant[name]", name);
+    fd.append("restaurant[facebook_url]", fbUrl);
+    fd.append("restaurant[youtube_url]", ytUrl);
+    fd.append("restaurant[instagram_url]", instaUrl);
     fd.append("restaurant[restaurant_users_attributes][0][role]", "super_admin");
     fd.append("restaurant[restaurant_users_attributes][0][user_id]", 1);
-    fd.append("restaurant[address_attributes][address]", "melbourne");
-    fd.append("restaurant[phone]", "Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][photo]", null);
-    fd.append("restaurant[icon_attributes][photo]", null);
+    fd.append("restaurant[address_attributes][address]", address);
+    fd.append("restaurant[phone]", phone);
+    fd.append("restaurant[bg_photo_attributes][photo]", photo);
+    fd.append("restaurant[icon_attributes][photo]", icon);
 
     const result = await Api('post', '/restaurants', fd)
     console.log(result)
     return result;
 }
 
-export const updateRestaurants = async (id, data2 = {}) => {
+export const updateRestaurants = async (id, data = {}) => {
     console.log(`/restaurants/${id}`);
-
+    const { name, fbUrl, ytUrl, instaUrl, address, address_id, phone, photo, photo_id, icon, icon_id } = data
     let fd = new FormData();
-    fd.append("restaurant[name]", "Bushjdo");
-    fd.append("restaurant[facebook_url]", "");
-    fd.append("restaurant[youtube_url]", "Bushjdo");
-    fd.append("restaurant[instagram_url]", "Bushjdo");
+    fd.append("restaurant[name]", name);
+    fd.append("restaurant[facebook_url]", fbUrl);
+    fd.append("restaurant[youtube_url]", ytUrl);
+    fd.append("restaurant[instagram_url]", instaUrl);
     fd.append("restaurant[restaurant_users_attributes][0][role]", "super_admin");
     fd.append("restaurant[restaurant_users_attributes][0][user_id]", 1);
-    fd.append("restaurant[address_attributes][id]", 1);
-    fd.append("restaurant[address_attributes][address]", "melbourne");
-    fd.append("restaurant[phone]", "Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][id]", "Bushjdo");
-    fd.append("restaurant[bg_photo_attributes][photo]", null);
-    fd.append("restaurant[icon_attributes][id]", null);
-    fd.append("restaurant[icon_attributes][photo]", null);
+    fd.append("restaurant[address_attributes][id]", address_id);
+    fd.append("restaurant[address_attributes][address]", address);
+    fd.append("restaurant[phone]", phone);
+    fd.append("restaurant[bg_photo_attributes][id]", photo_id);
+    fd.append("restaurant[bg_photo_attributes][photo]", photo);
+    fd.append("restaurant[icon_attributes][id]", icon_id);
+    fd.append("restaurant[icon_attributes][photo]", icon);
     try {
         const result = await Api('patch', `/restaurants/${id}`, fd)
         console.log(result)
@@ -777,21 +779,35 @@ export const isEmpty = (obj) => {
     return true;
 }
 
+//==================== Login =======================
+
+export const signIn = async (email, password) => {
+    const result = await axios.post(`${corsURL}http://tastebagdev.herokuapp.com/auth/sign_in`, { email, password })
+    console.log(result)
+    localStorage.setItem(HEADERS, JSON.stringify(result.headers))
+    localStorage.setItem(USER, JSON.stringify(result.data.data))
+    return result.data;
+}
+
+export const signOut = () => {
+    localStorage.removeItem(USER)
+}
+
 
 const Api = async (method, url, data = {}) => {
 
-    //let headers = JSON.parse(localStorage.getItem('headers'));
-
+    let headers = JSON.parse(localStorage.getItem(HEADERS));
+    //console.log(headers)
     let result = {};
     let config = {
         url: url,
         baseURL: `${corsURL}http://tastebagdev.herokuapp.com/`,
         headers: {
-            'Access-Token': 'zziON5mxJQeo_SvpMtgpYQ',
-            'Client': 'R20cWAikp4WxYMa8NWuoMg',
-            'Expiry': 1534472736,
-            'Token-Type': 'Bearer',
-            'Uid': 'super_admin@example.com',
+            'Access-Token': headers['access-token'],
+            'Client': headers['client'],
+            'Expiry': headers['expiry'],
+            'Token-Type': headers['token-type'],
+            'Uid': headers['uid'],
         },
         method: method,
         data: data
@@ -828,30 +844,22 @@ export const pagination = (arr, page = 1, itemPerPage = 5) => {
 
     return arr.slice(start, end)
 }
-/**
- * 
- * headers: {
-            'Access-Token': headers["access-token"],
-            'Client': headers["client"],
-            'Expiry': headers["expiry"],
-            'Token-Type': 'Bearer',
-            'Uid': 'super_admin@example.com',
-        }
- * 
- * 
- * 
- * export const getAllComments = (id)=>{
-    return async (dispatch)=>{
-            const allComment = await Api('get',`/posts/${id}/comments`);
-            dispatch({type: ALL_COMMENT , payload: allComment.data});
-            return allComment.data;
+
+export const isLogin = () => {
+    const user = getUser();
+    if (user != null) {
+        return true
+    } else {
+        return false
     }
 }
-export const addComment = (comment)=>{
-    return async (dispatch)=>{
-        const addComment = await Api('post','/comments',comment);
-        dispatch({type: ADD_COMMENT , payload:addComment.data});
-        return addComment.data;
+
+const getUser = () => {
+    const user = localStorage.getItem(USER);
+    console.log(user);
+    if (user != null) {
+        return JSON.parse(user)
+    } else {
+        return null;
     }
 }
- */

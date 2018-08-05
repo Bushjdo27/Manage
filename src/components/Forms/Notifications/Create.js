@@ -35,9 +35,9 @@ class CreateNotification extends Component {
         //console.log(e.target.elements.photo.files[0])
         //createNotifications(e.target.elements.photo.files[0])
         if (this.props.data) {
-            this.props.dispatch(updateNotification(this.props.data.id, { ...this.state, photo: e.target.elements.photo.files[0] }))
+            this.props.dispatch(updateNotification(this.props.data.id, { ...this.state, photo: e.target.elements.photo.files[0] })).then(() => { this.props.history.goBack() })
         } else {
-            this.props.dispatch(createNotification({ ...this.state, photo: e.target.elements.photo.files[0] }))
+            this.props.dispatch(createNotification({ ...this.state, photo: e.target.elements.photo.files[0] })).then(() => { this.props.hideCreate() })
         }
     }
     render() {

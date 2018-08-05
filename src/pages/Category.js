@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getCategories } from '../actions/categoriesActions';
 import CreateForm from '../components/Forms/Categories/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class CategoryPage extends Component {
 
@@ -19,7 +19,12 @@ class CategoryPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getCategories())
+
+        if (isLogin()) {
+            this.props.dispatch(getCategories())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleSearch = (search) => {
@@ -34,6 +39,9 @@ class CategoryPage extends Component {
     handlePrev = () => {
         //console.log()
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -66,7 +74,7 @@ class CategoryPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Categories.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Categories.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

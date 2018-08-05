@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListUser } from '../actions/userActions';
 import CreateForm from '../components/Forms/User/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class UserPage extends Component {
 
@@ -19,7 +19,12 @@ class UserPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListUser())
+
+        if (isLogin()) {
+            this.props.dispatch(getListUser())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -51,6 +56,10 @@ class UserPage extends Component {
         //return this.props.Users
     }
 
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
+    }
+
     renderCreateForm = () => {
         this.setState(() => ({ showCreate: true }))
     }
@@ -67,7 +76,7 @@ class UserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"email"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Users.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="User" titleTable={['email', "password change", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Users.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="User" titleTable={['email', "password change", "updated"]} data={this.data()} />
                             }
 
                         </div>

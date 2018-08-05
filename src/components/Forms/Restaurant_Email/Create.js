@@ -27,9 +27,9 @@ class CreateRestaurantEmail extends Component {
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
         if (this.props.data) {
-            this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state))
+            this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
         } else {
-            this.props.dispatch(createRestaurantEmail(this.state))
+            this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
         }
     }
     render() {

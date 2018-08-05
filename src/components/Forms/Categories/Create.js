@@ -37,16 +37,16 @@ class CreateCategories extends Component {
         const { name, category_type, restaurant_id } = this.state;
         if (this.props.data) {
             this.setState(() => { this.setState(() => ({ clickSumit: true })) })
-            this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.setState(() => { this.setState(() => ({ clickSumit: false })) }) })
+            this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
         } else {
             const data = { name, category_type, restaurant_id, files: e.target.elements.photo.files[0] }
-            this.setState(() => { this.setState(() => ({ clickSumit: true })) })
-            this.props.dispatch(createCategory(data)).then(() => { this.setState(() => { this.setState(() => ({ clickSumit: false })) }) })
+            //this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+            this.props.dispatch(createCategory(data)).then(() => { this.props.hideCreate() })
         }
 
     }
     render() {
-        const { name, category_type, restaurant_id } = this.state;
+        const { name, category_type, restaurant_id, clickSumit } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

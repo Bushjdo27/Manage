@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListNotification } from '../actions/notificationActions';
 import CreateForm from '../components/Forms/Notifications/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class NotificationPage extends Component {
 
@@ -19,7 +19,12 @@ class NotificationPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListNotification())
+
+        if (isLogin()) {
+            this.props.dispatch(getListNotification())
+        } else {
+            this.props.history.push('/login')
+        }
     }
     handleNext = () => {
         //console.log()
@@ -33,6 +38,9 @@ class NotificationPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -65,7 +73,7 @@ class NotificationPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"message"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Notifications.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Notification" titleTable={['subject', "message", "restaurant id", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Notifications.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Notification" titleTable={['subject', "message", "restaurant id", "updated"]} data={this.data()} />
                             }
 
                         </div>

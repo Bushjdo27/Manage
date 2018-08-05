@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import App from '../App';
+import Auth from '../pages/Auth'
 import RestaurantPage from '../pages/Restaurant';
 import EditRestaurant from '../components/Forms/Restaurant/Edit';
 
@@ -49,6 +50,7 @@ class AppRoute extends Component {
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route exact path="/login" component={Auth} />
                     <Route exact path="/" component={RestaurantPage} />
                     <Route exact path="/restaurant/:id/" component={EditRestaurant} />
                     <Route exact path="/caterogy" component={CategoryPage} />

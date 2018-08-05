@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getOrderFood } from '../actions/orderFoodAction';
 import CreateForm from '../components/Forms/Order_Foods/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class OrderFoodPage extends Component {
 
@@ -19,7 +19,12 @@ class OrderFoodPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getOrderFood())
+
+        if (isLogin()) {
+            this.props.dispatch(getOrderFood())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -32,6 +37,9 @@ class OrderFoodPage extends Component {
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
     }
 
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
+    }
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
@@ -67,7 +75,7 @@ class OrderFoodPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Order_Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order_Food" titleTable={["Food ID", "amount", "price", "create"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Order_Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order_Food" titleTable={["Food ID", "amount", "price", "create"]} data={this.data()} />
                             }
 
                         </div>

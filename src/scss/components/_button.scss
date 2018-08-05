@@ -7,6 +7,7 @@ button[type="submit"]{
     font-size: 1.6rem;
     cursor: pointer;
     transition: all .4s;
+    font-family: 'MyFont';
     &:hover{
         transform: translateY(-.7rem);
         box-shadow: 0rem 1rem 3rem rgba(0,0,0,.05);

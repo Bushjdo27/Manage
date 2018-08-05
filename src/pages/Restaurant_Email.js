@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurantEmail } from '../actions/restaurantEmailActions';
 import CreateForm from '../components/Forms/Restaurant_Email/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class RestaurantEmailPage extends Component {
 
@@ -19,7 +19,12 @@ class RestaurantEmailPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListRestaurantEmail())
+
+        if (isLogin()) {
+            this.props.dispatch(getListRestaurantEmail())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -34,6 +39,9 @@ class RestaurantEmailPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -66,7 +74,7 @@ class RestaurantEmailPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"email"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurant_Email.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant_Email" titleTable={['email', "restaurant id", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurant_Email.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant_Email" titleTable={['email', "restaurant id", "updated"]} data={this.data()} />
                             }
 
                         </div>

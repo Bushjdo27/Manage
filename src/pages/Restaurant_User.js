@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListRestaurantUser } from '../actions/restaurantUsersActions';
 import CreateForm from '../components/Forms/Restaurant_User/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class RestaurantUserPage extends Component {
 
@@ -19,7 +19,12 @@ class RestaurantUserPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListRestaurantUser())
+
+        if (isLogin()) {
+            this.props.dispatch(getListRestaurantUser())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -35,6 +40,9 @@ class RestaurantUserPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -67,7 +75,7 @@ class RestaurantUserPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"role"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurant_Users.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant_User" titleTable={['user id', "role", "restaurant id", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurant_Users.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant_User" titleTable={['user id', "role", "restaurant id", "updated"]} data={this.data()} />
                             }
 
                         </div>

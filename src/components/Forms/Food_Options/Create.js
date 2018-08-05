@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { createFoodOptions } from '../../../utils';
-import {createFoodOption , updateFoodOption} from '../../../actions/foodOptionActions'
+import { createFoodOption, updateFoodOption } from '../../../actions/foodOptionActions'
 import { connect } from 'react-redux';
 
 //checked
@@ -9,35 +9,35 @@ class CreateFoodOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            food_id: props.data ? parseInt(props.data.food_id,10) : 0,
+            food_id: props.data ? parseInt(props.data.food_id, 10) : 0,
             name: props.data ? props.data.name : "",
             price: props.data ? props.data.price : ""
         }
     }
 
     // 
-    handleFoodIDChange = (e)=>{
+    handleFoodIDChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({food_id: value}))
+        this.setState(() => ({ food_id: value }))
     }
 
-    handleNameChange = (e)=>{
+    handleNameChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({name: value}))
+        this.setState(() => ({ name: value }))
     }
 
-    handlePriceChange = (e)=>{
+    handlePriceChange = (e) => {
         const value = e.target.value;
-        this.setState(()=>({price: value}))
+        this.setState(() => ({ price: value }))
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         //console.log(e.target.elements.photo.files[0])
-        if(this.props.data){
-            this.props.dispatch(updateFoodOption(this.props.data.id ,this.state))
-        }else{
-            this.props.dispatch(createFoodOption(this.state))
+        if (this.props.data) {
+            this.props.dispatch(updateFoodOption(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+        } else {
+            this.props.dispatch(createFoodOption(this.state)).then(() => { this.props.hideCreate() })
         }
     }
     render() {

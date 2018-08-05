@@ -143,6 +143,7 @@ body {
     font-size: 1.6rem;
     box-shadow: 0rem 1rem 3rem rgba(0, 0, 0, 0.07);
     cursor: pointer;
+    font-family: 'MyFont';
     transition: all .3s; }
     .admin__control__text span:not(:first-child) {
       margin-left: 2rem; }
@@ -164,7 +165,8 @@ body {
     font-size: 1.4rem;
     background-color: #f7f7f7;
     color: #333;
-    flex: 1; }
+    flex: 1;
+    font-family: 'MyFont'; }
     .admin__control__search input:focus {
       outline: none; }
   .admin__control__search button {
@@ -210,9 +212,24 @@ body {
       text-align: center; }
       .admin__data table tbody tr td a {
         text-decoration: none;
-        color: #222222; }
+        color: #222222;
+        display: inline-block;
+        width: 3.2rem;
+        transition: all .2s; }
+        .admin__data table tbody tr td a:hover {
+          color: #EAA750;
+          font-weight: bold; }
       .admin__data table tbody tr td:last-child {
-        cursor: pointer; }
+        cursor: pointer;
+        transition: all .2s; }
+        .admin__data table tbody tr td:last-child:hover {
+          color: #EAA750;
+          font-weight: bold; }
+      .admin__data table tbody tr td.spinDel {
+        display: inline-block;
+        width: 3.2rem; }
+    .admin__data table tbody tr#spinnCircle {
+      width: 100%; }
     .admin__data table tbody tr:nth-child(2n) {
       background-color: #f7f7f7; }
   .admin__data__control {
@@ -248,6 +265,199 @@ body {
         color: #333;
         transform: translateY(0);
         box-shadow: 0 0 0 0; }
+
+.login {
+  background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url("https://www.grainchain.com/sites/default/files/flour-baking-background-with-egg%2C-rolling-pin-and-wheat-ear-000069728007_Medium_3.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .login__content {
+    border-radius: .7rem;
+    width: 50rem;
+    background-color: #fff;
+    padding: 2rem; }
+    .login__content h3 {
+      font-size: 2rem;
+      text-align: center;
+      margin: 3rem 0 8rem 0;
+      font-weight: normal; }
+    .login__content .form__auth input {
+      width: 100%;
+      padding: 1.5rem 2rem;
+      border-radius: .7rem;
+      border: none;
+      background-color: #EEEEEE; }
+      .login__content .form__auth input:not(:last-child) {
+        margin-bottom: 2rem; }
+    .login__content .form__auth .btn__auth__in {
+      padding: 1.2rem 2rem;
+      background-color: #EAA750;
+      color: #fff;
+      border: none;
+      width: 100%;
+      font-size: 1.6rem;
+      transition: all .3s;
+      cursor: pointer; }
+      .login__content .form__auth .btn__auth__in:hover {
+        transform: translateY(-0.7rem);
+        box-shadow: 0rem 0.8rem 1.6rem 0rem rgba(0, 0, 0, 0.2); }
+      .login__content .form__auth .btn__auth__in:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0rem 0.4rem 1.6rem 0rem rgba(0, 0, 0, 0.2); }
+    .login__content .form__auth p {
+      font-size: 1.6rem;
+      text-align: right;
+      margin: 2rem 0;
+      color: #EAA750;
+      cursor: pointer; }
+    .login__content .form__auth .btn__auth__up {
+      padding: 1.2rem 2rem;
+      background-color: #fff;
+      color: #333;
+      border: .1rem solid #333;
+      width: 100%;
+      font-size: 1.6rem;
+      transition: all .3s;
+      margin-top: 2rem;
+      cursor: pointer; }
+      .login__content .form__auth .btn__auth__up:hover {
+        background-color: #222222;
+        color: #fff;
+        transform: translateY(-0.7rem);
+        box-shadow: 0rem 0.8rem 1.6rem 0rem rgba(0, 0, 0, 0.4); }
+      .login__content .form__auth .btn__auth__up:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0rem 0.4rem 1.6rem 0rem rgba(0, 0, 0, 0.2); }
+    .login__content p {
+      text-align: center;
+      margin: 2rem 0; }
+      .login__content p span {
+        font-size: 1.6rem; }
+        .login__content p span:last-child {
+          color: #EAA750;
+          font-size: 1.8rem;
+          margin-left: 1.5rem;
+          cursor: pointer; }
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto; }
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 32px 32px; }
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #EAA750;
+  margin: -3px 0 0 -3px; }
+
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s; }
+
+.lds-roller div:nth-child(1):after {
+  top: 50px;
+  left: 50px; }
+
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s; }
+
+.lds-roller div:nth-child(2):after {
+  top: 54px;
+  left: 45px; }
+
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s; }
+
+.lds-roller div:nth-child(3):after {
+  top: 57px;
+  left: 39px; }
+
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s; }
+
+.lds-roller div:nth-child(4):after {
+  top: 58px;
+  left: 32px; }
+
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s; }
+
+.lds-roller div:nth-child(5):after {
+  top: 57px;
+  left: 25px; }
+
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s; }
+
+.lds-roller div:nth-child(6):after {
+  top: 54px;
+  left: 19px; }
+
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s; }
+
+.lds-roller div:nth-child(7):after {
+  top: 50px;
+  left: 14px; }
+
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s; }
+
+.lds-roller div:nth-child(8):after {
+  top: 45px;
+  left: 10px; }
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem; }
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: .6rem;
+  width: .6rem;
+  background: #EAA750;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite; }
+
+.lds-facebook div:nth-child(1) {
+  left: 1rem;
+  animation-delay: -0.24s; }
+
+.lds-facebook div:nth-child(2) {
+  left: 2.2rem;
+  animation-delay: -0.12s; }
+
+.lds-facebook div:nth-child(3) {
+  left: 3.5rem;
+  animation-delay: 0; }
+
+@keyframes lds-facebook {
+  0% {
+    top: .3rem;
+    height: 1.2rem; }
+  50%, 100% {
+    top: 1.5rem;
+    height: 1.2rem; } }
 
 .header {
   width: 100%;
@@ -351,7 +561,8 @@ button[type="submit"] {
   background-color: transparent;
   font-size: 1.6rem;
   cursor: pointer;
-  transition: all .4s; }
+  transition: all .4s;
+  font-family: 'MyFont'; }
   button[type="submit"]:hover {
     transform: translateY(-0.7rem);
     box-shadow: 0rem 1rem 3rem rgba(0, 0, 0, 0.05);

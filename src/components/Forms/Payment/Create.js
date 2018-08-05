@@ -56,9 +56,9 @@ class CreatePayment extends Component {
         //createPaymentInfos()
 
         if (this.props.data) {
-            this.props.dispatch(updatePaymentInfo(this.props.data.id, { ...this.state, card_id: this.props.data.card_account.id }))
+            this.props.dispatch(updatePaymentInfo(this.props.data.id, { ...this.state, card_id: this.props.data.card_account.id })).then(() => { this.props.history.goBack() })
         } else {
-            this.props.dispatch(createPaymentInfo(this.state))
+            this.props.dispatch(createPaymentInfo(this.state)).then(() => { this.props.hideCreate() })
         }
     }
     render() {

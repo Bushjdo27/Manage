@@ -53,10 +53,10 @@ class CreateFoods extends Component {
         //createFoods(e.target.elements.photo.files[0]);
         const { category_id, name, description, price } = this.state
         if (this.props.data) {
-            this.props.dispatch(updateFood(this.props.data.id, { ...this.state, files: e.target.elements.photo.files[0], id_photo: this.props.data.photo.id }))
+            this.props.dispatch(updateFood(this.props.data.id, { ...this.state, files: e.target.elements.photo.files[0], id_photo: this.props.data.photo.id })).then(() => { this.props.history.goBack() })
         } else {
             const data = { category_id, name, description, price, files: e.target.elements.photo.files[0] }
-            this.props.dispatch(createFood(data)).then(() => { console.log("complete create") })
+            this.props.dispatch(createFood(data)).then(() => { this.props.hideCreate() })
         }
     }
     render() {

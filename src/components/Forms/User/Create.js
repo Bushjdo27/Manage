@@ -56,9 +56,9 @@ class CreateUser extends Component {
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         if (this.props.data) {
-            this.props.dispatch(updateUser(this.props.data.id, this.state))
+            this.props.dispatch(updateUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
         } else {
-            this.props.dispatch(createUser(this.state))
+            this.props.dispatch(createUser(this.state)).then(() => { this.props.hideCreate() })
         }
     }
     render() {

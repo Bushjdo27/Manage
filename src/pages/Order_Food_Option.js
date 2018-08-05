@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getOrderFoodOption } from '../actions/orderFoodOptionActions';
 import CreateForm from '../components/Forms/Order_Food_Options/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 
 class OrderFoodOptionPage extends Component {
 
@@ -19,7 +19,12 @@ class OrderFoodOptionPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getOrderFoodOption())
+
+        if (isLogin()) {
+            this.props.dispatch(getOrderFoodOption())
+        } else {
+            this.props.history.push('/login')
+        }
     }
     handleSearch = (search) => {
         console.log(search)
@@ -28,6 +33,9 @@ class OrderFoodOptionPage extends Component {
     handleNext = () => {
         //console.log()
         this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     handlePrev = () => {
@@ -65,7 +73,7 @@ class OrderFoodOptionPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Order_Foods_Options.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order_Food_Option" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Order_Foods_Options.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order_Food_Option" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

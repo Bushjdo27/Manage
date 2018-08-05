@@ -8,7 +8,7 @@ class EditRestaurant extends Component {
         return (
             <div>
                 <Header />
-                <Form type="edit" data={this.props.Restaurant} />
+                <Form type="edit" data={this.props.Restaurant} back={this.props.history.goBack} />
             </div>
         )
     }

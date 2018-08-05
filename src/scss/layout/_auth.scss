@@ -1,0 +1,99 @@
+
+   
+   .login{
+     background-image:  linear-gradient(to right bottom , rgba(0,0,0,0.2) ,rgba(0,0,0,0.6)) ,url('https://www.grainchain.com/sites/default/files/flour-baking-background-with-egg%2C-rolling-pin-and-wheat-ear-000069728007_Medium_3.jpg');
+     background-size: cover;
+     background-position: center;
+     
+     height: 100vh;
+     display:flex;
+     justify-content: center;
+     align-items: center;
+     &__content{
+       border-radius: .7rem;
+       width: 50rem;
+       background-color: #fff;
+       padding: 2rem;
+       
+       h3{
+         font-size: 2rem;
+         text-align: center;
+         margin: 3rem 0 8rem 0;
+         font-weight: normal;
+       }
+       .form__auth{
+         input{
+           width: 100%;
+           padding: 1.5rem 2rem;
+           border-radius: .7rem;
+           border: none;
+           background-color: #EEEEEE;
+           &:not(:last-child){
+             margin-bottom: 2rem;
+           }
+         }
+         .btn__auth__in{
+           padding: 1.2rem 2rem;
+           background-color: #EAA750;
+           color: #fff;
+           border: none;
+           width: 100%;
+           font-size: 1.6rem;
+           transition: all .3s;
+           cursor: pointer;
+           &:hover{
+             
+             transform: translateY(-.7rem);
+             box-shadow: 0rem .8rem 1.6rem 0rem rgba(0,0,0,0.2);
+           }
+           &:active{
+             transform: translateY(-.3rem);
+             box-shadow: 0rem .4rem 1.6rem 0rem rgba(0,0,0,0.2);
+           }
+           
+         }
+         p{
+           font-size: 1.6rem;
+           text-align: right;
+           margin: 2rem 0;
+           color:  #EAA750;
+           cursor: pointer;
+         }
+         .btn__auth__up{
+           padding: 1.2rem 2rem;
+           background-color: #fff;
+           color: #333;
+           border: .1rem solid #333;
+           width: 100%;
+           font-size: 1.6rem;
+           transition: all .3s;
+           margin-top: 2rem;
+           cursor: pointer;
+            &:hover{
+              background-color: #222222;
+             color: #fff;
+             transform: translateY(-.7rem);
+             box-shadow: 0rem .8rem 1.6rem 0rem rgba(0,0,0,0.4);
+           }
+           &:active{
+             transform: translateY(-.3rem);
+             box-shadow: 0rem .4rem 1.6rem 0rem rgba(0,0,0,0.2);
+           }
+         }
+       }
+       p{
+         text-align: center;
+         margin: 2rem 0;
+         span{
+           font-size: 1.6rem;
+           
+           &:last-child{
+             color: #EAA750;
+             font-size: 1.8rem;
+             margin-left: 1.5rem;
+             cursor: pointer;
+           }
+         }
+       }
+     }
+   }

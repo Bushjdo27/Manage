@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import SideNav from '../components/SideNav'
 import { getListOrder } from '../actions/orderActions';
 import CreateForm from '../components/Forms/Restaurant/Create'
-import { pagination } from '../utils/index'
+import { pagination, isLogin } from '../utils/index'
 // lam viec voi action
 
 class OrderPage extends Component {
@@ -20,7 +20,12 @@ class OrderPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.dispatch(getListOrder())
+
+        if (isLogin()) {
+            this.props.dispatch(getListOrder())
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleNext = () => {
@@ -35,6 +40,9 @@ class OrderPage extends Component {
     handleSearch = (search) => {
         console.log(search)
         this.setState(() => ({ search }))
+    }
+    hideCreateForm = ()=>{
+        this.setState(() => ({ showCreate: false }))
     }
 
     data = () => {
@@ -67,7 +75,7 @@ class OrderPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
                             {
-                                this.state.showCreate ? <CreateForm /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Orders.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['Email', "Name", "Infor", "Food", "Option", "Total"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Orders.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['Email', "Name", "Infor", "Food", "Option", "Total"]} data={this.data()} />
                             }
 
                         </div>

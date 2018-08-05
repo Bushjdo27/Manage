@@ -11,9 +11,18 @@ import { deleteUser } from '../actions/userActions'
 import { deleteNotification } from '../actions/notificationActions'
 import { deleteOrderFood } from '../actions/orderFoodAction'
 import { deleteOrder } from '../actions/orderActions'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import SpinnerDelete from './SpinnerDelete'
+import Spinner from './Spinner'
 class AdminTable extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            clickDelete: false,
+            itemClick: 0
+        }
+    }
 
     renderTableHead = () => {
         //this.props.titleTable
@@ -38,14 +47,19 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
+
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeCategory = () => {
+        //this.props.data.length > 0
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
                 return (
@@ -59,11 +73,15 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            //(this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            <td className="spinDel"><SpinnerDelete /></td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeFood = () => {
@@ -80,11 +98,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeFoodOptions = () => {
@@ -101,11 +122,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
 
@@ -204,11 +228,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
 
@@ -227,11 +254,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeOrderFoodOptions = () => {
@@ -248,11 +278,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typePayments = () => {
@@ -269,11 +302,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeRestaurantUsers = () => {
@@ -290,11 +326,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeRestaurantEmails = () => {
@@ -310,11 +349,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeUsers = () => {
@@ -330,11 +372,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
 
     typeNotifications = () => {
@@ -351,11 +396,14 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        {
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                        }
                     </tr>
                 )
             })
         }
+        return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
     renderTableBody = () => {
         //this.props.data
@@ -395,41 +443,41 @@ class AdminTable extends Component {
 
     handleRemove = (id) => {
         const { type } = this.props;
-
+        this.setState(() => ({ clickDelete: true, itemClick: id }))
         switch (type) {
             case 'Restaurant':
-                this.props.dispatch(deleteRestaurant(id))
+                this.props.dispatch(deleteRestaurant(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Category':
-                this.props.dispatch(deleteCategory(id))
+                this.props.dispatch(deleteCategory(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
 
             case 'Food':
-                this.props.dispatch(deleteFood(id))
+                this.props.dispatch(deleteFood(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Food_Option':
-                this.props.dispatch(deleteFoodOption(id))
+                this.props.dispatch(deleteFoodOption(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Payment':
-                this.props.dispatch(deletePaymentInfo(id))
+                this.props.dispatch(deletePaymentInfo(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Restaurant_User':
-                this.props.dispatch(deleteRestaurantUser(id))
+                this.props.dispatch(deleteRestaurantUser(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Restaurant_Email':
-                this.props.dispatch(deleteRestaurantEmail(id))
+                this.props.dispatch(deleteRestaurantEmail(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'User':
-                this.props.dispatch(deleteUser(id))
+                this.props.dispatch(deleteUser(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Notification':
-                this.props.dispatch(deleteNotification(id))
+                this.props.dispatch(deleteNotification(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Order_Food':
-                this.props.dispatch(deleteOrderFood(id))
+                this.props.dispatch(deleteOrderFood(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Order':
-                this.props.dispatch(deleteOrder(id))
+                this.props.dispatch(deleteOrder(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             default:
                 return []
@@ -437,8 +485,6 @@ class AdminTable extends Component {
         }
     }
     render() {
-        console.log(this.props.canPrev);
-        console.log(this.props.canNext)
         return (
             <div className="admin__data">
                 <table>

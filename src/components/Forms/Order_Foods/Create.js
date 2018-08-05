@@ -33,7 +33,7 @@ class CreateOrderFood extends Component {
         //console.log(e.target.elements.photo.files[0])
         //createOrderFoods()
         if (this.props.data) {
-            this.props.dispatch(updateOrderFood(this.props.data.id, this.state))
+            this.props.dispatch(updateOrderFood(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
         } else {
             this.props.dispatch(createOrderFood(this.state))
         }

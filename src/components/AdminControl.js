@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class AdminControl extends Component {
 
     handleCreate = () => {
