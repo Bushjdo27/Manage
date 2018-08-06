@@ -21,7 +21,7 @@ export const authSignIn = async (req) => {
 }
 
 
-export const SignOut = () => {
+export const SignOutUser = () => {
     signOut();
     return {
         type: AUTH_SIGN_OUT

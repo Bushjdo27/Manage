@@ -19,7 +19,7 @@ import EditNotifications from '../components/Forms/Notifications/Edit';
 
 
 import OrderPage from '../pages/Order';
-import EditOrder from '../components/Forms/Order/Edit';
+//import EditOrder from '../components/Forms/Order/Edit';
 
 import PaymentPage from '../pages/Payment';
 import EditPayment from '../components/Forms/Payment/Edit';

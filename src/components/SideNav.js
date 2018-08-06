@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { SignOutUser } from '../actions/authAction';
+import { connect } from 'react-redux'
 class SideNav extends Component {
+
+    handleSignOut = () => {
+        console.log(this.props)
+        this.props.dispatch(SignOutUser());
+        this.props.redirect()
+
+    }
     render() {
         return (
             <nav className="navigation">
@@ -37,13 +45,16 @@ class SideNav extends Component {
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/notification" className="navigation__link">Notification</NavLink>
                     </li>
+                    <li className="navigation__item">
+                        <button className="btn" onClick={this.handleSignOut}>LogOut</button>
+                    </li>
                 </ul>
             </nav>
         )
     }
 }
 
-export default SideNav;
+export default connect()(SideNav);
 
 /*
 

@@ -15,3 +15,18 @@ button[type="submit"]{
         color: $color-white
     }
 }
+
+.btn{
+    display: inline-block;
+    width: 100%;
+    padding: .5rem 0;
+    background-color: transparent;
+    color: $color-white;
+    border: none;
+    transition: all .3s;
+    cursor: pointer;
+    &:hover{
+        color: $color-primary;
+        font-size: 1.6rem;
+    }
+}

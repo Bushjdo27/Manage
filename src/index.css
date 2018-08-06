@@ -569,6 +569,19 @@ button[type="submit"] {
     background-color: #222222;
     color: #fff; }
 
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: .5rem 0;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  transition: all .3s;
+  cursor: pointer; }
+  .btn:hover {
+    color: #EAA750;
+    font-size: 1.6rem; }
+
 .u-margin-bottom-large {
   margin-bottom: 6rem; }
 

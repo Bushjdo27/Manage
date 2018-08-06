@@ -70,7 +70,7 @@ class RestaurantUserPage extends Component {
             <div>
                 <Header name="Restaurant User" />
                 <div className="container">
-                    <SideNav />
+                    <SideNav redirect={() => { this.props.history.push('/login') }} />
                     <div className="content">
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"role"} />

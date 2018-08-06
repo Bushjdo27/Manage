@@ -74,8 +74,8 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            //(this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
-                            <td className="spinDel"><SpinnerDelete /></td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+
                         }
                     </tr>
                 )
