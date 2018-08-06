@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Create'
 import Header from '../../Header'
+import { isLogin } from '../../../utils'
 const EditFoodOptions = (props) => {
+
+    if (!isLogin) {
+        this.props.history.push("/login")
+    }
+
     return (
         <div>
-            <Header />
-            <Form type="edit" data={props.Payment} />
+            <Header name="Payment" sub="Edit Payment Page" />
+            <Form back={this.props.history.goBack} type="edit" data={props.Payment} />
         </div>
     )
 }

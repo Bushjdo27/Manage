@@ -41,7 +41,7 @@ class RestaurantUserPage extends Component {
         console.log(search)
         this.setState(() => ({ search }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -68,7 +68,7 @@ class RestaurantUserPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Restaurant User" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

@@ -56,7 +56,7 @@ class UserPage extends Component {
         //return this.props.Users
     }
 
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -69,7 +69,7 @@ class UserPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="User" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

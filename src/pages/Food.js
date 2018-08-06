@@ -40,7 +40,7 @@ class FoodPage extends Component {
         console.log(search)
         this.setState(() => ({ search }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -68,12 +68,12 @@ class FoodPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Food" />
                 <div className="container">
                     <SideNav />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl  showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
                                 this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
                             }

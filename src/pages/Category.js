@@ -40,7 +40,7 @@ class CategoryPage extends Component {
         //console.log()
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -67,7 +67,7 @@ class CategoryPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Category" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

@@ -39,7 +39,7 @@ class NotificationPage extends Component {
         console.log(search)
         this.setState(() => ({ search }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -66,7 +66,7 @@ class NotificationPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Notification" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

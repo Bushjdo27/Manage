@@ -17,11 +17,6 @@ import EditFoods from '../components/Forms/Foods/Edit';
 import NotificationPage from '../pages/Notification';
 import EditNotifications from '../components/Forms/Notifications/Edit';
 
-import Order_Food_OptionPage from '../pages/Order_Food_Option';
-import EditOrderFoodOptions from '../components/Forms/Order_Food_Options/Edit';
-
-import Order_Food from '../pages/Order_Food';
-import EditOrderFoods from '../components/Forms/Order_Foods/Edit';
 
 import OrderPage from '../pages/Order';
 import EditOrder from '../components/Forms/Order/Edit';
@@ -36,6 +31,12 @@ import Restaurant_UserPage from '../pages/Restaurant_User';
 import EditRestaurantUser from '../components/Forms/Restaurant_User/Edit';
 import UserPage from '../pages/User';
 import EditUser from '../components/Forms/User/Edit';
+
+// import Order_Food_OptionPage from '../pages/Order_Food_Option';
+// import EditOrderFoodOptions from '../components/Forms/Order_Food_Options/Edit';
+
+// import Order_Food from '../pages/Order_Food';
+// import EditOrderFoods from '../components/Forms/Order_Foods/Edit';
 
 
 // import AboutPage from '../pages/AboutPage';
@@ -66,14 +67,6 @@ class AppRoute extends Component {
                     <Route exact path="/notification/:id" component={EditNotifications} />
 
                     <Route exact path="/order" component={OrderPage} />
-                    <Route exact path="/order/:id/" component={EditOrder} />
-
-                    <Route exact path="/order_food" component={Order_Food} />
-                    <Route exact path="/order_food/:id/" component={EditOrderFoods} />
-
-                    <Route exact path="/order_food_option" component={Order_Food_OptionPage} />
-                    <Route exact path="/order_food_option/:id/" component={EditOrderFoodOptions} />
-
                     <Route exact path="/payment" component={PaymentPage} />
                     <Route exact path="/payment/:id/" component={EditPayment} />
 
@@ -111,3 +104,14 @@ class AppRoute extends Component {
 export default AppRoute;
 
 //backgroundImage: 'url(' + background404 + ')',
+
+/*
+
+<Route exact path="/order_food" component={Order_Food} />
+<Route exact path="/order_food/:id/" component={EditOrderFoods} />
+
+<Route exact path="/order_food_option" component={Order_Food_OptionPage} />
+<Route exact path="/order_food_option/:id/" component={EditOrderFoodOptions} />
+<Route exact path="/order/:id/" component={EditOrder} />
+
+*/

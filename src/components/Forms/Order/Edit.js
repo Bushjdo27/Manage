@@ -5,7 +5,7 @@ import Header from '../../Header'
 const EditOrder = (props) => {
     return (
         <div>
-            <Header />
+            <Header name="Order" sub="Edit Order Page" />
             <Form type="edit" data={props.Order} />
         </div>
     )

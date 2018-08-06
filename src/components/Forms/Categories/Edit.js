@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Form from './Create';
-import Header from '../../Header'
+import Header from '../../Header';
+import { isLogin } from '../../../utils'
 
 class EditCategories extends Component {
+
+    componentDidMount() {
+        if (!isLogin) {
+            this.props.history.push("/login")
+        }
+    }
     render() {
         return (
             <div>
-                <Header />
-                <Form type="edit" data={this.props.Category} />
+                <Header name="Category" sub="Edit Category Page" />
+                <Form back={this.props.history.goBack} type="edit" data={this.props.Category} />
             </div>
         )
     }

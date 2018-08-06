@@ -40,7 +40,7 @@ class RestaurantEmailPage extends Component {
         console.log(search)
         this.setState(() => ({ search }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -67,7 +67,7 @@ class RestaurantEmailPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Restaurant Email" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

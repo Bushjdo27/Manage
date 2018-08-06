@@ -34,7 +34,7 @@ class OrderFoodOptionPage extends Component {
         //console.log()
         this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }))
     }
-    hideCreateForm = ()=>{
+    hideCreateForm = () => {
         this.setState(() => ({ showCreate: false }))
     }
 
@@ -66,7 +66,7 @@ class OrderFoodOptionPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Order Food Option" />
                 <div className="container">
                     <SideNav />
                     <div className="content">

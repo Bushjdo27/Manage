@@ -19,12 +19,6 @@ class SideNav extends Component {
                         <NavLink exact activeClassName="active-item" to="/food_options" className="navigation__link">Food Options</NavLink>
                     </li>
                     <li className="navigation__item">
-                        <NavLink exact activeClassName="active-item" to="/order_food_option" className="navigation__link">Order Food Options</NavLink>
-                    </li>
-                    <li className="navigation__item">
-                        <NavLink exact activeClassName="active-item" to="/order_food" className="navigation__link">Order Foods </NavLink>
-                    </li>
-                    <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/order" className="navigation__link">Orders</NavLink>
                     </li>
 
@@ -37,8 +31,6 @@ class SideNav extends Component {
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/restaurant_emails" className="navigation__link">Restaurant Emails</NavLink>
                     </li>
-
-
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/users" className="navigation__link">Users</NavLink>
                     </li>
@@ -52,3 +44,14 @@ class SideNav extends Component {
 }
 
 export default SideNav;
+
+/*
+
+<li className="navigation__item">
+<NavLink exact activeClassName="active-item" to="/order_food_option" className="navigation__link">Order Food Options</NavLink>
+</li>
+<li className="navigation__item">
+<NavLink exact activeClassName="active-item" to="/order_food" className="navigation__link">Order Foods </NavLink>
+</li>
+
+*/

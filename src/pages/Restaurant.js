@@ -75,7 +75,7 @@ class RestaurantPage extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header name="Restaurant" />
                 <div className="container">
                     <SideNav />
                     <div className="content">
