@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { createUser, updateUser } from '../../../actions/userActions'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { checkDataRequest } from '../../../utils'
+import Spinner from '../../Spinner';
 class CreateUser extends Component {
 
     constructor(props) {
@@ -13,7 +15,9 @@ class CreateUser extends Component {
             role: "",
             restaurant_id: 0,
             email: props.data ? props.data.email : "",
-            password: ""
+            password: "",
+            error: false,
+            clickSumit: false,
         }
     }
 
@@ -55,14 +59,31 @@ class CreateUser extends Component {
         e.preventDefault();
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
+        const {nickname , name , phone , address , role , restaurant_id , email , password} = this.state;
+        const data = {nickname , name , phone , address , role , restaurant_id , email , password}
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updateUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         } else {
-            this.props.dispatch(createUser(this.state)).then(() => { this.props.hideCreate() })
+            // this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
     render() {
-        const { nickname, name, phone, address, role, restaurant_id, email, password } = this.state;
+        const { nickname, name, phone, address, role, restaurant_id, email, password, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -98,8 +119,11 @@ class CreateUser extends Component {
                         <label>Password <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="password" placeholder="Password" value={password} onChange={this.handleChangePassword} />
                     </div>
-
-                    <button type="submit" >{this.props.data ? 'Edit User' : 'Create User'}</button>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit User' : 'Create User'}</button>
+                    }
                 </form>
             </div>
 

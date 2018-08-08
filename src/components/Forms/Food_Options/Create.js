@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 //import { createFoodOptions } from '../../../utils';
 import { createFoodOption, updateFoodOption } from '../../../actions/foodOptionActions'
 import { connect } from 'react-redux';
+import { checkDataRequest } from '../../../utils'
 
+import Spinner from '../../Spinner';
 //checked
 class CreateFoodOptions extends Component {
 
@@ -11,7 +13,9 @@ class CreateFoodOptions extends Component {
         this.state = {
             food_id: props.data ? parseInt(props.data.food_id, 10) : 0,
             name: props.data ? props.data.name : "",
-            price: props.data ? props.data.price : ""
+            price: props.data ? props.data.price : "",
+            error: false,
+            clickSumit:false
         }
     }
 
@@ -34,14 +38,31 @@ class CreateFoodOptions extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         //console.log(e.target.elements.photo.files[0])
+        const {food_id , name , price} = this.state
+        const data = {food_id , name ,price}
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updateFoodOption(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            //this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         } else {
-            this.props.dispatch(createFoodOption(this.state)).then(() => { this.props.hideCreate() })
+            
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createFoodOption(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
     render() {
-        const { food_id, name, price } = this.state;
+        const { food_id, name, price, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -57,7 +78,11 @@ class CreateFoodOptions extends Component {
                         <label>Price <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlePriceChange} className="input" name="price" value={price} type="number" placeholder="price" />
                     </div>
-                    <button type="submit" >{this.props.data ? 'Edit Foods Options' : 'Create Foods Options'}</button>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Foods Options' : 'Create Foods Options'}</button>
+                    }
                 </form>
             </div>
 

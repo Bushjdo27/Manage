@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { createNotification, updateNotification } from '../../../actions/notificationActions'
 import { connect } from 'react-redux';
+import { checkDataRequest } from '../../../utils';
 
+import Spinner from '../../Spinner';
 //error update
 class CreateNotification extends Component {
 
@@ -10,7 +12,9 @@ class CreateNotification extends Component {
         this.state = {
             subject: props.data ? props.data.subject : '',
             message: props.data ? props.data.message : '',
-            restaurant_id: props.data ? props.data.restaurant_id : 0
+            restaurant_id: props.data ? props.data.restaurant_id : 0,
+            error: false,
+            clickSumit: false,
 
         }
     }
@@ -31,17 +35,35 @@ class CreateNotification extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create RestaurantUser')
-        //console.log(e.target.elements.photo.files[0])
-        //createNotifications(e.target.elements.photo.files[0])
+        const {subject , message , restaurant_id} = this.state;
+        const data = {
+            subject,
+            message,
+            restaurant_id,
+            photo: e.target.elements.photo.files[0]
+        }
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updateNotification(this.props.data.id, { ...this.state, photo: e.target.elements.photo.files[0] })).then(() => { this.props.history.goBack() })
+            if(!checkDataRequest(data)){
+                this.props.dispatch(updateNotification(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
+            
         } else {
-            this.props.dispatch(createNotification({ ...this.state, photo: e.target.elements.photo.files[0] })).then(() => { this.props.hideCreate() })
+            
+
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createNotification(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
     render() {
-        const { subject, message, restaurant_id } = this.state
+        const { subject, message, restaurant_id, clickSumit ,error } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -62,8 +84,11 @@ class CreateNotification extends Component {
                         <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="restaurant_id" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleResIDChange} />
                     </div>
-
-                    <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>
+                    }
                 </form>
             </div>
 

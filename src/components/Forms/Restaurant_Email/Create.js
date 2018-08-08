@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantEmail, updateRestaurantEmail } from '../../../actions/restaurantEmailActions'
 import { connect } from 'react-redux';
-
+import { checkDataRequest } from '../../../utils'
+import Spinner from '../../Spinner';
 //checked
 class CreateRestaurantEmail extends Component {
 
@@ -9,7 +10,9 @@ class CreateRestaurantEmail extends Component {
         super(props);
         this.state = {
             email: props.data ? props.data.email : "",
-            restaurant_id: props.data ? props.data.restaurant_id : 0
+            restaurant_id: props.data ? props.data.restaurant_id : 0,
+            error: false,
+            clickSumit: false,
         }
     }
 
@@ -26,14 +29,34 @@ class CreateRestaurantEmail extends Component {
         e.preventDefault();
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
+        const {email , restaurant_id} = this.state;
+        const data = {
+            email,
+            restaurant_id
+        }
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            //this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(updateRestaurantEmail(this.props.data.id,data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         } else {
-            this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
+            //this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createRestaurantEmail(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
     render() {
-        const { email, restaurant_id } = this.state;
+        const { email, restaurant_id, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -45,8 +68,11 @@ class CreateRestaurantEmail extends Component {
                         <input onChange={this.handlResIDChange} className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
                     </div>
 
-
-                    <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
+                    }
                 </form>
             </div>
 

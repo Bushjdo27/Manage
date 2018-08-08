@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 //import { createPaymentInfos } from '../../../utils'
 import { createPaymentInfo, updatePaymentInfo } from '../../../actions/paymentActions'
 import { connect } from 'react-redux'
-
+import { checkDataRequest } from '../../../utils'
+import Spinner from '../../Spinner';
 //checked
 class CreatePayment extends Component {
 
@@ -15,7 +16,9 @@ class CreatePayment extends Component {
             card_number: 0,
             expiry_month: 0,
             expiry_year: 0,
-            cvv: 0
+            cvv: 0,
+            error: false,
+            clickSumit: false,
 
         }
     }
@@ -54,15 +57,46 @@ class CreatePayment extends Component {
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         //createPaymentInfos()
-
+        const {restaurant_id , payment_type , full_name , card_number , expiry_month , expiry_year ,cvv} = this.state;
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updatePaymentInfo(this.props.data.id, { ...this.state, card_id: this.props.data.card_account.id })).then(() => { this.props.history.goBack() })
+            const data = {
+                restaurant_id,
+                payment_type,
+                full_name,
+                card_number,
+                expiry_month,
+                expiry_year,
+                cvv,
+                card_id: this.props.data.card_account.id
+            }
+            if(!checkDataRequest(data)){
+                this.props.dispatch(updatePaymentInfo(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+            }else{
+                this.setState(()=>({clickSumit: false , error:true}))
+            }
+            
         } else {
-            this.props.dispatch(createPaymentInfo(this.state)).then(() => { this.props.hideCreate() })
+            
+            const data = {
+                restaurant_id,
+                payment_type,
+                full_name,
+                card_number,
+                expiry_month,
+                expiry_year,
+                cvv,
+            }
+            if(!checkDataRequest(data)){
+                this.props.dispatch(createPaymentInfo(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
     render() {
-        const { restaurant_id, payment_type, full_name, card_number, expiry_month, expiry_year, cvv } = this.state
+        const { restaurant_id, payment_type, full_name, card_number, expiry_month, expiry_year, cvv, clickSumit ,error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -99,9 +133,12 @@ class CreatePayment extends Component {
                         </div>
                     }
 
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
 
-
-                    <button type="submit" >{this.props.data ? 'Edit Payment' : 'Create Payment'}</button>
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Payment' : 'Create Payment'}</button>
+                    }
                 </form>
             </div>
 

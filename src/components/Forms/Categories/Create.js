@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createCategory, updateCategory } from '../../../actions/categoriesActions';
 import { connect } from 'react-redux';
-import Spinner from '../../Spinner'
+import Spinner from '../../Spinner';
+import { checkDataRequest } from '../../../utils'
 //checked
 class CreateCategories extends Component {
 
@@ -12,7 +13,8 @@ class CreateCategories extends Component {
             category_type: props.data ? props.data.category_type : "",
             restaurant_id: props.data ? props.data.restaurant_id : 0,
             loading: false,
-            clickSumit: false
+            clickSumit: false,
+            error: false
         }
     }
 
@@ -35,18 +37,35 @@ class CreateCategories extends Component {
         e.preventDefault();
         console.log("Submiting..");
         const { name, category_type, restaurant_id } = this.state;
+
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.setState(() => { this.setState(() => ({ clickSumit: true })) })
-            this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            //this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
+            const data = { name, category_type, restaurant_id }
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         } else {
             const data = { name, category_type, restaurant_id, files: e.target.elements.photo.files[0] }
+
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createCategory(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
             //this.setState(() => { this.setState(() => ({ clickSumit: true })) })
-            this.props.dispatch(createCategory(data)).then(() => { this.props.hideCreate() })
+            
         }
 
     }
     render() {
-        const { name, category_type, restaurant_id, clickSumit } = this.state;
+        const { name, category_type, restaurant_id, clickSumit ,error} = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -69,7 +88,7 @@ class CreateCategories extends Component {
                             <input className="input" name="photo" type="file" />
                         </div>
                     }
-                    <p className="error-label">You must enter all field have asterisk</p>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                     }

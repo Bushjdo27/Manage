@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../../../actions/resActions'
+import { checkDataRequest } from '../../../utils'
+import Spinner from '../../Spinner';
 
 class CreateRestaurant extends Component {
 
@@ -14,6 +16,8 @@ class CreateRestaurant extends Component {
             instaUrl: props.data ? props.data.instagram_url : "",
             address: props.data ? props.data.address.address : "",
             phone: props.data ? props.data.phone : "",
+            error: false,
+            clickSumit: false,
         }
     }
 
@@ -90,17 +94,54 @@ class CreateRestaurant extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const type = typeof e.target.elements.photo.files[0];
+        const { name , fbUrl , ytUrl , instaUrl , address , phone } = this.state;
         console.log(type !== null)
         console.log(type)
+        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
         if (this.props.data) {
-            this.props.dispatch(updateRestaurant(this.props.data.id, { ...this.state, address_id: this.props.data.address.id, photo_id: this.props.data.bg_photo.id, photo: e.target.elements.photo.files[0], icon_id: this.props.data.icon.id, icon: e.target.elements.icon.files[0] })).then(() => { this.props.back() })
+            const data = {
+                name ,
+                fbUrl,
+                ytUrl,
+                instaUrl,
+                address,
+                phone,
+                photo: e.target.elements.photo.files[0],
+                icon: e.target.elements.icon.files[0],
+                address_id: this.props.data.address.id,
+                photo_id: this.props.data.bg_photo.id,
+                icon_id: this.props.data.icon.id 
+            }
+            if(!checkDataRequest(data)){
+                this.props.dispatch(updateRestaurant(this.props.data.id, data)).then(() => { this.props.back() })
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
+            
         } else {
-            this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
+            //this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
+            const data = {
+                name ,
+                fbUrl,
+                ytUrl,
+                instaUrl,
+                address,
+                phone,
+                photo: e.target.elements.photo.files[0],
+                icon: e.target.elements.icon.files[0] 
+            }
+            if(!checkDataRequest(data)){
+                
+                this.props.dispatch(createRestaurant(data)).then(() => { this.props.hideCreate() })
+                //return
+            }else{
+                this.setState(()=>({clickSumit:false , error:true}))
+            }
         }
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, address, phone } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -143,7 +184,11 @@ class CreateRestaurant extends Component {
                         <label>Icon <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
-                    <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>
+                    {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    
+                    {
+                        clickSumit ? <Spinner /> : <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>
+                    }
 
                 </form>
 
