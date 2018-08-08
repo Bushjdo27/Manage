@@ -95,14 +95,26 @@ class CreatePayment extends Component {
             }
         }
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { restaurant_id, payment_type, full_name, card_number, expiry_month, expiry_year, cvv, clickSumit ,error } = this.state
+        const { payment_type, full_name, card_number, expiry_month, expiry_year, cvv, clickSumit ,error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input value={restaurant_id} onChange={this.handleResIDChange} className="input" name="resID" type="number" placeholder="Restaurant ID" />
+                        <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
+                        
+
+                        <select className="input" onChange={this.handleResIDChange}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Payment Type <span style={{ color: 'red' }}>* :</span> </label>
@@ -147,8 +159,14 @@ class CreatePayment extends Component {
 
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
 
-export default connect()(CreatePayment)
+
+export default connect(mapStateToProps)(CreatePayment)
 
 /*
 

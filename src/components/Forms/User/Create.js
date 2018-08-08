@@ -82,8 +82,15 @@ class CreateUser extends Component {
             }
         }
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { nickname, name, phone, address, role, restaurant_id, email, password, clickSumit ,error } = this.state;
+        const { nickname, name, phone, address, role, email, password, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -108,8 +115,11 @@ class CreateUser extends Component {
                         <input className="input" name="resID" type="text" placeholder="Role" value={role} onChange={this.handleChangeRole} />
                     </div>
                     <div className="form__group">
-                        <label>restaurant Id <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" name="resID" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleChangeRestaurantID} />
+                        <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
+                        <select className="input" onChange={this.handleChangeRestaurantID}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Email <span style={{ color: 'red' }}>* :</span> </label>
@@ -132,5 +142,9 @@ class CreateUser extends Component {
 
 }
 
-
-export default connect()(CreateUser)
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
+export default connect(mapStateToProps)(CreateUser)

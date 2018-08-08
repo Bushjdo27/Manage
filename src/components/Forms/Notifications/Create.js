@@ -62,8 +62,15 @@ class CreateNotification extends Component {
             }
         }
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { subject, message, restaurant_id, clickSumit ,error } = this.state
+        const { subject, message, clickSumit ,error } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -81,8 +88,12 @@ class CreateNotification extends Component {
                         <input className="input" name="photo" type="file" onChange={this.handlePhotoChange} />
                     </div>
                     <div className="form__group">
-                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" name="restaurant_id" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleResIDChange} />
+                        <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
+                        
+                        <select className="input" onChange={this.handleResIDChange}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
                     
@@ -97,5 +108,11 @@ class CreateNotification extends Component {
 
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
 
-export default connect()(CreateNotification)
+
+export default connect(mapStateToProps)(CreateNotification)

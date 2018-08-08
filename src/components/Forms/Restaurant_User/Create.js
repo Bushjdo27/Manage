@@ -56,8 +56,15 @@ class CreateRestaurantUser extends Component {
             }
         }
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { user_id, restaurant_id, clickSumit ,error } = this.state
+        const { user_id, clickSumit ,error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -66,8 +73,12 @@ class CreateRestaurantUser extends Component {
                         <input className="input" onChange={this.handleUserIDChange} name="user_id" value={user_id} type="number" placeholder="User ID" />
                     </div>
                     <div className="form__group">
-                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" onChange={this.handleRestIdChange} name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
+                        <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
+                        
+                        <select className="input" onChange={this.handleRestIdChange}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
                     
@@ -82,5 +93,11 @@ class CreateRestaurantUser extends Component {
 
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
 
-export default connect()(CreateRestaurantUser)
+
+export default connect(mapStateToProps)(CreateRestaurantUser)

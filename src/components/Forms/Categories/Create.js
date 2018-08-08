@@ -33,6 +33,14 @@ class CreateCategories extends Component {
         this.setState(() => ({ restaurant_id }))
     }
 
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.data_food.map((item, index) => {
+                return <option key={index} value={item.category_id}>{item.category.name}</option>
+            })
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         console.log("Submiting..");
@@ -64,8 +72,15 @@ class CreateCategories extends Component {
         }
 
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { name, category_type, restaurant_id, clickSumit ,error} = this.state;
+        const { name, category_type, clickSumit ,error} = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -78,8 +93,13 @@ class CreateCategories extends Component {
                         <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type  <span style={{ color: 'red' }}>* :</span> only menu or catering" />
                     </div>
                     <div className="form__group">
-                        <label><span> Restaurant ID </span><span style={{ color: 'red' }}>* :</span> </label>
-                        <input onChange={this.handleChangeResId} className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
+                        <label><span> Restaurant </span><span style={{ color: 'red' }}>* :</span> </label>
+                        
+
+                        <select className="input" onChange={this.handleChangeResId}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
 
                     {!this.props.data &&
@@ -101,5 +121,10 @@ class CreateCategories extends Component {
 
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
 
-export default connect()(CreateCategories)
+export default connect(mapStateToProps)(CreateCategories)

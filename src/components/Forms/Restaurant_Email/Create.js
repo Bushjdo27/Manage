@@ -55,8 +55,16 @@ class CreateRestaurantEmail extends Component {
             }
         }
     }
+
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.data_food.map((item, index) => {
+                return <option key={index} value={item.category_id}>{item.category.name}</option>
+            })
+        }
+    }
     render() {
-        const { email, restaurant_id, clickSumit ,error } = this.state;
+        const { email, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -64,8 +72,12 @@ class CreateRestaurantEmail extends Component {
                         <label>Email <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlEmailChange} className="input" name="email" value={email} type="email" placeholder="Email" />
                     </div><div className="form__group">
-                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input onChange={this.handlResIDChange} className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
+                        <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
+                        
+                        <select className="input" onChange={this.handlResIDChange}>
+                            <option value="">Select Restaurant</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
 
                     {error && <p className="error-label">You must enter all field have asterisk</p>}

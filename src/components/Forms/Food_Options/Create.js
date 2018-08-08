@@ -61,14 +61,26 @@ class CreateFoodOptions extends Component {
             }
         }
     }
+    renderOptions = () => {
+        if (this.props.data_food.length > 0) {
+            return this.props.Foods.map((item, index) => {
+                return <option key={index} value={item.id}>{item.name}</option>
+            })
+        }
+    }
     render() {
-        const { food_id, name, price, clickSumit ,error } = this.state;
+        const { name, price, clickSumit ,error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Food ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input onChange={this.handleFoodIDChange} className="input" name="food_id" value={food_id} type="number" placeholder="Food ID" />
+                        <label>Food <span style={{ color: 'red' }}>* :</span> </label>
+                        
+
+                        <select className="input" onChange={this.handleFoodIDChange}>
+                            <option value="">Select Food</option>
+                            {this.renderOptions()}
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Name <span style={{ color: 'red' }}>* :</span> </label>
@@ -91,6 +103,11 @@ class CreateFoodOptions extends Component {
 
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        Foods: state.Foods
+    }
+}
 
 
-export default connect()(CreateFoodOptions);
+export default connect(mapStateToProps)(CreateFoodOptions);
