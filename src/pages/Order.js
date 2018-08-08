@@ -49,7 +49,7 @@ class OrderPage extends Component {
         const { search, currentPage } = this.state;
         if (search.length > 0) {
             const data = this.props.Orders.filter((item) => {
-                return item.name.toLowerCase().includes(search.toLowerCase())
+                return item.email.toLowerCase().includes(search.toLowerCase())
             });
             console.log(data)
             //this.setState(()=>({data})) Menu Item 1
@@ -73,9 +73,9 @@ class OrderPage extends Component {
                     <SideNav redirect={() => { this.props.history.push('/login') }} />
                     <div className="content">
                         <div className="admin">
-                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} />
+                            <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"Email"} />
                             {
-                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Orders.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['Email', "Name", "Infor", "Food", "Option", "Total"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage >= Math.ceil(this.props.Orders.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Order" titleTable={['Email', "Name", "Infor", "Food", "Option", "Total"]} data={this.data()} />
                             }
 
                         </div>

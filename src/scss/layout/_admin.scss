@@ -125,7 +125,10 @@
               &.spinDel{
                 display: inline-block;
                 width: 3.2rem;
+
+              
               }
+
             }
 
             &#spinnCircle{
@@ -135,6 +138,9 @@
             
             &:nth-child(2n){
               background-color: $color-grey;
+            }
+            td.rowDelete{
+              width: 6.2rem;
             }
           }
         }

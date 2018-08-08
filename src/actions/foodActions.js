@@ -11,6 +11,7 @@ export const getFoods = () => {
     return async (dispatch) => {
         let payload = await getListFoods();
         checkErrorResponse(payload, FOOD_ALL, dispatch)
+        return payload.data
     }
 }
 

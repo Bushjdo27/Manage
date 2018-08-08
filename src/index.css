@@ -232,6 +232,8 @@ body {
       width: 100%; }
     .admin__data table tbody tr:nth-child(2n) {
       background-color: #f7f7f7; }
+    .admin__data table tbody tr td.rowDelete {
+      width: 6.2rem; }
   .admin__data__control {
     display: flex;
     justify-content: flex-end;

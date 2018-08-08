@@ -48,7 +48,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
 
                     </tr>
@@ -74,7 +74,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
 
                         }
                     </tr>
@@ -99,7 +99,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -123,7 +123,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -229,7 +229,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -255,7 +255,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -279,7 +279,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -303,7 +303,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -327,7 +327,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -350,7 +350,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -373,7 +373,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )
@@ -397,7 +397,7 @@ class AdminTable extends Component {
                             </Link>
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td onClick={() => { this.handleRemove(res.id) }}>Delete</td>
+                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
                         }
                     </tr>
                 )

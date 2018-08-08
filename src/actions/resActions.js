@@ -18,6 +18,7 @@ export const getListRestaurant = () => {
     return async (dispatch) => {
         let payload = await getListRestaurants();
         checkErrorResponse(payload, RESTAURANT_ALL, dispatch)
+        return payload.data
     }
 }
 

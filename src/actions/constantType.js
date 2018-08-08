@@ -69,5 +69,17 @@ export const AUTH_SIGN_IN = "AUTH_SIGN_IN"
 export const AUTH_SIGN_UP = "AUTH_SIGN_UP"
 export const AUTH_SIGN_OUT = "AUTH_SIGN_OUT"
 
+//============== Localstorage ==============
+
 export const USER = "USER";
 export const HEADERS = "HEADERS";
+export const RESTAURANTS = "RESTAURANTS"
+export const FOODS = "FOODS"
+
+export const GET = 'GET';
+export const CREATE = 'CREATE';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+export const NEW = 'NEW';
+
+

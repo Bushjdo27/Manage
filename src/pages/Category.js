@@ -74,7 +74,7 @@ class CategoryPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Categories.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage >= Math.ceil(this.props.Categories.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} search={this.state.search} type="Category" titleTable={['name', "type", "updated", "photo"]} data={this.data()} />
                             }
 
                         </div>

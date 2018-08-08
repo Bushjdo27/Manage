@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { HEADERS, USER, AUTH_SIGN_IN } from '../actions/constantType'
+import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW } from '../actions/constantType';
+import moment from 'moment'
 const corsURL = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -841,7 +842,12 @@ export const pagination = (arr, page = 1, itemPerPage = 5) => {
     //render result of current page
     const start = (page - 1) * itemPerPage;
     const end = page * itemPerPage;
-
+    if (arr.slice(start, end).length < 1) {
+        let newPage = page - 1;
+        let newStart = (newPage - 1) * itemPerPage;
+        let newEnd = newPage + itemPerPage
+        return arr.slice(newStart, newEnd)
+    }
     return arr.slice(start, end)
 }
 
@@ -861,5 +867,74 @@ const getUser = () => {
         return JSON.parse(user)
     } else {
         return null;
+    }
+}
+
+// ======================== Perfomance ===================
+
+const Manage = (method, lists, data = {}) => {
+    //const lists = raw.data;
+    switch (method) {
+        case GET:
+            return lists
+        case CREATE:
+            //lists.push(data)
+            return [...lists, data]
+        case UPDATE:
+            return lists.map(item => {
+                if (item.id === data.id) {
+                    return data;
+                }
+                return item;
+            })
+
+        case DELETE:
+            return lists.filter(item => item.id !== data.id)
+
+        default:
+            break;
+
+    }
+}
+
+export const ManageStorage = (type, method = "new", data = {}) => {
+    console.log(type)
+    const result = JSON.parse(localStorage.getItem(type))
+    console.log(result)
+    if (result) {
+        console.log(result.data)
+        const res = Manage(method, result.data, data)
+
+        if (needRenew(result.created_at)) {
+            localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
+        }
+
+        return res;
+    } else {
+        if (method === NEW) {
+            localStorage.setItem(type, JSON.stringify({ data: data, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
+        }
+        return false;
+    }
+}
+
+
+const needRenew = (data) => {
+
+    const now = moment()
+    const type_1 = (data.month < (now.month() + 1)) || (data.month === (now.month() + 1) && data.day < now.date());
+    const type_2 = ((data.month === (now.month() + 1)) && data.day === now.date() && data.hour < now.hour());
+    const type_3 = ((data.month === (now.month() + 1)) && data.day === now.date() && data.hour === now.hour() && ((now.minute() - data.minute) >= 20));
+    if (type_1) {
+        return true;
+    }
+    else if (type_2) {
+        return true;
+    }
+    else if (type_3) {
+        return true
+    }
+    else {
+        return false;
     }
 }

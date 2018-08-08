@@ -21,7 +21,7 @@ class FoodPage extends Component {
     componentDidMount() {
 
         if (isLogin()) {
-            this.props.dispatch(getFoods())
+            //this.props.dispatch(getFoods())
         } else {
             this.props.history.push('/login')
         }
@@ -75,7 +75,7 @@ class FoodPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} /> : <AdminTable canNext={this.state.currentPage >= Math.ceil(this.props.Foods.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Food" titleTable={['name', "description", "price", "updated"]} data={this.data()} />
                             }
 
                         </div>

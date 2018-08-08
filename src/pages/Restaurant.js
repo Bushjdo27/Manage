@@ -25,7 +25,7 @@ class RestaurantPage extends Component {
         //     this.props.dispatch(result)
         // })
         if (isLogin()) {
-            this.props.dispatch(getListRestaurant())
+            //this.props.dispatch(getListRestaurant())
         } else {
             this.props.history.push('/login')
         }
@@ -73,6 +73,8 @@ class RestaurantPage extends Component {
         console.log("submit done")
     }
     render() {
+        console.log(this.props.Restaurants);
+        console.log(this.state.currentPage)
         return (
             <div>
                 <Header name="Restaurant" />
@@ -82,7 +84,7 @@ class RestaurantPage extends Component {
                         <div className="admin">
                             <AdminControl showCreate={this.renderCreateForm} back={this.handleBack} isShowBack={this.state.showCreate} query={this.handleSearch} searchFor={"name"} />
                             {
-                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} back={this.backToTable} /> : <AdminTable canNext={this.state.currentPage === Math.ceil(this.props.Restaurants.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant" titleTable={['name', "address", "phone", "updated"]} data={this.data()} />
+                                this.state.showCreate ? <CreateForm hideCreate={this.hideCreateForm} back={this.backToTable} /> : <AdminTable canNext={this.state.currentPage >= Math.ceil(this.props.Restaurants.length / 5)} canPrev={this.state.currentPage === 1} next={this.handleNext} prev={this.handlePrev} type="Restaurant" titleTable={['name', "address", "phone", "updated"]} data={this.data()} />
                             }
 
                         </div>
