@@ -51,24 +51,25 @@ class CreateCategories extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Name : </label>
+                        <label><span>Name </span> <span style={{ color: 'red' }}>* :</span></label>
                         <input onChange={this.handleChangeName} className="input" value={name} name="name" type="text" placeholder="Category name" />
                     </div>
                     <div className="form__group">
-                        <label>Name : </label>
-                        <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type : only menu or catering" />
+                        <label><span> Category Type   </span><span style={{ color: 'red' }}>* :</span> </label>
+                        <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type  <span style={{ color: 'red' }}>* :</span> only menu or catering" />
                     </div>
                     <div className="form__group">
-                        <label>Restaurant ID : </label>
+                        <label><span> Restaurant ID </span><span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handleChangeResId} className="input" value={restaurant_id} name="restaurant_id" type="number" placeholder="Restaurant ID" />
                     </div>
 
                     {!this.props.data &&
                         <div className="form__group">
-                            <label>Photo: </label>
+                            <label><span>Photo</span> <span style={{ color: 'red' }}>* :</span></label>
                             <input className="input" name="photo" type="file" />
                         </div>
                     }
+                    <p className="error-label">You must enter all field have asterisk</p>
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                     }

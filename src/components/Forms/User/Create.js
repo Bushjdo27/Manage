@@ -67,35 +67,35 @@ class CreateUser extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Nick Name : </label>
+                        <label>Nick Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Restaurant ID" value={nickname} onChange={this.handleChangeNickName} />
                     </div>
                     <div className="form__group">
-                        <label>Name : </label>
+                        <label>Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Name" value={name} onChange={this.handleChangeName} />
                     </div>
                     <div className="form__group">
-                        <label>Phone : </label>
+                        <label>Phone <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Phone" value={phone} onChange={this.handleChangePhone} />
                     </div>
                     <div className="form__group">
-                        <label>Address : </label>
+                        <label>Address <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Address" value={address} onChange={this.handleChangeAddress} />
                     </div>
                     <div className="form__group">
-                        <label>Role : </label>
+                        <label>Role <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Role" value={role} onChange={this.handleChangeRole} />
                     </div>
                     <div className="form__group">
-                        <label>restaurant Id : </label>
+                        <label>restaurant Id <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleChangeRestaurantID} />
                     </div>
                     <div className="form__group">
-                        <label>Email : </label>
+                        <label>Email <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Email" value={email} onChange={this.handleChangeEmail} />
                     </div>
                     <div className="form__group">
-                        <label>Password : </label>
+                        <label>Password <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="password" placeholder="Password" value={password} onChange={this.handleChangePassword} />
                     </div>
 

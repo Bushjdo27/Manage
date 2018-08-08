@@ -807,3 +807,32 @@ const needRenew = (data) => {
         return false;
     }
 }
+
+const checkType = (item) => {
+    const type = typeof item;
+
+    switch (type) {
+        case 'string':
+            return item.length > 0
+        case 'number':
+            return item > 0
+        case 'object':
+            return isEmpty(item)
+        default:
+            break;
+    }
+}
+
+export const checkDataRequest = (obj) => {
+    const arrKeys = Object.keys(obj);
+    let haveError = false;
+
+    for (let i = 0; i < arrKeys.length; i++) {
+        if (checkType(obj[arrKeys[i]])) {
+            haveError = true;
+            break;
+        }
+    }
+    return haveError;
+
+}

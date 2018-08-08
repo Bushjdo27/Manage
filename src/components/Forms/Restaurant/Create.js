@@ -77,6 +77,8 @@ class CreateRestaurant extends Component {
         })
     }
     handleIconChange = (e) => {
+        const type = typeof e.target.value;
+        console.log(type)
         const value = e.target.value;
         this.setState(() => {
             return {
@@ -87,7 +89,9 @@ class CreateRestaurant extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        //e.target.elements.photo.files[0]
+        const type = typeof e.target.elements.photo.files[0];
+        console.log(type !== null)
+        console.log(type)
         if (this.props.data) {
             this.props.dispatch(updateRestaurant(this.props.data.id, { ...this.state, address_id: this.props.data.address.id, photo_id: this.props.data.bg_photo.id, photo: e.target.elements.photo.files[0], icon_id: this.props.data.icon.id, icon: e.target.elements.icon.files[0] })).then(() => { this.props.back() })
         } else {
@@ -101,42 +105,42 @@ class CreateRestaurant extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Name : </label>
+                        <label>Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="name" value={name} onChange={this.handleNameChange} placeholder="Enter name" />
                     </div>
 
                     <div className="form__group">
-                        <label>Facebook Url : </label>
+                        <label>Facebook Url <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="fb" value={fbUrl} onChange={this.handleFBChange} placeholder="Facbook Url" />
                     </div>
 
                     <div className="form__group">
-                        <label>Youtube Url : </label>
+                        <label>Youtube Url <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="yt" value={ytUrl} onChange={this.handleYTChange} placeholder="Youtube Url" />
                     </div>
 
                     <div className="form__group">
-                        <label>Instagram Url : </label>
+                        <label>Instagram Url <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="insta" value={instaUrl} onChange={this.handleInstaChange} placeholder="Instagram Url" />
                     </div>
 
                     <div className="form__group">
-                        <label>Address : </label>
+                        <label>Address <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="address" value={address} onChange={this.handleAddressChange} placeholder="Address" />
                     </div>
 
                     <div className="form__group">
-                        <label>phone : </label>
+                        <label>phone <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="text" name="phone" value={phone} onChange={this.handlePhoneChange} placeholder="Phone" />
                     </div>
 
                     <div className="form__group">
-                        <label>photo : </label>
+                        <label>photo <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="file" name="photo" onChange={this.handlePhotoChange} />
                     </div>
 
                     <div className="form__group">
-                        <label>Icon : </label>
+                        <label>Icon <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
                     <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>

@@ -46,15 +46,15 @@ class CreateFoodOptions extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Food ID : </label>
+                        <label>Food ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handleFoodIDChange} className="input" name="food_id" value={food_id} type="number" placeholder="Food ID" />
                     </div>
                     <div className="form__group">
-                        <label>Name : </label>
+                        <label>Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handleNameChange} className="input" name="name" value={name} type="text" placeholder="Name" />
                     </div>
                     <div className="form__group">
-                        <label>Price : </label>
+                        <label>Price <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlePriceChange} className="input" name="price" value={price} type="number" placeholder="price" />
                     </div>
                     <button type="submit" >{this.props.data ? 'Edit Foods Options' : 'Create Foods Options'}</button>

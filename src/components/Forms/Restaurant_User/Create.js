@@ -41,11 +41,11 @@ class CreateRestaurantUser extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>User ID : </label>
+                        <label>User ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" onChange={this.handleUserIDChange} name="user_id" value={user_id} type="number" placeholder="User ID" />
                     </div>
                     <div className="form__group">
-                        <label>Restaurant ID : </label>
+                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" onChange={this.handleRestIdChange} name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
                     </div>
                     <button type="submit" >{this.props.data ? 'Edit Restaurant User' : 'Create Restaurant User'}</button>

@@ -65,26 +65,26 @@ class CreateFoods extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Category : </label>
+                        <label>Category <span style={{ color: 'red' }}>* :</span> </label>
                         <select className="input" onChange={this.handleCateIDChange}>
                             <option value="">Select Category</option>
                             {this.renderOptions()}
                         </select>
                     </div>
                     <div className="form__group">
-                        <label>Name : </label>
+                        <label>Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handleNameChange} className="input" value={name} name="name" type="text" placeholder="Name" />
                     </div>
                     <div className="form__group">
-                        <label>Description : </label>
+                        <label>Description <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handleDescriptionChange} className="input" value={description} name="description" type="text" placeholder="descriptions" />
                     </div>
                     <div className="form__group">
-                        <label>Price : </label>
+                        <label>Price <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlePriceChange} className="input" value={price} name="price" type="number" placeholder="price" />
                     </div>
                     <div className="form__group">
-                        <label>Photo : </label>
+                        <label>Photo <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="photo" type="file" />
                     </div>
 

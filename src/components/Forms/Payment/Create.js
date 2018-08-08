@@ -67,33 +67,33 @@ class CreatePayment extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Restaurant ID : </label>
+                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input value={restaurant_id} onChange={this.handleResIDChange} className="input" name="resID" type="number" placeholder="Restaurant ID" />
                     </div>
                     <div className="form__group">
-                        <label>Payment Type : </label>
+                        <label>Payment Type <span style={{ color: 'red' }}>* :</span> </label>
                         <input value={payment_type} onChange={this.handlePaymentTypeChange} className="input" name="type" type="text" placeholder="Type: card or paypal" />
                     </div>
                     <div className="form__group">
-                        <label>Full Name : </label>
+                        <label>Full Name <span style={{ color: 'red' }}>* :</span> </label>
                         <input value={full_name} onChange={this.handleFullNameChange} className="input" name="fullName" type="text" placeholder="Full Name" />
                     </div>
                     {!this.props.data &&
                         <div style={{ width: "100%" }}>
                             <div className="form__group">
-                                <label>Card Number : </label>
+                                <label>Card Number <span style={{ color: 'red' }}>* :</span> </label>
                                 <input value={card_number} onChange={this.handleCardNumberChange} className="input" name="card_number" type="number" placeholder="Restaurant ID" />
                             </div>
                             <div className="form__group">
-                                <label>Expire Month : </label>
+                                <label>Expire Month <span style={{ color: 'red' }}>* :</span> </label>
                                 <input value={expiry_month} onChange={this.handleExpMonthChange} className="input" name="resID" type="number" placeholder="Expire Month" />
                             </div>
                             <div className="form__group">
-                                <label>Expire Year : </label>
+                                <label>Expire Year <span style={{ color: 'red' }}>* :</span> </label>
                                 <input value={expiry_year} onChange={this.handleExpYearChange} className="input" name="resID" type="number" placeholder="Expire Year" />
                             </div>
                             <div className="form__group">
-                                <label>CVV : </label>
+                                <label>CVV <span style={{ color: 'red' }}>* :</span> </label>
                                 <input value={cvv} onChange={this.handleCVVChange} className="input" name="resID" type="number" placeholder="CVV" />
                             </div>
                         </div>

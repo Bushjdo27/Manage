@@ -38,10 +38,10 @@ class CreateRestaurantEmail extends Component {
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>Email : </label>
+                        <label>Email <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlEmailChange} className="input" name="email" value={email} type="email" placeholder="Email" />
                     </div><div className="form__group">
-                        <label>Restaurant ID : </label>
+                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input onChange={this.handlResIDChange} className="input" name="restaurant_id" value={restaurant_id} type="number" placeholder="Restaurant ID" />
                     </div>
 

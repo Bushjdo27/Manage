@@ -46,20 +46,20 @@ class CreateNotification extends Component {
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
                     <div className="form__group">
-                        <label>Subject : </label>
+                        <label>Subject <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="subject" type="text" placeholder="Subject" value={subject} onChange={this.handleSubjectChange} />
                     </div>
 
                     <div className="form__group">
-                        <label>Message : </label>
+                        <label>Message <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="message" type="text" placeholder="Message" value={message} onChange={this.handleMessageChange} />
                     </div>
                     <div className="form__group">
-                        <label>Image  : </label>
+                        <label>Image  <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="photo" type="file" onChange={this.handlePhotoChange} />
                     </div>
                     <div className="form__group">
-                        <label>Restaurant ID : </label>
+                        <label>Restaurant ID <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="restaurant_id" type="number" placeholder="Restaurant ID" value={restaurant_id} onChange={this.handleResIDChange} />
                     </div>
 
