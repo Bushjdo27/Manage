@@ -48,7 +48,6 @@ class Auth extends Component {
                 <form action="Post" className="form__auth" onSubmit={this.handleSignIn}>
                     <input type="email" placeholder="Email : super_admin@example.com" onChange={this.handleEmailChange} value={this.state.email} />
                     <input type="password" placeholder="Password : 12345678" onChange={this.handlePassChange} value={this.state.password} />
-                    <p>Forgot Password ?</p>
                     {this.state.processing ? <Spinner /> : <button className="btn__auth__in">Sign In</button>}
                 </form>
             </div>

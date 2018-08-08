@@ -33,6 +33,9 @@ export const deleteFood = (id) => {
     return async (dispatch) => {
         let payload = await deleteFoods(id);
         //checkErrorResponse(payload, FOOD_REMOVE, dispatch)
-        dispatch({ type: FOOD_REMOVE, payload: { id } })
+        if (payload.data.success) {
+            dispatch({ type: FOOD_REMOVE, payload: { id } })
+        }
+
     }
 }

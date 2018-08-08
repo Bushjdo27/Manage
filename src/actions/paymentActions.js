@@ -40,6 +40,9 @@ export const deletePaymentInfo = (id) => {
     return async (dispatch) => {
         let payload = await deletePaymentInfos(id);
         //checkErrorResponse(payload, PAYMENT_REMOVE, dispatch)
-        dispatch({ type: PAYMENT_REMOVE, payload: { id } })
+        if (payload.data.success) {
+            dispatch({ type: PAYMENT_REMOVE, payload: { id } })
+        }
+
     }
 }

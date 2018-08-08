@@ -38,7 +38,10 @@ export const updateCategory = (id, data) => {
 export const deleteCategory = (id) => {
     return async (dispatch) => {
         let payload = await deleteCategories(id);
+        if (payload.data.success) {
+            dispatch({ type: CATEGOREIS_REMOVE, payload: { id } })
+        }
         //checkErrorResponse(payload, CATEGOREIS_REMOVE, dispatch)
-        dispatch({ type: CATEGOREIS_REMOVE, payload: { id } })
+
     }
 }

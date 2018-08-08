@@ -4,7 +4,7 @@ import AdminTable from '../components/AdminTable';
 import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
-import { getFoods } from '../actions/foodActions';
+//import { getFoods } from '../actions/foodActions';
 import CreateForm from '../components/Forms/Foods/Create'
 import { pagination, isLogin } from '../utils/index'
 

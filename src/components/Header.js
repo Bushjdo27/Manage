@@ -13,9 +13,7 @@ class Header extends Component {
 
 
     handleLoadRestaurants = async () => {
-        console.log("Loading Data Restaurant")
-        const data = ManageStorage(RESTAURANTS, GET)
-        console.log(data)
+        //const data = ManageStorage(RESTAURANTS, GET)
         if (ManageStorage(RESTAURANTS, GET)) {
             const payload = ManageStorage(RESTAURANTS, GET)
             //console.log("data come back from ")
@@ -29,9 +27,9 @@ class Header extends Component {
     }
 
     handleLoadFoods = async () => {
-        console.log("Loading Data Food")
-        const data = ManageStorage(FOODS, GET)
-        console.log(data)
+        //console.log("Loading Data Food")
+        //const data = ManageStorage(FOODS, GET)
+        //console.log(data)
         if (ManageStorage(FOODS, GET)) {
             const payload = ManageStorage(FOODS, GET)
             //console.log("data come back from ")
@@ -39,7 +37,7 @@ class Header extends Component {
         } else {
             console.log("in else , prepare call api")
             this.props.dispatch(getFoods()).then(data => {
-                console.log(data)
+                //console.log(data)
                 ManageStorage(FOODS, NEW, data)
             })
         }

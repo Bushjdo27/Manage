@@ -39,6 +39,9 @@ export const deleteOrder = (id) => {
     return async (dispatch) => {
         let payload = await deleteOrders(id);
         //checkErrorResponse(payload, ORDER_REMOVE, dispatch)
-        dispatch({ type: ORDER_REMOVE, payload: { id } })
+        if (payload.data.success) {
+            dispatch({ type: ORDER_REMOVE, payload: { id } })
+        }
+
     }
 }
