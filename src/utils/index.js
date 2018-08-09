@@ -821,7 +821,10 @@ const checkType = (item) => {
         case 'number':
             return item > 0
         case 'object':
-            return isEmpty(item)
+            //console.log(`files is : ${JSON.stringify(item)}`)
+            return item instanceof File
+        case 'undefined':
+            return false;
         default:
             break;
     }
@@ -832,11 +835,11 @@ export const checkDataRequest = (obj) => {
     let haveError = false;
 
     for (let i = 0; i < arrKeys.length; i++) {
-        if (checkType(obj[arrKeys[i]])) {
+        if (!checkType(obj[arrKeys[i]])) {
             haveError = true;
             break;
         }
     }
-    return haveError;
+    return haveError; // neu co loi se la true
 
 }
