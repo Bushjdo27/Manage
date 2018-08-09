@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createFood, updateFood } from '../../../actions/foodActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest  , ManageStorage} from '../../../utils'
+import { FOODS , UPDATE , CREATE} from '../../../actions/constantType'
 
 import Spinner from '../../Spinner';
 // checked
@@ -68,7 +69,10 @@ class CreateFoods extends Component {
             }
 
             if(!checkDataRequest(data)){
-                this.props.dispatch(updateFood(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                this.props.dispatch(updateFood(this.props.data.id, data)).then(() => { 
+                    ManageStorage(FOODS , UPDATE ,data) 
+                    this.props.history.goBack() 
+                })
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
             }
@@ -78,7 +82,7 @@ class CreateFoods extends Component {
             //this.props.dispatch(createFood(data)).then(() => { this.props.hideCreate() })
 
             if(!checkDataRequest(data)){
-                
+                ManageStorage(FOODS , CREATE ,data) 
                 this.props.dispatch(createFood(data)).then(() => { this.props.hideCreate() })
                 //return
             }else{

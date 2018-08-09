@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../../../actions/resActions'
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest , ManageStorage} from '../../../utils';
+import { RESTAURANTS , UPDATE , CREATE} from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 
 class CreateRestaurant extends Component {
@@ -113,7 +114,10 @@ class CreateRestaurant extends Component {
                 icon_id: this.props.data.icon.id 
             }
             if(!checkDataRequest(data)){
-                this.props.dispatch(updateRestaurant(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateRestaurant(this.props.data.id, data)).then(() => {
+                    ManageStorage(RESTAURANTS , UPDATE ,data) 
+                    this.props.back() 
+                })
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
             }
@@ -132,7 +136,10 @@ class CreateRestaurant extends Component {
             }
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(createRestaurant(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createRestaurant(data)).then(() => { 
+                    ManageStorage(RESTAURANTS , CREATE ,data) 
+                    this.props.hideCreate() 
+                })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
