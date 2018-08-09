@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { ManageStorage } from '../utils'
-import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL } from '../actions/constantType';
+import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL } from '../actions/constantType';
 import { connect } from 'react-redux';
 import { getListRestaurant } from '../actions/resActions';
 import { getFoods } from '../actions/foodActions';
+import { getListOrder } from '../actions/orderActions';
+import { isLogin } from '../utils'
 class Header extends Component {
 
 
     componentDidMount() {
-        this.handleLoadRestaurants().then(this.handleLoadFoods)
+        if (isLogin()) {
+            this.handleLoadRestaurants().then(this.handleLoadFoods).then(this.handleLoadOrder)
+        }
+
     }
 
 
@@ -39,6 +44,20 @@ class Header extends Component {
             this.props.dispatch(getFoods()).then(data => {
                 //console.log(data)
                 ManageStorage(FOODS, NEW, data)
+            })
+        }
+    }
+
+    handleLoadOrder = async () => {
+        if (ManageStorage(ORDERS, GET)) {
+            const payload = ManageStorage(ORDERS, GET)
+            //console.log("data come back from ")
+            this.props.dispatch({ type: ORDER_ALL, payload })
+        } else {
+            console.log("in else , prepare call api")
+            this.props.dispatch(getListOrder()).then(data => {
+                //console.log(data)
+                ManageStorage(ORDERS, NEW, data)
             })
         }
     }

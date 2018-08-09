@@ -12,8 +12,8 @@ import { deleteNotification } from '../actions/notificationActions'
 import { deleteOrderFood } from '../actions/orderFoodAction'
 import { deleteOrder } from '../actions/orderActions'
 import { connect } from 'react-redux';
-import {ManageStorage} from '../utils';
-import {RESTAURANTS , FOODS , DELETE} from '../actions/constantType';
+import { ManageStorage } from '../utils';
+import { RESTAURANTS, FOODS, ORDERS, DELETE } from '../actions/constantType';
 import SpinnerDelete from './SpinnerDelete'
 import Spinner from './Spinner'
 class AdminTable extends Component {
@@ -448,14 +448,14 @@ class AdminTable extends Component {
         this.setState(() => ({ clickDelete: true, itemClick: id }))
         switch (type) {
             case 'Restaurant':
-                this.props.dispatch(deleteRestaurant(id)).then(() => { ManageStorage(RESTAURANTS , DELETE , {id}) ;this.setState(() => ({ clickDelete: false })) })
+                this.props.dispatch(deleteRestaurant(id)).then(() => { ManageStorage(RESTAURANTS, DELETE, { id }); this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Category':
                 this.props.dispatch(deleteCategory(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
 
             case 'Food':
-                this.props.dispatch(deleteFood(id)).then(() => { ManageStorage(FOODS , DELETE , {id}) ;this.setState(() => ({ clickDelete: false })) })
+                this.props.dispatch(deleteFood(id)).then(() => { ManageStorage(FOODS, DELETE, { id }); this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Food_Option':
                 this.props.dispatch(deleteFoodOption(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
@@ -479,7 +479,7 @@ class AdminTable extends Component {
                 this.props.dispatch(deleteOrderFood(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Order':
-                this.props.dispatch(deleteOrder(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
+                this.props.dispatch(deleteOrder(id)).then(() => { ManageStorage(ORDERS, DELETE, { id }); this.setState(() => ({ clickDelete: false })) })
                 break;
             default:
                 return []

@@ -4,7 +4,7 @@ import AdminTable from '../components/AdminTable';
 import AdminControl from '../components/AdminControl'
 import Header from '../components/Header';
 import SideNav from '../components/SideNav'
-import { getListOrder } from '../actions/orderActions';
+//import { getListOrder } from '../actions/orderActions';
 import CreateForm from '../components/Forms/Restaurant/Create'
 import { pagination, isLogin } from '../utils/index'
 // lam viec voi action
@@ -22,7 +22,7 @@ class OrderPage extends Component {
     componentDidMount() {
 
         if (isLogin()) {
-            this.props.dispatch(getListOrder())
+            //this.props.dispatch(getListOrder())
         } else {
             this.props.history.push('/login')
         }

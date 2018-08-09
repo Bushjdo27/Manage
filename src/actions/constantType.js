@@ -75,6 +75,7 @@ export const USER = "USER";
 export const HEADERS = "HEADERS";
 export const RESTAURANTS = "RESTAURANTS"
 export const FOODS = "FOODS"
+export const ORDERS = "ORDERS"
 
 export const GET = 'GET';
 export const CREATE = 'CREATE';
