@@ -40,7 +40,7 @@ class CreateFoodOptions extends Component {
         //console.log(e.target.elements.photo.files[0])
         const {food_id , name , price} = this.state
         const data = {food_id , name ,price}
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             //this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){

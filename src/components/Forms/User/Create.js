@@ -61,7 +61,7 @@ class CreateUser extends Component {
         //console.log(e.target.elements.photo.files[0])
         const {nickname , name , phone , address , role , restaurant_id , email , password} = this.state;
         const data = {nickname , name , phone , address , role , restaurant_id , email , password}
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){

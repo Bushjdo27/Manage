@@ -34,7 +34,7 @@ class CreateRestaurantUser extends Component {
         //console.log(e.target.elements.photo.files[0])
         const { user_id , restaurant_id} = this.state;
         const data = {user_id , restaurant_id};
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             //this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){

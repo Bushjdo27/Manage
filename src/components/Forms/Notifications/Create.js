@@ -42,7 +42,7 @@ class CreateNotification extends Component {
             restaurant_id,
             photo: e.target.elements.photo.files[0]
         }
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             if(!checkDataRequest(data)){
                 this.props.dispatch(updateNotification(this.props.data.id, data)).then(() => { this.props.history.goBack() })

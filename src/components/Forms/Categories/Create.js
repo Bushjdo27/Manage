@@ -46,7 +46,7 @@ class CreateCategories extends Component {
         console.log("Submiting..");
         const { name, category_type, restaurant_id } = this.state;
 
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             //this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             const data = { name, category_type, restaurant_id }

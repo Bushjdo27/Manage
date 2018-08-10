@@ -34,7 +34,7 @@ class CreateRestaurantEmail extends Component {
             email,
             restaurant_id
         }
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             //this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){

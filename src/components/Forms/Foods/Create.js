@@ -57,7 +57,7 @@ class CreateFoods extends Component {
         console.log("submiting...")
         //createFoods(e.target.elements.photo.files[0]);
         const { category_id, name, description, price } = this.state
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             const data = {
                 category_id,

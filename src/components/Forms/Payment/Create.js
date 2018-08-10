@@ -58,7 +58,7 @@ class CreatePayment extends Component {
         //console.log(e.target.elements.photo.files[0])
         //createPaymentInfos()
         const {restaurant_id , payment_type , full_name , card_number , expiry_month , expiry_year ,cvv} = this.state;
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false}))
         if (this.props.data) {
             const data = {
                 restaurant_id,

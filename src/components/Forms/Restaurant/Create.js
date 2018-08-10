@@ -98,7 +98,7 @@ class CreateRestaurant extends Component {
         const { name , fbUrl , ytUrl , instaUrl , address , phone } = this.state;
         console.log(type !== null)
         console.log(type)
-        this.setState(() => { this.setState(() => ({ clickSumit: true })) })
+        this.setState(() => ({ clickSumit: true ,error:false})) 
         if (this.props.data) {
             const data = {
                 name ,
@@ -124,6 +124,7 @@ class CreateRestaurant extends Component {
             
         } else {
             //this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
+            console.log("Creating")
             const data = {
                 name ,
                 fbUrl,
@@ -135,7 +136,7 @@ class CreateRestaurant extends Component {
                 icon: e.target.elements.icon.files[0] 
             }
             if(!checkDataRequest(data)){
-                
+                console.log("requesting")
                 this.props.dispatch(createRestaurant(data)).then(() => { 
                     ManageStorage(RESTAURANTS , CREATE ,data) 
                     this.props.hideCreate() 
