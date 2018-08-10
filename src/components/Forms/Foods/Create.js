@@ -45,8 +45,8 @@ class CreateFoods extends Component {
     }
 
     renderOptions = () => {
-        if (this.props.data_food.length > 0) {
-            return this.props.data_food.map((item, index) => {
+        if (this.props.Foods.length > 0) {
+            return this.props.Foods.map((item, index) => {
                 return <option key={index} value={item.category_id}>{item.category.name}</option>
             })
         }
@@ -133,7 +133,7 @@ class CreateFoods extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data_food: state.Foods
+        Foods: state.Foods
     }
 }
 

@@ -57,8 +57,8 @@ class CreateRestaurantEmail extends Component {
     }
 
     renderOptions = () => {
-        if (this.props.data_food.length > 0) {
-            return this.props.data_food.map((item, index) => {
+        if (this.props.Restaurants.length > 0) {
+            return this.props.Restaurants.map((item, index) => {
                 return <option key={index} value={item.category_id}>{item.category.name}</option>
             })
         }
@@ -94,4 +94,10 @@ class CreateRestaurantEmail extends Component {
 }
 
 
-export default connect()(CreateRestaurantEmail)
+const mapStateToProps = (state) =>{
+    return {
+        Restaurants: state.Restaurants
+    }
+}
+
+export default connect(mapStateToProps)(CreateRestaurantEmail)

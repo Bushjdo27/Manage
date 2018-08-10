@@ -33,13 +33,13 @@ class CreateCategories extends Component {
         this.setState(() => ({ restaurant_id }))
     }
 
-    renderOptions = () => {
-        if (this.props.data_food.length > 0) {
-            return this.props.data_food.map((item, index) => {
-                return <option key={index} value={item.category_id}>{item.category.name}</option>
-            })
-        }
-    }
+    // renderOptions = () => {
+    //     if (this.props.data_food.length > 0) {
+    //         return this.props.data_food.map((item, index) => {
+    //             return <option key={index} value={item.category_id}>{item.category.name}</option>
+    //         })
+    //     }
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -73,7 +73,7 @@ class CreateCategories extends Component {
 
     }
     renderOptions = () => {
-        if (this.props.data_food.length > 0) {
+        if (this.props.Restaurants.length > 0) {
             return this.props.Restaurants.map((item, index) => {
                 return <option key={index} value={item.id}>{item.name}</option>
             })
@@ -90,7 +90,7 @@ class CreateCategories extends Component {
                     </div>
                     <div className="form__group">
                         <label><span> Category Type   </span><span style={{ color: 'red' }}>* :</span> </label>
-                        <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type  <span style={{ color: 'red' }}>* :</span> only menu or catering" />
+                        <input onChange={this.handleChangeType} className="input" value={category_type} name="category_type" type="text" placeholder="Category Type only menu or catering" />
                     </div>
                     <div className="form__group">
                         <label><span> Restaurant </span><span style={{ color: 'red' }}>* :</span> </label>

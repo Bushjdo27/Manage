@@ -83,7 +83,7 @@ class CreateUser extends Component {
         }
     }
     renderOptions = () => {
-        if (this.props.data_food.length > 0) {
+        if (this.props.Restaurants.length > 0) {
             return this.props.Restaurants.map((item, index) => {
                 return <option key={index} value={item.id}>{item.name}</option>
             })
@@ -96,7 +96,7 @@ class CreateUser extends Component {
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Nick Name <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" name="resID" type="text" placeholder="Restaurant ID" value={nickname} onChange={this.handleChangeNickName} />
+                        <input className="input" name="resID" type="text" placeholder="Nick Name" value={nickname} onChange={this.handleChangeNickName} />
                     </div>
                     <div className="form__group">
                         <label>Name <span style={{ color: 'red' }}>* :</span> </label>

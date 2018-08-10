@@ -96,7 +96,7 @@ class CreatePayment extends Component {
         }
     }
     renderOptions = () => {
-        if (this.props.data_food.length > 0) {
+        if (this.props.Restaurants.length > 0) {
             return this.props.Restaurants.map((item, index) => {
                 return <option key={index} value={item.id}>{item.name}</option>
             })
