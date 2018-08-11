@@ -57,41 +57,39 @@ class CreatePayment extends Component {
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         //createPaymentInfos()
-        const {restaurant_id , payment_type , full_name , card_number , expiry_month , expiry_year ,cvv} = this.state;
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        const { restaurant_id, payment_type, full_name, card_number, expiry_month, expiry_year, cvv } = this.state;
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
                 restaurant_id,
                 payment_type,
                 full_name,
-                card_number,
-                expiry_month,
-                expiry_year,
-                cvv,
+
                 card_id: this.props.data.card_account.id
             }
-            if(!checkDataRequest(data)){
-                this.props.dispatch(updatePaymentInfo(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            }else{
-                this.setState(()=>({clickSumit: false , error:true}))
+            if (!checkDataRequest(data)) {
+                console.log("preparing update...")
+                this.props.dispatch(updatePaymentInfo(this.props.data.id, data)).then(() => { this.props.back() })
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
-            
+
         } else {
-            
+
             const data = {
                 restaurant_id,
                 payment_type,
                 full_name,
-                card_number,
-                expiry_month,
-                expiry_year,
-                cvv,
+                card_number: parseInt(card_number, 10),
+                expiry_month: parseInt(expiry_month, 10),
+                expiry_year: parseInt(expiry_year, 10),
+                cvv: parseInt(cvv, 10),
             }
-            if(!checkDataRequest(data)){
+            if (!checkDataRequest(data)) {
                 this.props.dispatch(createPaymentInfo(data)).then(() => { this.props.hideCreate() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -103,13 +101,13 @@ class CreatePayment extends Component {
         }
     }
     render() {
-        const { payment_type, full_name, card_number, expiry_month, expiry_year, cvv, clickSumit ,error } = this.state
+        const { payment_type, full_name, card_number, expiry_month, expiry_year, cvv, clickSumit, error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
-                        
+
 
                         <select className="input" onChange={this.handleResIDChange}>
                             <option value="">Select Restaurant</option>
@@ -147,7 +145,7 @@ class CreatePayment extends Component {
 
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
 
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Payment' : 'Create Payment'}</button>
                     }
@@ -159,7 +157,7 @@ class CreatePayment extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }

@@ -19,6 +19,8 @@ export const createFood = (data) => {
     return async (dispatch) => {
         let payload = await createFoods(data);
         checkErrorResponse(payload, FOOD_ADD, dispatch)
+        console.log(payload.data)
+        return payload.data
     }
 }
 
@@ -26,6 +28,7 @@ export const updateFood = (id, data) => {
     return async (dispatch) => {
         let payload = await updateFoods(id, data);
         checkErrorResponse(payload, FOOD_UPDATE, dispatch)
+        return payload.data
     }
 }
 

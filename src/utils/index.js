@@ -135,7 +135,7 @@ export const createFoods = async (food) => {
 
 
     const result = await Api('post', `/foods`, fd);
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
@@ -425,6 +425,7 @@ export const getListPaymentInfos = async () => {
 export const createPaymentInfos = async (payment) => {
     const { restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
     const fd = new FormData();
+    console.log(payment)
     fd.append("payment_info[generatable_type]", "Restaurant");
     fd.append("payment_info[generatable_id]", restaurant_id);
     fd.append("payment_info[payment_type]", payment_type);
@@ -433,7 +434,6 @@ export const createPaymentInfos = async (payment) => {
     fd.append("payment_info[card_account_attributes][expiry_month]", expiry_month);
     fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
     fd.append("payment_info[card_account_attributes][cvv]", cvv);
-    fd.append("payment_info[paypal_account_attributes][paypal_email]", "asd@gmail.com");
 
     console.log("im in create payment utils")
 
@@ -565,16 +565,19 @@ export const getListUsers = async () => {
 }
 
 export const createUsers = async (user) => {
-    const { nickname, name, phone, address, email, password } = user;
+    const { nickname, name, phone, address, email, password, restaurant_id, role } = user;
+    console.log(user)
+    //const resId = parseInt(restaurant_id, 10)
     const fd = new FormData();
     fd.append("user[nickname]", nickname);
     fd.append("user[name]", name);
     fd.append("user[phone]", phone);
     fd.append("user[address_attributes][address]", address);
-    fd.append("user[restaurant_users_attributes][0][role]", "admin");
-    fd.append("user[restaurant_users_attributes][0][restaurant_id]", 1);
+    fd.append("user[restaurant_users_attributes][0][role]", role);
+    fd.append("user[restaurant_users_attributes][0][restaurant_id]", restaurant_id);
     fd.append("user[email]", email);
     fd.append("user[password]", password);
+
 
     const result = await Api('post', '/users', fd);
     console.log(result)
@@ -781,6 +784,7 @@ export const ManageStorage = (type, method = "new", data = {}) => {
         if (needRenew(result.created_at)) {
             localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
         }
+        localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
 
         return res;
     } else {

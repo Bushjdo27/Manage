@@ -12,7 +12,7 @@ const EditFoodOptions = (props) => {
     return (
         <div>
             <Header name="Payment" sub="Edit Payment Page" />
-            <Form back={this.props.history.goBack} type="edit" data={props.Payment} />
+            <Form back={props.history.goBack} type="edit" data={props.Payment} />
         </div>
     )
 }

@@ -40,6 +40,7 @@ class CreateUser extends Component {
 
     handleChangeRole = (e) => {
         const value = e.target.value;
+        console.log(value)
         this.setState(() => ({ role: value }))
     }
     handleChangeRestaurantID = (e) => {
@@ -59,26 +60,26 @@ class CreateUser extends Component {
         e.preventDefault();
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
-        const {nickname , name , phone , address , role , restaurant_id , email , password} = this.state;
-        const data = {nickname , name , phone , address , role , restaurant_id , email , password}
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        const { nickname, name, phone, address, role, restaurant_id, email, password } = this.state;
+        const data = { nickname, name, phone, address, role: parseInt(role, 10), restaurant_id: parseInt(restaurant_id, 10), email, password }
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.back() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         } else {
             // this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
-            if(!checkDataRequest(data)){
-                
+            if (!checkDataRequest(data)) {
+
                 this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -89,8 +90,10 @@ class CreateUser extends Component {
             })
         }
     }
+
+
     render() {
-        const { nickname, name, phone, address, role, email, password, clickSumit ,error } = this.state;
+        const { nickname, name, phone, address, role, email, password, clickSumit, error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -112,7 +115,13 @@ class CreateUser extends Component {
                     </div>
                     <div className="form__group">
                         <label>Role <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" name="resID" type="text" placeholder="Role" value={role} onChange={this.handleChangeRole} />
+                        <select className="input" onChange={this.handleChangeRole}>
+                            <option value="">Select Role</option>
+                            <option value="0">Super Admin</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Customer</option>
+
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
@@ -130,7 +139,7 @@ class CreateUser extends Component {
                         <input className="input" name="resID" type="password" placeholder="Password" value={password} onChange={this.handleChangePassword} />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit User' : 'Create User'}</button>
                     }
@@ -142,7 +151,7 @@ class CreateUser extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }

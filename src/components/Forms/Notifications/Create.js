@@ -35,30 +35,30 @@ class CreateNotification extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {subject , message , restaurant_id} = this.state;
+        const { subject, message, restaurant_id } = this.state;
         const data = {
             subject,
             message,
             restaurant_id,
             photo: e.target.elements.photo.files[0]
         }
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
-            if(!checkDataRequest(data)){
-                this.props.dispatch(updateNotification(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            if (!checkDataRequest(data)) {
+                this.props.dispatch(updateNotification(this.props.data.id, data)).then(() => { this.props.back() })
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
-            
-        } else {
-            
 
-            if(!checkDataRequest(data)){
-                
+        } else {
+
+
+            if (!checkDataRequest(data)) {
+
                 this.props.dispatch(createNotification(data)).then(() => { this.props.hideCreate() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -70,7 +70,7 @@ class CreateNotification extends Component {
         }
     }
     render() {
-        const { subject, message, clickSumit ,error } = this.state
+        const { subject, message, clickSumit, error } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -89,14 +89,14 @@ class CreateNotification extends Component {
                     </div>
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
-                        
+
                         <select className="input" onChange={this.handleResIDChange}>
                             <option value="">Select Restaurant</option>
                             {this.renderOptions()}
                         </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>
                     }
@@ -108,7 +108,7 @@ class CreateNotification extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }

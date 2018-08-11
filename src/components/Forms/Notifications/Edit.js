@@ -10,7 +10,7 @@ const EditFoodOptions = (props) => {
     return (
         <div>
             <Header name="Notification" sub="Edit Notification Page" />
-            <Form back={this.props.history.goBack} type="edit" data={props.Notification} />
+            <Form back={props.history.goBack} type="edit" data={props.Notification} />
         </div>
     )
 }

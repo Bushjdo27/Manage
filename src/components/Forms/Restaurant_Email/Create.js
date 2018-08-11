@@ -29,29 +29,29 @@ class CreateRestaurantEmail extends Component {
         e.preventDefault();
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
-        const {email , restaurant_id} = this.state;
+        const { email, restaurant_id } = this.state;
         const data = {
             email,
             restaurant_id
         }
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             //this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(updateRestaurantEmail(this.props.data.id,data)).then(() => { this.props.hideCreate() })
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then(() => { this.props.back() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         } else {
             //this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
-            if(!checkDataRequest(data)){
-                
+            if (!checkDataRequest(data)) {
+
                 this.props.dispatch(createRestaurantEmail(data)).then(() => { this.props.hideCreate() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -59,12 +59,12 @@ class CreateRestaurantEmail extends Component {
     renderOptions = () => {
         if (this.props.Restaurants.length > 0) {
             return this.props.Restaurants.map((item, index) => {
-                return <option key={index} value={item.category_id}>{item.category.name}</option>
+                return <option key={index} value={item.id}>{item.name}</option>
             })
         }
     }
     render() {
-        const { email, clickSumit ,error } = this.state;
+        const { email, clickSumit, error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -73,7 +73,7 @@ class CreateRestaurantEmail extends Component {
                         <input onChange={this.handlEmailChange} className="input" name="email" value={email} type="email" placeholder="Email" />
                     </div><div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
-                        
+
                         <select className="input" onChange={this.handlResIDChange}>
                             <option value="">Select Restaurant</option>
                             {this.renderOptions()}
@@ -81,7 +81,7 @@ class CreateRestaurantEmail extends Component {
                     </div>
 
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
                     }
@@ -94,7 +94,7 @@ class CreateRestaurantEmail extends Component {
 }
 
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }

@@ -12,7 +12,7 @@ const EditUser = (props) => {
     return (
         <div>
             <Header name="User" sub="Edit User Page" />
-            <Form back={this.props.history.goBack} type="edit" data={props.User} />
+            <Form back={props.history.goBack} type="edit" data={props.User} />
         </div>
     )
 }

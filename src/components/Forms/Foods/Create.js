@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createFood, updateFood } from '../../../actions/foodActions'
 import { connect } from 'react-redux';
-import { checkDataRequest  , ManageStorage} from '../../../utils'
-import { FOODS , UPDATE , CREATE} from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage } from '../../../utils'
+import { FOODS, UPDATE, CREATE } from '../../../actions/constantType'
 
 import Spinner from '../../Spinner';
 // checked
@@ -57,7 +57,7 @@ class CreateFoods extends Component {
         console.log("submiting...")
         //createFoods(e.target.elements.photo.files[0]);
         const { category_id, name, description, price } = this.state
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
                 category_id,
@@ -68,30 +68,33 @@ class CreateFoods extends Component {
                 id_photo: this.props.data.photo.id
             }
 
-            if(!checkDataRequest(data)){
-                this.props.dispatch(updateFood(this.props.data.id, data)).then(() => { 
-                    ManageStorage(FOODS , UPDATE ,data) 
-                    this.props.history.goBack() 
+            if (!checkDataRequest(data)) {
+                this.props.dispatch(updateFood(this.props.data.id, data)).then((res) => {
+                    ManageStorage(FOODS, UPDATE, res)
+                    this.props.back()
                 })
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
-            
+
         } else {
             const data = { category_id, name, description, price, files: e.target.elements.photo.files[0] }
             //this.props.dispatch(createFood(data)).then(() => { this.props.hideCreate() })
 
-            if(!checkDataRequest(data)){
-                ManageStorage(FOODS , CREATE ,data) 
-                this.props.dispatch(createFood(data)).then(() => { this.props.hideCreate() })
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(createFood(data)).then((res) => {
+                    ManageStorage(FOODS, CREATE, res)
+                    this.props.hideCreate()
+                })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
     render() {
-        const { name, description, price, clickSumit ,error } = this.state
+        const { name, description, price, clickSumit, error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -119,7 +122,7 @@ class CreateFoods extends Component {
                         <input className="input" name="photo" type="file" />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Foods' : 'Create Foods'}</button>
                     }

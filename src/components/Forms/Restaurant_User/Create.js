@@ -32,27 +32,27 @@ class CreateRestaurantUser extends Component {
         e.preventDefault();
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
-        const { user_id , restaurant_id} = this.state;
-        const data = {user_id , restaurant_id};
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        const { user_id, restaurant_id } = this.state;
+        const data = { user_id, restaurant_id };
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             //this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => { this.props.hideCreate() })
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => { this.props.back() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
 
         } else {
             this.props.dispatch(createRestaurantUser(this.state)).then(() => { this.props.hideCreate() })
-            if(!checkDataRequest(data)){
-                
+            if (!checkDataRequest(data)) {
+
                 this.props.dispatch(createRestaurantUser(data)).then(() => { this.props.hideCreate() })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -64,7 +64,7 @@ class CreateRestaurantUser extends Component {
         }
     }
     render() {
-        const { user_id, clickSumit ,error } = this.state
+        const { user_id, clickSumit, error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -74,14 +74,14 @@ class CreateRestaurantUser extends Component {
                     </div>
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
-                        
+
                         <select className="input" onChange={this.handleRestIdChange}>
                             <option value="">Select Restaurant</option>
                             {this.renderOptions()}
                         </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant User' : 'Create Restaurant User'}</button>
                     }
@@ -93,7 +93,7 @@ class CreateRestaurantUser extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }
