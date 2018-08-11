@@ -93,7 +93,7 @@ class CreateUser extends Component {
 
 
     render() {
-        const { nickname, name, phone, address, role, email, password, clickSumit, error } = this.state;
+        const { nickname, name, phone, address, email, password, clickSumit, error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

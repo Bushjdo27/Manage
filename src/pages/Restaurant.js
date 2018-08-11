@@ -19,7 +19,7 @@ class RestaurantPage extends Component {
         }
     }
     componentDidMount() {
-        console.log("Calling didMount")
+        //console.log("Calling didMount")
         // getListRestaurant().then(result => {
         //     console.log(result)
         //     this.props.dispatch(result)
@@ -32,7 +32,7 @@ class RestaurantPage extends Component {
 
     }
     handleSearch = (search) => {
-        console.log(search)
+        //console.log(search)
         this.setState(() => ({ search }))
     }
 
@@ -55,7 +55,7 @@ class RestaurantPage extends Component {
             const data = this.props.Restaurants.filter((item) => {
                 return item.name.toLowerCase().includes(search.toLowerCase())
             });
-            console.log(data)
+            //console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }
@@ -73,8 +73,8 @@ class RestaurantPage extends Component {
         console.log("submit done")
     }
     render() {
-        console.log(this.props.Restaurants);
-        console.log(this.state.currentPage)
+        //console.log(this.props.Restaurants);
+        //console.log(this.state.currentPage)
         return (
             <div>
                 <Header name="Restaurant" />

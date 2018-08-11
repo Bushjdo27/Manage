@@ -25,7 +25,8 @@ export const getListRestaurant = () => {
 export const createRestaurant = (data) => {
     return async (dispatch) => {
         let payload = await createRestaurants(data);
-        checkErrorResponse(payload, RESTAURANT_ADD, dispatch)
+        checkErrorResponse(payload, RESTAURANT_ADD, dispatch);
+        return payload.data
     }
 }
 
@@ -33,6 +34,7 @@ export const updateRestaurant = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurants(id, data);
         checkErrorResponse(payload, RESTAURANT_UPDATE, dispatch)
+        return payload.data
     }
 }
 

@@ -45,7 +45,7 @@ class CreateFoodOptions extends Component {
             //this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.back() })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))

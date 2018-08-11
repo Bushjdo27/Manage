@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authSignIn } from '../actions/authAction';
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner';
+import { isLogin } from '../utils'
 class Auth extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +11,12 @@ class Auth extends Component {
             password: '12345678',
             username: '',
             processing: false
+        }
+    }
+
+    componentDidMount(){
+        if(isLogin()){
+            this.props.history.push('/')
         }
     }
 

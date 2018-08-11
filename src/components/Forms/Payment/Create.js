@@ -61,7 +61,7 @@ class CreatePayment extends Component {
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
-                restaurant_id,
+                restaurant_id: parseInt(restaurant_id , 10),
                 payment_type,
                 full_name,
 
@@ -77,7 +77,7 @@ class CreatePayment extends Component {
         } else {
 
             const data = {
-                restaurant_id,
+                restaurant_id: parseInt(restaurant_id , 10),
                 payment_type,
                 full_name,
                 card_number: parseInt(card_number, 10),

@@ -114,8 +114,8 @@ class CreateRestaurant extends Component {
                 icon_id: this.props.data.icon.id 
             }
             if(!checkDataRequest(data)){
-                this.props.dispatch(updateRestaurant(this.props.data.id, data)).then(() => {
-                    ManageStorage(RESTAURANTS , UPDATE ,data) 
+                this.props.dispatch(updateRestaurant(this.props.data.id, data)).then((res) => {
+                    ManageStorage(RESTAURANTS , UPDATE ,res) 
                     this.props.back() 
                 })
             }else{
@@ -137,8 +137,8 @@ class CreateRestaurant extends Component {
             }
             if(!checkDataRequest(data)){
                 console.log("requesting")
-                this.props.dispatch(createRestaurant(data)).then(() => { 
-                    ManageStorage(RESTAURANTS , CREATE ,data) 
+                this.props.dispatch(createRestaurant(data)).then((res) => { 
+                    ManageStorage(RESTAURANTS , CREATE ,res) 
                     this.props.hideCreate() 
                 })
                 //return

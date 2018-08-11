@@ -52,7 +52,7 @@ class CreateCategories extends Component {
             const data = { name, category_type, restaurant_id }
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { this.props.history.goBack() })
+                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { this.props.back() })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))

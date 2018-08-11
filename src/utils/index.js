@@ -31,7 +31,7 @@ export const createRestaurants = async (data) => {
     fd.append("restaurant[icon_attributes][photo]", icon);
 
     const result = await Api('post', '/restaurants', fd)
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -104,7 +104,7 @@ export const updateCategories = async (id, category) => {
 
 
     const result = await Api('patch', `/categories/${id}`, fd)
-    console.log(result)
+    //console.log(result)
     return result
 }
 
@@ -135,7 +135,7 @@ export const createFoods = async (food) => {
 
 
     const result = await Api('post', `/foods`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -153,14 +153,14 @@ export const updateFoods = async (id, food) => {
 
 
     const result = await Api('patch', `/foods/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
 
 export const deleteFoods = async (id) => {
     const result = await Api('delete', `/foods/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -170,7 +170,7 @@ export const deleteFoods = async (id) => {
 
 export const getListFoodsOptions = async () => {
     const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/food_options`)
-    console.log(result)
+    //console.log(result)
     return result
 }
 
@@ -267,7 +267,7 @@ export const createOrders = async (order) => {
         fd.append('order[payment_info_attributes][card_account_attributes][cvv]', cvv);
     }
     const result = await Api('post', '/orders', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -323,12 +323,12 @@ export const updateOrders = async (id, order) => {
         fd.append('order[payment_info_attributes][card_account_attributes][cvv]', card.cvv);
     }
     const result = await Api('patch', `/orders/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteOrders = async (id) => {
     const result = await Api('delete', `/orders/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -337,7 +337,7 @@ export const deleteOrders = async (id) => {
 
 export const getListOrdersFoodsOptions = async () => {
     const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_food_options`)
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -350,7 +350,7 @@ export const createOrderFoodOptions = async (order_food_option) => {
     fd.append('order_food_option[order_food_id]', order_food_id);
 
     const result = await Api('post', '/order_food_options', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -361,12 +361,12 @@ export const updateOrderFoodOptions = async (id, order_food_option) => {
     fd.append('order_food_option[order_food_id]', order_food_id);
 
     const result = await Api('patch', `/order_food_options/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteOrderFoodOptions = async (id) => {
     const result = await Api('delete', `/order_food_options/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -377,7 +377,7 @@ export const deleteOrderFoodOptions = async (id) => {
 export const getListOrdersFoods = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/order_foods')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -389,7 +389,7 @@ export const createOrderFoods = async (order_food) => {
     fd.append('order_food[food_id]', food_id);
     fd.append('order_food[amount]', amount);
     const result = await Api('post', '/order_foods', fd)
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -402,12 +402,12 @@ export const updateOrderFoods = async (id, order_food) => {
     fd.append('order_food[amount]', amount);
 
     const result = await Api('patch', `/order_foods/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteOrderFoods = async (id) => {
     const result = await Api('delete', `/order_foods/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -417,7 +417,7 @@ export const deleteOrderFoods = async (id) => {
 export const getListPaymentInfos = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/payment_infos')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -425,7 +425,7 @@ export const getListPaymentInfos = async () => {
 export const createPaymentInfos = async (payment) => {
     const { restaurant_id, full_name, payment_type, card_number, expiry_month, expiry_year, cvv } = payment;
     const fd = new FormData();
-    console.log(payment)
+    //console.log(payment)
     fd.append("payment_info[generatable_type]", "Restaurant");
     fd.append("payment_info[generatable_id]", restaurant_id);
     fd.append("payment_info[payment_type]", payment_type);
@@ -435,23 +435,24 @@ export const createPaymentInfos = async (payment) => {
     fd.append("payment_info[card_account_attributes][expiry_year]", expiry_year);
     fd.append("payment_info[card_account_attributes][cvv]", cvv);
 
-    console.log("im in create payment utils")
+    //console.log("im in create payment utils")
 
     const result = await Api('post', '/payment_infos', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
 
 export const updatePaymentInfos = async (id, payment) => {
     //const {}
-    console.log(payment)
+    //console.log(payment)
     const { card_id, full_name, payment_type } = payment;
+    const restaurant_id = payment.restaurant_id
     const fd = new FormData();
     fd.append("payment_info[generatable_type]", "Restaurant");
     fd.append("payment_info[payment_type]", payment_type);
     fd.append("payment_info[card_account_attributes][id]", card_id);
-    //fd.append("payment_info[generatable_id]", restaurant_id);
+    fd.append("payment_info[generatable_id]", restaurant_id);
 
     fd.append("payment_info[card_account_attributes][full_name]", full_name);
     //fd.append("payment_info[card_account_attributes][number]", null);
@@ -468,12 +469,12 @@ export const updatePaymentInfos = async (id, payment) => {
     //     }
     // }
     const result = await Api('patch', `/payment_infos/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deletePaymentInfos = async (id) => {
     const result = await Api('delete', `/payment_infos/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -487,7 +488,7 @@ export const deletePaymentInfos = async (id) => {
 export const getListRestaurantUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/restaurant_users')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -498,7 +499,7 @@ export const createRestaurantUsers = async (resUser) => {
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
 
     const result = await Api('post', '/restaurant_users', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -509,12 +510,12 @@ export const updateRestaurantUsers = async (id, resUser) => {
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
 
     const result = await Api('patch', `/restaurant_users/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteRestaurantUsers = async (id) => {
     const result = await Api('delete', `/restaurant_users/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -523,7 +524,7 @@ export const deleteRestaurantUsers = async (id) => {
 export const getListRestaurantEmails = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/restaurant_emails')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const createRestaurantEmails = async (resEmail) => {
@@ -533,7 +534,7 @@ export const createRestaurantEmails = async (resEmail) => {
     fd.append("restaurant_email[restaurant_id]", restaurant_id);
 
     const result = await Api('post', '/restaurant_emails', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -544,12 +545,12 @@ export const updateRestaurantEmails = async (id, resEmail) => {
     fd.append("restaurant_email[restaurant_id]", restaurant_id);
 
     const result = await Api('patch', `/restaurant_emails/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteRestaurantEmails = async (id) => {
     const result = await Api('delete', `/restaurant_emails/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -560,13 +561,13 @@ export const deleteRestaurantEmails = async (id) => {
 export const getListUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/users')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
 export const createUsers = async (user) => {
     const { nickname, name, phone, address, email, password, restaurant_id, role } = user;
-    console.log(user)
+    //console.log(user)
     //const resId = parseInt(restaurant_id, 10)
     const fd = new FormData();
     fd.append("user[nickname]", nickname);
@@ -580,7 +581,7 @@ export const createUsers = async (user) => {
 
 
     const result = await Api('post', '/users', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -595,7 +596,7 @@ export const updateUsers = async (id, user) => {
     fd.append("user[address_attributes][address]", address);
 
     const result = await Api('patch', `/users/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -606,7 +607,7 @@ export const getListNotifications = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/notifications');
 
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -621,7 +622,7 @@ export const createNotifications = async (notification) => {
     fd.append("notification[restaurant_id]", restaurant_id)
 
     const result = await Api('post', '/notifications', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -635,12 +636,12 @@ export const updateNotifications = async (id, notification) => {
     fd.append("notification[restaurant_id]", restaurant_id)
 
     const result = await Api('patch', `/notifications/${id}`, fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 export const deleteNotifications = async (id) => {
     const result = await Api('delete', `/notifications/${id}`);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -699,7 +700,7 @@ const Api = async (method, url, data = {}) => {
 
 }
 export const checkErrorResponse = (payload, type, dispatch) => {
-    console.log("im in checkError function")
+    //console.log("im in checkError function")
     if (payload) {
         //console.log("payload not null")
         dispatch(
@@ -738,7 +739,7 @@ export const isLogin = () => {
 
 const getUser = () => {
     const user = localStorage.getItem(USER);
-    console.log(user);
+    //console.log(user);
     if (user != null) {
         return JSON.parse(user)
     } else {
@@ -776,14 +777,14 @@ const Manage = (method, lists, data = {}) => {
 export const ManageStorage = (type, method = "new", data = {}) => {
     //console.log(type)
     const result = JSON.parse(localStorage.getItem(type))
-    console.log(result)
+    //console.log(result)
     if (result) {
-        console.log(result.data)
+        //console.log(result.data)
         const res = Manage(method, result.data, data)
 
-        if (needRenew(result.created_at)) {
-            localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
-        }
+        // if (needRenew(result.created_at)) {
+        //     localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
+        // }
         localStorage.setItem(type, JSON.stringify({ data: res, created_at: { hour: moment().hour(), day: moment().date(), month: moment().month() + 1, minute: moment().minute() } }))
 
         return res;
@@ -796,7 +797,7 @@ export const ManageStorage = (type, method = "new", data = {}) => {
 }
 
 
-const needRenew = (data) => {
+export const needRenew = (data) => {
 
     const now = moment()
     const type_1 = (data.month < (now.month() + 1)) || (data.month === (now.month() + 1) && data.day < now.date());

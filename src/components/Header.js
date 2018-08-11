@@ -24,7 +24,7 @@ class Header extends Component {
             //console.log("data come back from ")
             this.props.dispatch({ type: RESTAURANT_ALL, payload })
         } else {
-            console.log("in else , prepare call api")
+            //console.log("in else , prepare call api")
             this.props.dispatch(getListRestaurant()).then(data => {
                 ManageStorage(RESTAURANTS, NEW, data)
             })
@@ -40,7 +40,7 @@ class Header extends Component {
             //console.log("data come back from ")
             this.props.dispatch({ type: FOOD_ALL, payload })
         } else {
-            console.log("in else , prepare call api")
+            //console.log("in else , prepare call api")
             this.props.dispatch(getFoods()).then(data => {
                 //console.log(data)
                 ManageStorage(FOODS, NEW, data)
@@ -54,7 +54,7 @@ class Header extends Component {
             //console.log("data come back from ")
             this.props.dispatch({ type: ORDER_ALL, payload })
         } else {
-            console.log("in else , prepare call api")
+            //console.log("in else , prepare call api")
             this.props.dispatch(getListOrder()).then(data => {
                 //console.log(data)
                 ManageStorage(ORDERS, NEW, data)
