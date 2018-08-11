@@ -61,7 +61,7 @@ class CreateUser extends Component {
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         const { nickname, name, phone, address, role, restaurant_id, email, password } = this.state;
-        const data = { nickname, name, phone, address, role: parseInt(role, 10), restaurant_id: parseInt(restaurant_id, 10), email, password }
+        const data = { nickname, name, phone, address, restaurant_id: parseInt(restaurant_id, 10), email, password }
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })

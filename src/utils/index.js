@@ -566,20 +566,20 @@ export const getListUsers = async () => {
 }
 
 export const createUsers = async (user) => {
-    const { nickname, name, phone, address, email, password, restaurant_id, role } = user;
-    //console.log(user)
+    const { nickname, name, phone, address, email, password, restaurant_id } = user;
+    console.log(user)
     //const resId = parseInt(restaurant_id, 10)
     const fd = new FormData();
-    fd.append("user[nickname]", nickname);
-    fd.append("user[name]", name);
-    fd.append("user[phone]", phone);
-    fd.append("user[address_attributes][address]", address);
-    fd.append("user[restaurant_users_attributes][0][role]", role);
-    fd.append("user[restaurant_users_attributes][0][restaurant_id]", restaurant_id);
-    fd.append("user[email]", email);
-    fd.append("user[password]", password);
+    fd.append("user[nickname]", "nick name 1");
+    fd.append("user[name]", "name 1");
+    fd.append("user[phone]", "1234654");
+    fd.append("user[address_attributes][address]", "tokyo");
+    fd.append("user[restaurant_users_attributes][0][role]", "admin");
+    fd.append("user[restaurant_users_attributes][0][restaurant_id]", 6);
+    fd.append("user[email]", "a@gmail.com");
+    fd.append("user[password]", "123456");
 
-
+    //console.log(fd)
     const result = await Api('post', '/users', fd);
     //console.log(result)
     return result;
@@ -607,7 +607,7 @@ export const getListNotifications = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/notifications');
 
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
@@ -628,6 +628,7 @@ export const createNotifications = async (notification) => {
 
 export const updateNotifications = async (id, notification) => {
     const { subject, message, photo, photo_id, restaurant_id } = notification;
+    console.log(notification)
     let fd = new FormData();
     fd.append("notification[subject]", subject)
     fd.append("notification[message]", message)

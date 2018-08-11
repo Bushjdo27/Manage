@@ -39,13 +39,13 @@ class CreateNotification extends Component {
         const data = {
             subject,
             message,
-            restaurant_id,
+            restaurant_id: parseInt(restaurant_id , 10),
             photo: e.target.elements.photo.files[0]
         }
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             if (!checkDataRequest(data)) {
-                this.props.dispatch(updateNotification(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateNotification(this.props.data.id, {...data , photo_id: this.props.data.photo.id})).then(() => { this.props.back() })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
             }
