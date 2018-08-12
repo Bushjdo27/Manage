@@ -561,7 +561,7 @@ export const deleteRestaurantEmails = async (id) => {
 export const getListUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/users')
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
@@ -570,14 +570,14 @@ export const createUsers = async (user) => {
     console.log(user)
     //const resId = parseInt(restaurant_id, 10)
     const fd = new FormData();
-    fd.append("user[nickname]", "nick name 1");
-    fd.append("user[name]", "name 1");
-    fd.append("user[phone]", "1234654");
-    fd.append("user[address_attributes][address]", "tokyo");
+    fd.append("user[nickname]", nickname);
+    fd.append("user[name]", name);
+    fd.append("user[phone]", phone);
+    fd.append("user[address_attributes][address]", address);
     fd.append("user[restaurant_users_attributes][0][role]", "admin");
-    fd.append("user[restaurant_users_attributes][0][restaurant_id]", 6);
-    fd.append("user[email]", "a@gmail.com");
-    fd.append("user[password]", "123456");
+    fd.append("user[restaurant_users_attributes][0][restaurant_id]", restaurant_id);
+    fd.append("user[email]", email);
+    fd.append("user[password]", password);
 
     //console.log(fd)
     const result = await Api('post', '/users', fd);
@@ -589,11 +589,11 @@ export const updateUsers = async (id, user) => {
     //const { nickname, name, phone, address, address_id, email, password } = user;
     const { nickname, name, phone, address, address_id } = user;
     const fd = new FormData();
-    fd.append("user[nickname]", nickname);
-    fd.append("user[name]", name);
-    fd.append("user[phone]", phone);
-    fd.append("user[address_attributes][id]", address_id);
-    fd.append("user[address_attributes][address]", address);
+    fd.append("user[nickname]", "Joker 9999");
+    fd.append("user[name]", "Joker 999");
+    fd.append("user[phone]", "123456798");
+    fd.append("user[address_attributes][address]", "tphcm");
+    fd.append("user[address_attributes][id]", 187);
 
     const result = await Api('patch', `/users/${id}`, fd);
     //console.log(result)

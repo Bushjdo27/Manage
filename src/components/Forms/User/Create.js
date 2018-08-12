@@ -12,7 +12,6 @@ class CreateUser extends Component {
             name: props.data ? props.data.name : "",
             phone: props.data ? props.data.phone : "",
             address: "",
-            role: "",
             restaurant_id: 0,
             email: props.data ? props.data.email : "",
             password: "",
@@ -37,12 +36,6 @@ class CreateUser extends Component {
         const value = e.target.value;
         this.setState(() => ({ address: value }))
     }
-
-    handleChangeRole = (e) => {
-        const value = e.target.value;
-        console.log(value)
-        this.setState(() => ({ role: value }))
-    }
     handleChangeRestaurantID = (e) => {
         const value = e.target.value;
         this.setState(() => ({ restaurant_id: value }))
@@ -60,14 +53,15 @@ class CreateUser extends Component {
         e.preventDefault();
         console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
-        const { nickname, name, phone, address, role, restaurant_id, email, password } = this.state;
+        const { nickname, name, phone, address, restaurant_id, email, password } = this.state;
         const data = { nickname, name, phone, address, restaurant_id: parseInt(restaurant_id, 10), email, password }
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            if (!checkDataRequest(data)) {
+            const updateData = {...data , address_id: parseInt(this.props.data.address.id,10) , address: this.props.data.address.address}
+            if (!checkDataRequest(updateData)) {
 
-                this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateUser(this.props.data.id, updateData)).then(() => { this.props.back() })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -113,16 +107,7 @@ class CreateUser extends Component {
                         <label>Address <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Address" value={address} onChange={this.handleChangeAddress} />
                     </div>
-                    <div className="form__group">
-                        <label>Role <span style={{ color: 'red' }}>* :</span> </label>
-                        <select className="input" onChange={this.handleChangeRole}>
-                            <option value="">Select Role</option>
-                            <option value="0">Super Admin</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Customer</option>
-
-                        </select>
-                    </div>
+                    
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
                         <select className="input" onChange={this.handleChangeRestaurantID}>
