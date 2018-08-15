@@ -589,11 +589,11 @@ export const updateUsers = async (id, user) => {
     //const { nickname, name, phone, address, address_id, email, password } = user;
     const { nickname, name, phone, address, address_id } = user;
     const fd = new FormData();
-    fd.append("user[nickname]", "Joker 9999");
-    fd.append("user[name]", "Joker 999");
-    fd.append("user[phone]", "123456798");
-    fd.append("user[address_attributes][address]", "tphcm");
-    fd.append("user[address_attributes][id]", 187);
+    fd.append("user[nickname]", nickname);
+    fd.append("user[name]", name);
+    fd.append("user[phone]", phone);
+    fd.append("user[address_attributes][id]", address_id);
+    fd.append("user[address_attributes][address]", address);
 
     const result = await Api('patch', `/users/${id}`, fd);
     //console.log(result)

@@ -225,14 +225,7 @@ class AdminTable extends Component {
 
 
                         <td>{res.total_price}</td>
-                        <td>
-                            <Link to={`/order_foods/${res.id}/`}>
-                                Edit
-                            </Link>
-                        </td>
-                        {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
-                        }
+                        
                     </tr>
                 )
             })
@@ -493,7 +486,9 @@ class AdminTable extends Component {
                     <thead>
                         <tr>
                             {this.renderTableHead()}
-                            <td colSpan="2">Control</td>
+                            {
+                                this.props.type !== 'Order' && <td colSpan="2">Control</td>
+                            }
                         </tr>
                     </thead>
                     <tfoot>
@@ -517,3 +512,13 @@ class AdminTable extends Component {
 
 
 export default connect()(AdminTable);
+/*
+<td>
+    <Link to={`/order_foods/${res.id}/`}>
+        Edit
+    </Link>
+</td>
+{
+    (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
+}
+                        */
