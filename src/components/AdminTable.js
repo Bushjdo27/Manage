@@ -13,7 +13,7 @@ import { deleteOrderFood } from '../actions/orderFoodAction'
 import { deleteOrder } from '../actions/orderActions'
 import { connect } from 'react-redux';
 import { ManageStorage } from '../utils';
-import { RESTAURANTS, FOODS, ORDERS, DELETE } from '../actions/constantType';
+import { RESTAURANTS, FOODS, ORDERS, DELETE , RESTAURANT_EMAILS} from '../actions/constantType';
 import SpinnerDelete from './SpinnerDelete'
 import Spinner from './Spinner'
 class AdminTable extends Component {
@@ -460,7 +460,7 @@ class AdminTable extends Component {
                 this.props.dispatch(deleteRestaurantUser(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'Restaurant_Email':
-                this.props.dispatch(deleteRestaurantEmail(id)).then(() => { this.setState(() => ({ clickDelete: false })) })
+                this.props.dispatch(deleteRestaurantEmail(id)).then(() => { ManageStorage(RESTAURANT_EMAILS, DELETE, { id }); this.setState(() => ({ clickDelete: false })) })
                 break;
             case 'User':
                 this.props.dispatch(deleteUser(id)).then(() => { this.setState(() => ({ clickDelete: false })) })

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { ManageStorage } from '../utils'
-import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL } from '../actions/constantType';
+import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL , RESTAURANT_EMAILS , RESTAURANT_EMAIL_ALL} from '../actions/constantType';
 import { connect } from 'react-redux';
 import { getListRestaurant } from '../actions/resActions';
 import { getFoods } from '../actions/foodActions';
 import { getListOrder } from '../actions/orderActions';
+import { getListRestaurantEmail } from '../actions/restaurantEmailActions'
 import { isLogin } from '../utils'
 class Header extends Component {
 
 
     componentDidMount() {
         if (isLogin()) {
-            this.handleLoadRestaurants().then(this.handleLoadFoods).then(this.handleLoadOrder)
+            this.handleLoadRestaurants().then(this.handleLoadFoods).then(this.handleLoadOrder).then(this.handleLoadRestaurantEmail)
         }
 
     }
@@ -62,6 +63,19 @@ class Header extends Component {
         }
     }
 
+    handleLoadRestaurantEmail = async ()=>{
+        if (ManageStorage(RESTAURANT_EMAILS, GET)) {
+            const payload = ManageStorage(RESTAURANT_EMAILS, GET)
+            //console.log("data come back from ")
+            this.props.dispatch({ type: RESTAURANT_EMAIL_ALL, payload })
+        } else {
+            //console.log("in else , prepare call api")
+            this.props.dispatch(getListRestaurantEmail()).then(data => {
+                //console.log(data)
+                ManageStorage(RESTAURANT_EMAILS, NEW, data)
+            })
+        }
+    }
 
 
     render() {

@@ -60,8 +60,12 @@ class CreateUser extends Component {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
             const updateData = {...data , address_id: parseInt(this.props.data.address.id,10) , address: this.props.data.address.address}
             if (!checkDataRequest(updateData)) {
-
-                this.props.dispatch(updateUser(this.props.data.id, updateData)).then(() => { this.props.back() })
+                if(!this.validateEmails()){
+                    this.props.dispatch(updateUser(this.props.data.id, updateData)).then(() => { this.props.back() })
+                }else{
+                    this.setState(() => ({ clickSumit: false, error: true }))
+                }
+                
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -69,8 +73,12 @@ class CreateUser extends Component {
         } else {
             // this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
-
-                this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
+                if(!this.validateEmails()){
+                    this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
+                }else{
+                    this.setState(() => ({ clickSumit: false, error: true }))
+                }
+                
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -82,6 +90,27 @@ class CreateUser extends Component {
             return this.props.Restaurants.map((item, index) => {
                 return <option key={index} value={item.id}>{item.name}</option>
             })
+        }
+    }
+
+    validateEmails = () =>{
+        const {Emails , Users} = this.props;
+        const {email} = this.state;
+        const listEmails = []
+        if(Emails.length > 0 && Users.length > 0){
+            Users.forEach((item)=>{
+                listEmails.push(item.email)
+            })
+            Emails.forEach((item)=>{
+                listEmails.push(item.email)
+            })
+
+            const find = listEmails.find((item)=> item === email)
+            if(find > -1){
+                return true
+            }
+            return false;
+
         }
     }
 
@@ -138,7 +167,9 @@ class CreateUser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Restaurants: state.Restaurants
+        Restaurants: state.Restaurants,
+        Emails: state.Restaurant_Email,
+        Users: state.Users
     }
 }
 export default connect(mapStateToProps)(CreateUser)

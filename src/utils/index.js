@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS } from '../actions/constantType';
+import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS ,RESTAURANT_EMAILS } from '../actions/constantType';
 import moment from 'moment'
 const corsURL = "https://cors-anywhere.herokuapp.com/";
 
@@ -670,6 +670,7 @@ export const signOut = () => {
     localStorage.removeItem(RESTAURANTS)
     localStorage.removeItem(FOODS)
     localStorage.removeItem(ORDERS)
+    localStorage.removeItem(RESTAURANT_EMAILS)
 }
 
 

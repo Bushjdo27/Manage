@@ -17,7 +17,8 @@ import {
 export const getListRestaurantEmail = () => {
     return async (dispatch) => {
         let payload = await getListRestaurantEmails();
-        checkErrorResponse(payload, RESTAURANT_EMAIL_ALL, dispatch)
+        checkErrorResponse(payload, RESTAURANT_EMAIL_ALL, dispatch);
+        return payload.data
     }
 }
 
@@ -25,6 +26,7 @@ export const createRestaurantEmail = (data) => {
     return async (dispatch) => {
         let payload = await createRestaurantEmails(data);
         checkErrorResponse(payload, RESTAURANT_EMAIL_ADD, dispatch)
+        return payload.data
     }
 }
 
@@ -32,6 +34,7 @@ export const updateRestaurantEmail = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurantEmails(id, data);
         checkErrorResponse(payload, RESTAURANT_EMAIL_UPDATE, dispatch)
+        return payload.data
     }
 }
 

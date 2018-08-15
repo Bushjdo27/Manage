@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantEmail, updateRestaurantEmail } from '../../../actions/restaurantEmailActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest , ManageStorage} from '../../../utils'
+import {RESTAURANT_EMAILS , UPDATE ,CREATE} from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 //checked
 class CreateRestaurantEmail extends Component {
@@ -39,7 +40,10 @@ class CreateRestaurantEmail extends Component {
             //this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then((res) => { 
+                    ManageStorage(RESTAURANT_EMAILS, UPDATE, res)
+                    this.props.back() 
+                })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -48,7 +52,10 @@ class CreateRestaurantEmail extends Component {
             //this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createRestaurantEmail(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createRestaurantEmail(data)).then((res) => { 
+                    ManageStorage(RESTAURANT_EMAILS, CREATE, res)
+                    this.props.hideCreate() 
+                })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
