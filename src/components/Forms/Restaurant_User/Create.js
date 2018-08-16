@@ -18,7 +18,9 @@ class CreateRestaurantUser extends Component {
     }
 
     handleUserIDChange = (e) => {
-        const value = e.target.value;
+        const element = e.target.value;
+        const value = parseInt(element, 10)
+        console.log(value)
         this.setState(() => ({ user_id: value }))
     }
 
@@ -63,14 +65,26 @@ class CreateRestaurantUser extends Component {
             })
         }
     }
+
+    renderUserOptions = () => {
+        if (this.props.Users.length > 0) {
+            return this.props.Users.map((item, index) => {
+                return <option key={index} value={item.id}>{item.email}</option>
+            })
+        }
+    }
     render() {
-        const { user_id, clickSumit, error } = this.state
+        const { clickSumit, error } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
-                        <label>User ID <span style={{ color: 'red' }}>* :</span> </label>
-                        <input className="input" onChange={this.handleUserIDChange} name="user_id" value={user_id} type="number" placeholder="User ID" />
+                        <label>User <span style={{ color: 'red' }}>* :</span> </label>
+
+                        <select className="input" onChange={this.handleUserIDChange}>
+                            <option value="">Select User</option>
+                            {this.renderUserOptions()}
+                        </select>
                     </div>
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
@@ -95,9 +109,12 @@ class CreateRestaurantUser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Restaurants: state.Restaurants
+        Restaurants: state.Restaurants,
+        Users: state.Users
     }
 }
 
 
 export default connect(mapStateToProps)(CreateRestaurantUser)
+
+//<input className="input" onChange={this.handleUserIDChange} name="user_id" value={user_id} type="number" placeholder="User ID" />

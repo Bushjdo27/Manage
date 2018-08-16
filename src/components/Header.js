@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { ManageStorage } from '../utils'
-import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL , RESTAURANT_EMAILS , RESTAURANT_EMAIL_ALL} from '../actions/constantType';
+import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL, RESTAURANT_EMAILS, RESTAURANT_EMAIL_ALL, USER_RESTAURANT, USERS_ALL } from '../actions/constantType';
 import { connect } from 'react-redux';
 import { getListRestaurant } from '../actions/resActions';
 import { getFoods } from '../actions/foodActions';
 import { getListOrder } from '../actions/orderActions';
 import { getListRestaurantEmail } from '../actions/restaurantEmailActions'
+import { getListUser } from '../actions/userActions'
 import { isLogin } from '../utils'
 class Header extends Component {
 
 
     componentDidMount() {
         if (isLogin()) {
-            this.handleLoadRestaurants().then(this.handleLoadFoods).then(this.handleLoadOrder).then(this.handleLoadRestaurantEmail)
+            this.handleLoadRestaurants()
+                .then(this.handleLoadFoods)
+                .then(this.handleLoadOrder)
+                .then(this.handleLoadRestaurantEmail)
+                .then(this.handleLoadUsers)
         }
 
     }
@@ -63,7 +68,7 @@ class Header extends Component {
         }
     }
 
-    handleLoadRestaurantEmail = async ()=>{
+    handleLoadRestaurantEmail = async () => {
         if (ManageStorage(RESTAURANT_EMAILS, GET)) {
             const payload = ManageStorage(RESTAURANT_EMAILS, GET)
             //console.log("data come back from ")
@@ -73,6 +78,20 @@ class Header extends Component {
             this.props.dispatch(getListRestaurantEmail()).then(data => {
                 //console.log(data)
                 ManageStorage(RESTAURANT_EMAILS, NEW, data)
+            })
+        }
+    }
+
+    handleLoadUsers = async () => {
+        if (ManageStorage(USER_RESTAURANT, GET)) {
+            const payload = ManageStorage(USER_RESTAURANT, GET)
+            //console.log("data come back from ")
+            this.props.dispatch({ type: USERS_ALL, payload })
+        } else {
+            //console.log("in else , prepare call api")
+            this.props.dispatch(getListUser()).then(data => {
+                //console.log(data)
+                ManageStorage(USER_RESTAURANT, NEW, data)
             })
         }
     }

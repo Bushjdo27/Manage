@@ -13,7 +13,7 @@ import { deleteOrderFood } from '../actions/orderFoodAction'
 import { deleteOrder } from '../actions/orderActions'
 import { connect } from 'react-redux';
 import { ManageStorage } from '../utils';
-import { RESTAURANTS, FOODS, ORDERS, DELETE , RESTAURANT_EMAILS} from '../actions/constantType';
+import { RESTAURANTS, FOODS, ORDERS, DELETE, RESTAURANT_EMAILS } from '../actions/constantType';
 import SpinnerDelete from './SpinnerDelete'
 import Spinner from './Spinner'
 class AdminTable extends Component {
@@ -139,7 +139,7 @@ class AdminTable extends Component {
         let result = [];
         data.forEach((item) => {
             for (let i = 0; i < item.order_foods.length; i++) {
-                console.log(item.order_foods[i])
+                //console.log(item.order_foods[i])
                 result.push({ data: item.order_foods[i] })
             }
         })
@@ -154,7 +154,7 @@ class AdminTable extends Component {
 
             item.order_foods.forEach((option) => {
                 for (let j = 0; j < option.order_food_options.length; j++) {
-                    console.log(option.order_food_options[j])
+                    //console.log(option.order_food_options[j])
                     result.push({ data: option.order_food_options[j] })
                 }
 
@@ -225,7 +225,7 @@ class AdminTable extends Component {
 
 
                         <td>{res.total_price}</td>
-                        
+
                     </tr>
                 )
             })
@@ -367,9 +367,7 @@ class AdminTable extends Component {
                                 Edit
                             </Link>
                         </td>
-                        {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
-                        }
+
                     </tr>
                 )
             })

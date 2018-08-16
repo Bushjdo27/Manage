@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS ,RESTAURANT_EMAILS } from '../actions/constantType';
+import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS, RESTAURANT_EMAILS, USER_RESTAURANT } from '../actions/constantType';
 import moment from 'moment'
 const corsURL = "https://cors-anywhere.herokuapp.com/";
 
@@ -561,13 +561,13 @@ export const deleteRestaurantEmails = async (id) => {
 export const getListUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/users')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
 export const createUsers = async (user) => {
     const { nickname, name, phone, address, email, password, restaurant_id } = user;
-    console.log(user)
+    //console.log(user)
     //const resId = parseInt(restaurant_id, 10)
     const fd = new FormData();
     fd.append("user[nickname]", nickname);
@@ -607,7 +607,7 @@ export const getListNotifications = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/notifications');
 
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -628,7 +628,7 @@ export const createNotifications = async (notification) => {
 
 export const updateNotifications = async (id, notification) => {
     const { subject, message, photo, photo_id, restaurant_id } = notification;
-    console.log(notification)
+    //console.log(notification)
     let fd = new FormData();
     fd.append("notification[subject]", subject)
     fd.append("notification[message]", message)
@@ -671,6 +671,7 @@ export const signOut = () => {
     localStorage.removeItem(FOODS)
     localStorage.removeItem(ORDERS)
     localStorage.removeItem(RESTAURANT_EMAILS)
+    localStorage.removeItem(USER_RESTAURANT)
 }
 
 

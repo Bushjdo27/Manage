@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createUser, updateUser } from '../../../actions/userActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest, ManageStorage } from '../../../utils'
+import { USER_RESTAURANT, UPDATE, CREATE } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 class CreateUser extends Component {
 
@@ -17,6 +18,7 @@ class CreateUser extends Component {
             password: "",
             error: false,
             clickSumit: false,
+            isTaken: false
         }
     }
 
@@ -51,21 +53,24 @@ class CreateUser extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create payment')
+        //console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         const { nickname, name, phone, address, restaurant_id, email, password } = this.state;
         const data = { nickname, name, phone, address, restaurant_id: parseInt(restaurant_id, 10), email, password }
-        this.setState(() => ({ clickSumit: true, error: false }))
+        this.setState(() => ({ clickSumit: true, error: false, isTaken: false }))
         if (this.props.data) {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            const updateData = {...data , address_id: parseInt(this.props.data.address.id,10) , address: this.props.data.address.address}
+            const updateData = { ...data, address_id: parseInt(this.props.data.address.id, 10), address: this.props.data.address.address }
             if (!checkDataRequest(updateData)) {
-                if(!this.validateEmails()){
-                    this.props.dispatch(updateUser(this.props.data.id, updateData)).then(() => { this.props.back() })
-                }else{
-                    this.setState(() => ({ clickSumit: false, error: true }))
+                if (!this.validateEmails()) {
+                    this.props.dispatch(updateUser(this.props.data.id, updateData)).then((res) => {
+                        ManageStorage(USER_RESTAURANT, UPDATE, res)
+                        this.props.back()
+                    })
+                } else {
+                    this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }
-                
+
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -73,12 +78,16 @@ class CreateUser extends Component {
         } else {
             // this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
-                if(!this.validateEmails()){
-                    this.props.dispatch(createUser(data)).then(() => { this.props.hideCreate() })
-                }else{
-                    this.setState(() => ({ clickSumit: false, error: true }))
+                if (!this.validateEmails()) {
+                    //console.log("email has been taken")
+                    this.props.dispatch(createUser(data)).then((res) => {
+                        ManageStorage(USER_RESTAURANT, CREATE, res)
+                        this.props.hideCreate()
+                    })
+                } else {
+                    this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }
-                
+
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -93,20 +102,21 @@ class CreateUser extends Component {
         }
     }
 
-    validateEmails = () =>{
-        const {Emails , Users} = this.props;
-        const {email} = this.state;
+    validateEmails = () => {
+        const { Emails, Users } = this.props;
+        const { email } = this.state;
         const listEmails = []
-        if(Emails.length > 0 && Users.length > 0){
-            Users.forEach((item)=>{
+        if (Emails.length > 0 && Users.length > 0) {
+            Users.forEach((item) => {
                 listEmails.push(item.email)
             })
-            Emails.forEach((item)=>{
+            Emails.forEach((item) => {
                 listEmails.push(item.email)
             })
-
-            const find = listEmails.find((item)=> item === email)
-            if(find > -1){
+            // console.log(listEmails)
+            // console.log(email)
+            const find = listEmails.findIndex((item) => item === email)
+            if (find > -1) {
                 return true
             }
             return false;
@@ -116,7 +126,7 @@ class CreateUser extends Component {
 
 
     render() {
-        const { nickname, name, phone, address, email, password, clickSumit, error } = this.state;
+        const { nickname, name, phone, address, email, password, clickSumit, error, isTaken } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -136,7 +146,7 @@ class CreateUser extends Component {
                         <label>Address <span style={{ color: 'red' }}>* :</span> </label>
                         <input className="input" name="resID" type="text" placeholder="Address" value={address} onChange={this.handleChangeAddress} />
                     </div>
-                    
+
                     <div className="form__group">
                         <label>Restaurant <span style={{ color: 'red' }}>* :</span> </label>
                         <select className="input" onChange={this.handleChangeRestaurantID}>
@@ -153,6 +163,7 @@ class CreateUser extends Component {
                         <input className="input" name="resID" type="password" placeholder="Password" value={password} onChange={this.handleChangePassword} />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {isTaken && <p className="error-label">This email has been taken</p>}
 
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit User' : 'Create User'}</button>

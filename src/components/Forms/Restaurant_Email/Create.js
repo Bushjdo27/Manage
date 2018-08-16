@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantEmail, updateRestaurantEmail } from '../../../actions/restaurantEmailActions'
 import { connect } from 'react-redux';
-import { checkDataRequest , ManageStorage} from '../../../utils'
-import {RESTAURANT_EMAILS , UPDATE ,CREATE} from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage } from '../../../utils'
+import { RESTAURANT_EMAILS, UPDATE, CREATE } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 //checked
 class CreateRestaurantEmail extends Component {
@@ -14,6 +14,7 @@ class CreateRestaurantEmail extends Component {
             restaurant_id: props.data ? props.data.restaurant_id : 0,
             error: false,
             clickSumit: false,
+            isTaken: false
         }
     }
 
@@ -40,10 +41,17 @@ class CreateRestaurantEmail extends Component {
             //this.props.dispatch(updateRestaurantEmail(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then((res) => { 
-                    ManageStorage(RESTAURANT_EMAILS, UPDATE, res)
-                    this.props.back() 
-                })
+
+                if (!this.validateEmails()) {
+                    //console.log("email has been taken")
+
+                    this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then((res) => {
+                        ManageStorage(RESTAURANT_EMAILS, UPDATE, res)
+                        this.props.back()
+                    })
+                } else {
+                    this.setState(() => ({ clickSumit: false, isTaken: true }))
+                }
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -52,10 +60,17 @@ class CreateRestaurantEmail extends Component {
             //this.props.dispatch(createRestaurantEmail(this.state)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createRestaurantEmail(data)).then((res) => { 
-                    ManageStorage(RESTAURANT_EMAILS, CREATE, res)
-                    this.props.hideCreate() 
-                })
+
+                if (!this.validateEmails()) {
+                    //console.log("email has been taken")
+
+                    this.props.dispatch(createRestaurantEmail(data)).then((res) => {
+                        ManageStorage(RESTAURANT_EMAILS, CREATE, res)
+                        this.props.hideCreate()
+                    })
+                } else {
+                    this.setState(() => ({ clickSumit: false, isTaken: true }))
+                }
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -70,8 +85,29 @@ class CreateRestaurantEmail extends Component {
             })
         }
     }
+    validateEmails = () => {
+        const { Emails, Users } = this.props;
+        const { email } = this.state;
+        const listEmails = []
+        if (Emails.length > 0 && Users.length > 0) {
+            Users.forEach((item) => {
+                listEmails.push(item.email)
+            })
+            Emails.forEach((item) => {
+                listEmails.push(item.email)
+            })
+            // console.log(listEmails)
+            // console.log(email)
+            const find = listEmails.findIndex((item) => item === email)
+            if (find > -1) {
+                return true
+            }
+            return false;
+
+        }
+    }
     render() {
-        const { email, clickSumit, error } = this.state;
+        const { email, clickSumit, error, isTaken } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -88,7 +124,7 @@ class CreateRestaurantEmail extends Component {
                     </div>
 
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-
+                    {isTaken && <p className="error-label">This email has been taken</p>}
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
                     }
@@ -103,7 +139,9 @@ class CreateRestaurantEmail extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Restaurants: state.Restaurants
+        Restaurants: state.Restaurants,
+        Emails: state.Restaurant_Email,
+        Users: state.Users
     }
 }
 
