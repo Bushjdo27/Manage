@@ -25,7 +25,8 @@ class CreateRestaurantUser extends Component {
     }
 
     handleRestIdChange = (e) => {
-        const value = e.target.value;
+        const element = e.target.value;
+        const value = parseInt(element, 10)
         this.setState(() => ({ restaurant_id: value }))
 
     }
@@ -35,7 +36,9 @@ class CreateRestaurantUser extends Component {
         console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
         const { user_id, restaurant_id } = this.state;
+        console.log(this.state)
         const data = { user_id, restaurant_id };
+
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             //this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })

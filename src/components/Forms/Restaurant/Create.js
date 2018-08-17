@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../../../actions/resActions'
-import { checkDataRequest , ManageStorage} from '../../../utils';
-import { RESTAURANTS , UPDATE , CREATE} from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage } from '../../../utils';
+import { RESTAURANTS, UPDATE, CREATE } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 
 class CreateRestaurant extends Component {
@@ -95,13 +95,13 @@ class CreateRestaurant extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const type = typeof e.target.elements.photo.files[0];
-        const { name , fbUrl , ytUrl , instaUrl , address , phone } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone } = this.state;
         console.log(type !== null)
         console.log(type)
-        this.setState(() => ({ clickSumit: true ,error:false})) 
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
-                name ,
+                name,
                 fbUrl,
                 ytUrl,
                 instaUrl,
@@ -111,45 +111,46 @@ class CreateRestaurant extends Component {
                 icon: e.target.elements.icon.files[0],
                 address_id: this.props.data.address.id,
                 photo_id: this.props.data.bg_photo.id,
-                icon_id: this.props.data.icon.id 
+                icon_id: this.props.data.icon.id
             }
-            if(!checkDataRequest(data)){
+            if (!checkDataRequest(data)) {
+                console.log(data)
                 this.props.dispatch(updateRestaurant(this.props.data.id, data)).then((res) => {
-                    ManageStorage(RESTAURANTS , UPDATE ,res) 
-                    this.props.back() 
+                    ManageStorage(RESTAURANTS, UPDATE, res)
+                    this.props.back()
                 })
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
-            
+
         } else {
             //this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
             console.log("Creating")
             const data = {
-                name ,
+                name,
                 fbUrl,
                 ytUrl,
                 instaUrl,
                 address,
                 phone,
                 photo: e.target.elements.photo.files[0],
-                icon: e.target.elements.icon.files[0] 
+                icon: e.target.elements.icon.files[0]
             }
-            if(!checkDataRequest(data)){
+            if (!checkDataRequest(data)) {
                 console.log("requesting")
-                this.props.dispatch(createRestaurant(data)).then((res) => { 
-                    ManageStorage(RESTAURANTS , CREATE ,res) 
-                    this.props.hideCreate() 
+                this.props.dispatch(createRestaurant(data)).then((res) => {
+                    ManageStorage(RESTAURANTS, CREATE, res)
+                    this.props.hideCreate()
                 })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit ,error } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit, error } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -193,7 +194,7 @@ class CreateRestaurant extends Component {
                         <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>
                     }

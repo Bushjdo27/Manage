@@ -33,6 +33,7 @@ export const createRestaurant = (data) => {
 export const updateRestaurant = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurants(id, data);
+        console.log(payload)
         checkErrorResponse(payload, RESTAURANT_UPDATE, dispatch)
         return payload.data
     }

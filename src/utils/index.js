@@ -54,7 +54,7 @@ export const updateRestaurants = async (id, data = {}) => {
     fd.append("restaurant[icon_attributes][photo]", icon);
     try {
         const result = await Api('patch', `/restaurants/${id}`, fd)
-        //console.log(result)
+        console.log(result)
         return result;
     } catch (e) {
         // console.log(e.getMessage)
@@ -494,12 +494,13 @@ export const getListRestaurantUsers = async () => {
 
 export const createRestaurantUsers = async (resUser) => {
     const { user_id, restaurant_id } = resUser;
+    console.log(resUser)
     const fd = new FormData();
     fd.append("restaurant_user[user_id]", user_id);
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
 
     const result = await Api('post', '/restaurant_users', fd);
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
