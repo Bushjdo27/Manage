@@ -204,7 +204,7 @@ class AdminTable extends Component {
                             </p>
                             <p>
                                 <strong>Food : </strong>
-                                <span>{foods[index] && foods[index].data.food_id}</span>
+                                <span>{foods[index] && foods[index].data.food.name}</span>
                             </p>
                         </td>
 
@@ -213,7 +213,7 @@ class AdminTable extends Component {
                                 <div>
                                     <p>
                                         <strong>Name : </strong>
-                                        <span>{options[index] && options[index].data.food_option_id}</span>
+                                        <span>{options[index] && options[index].data.food_option.name}</span>
                                     </p>
                                     <p>
                                         <strong>Price : </strong>
