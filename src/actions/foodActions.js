@@ -11,7 +11,10 @@ export const getFoods = () => {
     return async (dispatch) => {
         let payload = await getListFoods();
         checkErrorResponse(payload, FOOD_ALL, dispatch)
-        return payload.data
+        if (payload.data) {
+            return payload.data
+        }
+        throw Error()
     }
 }
 
@@ -20,7 +23,10 @@ export const createFood = (data) => {
         let payload = await createFoods(data);
         checkErrorResponse(payload, FOOD_ADD, dispatch)
         console.log(payload.data)
-        return payload.data
+        if (payload.data) {
+            return payload.data
+        }
+        throw Error()
     }
 }
 
@@ -28,7 +34,10 @@ export const updateFood = (id, data) => {
     return async (dispatch) => {
         let payload = await updateFoods(id, data);
         checkErrorResponse(payload, FOOD_UPDATE, dispatch)
-        return payload.data
+        if (payload.data) {
+            return payload.data
+        }
+        throw Error()
     }
 }
 

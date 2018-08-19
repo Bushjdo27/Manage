@@ -18,7 +18,10 @@ export const getListOrder = () => {
     return async (dispatch) => {
         let payload = await getListOrders();
         checkErrorResponse(payload, ORDER_ALL, dispatch);
-        return payload.data
+        if (payload.data) {
+            return payload.data
+        }
+        throw Error()
     }
 }
 

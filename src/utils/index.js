@@ -10,7 +10,7 @@ export const getListRestaurants = async () => {
     //console.log("fetching data")
     const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/restaurants`)
     //console.log(result);
-    //console.log(result)
+    console.log(result.data)
     return result;
 }
 
