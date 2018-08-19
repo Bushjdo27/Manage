@@ -18,6 +18,10 @@ export const getListRestaurantUser = () => {
     return async (dispatch) => {
         let payload = await getListRestaurantUsers();
         checkErrorResponse(payload, RESTAURANT_USER_ALL, dispatch)
+        if (payload) {
+            return payload.data
+        }
+        throw new Error();
     }
 }
 
@@ -25,6 +29,10 @@ export const createRestaurantUser = (data) => {
     return async (dispatch) => {
         let payload = await createRestaurantUsers(data);
         checkErrorResponse(payload, RESTAURANT_USER_ADD, dispatch)
+        if (payload) {
+            return payload.data
+        }
+        throw new Error();
     }
 }
 
@@ -32,6 +40,10 @@ export const updateRestaurantUser = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurantUsers(id, data);
         checkErrorResponse(payload, RESTAURANT_USER_UPDATE, dispatch)
+        if (payload) {
+            return payload.data
+        }
+        throw new Error();
     }
 }
 

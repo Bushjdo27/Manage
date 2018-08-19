@@ -227,10 +227,31 @@ body {
           font-weight: bold; }
       .admin__data table tbody tr td:last-child {
         cursor: pointer;
-        transition: all .2s; }
+        transition: all .2s;
+        display: block;
+        height: 2rem;
+        width: 9rem;
+        margin: 0 auto; }
         .admin__data table tbody tr td:last-child:hover {
           color: #EAA750;
           font-weight: bold; }
+      .admin__data table tbody tr td:last-child.total {
+        cursor: pointer;
+        -webkit-transition: all .2s;
+        -o-transition: all .2s;
+        transition: all .2s;
+        display: block;
+        height: 8rem;
+        width: 10rem;
+        margin: 0 auto;
+        position: relative; }
+        .admin__data table tbody tr td:last-child.total .total_price {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.8rem;
+          color: #EAA750; }
       .admin__data table tbody tr td.spinDel {
         display: inline-block;
         width: 3.2rem; }

@@ -18,10 +18,10 @@ export const getListRestaurantEmail = () => {
     return async (dispatch) => {
         let payload = await getListRestaurantEmails();
         checkErrorResponse(payload, RESTAURANT_EMAIL_ALL, dispatch);
-        if (payload.data) {
+        if (payload) {
             return payload.data
         }
-        throw Error()
+        throw new Error();
     }
 }
 
@@ -29,10 +29,10 @@ export const createRestaurantEmail = (data) => {
     return async (dispatch) => {
         let payload = await createRestaurantEmails(data);
         checkErrorResponse(payload, RESTAURANT_EMAIL_ADD, dispatch)
-        if (payload.data) {
+        if (payload) {
             return payload.data
         }
-        throw Error()
+        throw new Error();
     }
 }
 
@@ -40,10 +40,10 @@ export const updateRestaurantEmail = (id, data) => {
     return async (dispatch) => {
         let payload = await updateRestaurantEmails(id, data);
         checkErrorResponse(payload, RESTAURANT_EMAIL_UPDATE, dispatch)
-        if (payload.data) {
+        if (payload) {
             return payload.data
         }
-        throw Error()
+        throw new Error();
     }
 }
 

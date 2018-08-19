@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import { ManageStorage } from '../utils'
-import { GET, NEW, RESTAURANT_ALL, FOODS, RESTAURANTS, FOOD_ALL, ORDERS, ORDER_ALL, RESTAURANT_EMAILS, RESTAURANT_EMAIL_ALL, USER_RESTAURANT, USERS_ALL } from '../actions/constantType';
+import {
+    GET,
+    NEW,
+    RESTAURANT_ALL,
+    FOODS,
+    RESTAURANTS,
+    FOOD_ALL,
+    ORDERS,
+    ORDER_ALL,
+    RESTAURANT_EMAILS,
+    RESTAURANT_EMAIL_ALL,
+    USER_RESTAURANT,
+    USERS_ALL,
+    LIST_ADMIN,
+    RESTAURANT_USER_ALL
+} from '../actions/constantType';
 import { connect } from 'react-redux';
 import { getListRestaurant } from '../actions/resActions';
 import { getFoods } from '../actions/foodActions';
 import { getListOrder } from '../actions/orderActions';
 import { getListRestaurantEmail } from '../actions/restaurantEmailActions'
 import { getListUser } from '../actions/userActions'
+import { getListRestaurantUser } from '../actions/restaurantUsersActions'
 import { isLogin } from '../utils'
 class Header extends Component {
 
@@ -18,6 +34,7 @@ class Header extends Component {
                 .then(this.handleLoadOrder)
                 .then(this.handleLoadRestaurantEmail)
                 .then(this.handleLoadUsers)
+                .then(this.handleLoadRestaurantUser)
         }
 
     }
@@ -92,6 +109,20 @@ class Header extends Component {
             this.props.dispatch(getListUser()).then(data => {
                 //console.log(data)
                 ManageStorage(USER_RESTAURANT, NEW, data)
+            })
+        }
+    }
+
+    handleLoadRestaurantUser = async () => {
+        if (ManageStorage(LIST_ADMIN, GET)) {
+            const payload = ManageStorage(LIST_ADMIN, GET)
+            //console.log("data come back from ")
+            this.props.dispatch({ type: RESTAURANT_USER_ALL, payload })
+        } else {
+            //console.log("in else , prepare call api")
+            this.props.dispatch(getListRestaurantUser()).then(data => {
+                //console.log(data)
+                ManageStorage(LIST_ADMIN, NEW, data)
             })
         }
     }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS, RESTAURANT_EMAILS, USER_RESTAURANT } from '../actions/constantType';
+import { HEADERS, USER, CREATE, UPDATE, DELETE, GET, NEW, RESTAURANTS, FOODS, ORDERS, RESTAURANT_EMAILS, USER_RESTAURANT, LIST_ADMIN } from '../actions/constantType';
 import moment from 'moment'
 const corsURL = "https://cors-anywhere.herokuapp.com/";
 
@@ -38,26 +38,31 @@ export const createRestaurants = async (data) => {
 export const updateRestaurants = async (id, data = {}) => {
     //console.log(`/restaurants/${id}`);
     const { name, fbUrl, ytUrl, instaUrl, address, address_id, phone, photo, photo_id, icon, icon_id } = data
+    const user = JSON.parse(localStorage.getItem(USER));
     let fd = new FormData();
-    fd.append("restaurant[name]", name);
-    fd.append("restaurant[facebook_url]", fbUrl);
-    fd.append("restaurant[youtube_url]", ytUrl);
-    fd.append("restaurant[instagram_url]", instaUrl);
-    fd.append("restaurant[restaurant_users_attributes][0][role]", "super_admin");
-    fd.append("restaurant[restaurant_users_attributes][0][user_id]", 1);
-    fd.append("restaurant[address_attributes][id]", address_id);
-    fd.append("restaurant[address_attributes][address]", address);
-    fd.append("restaurant[phone]", phone);
-    fd.append("restaurant[bg_photo_attributes][id]", photo_id);
-    fd.append("restaurant[bg_photo_attributes][photo]", photo);
-    fd.append("restaurant[icon_attributes][id]", icon_id);
-    fd.append("restaurant[icon_attributes][photo]", icon);
-    try {
-        const result = await Api('patch', `/restaurants/${id}`, fd)
-        console.log(result)
-        return result;
-    } catch (e) {
-        // console.log(e.getMessage)
+    if (user) {
+        const admin = createUserUpdate(user.id)
+        fd.append("restaurant[name]", name);
+        fd.append("restaurant[facebook_url]", fbUrl);
+        fd.append("restaurant[youtube_url]", ytUrl);
+        fd.append("restaurant[instagram_url]", instaUrl);
+        fd.append("restaurant[restaurant_users_attributes][0][id]", admin.id);
+        fd.append("restaurant[restaurant_users_attributes][0][role]", admin.role);
+        fd.append("restaurant[restaurant_users_attributes][0][user_id]", admin.user_id);
+        fd.append("restaurant[address_attributes][id]", address_id);
+        fd.append("restaurant[address_attributes][address]", address);
+        fd.append("restaurant[phone]", phone);
+        fd.append("restaurant[bg_photo_attributes][id]", photo_id);
+        fd.append("restaurant[bg_photo_attributes][photo]", photo);
+        fd.append("restaurant[icon_attributes][id]", icon_id);
+        fd.append("restaurant[icon_attributes][photo]", icon);
+        try {
+            const result = await Api('patch', `/restaurants/${id}`, fd)
+            console.log(result)
+            return result;
+        } catch (e) {
+            // console.log(e.getMessage)
+        }
     }
 
 }
@@ -488,7 +493,7 @@ export const deletePaymentInfos = async (id) => {
 export const getListRestaurantUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/restaurant_users')
-    //console.log(result)
+    console.log(result)
     return result;
 }
 
@@ -673,6 +678,7 @@ export const signOut = () => {
     localStorage.removeItem(ORDERS)
     localStorage.removeItem(RESTAURANT_EMAILS)
     localStorage.removeItem(USER_RESTAURANT)
+    localStorage.removeItem(LIST_ADMIN)
 }
 
 
@@ -851,4 +857,55 @@ export const checkDataRequest = (obj) => {
     }
     return haveError; // neu co loi se la true
 
+}
+
+export const havePermission = (id, type) => {
+    const user = JSON.parse(localStorage.getItem(USER));
+    const list = JSON.parse(localStorage.getItem(LIST_ADMIN))
+    let result = -1;
+    let permission = false;
+    if (user && list) {
+
+        switch (type) {
+            case 'RESTAURANT':
+                result = list.data.findIndex(item => item.restaurant_id === id && item.user_id === user.id)
+                if (result > -1) {
+                    permission = true
+                } else {
+                    permission = false
+                }
+                break;
+            case 'USER_RES':
+                const listRes = JSON.parse(localStorage.getItem(USER_RESTAURANT))
+                result = listRes.data.findIndex(item => item.uid === user.uid && item.id === user.id)
+                if (result > -1) {
+                    console.log(result)
+                    permission = true
+                } else {
+                    permission = false
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    console.log(permission)
+    return permission;
+}
+
+const createUserUpdate = (id) => {
+    const list = JSON.parse(localStorage.getItem(LIST_ADMIN))
+    let user = {}
+    if (list) {
+        list.data.forEach((item) => {
+            if (item.user_id === id) {
+                user = {
+                    user_id: item.user_id,
+                    id: item.id,
+                    role: item.role
+                }
+            }
+        })
+    }
+    return user
 }

@@ -115,11 +115,35 @@
               &:last-child{
                 cursor: pointer;
                 transition: all .2s;
+                display: block;
+                height: 2rem;
+                width: 9rem;
+                margin: 0 auto;
 
                 &:hover{
                   color: $color-primary;
                   font-weight: bold
                 }
+              }
+              &:last-child.total{
+                cursor: pointer;
+                -webkit-transition: all .2s;
+                -o-transition: all .2s;
+                transition: all .2s;
+                display: block;
+                height: 8rem;
+                width: 10rem;
+                margin: 0 auto;
+                position: relative;
+
+                .total_price {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%,-50%);
+                  font-size: 1.8rem;
+                  color: $color-primary;
+              }
               }
 
               &.spinDel{

@@ -68,7 +68,7 @@ class CreateUser extends Component {
                     this.props.dispatch(updateUser(this.props.data.id, updateData)).then((res) => {
                         ManageStorage(USER_RESTAURANT, UPDATE, res)
                         this.props.back()
-                    })
+                    }).catch(() => { console.log("") })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }
@@ -85,7 +85,7 @@ class CreateUser extends Component {
                     this.props.dispatch(createUser(data)).then((res) => {
                         ManageStorage(USER_RESTAURANT, CREATE, res)
                         this.props.hideCreate()
-                    })
+                    }).catch(() => { console.log("") })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }

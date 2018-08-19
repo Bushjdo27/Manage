@@ -12,8 +12,8 @@ import { deleteNotification } from '../actions/notificationActions'
 import { deleteOrderFood } from '../actions/orderFoodAction'
 import { deleteOrder } from '../actions/orderActions'
 import { connect } from 'react-redux';
-import { ManageStorage } from '../utils';
-import { RESTAURANTS, FOODS, ORDERS, DELETE, RESTAURANT_EMAILS } from '../actions/constantType';
+import { ManageStorage, havePermission } from '../utils';
+import { RESTAURANTS, FOODS, ORDERS, DELETE, RESTAURANT_EMAILS, USER } from '../actions/constantType';
 import SpinnerDelete from './SpinnerDelete'
 import Spinner from './Spinner'
 class AdminTable extends Component {
@@ -45,9 +45,12 @@ class AdminTable extends Component {
                         <td>{res.phone}</td>
                         <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
-                            <Link to={`/restaurant/${res.id}/`}>
-                                Edit
-                            </Link>
+                            {havePermission(res.id, 'RESTAURANT') ?
+                                <Link to={`/restaurant/${res.id}/`}>
+                                    Edit
+                                </Link>
+                                : <span>No Permission</span>}
+
                         </td>
                         {
                             (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
@@ -224,7 +227,11 @@ class AdminTable extends Component {
                         </td>
 
 
-                        <td>{res.total_price}</td>
+                        <td className="total">
+                            <div className="total_price">
+                                <p>$ {res.total_price}</p>
+                            </div>
+                        </td>
 
                     </tr>
                 )
@@ -355,7 +362,8 @@ class AdminTable extends Component {
     }
 
     typeUsers = () => {
-        if (this.props.data.length > 0) {
+        const user = JSON.parse(localStorage.getItem(USER))
+        if (this.props.data.length > 0 && user) {
             return this.props.data.map((res) => {
                 return (
                     <tr key={res.id}>
@@ -363,9 +371,13 @@ class AdminTable extends Component {
                         <td>{res.allow_password_change ? "True" : "False"}</td>
                         <td>{res.updated_at.substring(0, 50)}</td>
                         <td>
-                            <Link to={`/users/${res.id}/`}>
-                                Edit
-                            </Link>
+
+
+                            {res.id === user.id ?
+                                <Link to={`/users/${res.id}/`}>
+                                    Edit
+                                </Link>
+                                : <span>No Permission</span>}
                         </td>
 
                     </tr>
