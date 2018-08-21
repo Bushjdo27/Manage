@@ -141,10 +141,13 @@ class AdminTable extends Component {
     filterDataOrderFoods = (data) => {
         let result = [];
         data.forEach((item) => {
-            for (let i = 0; i < item.order_foods.length; i++) {
-                //console.log(item.order_foods[i])
-                result.push({ data: item.order_foods[i] })
+            if (item.hasOwnProperty('order_foods')) {
+                for (let i = 0; i < item.order_foods.length; i++) {
+                    //console.log(item.order_foods[i])
+                    result.push({ data: item.order_foods[i] })
+                }
             }
+
         })
 
         return result
@@ -154,14 +157,16 @@ class AdminTable extends Component {
         let result = [];
         data.forEach((item) => {
 
+            if (item.hasOwnProperty('order_foods')) {
+                item.order_foods.forEach((option) => {
+                    for (let j = 0; j < option.order_food_options.length; j++) {
+                        //console.log(option.order_food_options[j])
+                        result.push({ data: option.order_food_options[j] })
+                    }
 
-            item.order_foods.forEach((option) => {
-                for (let j = 0; j < option.order_food_options.length; j++) {
-                    //console.log(option.order_food_options[j])
-                    result.push({ data: option.order_food_options[j] })
-                }
+                })
+            }
 
-            })
         })
 
         return result
@@ -186,7 +191,7 @@ class AdminTable extends Component {
                                 </p>
                                 <p>
                                     <strong>Address : </strong>
-                                    <span>{res.address.address}</span>
+                                    <span>{res.hasOwnProperty('address') && res.address.address}</span>
                                 </p>
 
                             </div>

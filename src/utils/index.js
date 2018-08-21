@@ -124,7 +124,7 @@ export const deleteCategories = async (id) => {
 //============= Foods Checked ==========================
 
 export const getListFoods = async () => {
-    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/foods`)
+    const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/foods?all=true`)
     //console.log(result)
     return result;
 }
@@ -217,7 +217,7 @@ export const deleteFoodOptions = async (id) => {
 //==================== Order ==============================
 export const getListOrders = async () => {
 
-    const result = await Api('get', '/orders')
+    const result = await Api('get', '/orders?all=true')
     //console.log(result)
     return result;
 }
@@ -492,7 +492,7 @@ export const deletePaymentInfos = async (id) => {
 
 export const getListRestaurantUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
-    const result = await Api('get', '/restaurant_users')
+    const result = await Api('get', '/restaurant_users?all=true')
     console.log(result)
     return result;
 }
@@ -529,7 +529,7 @@ export const deleteRestaurantUsers = async (id) => {
 
 export const getListRestaurantEmails = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
-    const result = await Api('get', '/restaurant_emails')
+    const result = await Api('get', '/restaurant_emails?all=true')
     //console.log(result)
     return result;
 }
@@ -566,7 +566,7 @@ export const deleteRestaurantEmails = async (id) => {
 // Can chu y xem lai create
 export const getListUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
-    const result = await Api('get', '/users')
+    const result = await Api('get', '/users?all=true')
     //console.log(result)
     return result;
 }
