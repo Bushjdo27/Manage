@@ -122,6 +122,13 @@ body {
   font-size: 1.2rem;
   font-style: italic; }
 
+.error-warn, .login__content .form__auth p.error-warn {
+  text-align: center;
+  color: red;
+  cursor: default;
+  font-style: italic;
+  font-size: 1.2rem; }
+
 .container {
   margin-top: 1rem;
   display: flex;
@@ -331,7 +338,8 @@ body {
       width: 100%;
       font-size: 1.6rem;
       transition: all .3s;
-      cursor: pointer; }
+      cursor: pointer;
+      border-radius: .7rem; }
       .login__content .form__auth .btn__auth__in:hover {
         transform: translateY(-0.7rem);
         box-shadow: 0rem 0.8rem 1.6rem 0rem rgba(0, 0, 0, 0.2); }
@@ -656,3 +664,10 @@ button[type="submit"] {
   color: red;
   font-size: 1.2rem;
   font-style: italic; }
+
+.error-warn, .login__content .form__auth p.error-warn {
+  text-align: center;
+  color: red;
+  cursor: default;
+  font-style: italic;
+  font-size: 1.2rem; }

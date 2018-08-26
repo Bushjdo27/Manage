@@ -50,3 +50,11 @@
     font-size: 1.2rem;
     font-style: italic;
 }
+
+.error-warn , .login__content .form__auth p.error-warn{
+    text-align: center;
+    color: red;
+    cursor: default;
+    font-style: italic;
+    font-size: 1.2rem;
+}

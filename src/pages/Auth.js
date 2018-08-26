@@ -8,9 +8,10 @@ class Auth extends Component {
         super(props);
         this.state = {
             email: 'super_admin@example.com',
-            password: '12345678',
+            password: '1234567',
             username: '',
-            processing: false
+            processing: false,
+            error: false
         }
     }
 
@@ -21,22 +22,20 @@ class Auth extends Component {
     }
 
     handleEmailChange = (e) => {
-        //let email = e.target.value;
+        let email = e.target.value;
 
-        //this.setState(() => ({ email }))
+        this.setState(() => ({ email , error: false}))
     }
 
     handlePassChange = (e) => {
-        //let password = e.target.value;
+        let password = e.target.value;
 
-        //this.setState(() => ({ password }))
+        this.setState(() => ({ password , error: false }))
     }
 
 
     handleSignIn = (e) => {
         e.preventDefault()
-        //console.log("Sign In")
-        //this.props.dispatch()
         if (this.state.email.length > 0 && this.state.password > 0) {
             this.setState(() => ({ processing: true }))
             authSignIn({ email: this.state.email, password: this.state.password }).then((result) => {
@@ -44,6 +43,8 @@ class Auth extends Component {
                 this.props.dispatch(result);
                 //console.log(this.props);
                 this.props.history.push('/')
+            }).catch(()=>{
+                this.setState(()=>({processing: false , error: true}))
             })
         }
 
@@ -55,6 +56,7 @@ class Auth extends Component {
                 <form action="Post" className="form__auth" onSubmit={this.handleSignIn}>
                     <input type="email" placeholder="Email : super_admin@example.com" onChange={this.handleEmailChange} value={this.state.email} />
                     <input type="password" placeholder="Password : 12345678" onChange={this.handlePassChange} value={this.state.password} />
+                    {this.state.error && <p className="error-warn">Login Fails , please check again</p>}
                     {this.state.processing ? <Spinner /> : <button className="btn__auth__in">Sign In</button>}
                 </form>
             </div>
