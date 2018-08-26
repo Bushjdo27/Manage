@@ -43,7 +43,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.address.address.substring(0, 50)}</td>
                         <td>{res.phone}</td>
-                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.updated_at.substring(0, 10)}</td>
                         <td>
                             {havePermission(res.id, 'RESTAURANT') ?
                                 <Link to={`/restaurant/${res.id}/`}>
@@ -71,7 +71,7 @@ class AdminTable extends Component {
                     <tr key={res.id}>
                         <td>{res.name}</td>
                         <td>{res.category_type}</td>
-                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.updated_at.substring(0, 10)}</td>
                         <td>{res.photo.photo_url.substring(0, 50)}</td>
                         <td>
                             <Link to={`/caterogy/${res.id}/`}>
@@ -97,7 +97,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.description.substring(0, 50)}</td>
                         <td>{res.price}</td>
-                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.updated_at.substring(0, 10)}</td>
                         <td>
                             <Link to={`/foods/${res.id}/`}>
                                 Edit
@@ -121,7 +121,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.price}</td>
                         <td>{res.food_id}</td>
-                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.updated_at.substring(0, 10)}</td>
                         <td>
                             <Link to={`/food_options/${res.id}/`}>
                                 Edit
@@ -279,7 +279,7 @@ class AdminTable extends Component {
                         <td>{res.name}</td>
                         <td>{res.price}</td>
                         <td>{res.food_id}</td>
-                        <td>{res.updated_at.substring(0, 50)}</td>
+                        <td>{res.updated_at.substring(0, 10)}</td>
                         <td>
                             <Link to={`/order_food_option/${res.id}/`}>
                                 Edit
@@ -303,22 +303,25 @@ class AdminTable extends Component {
                         <td>{res.generatable.name}</td>
                         <td>{res.payment_type}</td>
                         <td>{res.card_account.full_name}</td>
-                        <td>{res.card_account.updated_at.substring(0, 50)}</td>
-                        <td>
-                            <Link to={`/payment/${res.id}/`}>
-                                Edit
-                            </Link>
-                        </td>
-                        {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
-                        }
+                        <td className="normal">{res.card_account.updated_at.substring(0, 10)}</td>
+
                     </tr>
                 )
             })
         }
         return <tr><td colSpan="6" style={{ paddingTop: '3rem' }}><Spinner /></td></tr>
     }
-
+    /*
+    
+    <td>
+                                <Link to={`/payment/${res.id}/`}>
+                                    Edit
+                                </Link>
+                            </td>
+                            {
+                                (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
+                            }
+    */
     typeRestaurantUsers = () => {
         if (this.props.data.length > 0) {
             return this.props.data.map((res) => {
@@ -494,6 +497,15 @@ class AdminTable extends Component {
 
         }
     }
+    //http://localhost:3000/login
+
+    renderControlHelper = () => {
+        let canShow = true;
+        if (this.props.type === 'Order' || this.props.type === 'Payment') {
+            canShow = false;
+        }
+        return canShow && <td colSpan="2">Control</td>
+    }
     render() {
         return (
             <div className="admin__data">
@@ -502,7 +514,7 @@ class AdminTable extends Component {
                         <tr>
                             {this.renderTableHead()}
                             {
-                                this.props.type !== 'Order' && <td colSpan="2">Control</td>
+                                this.renderControlHelper()
                             }
                         </tr>
                     </thead>

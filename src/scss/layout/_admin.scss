@@ -112,7 +112,7 @@
                   font-weight: bold
                 }
               }
-              &:last-child{
+              &:last-child:not(.normal){
                 cursor: pointer;
                 transition: all .2s;
                 display: block;
@@ -124,6 +124,10 @@
                   color: $color-primary;
                   font-weight: bold
                 }
+              }
+
+              &:last-child.rowDelete{
+                width: 3rem;
               }
               &:last-child.total{
                 cursor: pointer;

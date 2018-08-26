@@ -225,16 +225,18 @@ body {
         .admin__data table tbody tr td a:hover {
           color: #EAA750;
           font-weight: bold; }
-      .admin__data table tbody tr td:last-child {
+      .admin__data table tbody tr td:last-child:not(.normal) {
         cursor: pointer;
         transition: all .2s;
         display: block;
         height: 2rem;
         width: 9rem;
         margin: 0 auto; }
-        .admin__data table tbody tr td:last-child:hover {
+        .admin__data table tbody tr td:last-child:not(.normal):hover {
           color: #EAA750;
           font-weight: bold; }
+      .admin__data table tbody tr td:last-child.rowDelete {
+        width: 3rem; }
       .admin__data table tbody tr td:last-child.total {
         cursor: pointer;
         -webkit-transition: all .2s;
