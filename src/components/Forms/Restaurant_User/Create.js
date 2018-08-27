@@ -14,6 +14,7 @@ class CreateRestaurantUser extends Component {
             restaurant_id: props.data ? parseInt(props.data.restaurant_id, 10) : 0,
             error: false,
             clickSumit: false,
+            reqFail: false
         }
     }
 
@@ -44,7 +45,11 @@ class CreateRestaurantUser extends Component {
             //this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => { 
+                    this.props.back() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -54,7 +59,11 @@ class CreateRestaurantUser extends Component {
             this.props.dispatch(createRestaurantUser(this.state)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createRestaurantUser(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createRestaurantUser(data)).then(() => { 
+                    this.props.hideCreate() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -77,7 +86,7 @@ class CreateRestaurantUser extends Component {
         }
     }
     render() {
-        const { clickSumit, error } = this.state
+        const { clickSumit, error , reqFail } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -98,6 +107,7 @@ class CreateRestaurantUser extends Component {
                         </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
 
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant User' : 'Create Restaurant User'}</button>

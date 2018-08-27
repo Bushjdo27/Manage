@@ -18,7 +18,8 @@ class CreateUser extends Component {
             password: "",
             error: false,
             clickSumit: false,
-            isTaken: false
+            isTaken: false,
+            reqFail: false
         }
     }
 
@@ -68,7 +69,9 @@ class CreateUser extends Component {
                     this.props.dispatch(updateUser(this.props.data.id, updateData)).then((res) => {
                         ManageStorage(USER_RESTAURANT, UPDATE, res)
                         this.props.back()
-                    }).catch(() => { console.log("") })
+                    }).catch(()=>{
+                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }
@@ -85,7 +88,9 @@ class CreateUser extends Component {
                     this.props.dispatch(createUser(data)).then((res) => {
                         ManageStorage(USER_RESTAURANT, CREATE, res)
                         this.props.hideCreate()
-                    }).catch(() => { console.log("") })
+                    }).catch(()=>{
+                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
                 }
@@ -128,7 +133,7 @@ class CreateUser extends Component {
 
 
     render() {
-        const { nickname, name, phone, address, email, password, clickSumit, error, isTaken } = this.state;
+        const { nickname, name, phone, address, email, password, clickSumit, error, isTaken , reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -166,6 +171,7 @@ class CreateUser extends Component {
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
                     {isTaken && <p className="error-label">This email has been taken</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
 
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit User' : 'Create User'}</button>

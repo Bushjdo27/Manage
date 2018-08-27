@@ -15,6 +15,7 @@ class CreateNotification extends Component {
             restaurant_id: props.data ? props.data.restaurant_id : 0,
             error: false,
             clickSumit: false,
+            reqFail: false
 
         }
     }
@@ -45,7 +46,11 @@ class CreateNotification extends Component {
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             if (!checkDataRequest(data)) {
-                this.props.dispatch(updateNotification(this.props.data.id, {...data , photo_id: this.props.data.photo.id})).then(() => { this.props.back() })
+                this.props.dispatch(updateNotification(this.props.data.id, {...data , photo_id: this.props.data.photo.id})).then(() => { 
+                    this.props.back() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
             }
@@ -55,7 +60,11 @@ class CreateNotification extends Component {
 
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createNotification(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createNotification(data)).then(() => { 
+                    this.props.hideCreate() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -70,7 +79,7 @@ class CreateNotification extends Component {
         }
     }
     render() {
-        const { subject, message, clickSumit, error } = this.state
+        const { subject, message, clickSumit, error , reqFail } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -96,6 +105,7 @@ class CreateNotification extends Component {
                         </select>
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
 
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Notification' : 'Create Notification'}</button>

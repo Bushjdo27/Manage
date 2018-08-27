@@ -14,7 +14,8 @@ class CreateRestaurantEmail extends Component {
             restaurant_id: props.data ? props.data.restaurant_id : 0,
             error: false,
             clickSumit: false,
-            isTaken: false
+            isTaken: false,
+            reqFail: false
         }
     }
 
@@ -48,6 +49,8 @@ class CreateRestaurantEmail extends Component {
                     this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then((res) => {
                         ManageStorage(RESTAURANT_EMAILS, UPDATE, res)
                         this.props.back()
+                    }).catch(()=>{
+                        this.setState(()=>({reqFail: true , clickSumit:false}))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -67,6 +70,8 @@ class CreateRestaurantEmail extends Component {
                     this.props.dispatch(createRestaurantEmail(data)).then((res) => {
                         ManageStorage(RESTAURANT_EMAILS, CREATE, res)
                         this.props.hideCreate()
+                    }).catch(()=>{
+                        this.setState(()=>({reqFail: true , clickSumit:false}))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -107,7 +112,7 @@ class CreateRestaurantEmail extends Component {
         }
     }
     render() {
-        const { email, clickSumit, error, isTaken } = this.state;
+        const { email, clickSumit, error, isTaken , reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -125,6 +130,7 @@ class CreateRestaurantEmail extends Component {
 
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
                     {isTaken && <p className="error-label">This email has been taken</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Restaurant Email' : 'Create Restaurant Email'}</button>
                     }

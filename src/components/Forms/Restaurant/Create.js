@@ -19,6 +19,7 @@ class CreateRestaurant extends Component {
             phone: props.data ? props.data.phone : "",
             error: false,
             clickSumit: false,
+            reqFail: false
         }
     }
 
@@ -118,6 +119,8 @@ class CreateRestaurant extends Component {
                 this.props.dispatch(updateRestaurant(this.props.data.id, data)).then((res) => {
                     ManageStorage(RESTAURANTS, UPDATE, res)
                     this.props.back()
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
                 })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -141,6 +144,8 @@ class CreateRestaurant extends Component {
                 this.props.dispatch(createRestaurant(data)).then((res) => {
                     ManageStorage(RESTAURANTS, CREATE, res)
                     this.props.hideCreate()
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
                 })
                 //return
             } else {
@@ -150,7 +155,7 @@ class CreateRestaurant extends Component {
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit, error } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit, error , reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -194,6 +199,7 @@ class CreateRestaurant extends Component {
                         <input className="input" type="file" name="icon" onChange={this.handleIconChange} />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
 
                     {
                         clickSumit ? <Spinner /> : <button type="submit">{this.props.data ? 'Edit Restaurant' : 'Create Restaurant'}</button>

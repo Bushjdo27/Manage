@@ -15,7 +15,8 @@ class CreateFoodOptions extends Component {
             name: props.data ? props.data.name : "",
             price: props.data ? props.data.price : "",
             error: false,
-            clickSumit:false
+            clickSumit:false,
+            reqFail: false
         }
     }
 
@@ -45,7 +46,11 @@ class CreateFoodOptions extends Component {
             //this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { 
+                    this.props.back() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
@@ -54,7 +59,11 @@ class CreateFoodOptions extends Component {
             
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(createFoodOption(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createFoodOption(data)).then(() => { 
+                    this.props.hideCreate() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
@@ -69,7 +78,7 @@ class CreateFoodOptions extends Component {
         }
     }
     render() {
-        const { name, price, clickSumit ,error } = this.state;
+        const { name, price, clickSumit ,error , reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -91,6 +100,7 @@ class CreateFoodOptions extends Component {
                         <input onChange={this.handlePriceChange} className="input" name="price" value={price} type="number" placeholder="price" />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
                     
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Foods Options' : 'Create Foods Options'}</button>

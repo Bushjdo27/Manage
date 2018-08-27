@@ -18,38 +18,40 @@ class CreateFoods extends Component {
             photo: "",
             error: false,
             clickSumit: false,
+            reqFail: false
         }
     }
 
     handleCateIDChange = (e) => {
         console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
-        this.setState(() => ({ category_id: value }))
+        this.setState(() => ({ category_id: value , reqFail: false}))
 
     }
     handleNameChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ name: value }))
+        this.setState(() => ({ name: value , reqFail: false}))
 
     }
     handleDescriptionChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ description: value }))
+        this.setState(() => ({ description: value , reqFail: false}))
 
     }
 
     handlePriceChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ price: value }))
+        this.setState(() => ({ price: value , reqFail: false}))
 
     }
 
     renderOptions = () => {
         if (this.props.Foods.length > 0) {
             return this.props.Foods.map((item, index) => {
-                return <option key={index} value={item.category_id}>{item.category.name}</option>
+                return <option key={index} value={item.category_id}>{item.name}</option>
             })
         }
+        //item.category.name
     }
 
     handleSubmit = (e) => {
@@ -72,6 +74,8 @@ class CreateFoods extends Component {
                 this.props.dispatch(updateFood(this.props.data.id, data)).then((res) => {
                     ManageStorage(FOODS, UPDATE, res)
                     this.props.back()
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
                 })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -86,6 +90,8 @@ class CreateFoods extends Component {
                 this.props.dispatch(createFood(data)).then((res) => {
                     ManageStorage(FOODS, CREATE, res)
                     this.props.hideCreate()
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
                 })
                 //return
             } else {
@@ -94,7 +100,7 @@ class CreateFoods extends Component {
         }
     }
     render() {
-        const { name, description, price, clickSumit, error } = this.state
+        const { name, description, price, clickSumit, error ,reqFail} = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -122,7 +128,7 @@ class CreateFoods extends Component {
                         <input className="input" name="photo" type="file" />
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
-
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Foods' : 'Create Foods'}</button>
                     }

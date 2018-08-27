@@ -14,7 +14,8 @@ class CreateCategories extends Component {
             restaurant_id: props.data ? props.data.restaurant_id : 0,
             loading: false,
             clickSumit: false,
-            error: false
+            error: false,
+            reqFail: false
         }
     }
 
@@ -52,7 +53,11 @@ class CreateCategories extends Component {
             const data = { name, category_type, restaurant_id }
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { this.props.back() })
+                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { 
+                    this.props.back() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
@@ -62,7 +67,11 @@ class CreateCategories extends Component {
 
             if(!checkDataRequest(data)){
                 
-                this.props.dispatch(createCategory(data)).then(() => { this.props.hideCreate() })
+                this.props.dispatch(createCategory(data)).then(() => { 
+                    this.props.hideCreate() 
+                }).catch(()=>{
+                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                })
                 //return
             }else{
                 this.setState(()=>({clickSumit:false , error:true}))
@@ -80,7 +89,7 @@ class CreateCategories extends Component {
         }
     }
     render() {
-        const { name, category_type, clickSumit ,error} = this.state;
+        const { name, category_type, clickSumit ,error ,reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -109,6 +118,7 @@ class CreateCategories extends Component {
                         </div>
                     }
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
+                    {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Category' : 'Create Category'}</button>
                     }
