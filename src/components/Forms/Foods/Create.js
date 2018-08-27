@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { createFood, updateFood } from '../../../actions/foodActions'
 import { connect } from 'react-redux';
-import { checkDataRequest, ManageStorage } from '../../../utils'
+import { checkDataRequest, ManageStorage, removetDataEdit } from '../../../utils'
 import { FOODS, UPDATE, CREATE } from '../../../actions/constantType'
-
+import { EDIT_FOODS } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 // checked
 class CreateFoods extends Component {
@@ -22,26 +22,32 @@ class CreateFoods extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/foods")
+        }
+    }
+
     handleCateIDChange = (e) => {
         console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
-        this.setState(() => ({ category_id: value , reqFail: false}))
+        this.setState(() => ({ category_id: value, reqFail: false }))
 
     }
     handleNameChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ name: value , reqFail: false}))
+        this.setState(() => ({ name: value, reqFail: false }))
 
     }
     handleDescriptionChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ description: value , reqFail: false}))
+        this.setState(() => ({ description: value, reqFail: false }))
 
     }
 
     handlePriceChange = (e) => {
         const value = e.target.value;
-        this.setState(() => ({ price: value , reqFail: false}))
+        this.setState(() => ({ price: value, reqFail: false }))
 
     }
 
@@ -73,9 +79,10 @@ class CreateFoods extends Component {
             if (!checkDataRequest(data)) {
                 this.props.dispatch(updateFood(this.props.data.id, data)).then((res) => {
                     ManageStorage(FOODS, UPDATE, res)
+                    removetDataEdit(EDIT_FOODS)
                     this.props.back()
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -90,8 +97,8 @@ class CreateFoods extends Component {
                 this.props.dispatch(createFood(data)).then((res) => {
                     ManageStorage(FOODS, CREATE, res)
                     this.props.hideCreate()
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
             } else {
@@ -100,7 +107,7 @@ class CreateFoods extends Component {
         }
     }
     render() {
-        const { name, description, price, clickSumit, error ,reqFail } = this.state
+        const { name, description, price, clickSumit, error, reqFail } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

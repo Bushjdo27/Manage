@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createRestaurantEmail, updateRestaurantEmail } from '../../../actions/restaurantEmailActions'
 import { connect } from 'react-redux';
-import { checkDataRequest, ManageStorage } from '../../../utils'
-import { RESTAURANT_EMAILS, UPDATE, CREATE } from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage, removetDataEdit } from '../../../utils'
+import { RESTAURANT_EMAILS, UPDATE, CREATE, EDIT_RESTAURANTS_EMAILS } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 //checked
 class CreateRestaurantEmail extends Component {
@@ -16,6 +16,12 @@ class CreateRestaurantEmail extends Component {
             clickSumit: false,
             isTaken: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/restaurant_emails")
         }
     }
 
@@ -48,9 +54,10 @@ class CreateRestaurantEmail extends Component {
 
                     this.props.dispatch(updateRestaurantEmail(this.props.data.id, data)).then((res) => {
                         ManageStorage(RESTAURANT_EMAILS, UPDATE, res)
+                        removetDataEdit(EDIT_RESTAURANTS_EMAILS)
                         this.props.back()
-                    }).catch(()=>{
-                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    }).catch(() => {
+                        this.setState(() => ({ reqFail: true, clickSumit: false }))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -70,8 +77,8 @@ class CreateRestaurantEmail extends Component {
                     this.props.dispatch(createRestaurantEmail(data)).then((res) => {
                         ManageStorage(RESTAURANT_EMAILS, CREATE, res)
                         this.props.hideCreate()
-                    }).catch(()=>{
-                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    }).catch(() => {
+                        this.setState(() => ({ reqFail: true, clickSumit: false }))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -112,7 +119,7 @@ class CreateRestaurantEmail extends Component {
         }
     }
     render() {
-        const { email, clickSumit, error, isTaken , reqFail } = this.state;
+        const { email, clickSumit, error, isTaken, reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

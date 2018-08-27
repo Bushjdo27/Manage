@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createUser, updateUser } from '../../../actions/userActions'
 import { connect } from 'react-redux';
-import { checkDataRequest, ManageStorage } from '../../../utils'
-import { USER_RESTAURANT, UPDATE, CREATE } from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage, removetDataEdit } from '../../../utils'
+import { USER_RESTAURANT, UPDATE, CREATE, EDIT_USERS } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 class CreateUser extends Component {
 
@@ -20,6 +20,12 @@ class CreateUser extends Component {
             clickSumit: false,
             isTaken: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/users")
         }
     }
 
@@ -68,9 +74,10 @@ class CreateUser extends Component {
                 if (!this.validateEmails()) {
                     this.props.dispatch(updateUser(this.props.data.id, updateData)).then((res) => {
                         ManageStorage(USER_RESTAURANT, UPDATE, res)
+                        removetDataEdit(EDIT_USERS)
                         this.props.back()
-                    }).catch(()=>{
-                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    }).catch(() => {
+                        this.setState(() => ({ reqFail: true, clickSumit: false }))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -88,8 +95,8 @@ class CreateUser extends Component {
                     this.props.dispatch(createUser(data)).then((res) => {
                         ManageStorage(USER_RESTAURANT, CREATE, res)
                         this.props.hideCreate()
-                    }).catch(()=>{
-                        this.setState(()=>({reqFail: true , clickSumit:false}))
+                    }).catch(() => {
+                        this.setState(() => ({ reqFail: true, clickSumit: false }))
                     })
                 } else {
                     this.setState(() => ({ clickSumit: false, isTaken: true }))
@@ -133,7 +140,7 @@ class CreateUser extends Component {
 
 
     render() {
-        const { nickname, name, phone, address, email, password, clickSumit, error, isTaken , reqFail } = this.state;
+        const { nickname, name, phone, address, email, password, clickSumit, error, isTaken, reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

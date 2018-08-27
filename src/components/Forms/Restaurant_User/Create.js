@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { createRestaurantUser, updateRestaurantUser } from '../../../actions/restaurantUsersActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest, removetDataEdit } from '../../../utils'
 import Spinner from '../../Spinner';
+import { EDIT_RESTAURANTS_USERS } from '../../../actions/constantType'
 //checked
 class CreateRestaurantUser extends Component {
 
@@ -15,6 +16,12 @@ class CreateRestaurantUser extends Component {
             error: false,
             clickSumit: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/restaurant_users")
         }
     }
 
@@ -45,10 +52,11 @@ class CreateRestaurantUser extends Component {
             //this.props.dispatch(updateRestaurantUser(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => { 
-                    this.props.back() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                this.props.dispatch(updateRestaurantUser(this.props.data.id, data)).then(() => {
+                    removetDataEdit(EDIT_RESTAURANTS_USERS)
+                    this.props.back()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
             } else {
@@ -59,10 +67,10 @@ class CreateRestaurantUser extends Component {
             this.props.dispatch(createRestaurantUser(this.state)).then(() => { this.props.hideCreate() })
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createRestaurantUser(data)).then(() => { 
-                    this.props.hideCreate() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                this.props.dispatch(createRestaurantUser(data)).then(() => {
+                    this.props.hideCreate()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
             } else {
@@ -86,7 +94,7 @@ class CreateRestaurantUser extends Component {
         }
     }
     render() {
-        const { clickSumit, error , reqFail } = this.state
+        const { clickSumit, error, reqFail } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

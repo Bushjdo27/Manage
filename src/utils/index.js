@@ -909,3 +909,12 @@ const createUserUpdate = (id) => {
     }
     return user
 }
+
+export const checkDataEdit = (type) => {
+    const result = JSON.parse(localStorage.getItem(type))
+    return result;
+}
+
+export const removetDataEdit = (type) => {
+    localStorage.removeItem(type)
+}

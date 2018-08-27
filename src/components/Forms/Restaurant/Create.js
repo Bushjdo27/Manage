@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 //import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../../../actions/resActions'
-import { checkDataRequest, ManageStorage } from '../../../utils';
-import { RESTAURANTS, UPDATE, CREATE } from '../../../actions/constantType'
+import { checkDataRequest, ManageStorage, removetDataEdit } from '../../../utils';
+import { RESTAURANTS, UPDATE, CREATE, EDIT_RESTAURANTS } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 
 class CreateRestaurant extends Component {
@@ -20,6 +20,12 @@ class CreateRestaurant extends Component {
             error: false,
             clickSumit: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/")
         }
     }
 
@@ -118,9 +124,10 @@ class CreateRestaurant extends Component {
                 console.log(data)
                 this.props.dispatch(updateRestaurant(this.props.data.id, data)).then((res) => {
                     ManageStorage(RESTAURANTS, UPDATE, res)
+                    removetDataEdit(EDIT_RESTAURANTS)
                     this.props.back()
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -144,8 +151,8 @@ class CreateRestaurant extends Component {
                 this.props.dispatch(createRestaurant(data)).then((res) => {
                     ManageStorage(RESTAURANTS, CREATE, res)
                     this.props.hideCreate()
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
             } else {
@@ -155,7 +162,7 @@ class CreateRestaurant extends Component {
     }
 
     render() {
-        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit, error , reqFail } = this.state;
+        const { name, fbUrl, ytUrl, instaUrl, address, phone, clickSumit, error, reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>

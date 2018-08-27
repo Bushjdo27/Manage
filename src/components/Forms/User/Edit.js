@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Form from './Create'
 import Header from '../../Header'
-import { isLogin } from '../../../utils'
-const EditUser = (props) => {
+import { isLogin, checkDataEdit } from '../../../utils'
+import { EDIT_USERS } from '../../../actions/constantType'
 
-    if (!isLogin) {
-        this.props.history.push("/login")
+
+class EditUser extends Component {
+
+    componentDidMount() {
+        if (!isLogin) {
+            this.props.history.push("/login")
+        }
     }
 
-    return (
-        <div>
-            <Header name="User" sub="Edit User Page" />
-            <Form back={props.history.goBack} type="edit" data={props.User} />
-        </div>
-    )
+    getDataEdit = () => {
+        const value = checkDataEdit(EDIT_USERS);
+        if (this.props.User) {
+            localStorage.setItem(EDIT_USERS, JSON.stringify(this.props.User))
+            return this.props.User
+        } else if (value) {
+            if (value.id === parseInt(this.props.match.params.id, 10)) {
+                return value
+            }
+            return null;
+        } else {
+            //this.props.history.push("/caterogy")
+            return null
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Header name="User" sub="Edit User Page" />
+                <Form back={this.props.history.goBack} type="edit" data={this.getDataEdit()} navigate={this.props.history.push} />
+            </div>
+        )
+    }
+
+
 }
 
 

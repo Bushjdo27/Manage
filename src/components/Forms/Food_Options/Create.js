@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import { createFoodOptions } from '../../../utils';
 import { createFoodOption, updateFoodOption } from '../../../actions/foodOptionActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils'
-
+import { checkDataRequest, removetDataEdit } from '../../../utils'
+import { EDIT_FOOD_OPTIONS } from '../../../actions/constantType'
 import Spinner from '../../Spinner';
 //checked
 class CreateFoodOptions extends Component {
@@ -15,8 +15,14 @@ class CreateFoodOptions extends Component {
             name: props.data ? props.data.name : "",
             price: props.data ? props.data.price : "",
             error: false,
-            clickSumit:false,
+            clickSumit: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/food_options")
         }
     }
 
@@ -39,34 +45,35 @@ class CreateFoodOptions extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         //console.log(e.target.elements.photo.files[0])
-        const {food_id , name , price} = this.state
-        const data = {food_id , name ,price}
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        const { food_id, name, price } = this.state
+        const data = { food_id, name, price }
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             //this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { this.props.history.goBack() })
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => { 
-                    this.props.back() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(updateFoodOption(this.props.data.id, data)).then(() => {
+                    removetDataEdit(EDIT_FOOD_OPTIONS)
+                    this.props.back()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         } else {
-            
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(createFoodOption(data)).then(() => { 
-                    this.props.hideCreate() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(createFoodOption(data)).then(() => {
+                    this.props.hideCreate()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         }
     }
@@ -78,13 +85,13 @@ class CreateFoodOptions extends Component {
         }
     }
     render() {
-        const { name, price, clickSumit ,error , reqFail } = this.state;
+        const { name, price, clickSumit, error, reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label>Food <span style={{ color: 'red' }}>* :</span> </label>
-                        
+
 
                         <select className="input" onChange={this.handleFoodIDChange}>
                             <option value="">Select Food</option>
@@ -101,7 +108,7 @@ class CreateFoodOptions extends Component {
                     </div>
                     {error && <p className="error-label">You must enter all field have asterisk</p>}
                     {reqFail && <p className="error-label">Something went wrong with server, please try later</p>}
-                    
+
                     {
                         clickSumit ? <Spinner /> : <button type="submit" >{this.props.data ? 'Edit Foods Options' : 'Create Foods Options'}</button>
                     }
@@ -113,7 +120,7 @@ class CreateFoodOptions extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Foods: state.Foods
     }

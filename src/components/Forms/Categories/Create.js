@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { createCategory, updateCategory } from '../../../actions/categoriesActions';
 import { connect } from 'react-redux';
 import Spinner from '../../Spinner';
-import { checkDataRequest } from '../../../utils'
+import { checkDataRequest, removetDataEdit } from '../../../utils'
+import { EDIT_CATEGORIES } from '../../../actions/constantType'
 //checked
 class CreateCategories extends Component {
 
@@ -16,6 +17,12 @@ class CreateCategories extends Component {
             clickSumit: false,
             error: false,
             reqFail: false
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/caterogy")
         }
     }
 
@@ -47,37 +54,38 @@ class CreateCategories extends Component {
         console.log("Submiting..");
         const { name, category_type, restaurant_id } = this.state;
 
-        this.setState(() => ({ clickSumit: true ,error:false}))
+        this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             //this.props.dispatch(updateCategory(this.props.data.id, this.state)).then(() => { this.props.history.goBack() })
             const data = { name, category_type, restaurant_id }
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => { 
-                    this.props.back() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(updateCategory(this.props.data.id, data)).then(() => {
+                    removetDataEdit(EDIT_CATEGORIES)
+                    this.props.back()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
         } else {
             const data = { name, category_type, restaurant_id, files: e.target.elements.photo.files[0] }
 
-            if(!checkDataRequest(data)){
-                
-                this.props.dispatch(createCategory(data)).then(() => { 
-                    this.props.hideCreate() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+            if (!checkDataRequest(data)) {
+
+                this.props.dispatch(createCategory(data)).then(() => {
+                    this.props.hideCreate()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
-            }else{
-                this.setState(()=>({clickSumit:false , error:true}))
+            } else {
+                this.setState(() => ({ clickSumit: false, error: true }))
             }
             //this.setState(() => { this.setState(() => ({ clickSumit: true })) })
-            
+
         }
 
     }
@@ -89,7 +97,7 @@ class CreateCategories extends Component {
         }
     }
     render() {
-        const { name, category_type, clickSumit ,error ,reqFail } = this.state;
+        const { name, category_type, clickSumit, error, reqFail } = this.state;
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -103,7 +111,7 @@ class CreateCategories extends Component {
                     </div>
                     <div className="form__group">
                         <label><span> Restaurant </span><span style={{ color: 'red' }}>* :</span> </label>
-                        
+
 
                         <select className="input" onChange={this.handleChangeResId}>
                             <option value="">Select Restaurant</option>
@@ -131,7 +139,7 @@ class CreateCategories extends Component {
 
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return {
         Restaurants: state.Restaurants
     }
