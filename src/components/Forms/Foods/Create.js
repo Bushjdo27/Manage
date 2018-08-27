@@ -100,7 +100,7 @@ class CreateFoods extends Component {
         }
     }
     render() {
-        const { name, description, price, clickSumit, error ,reqFail} = this.state
+        const { name, description, price, clickSumit, error ,reqFail } = this.state
         return (
             <div className="container-form">
                 <form className="form" onSubmit={this.handleSubmit}>
