@@ -7,30 +7,30 @@ class Auth extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'super_admin@example.com',
-            password: '1234567',
+            email: '',
+            password: '',
             username: '',
             processing: false,
             error: false
         }
     }
 
-    componentDidMount(){
-        if(isLogin()){
+    componentDidMount() {
+        if (isLogin()) {
             this.props.history.push('/')
         }
     }
 
     handleEmailChange = (e) => {
-        let email = e.target.value;
-
-        this.setState(() => ({ email , error: false}))
+        let value = e.target.value;
+        let email = value.trim()
+        this.setState(() => ({ email, error: false }))
     }
 
     handlePassChange = (e) => {
-        let password = e.target.value;
-
-        this.setState(() => ({ password , error: false }))
+        let value = e.target.value;
+        let password = value.trim()
+        this.setState(() => ({ password, error: false }))
     }
 
 
@@ -43,8 +43,8 @@ class Auth extends Component {
                 this.props.dispatch(result);
                 //console.log(this.props);
                 this.props.history.push('/')
-            }).catch(()=>{
-                this.setState(()=>({processing: false , error: true}))
+            }).catch(() => {
+                this.setState(() => ({ processing: false, error: true }))
             })
         }
 
@@ -54,8 +54,8 @@ class Auth extends Component {
         return (
             <div>
                 <form action="Post" className="form__auth" onSubmit={this.handleSignIn}>
-                    <input type="email" placeholder="Email : super_admin@example.com" onChange={this.handleEmailChange} value={this.state.email} />
-                    <input type="password" placeholder="Password : 12345678" onChange={this.handlePassChange} value={this.state.password} />
+                    <input type="email" placeholder="Email" onChange={this.handleEmailChange} value={this.state.email} />
+                    <input type="password" placeholder="Password" onChange={this.handlePassChange} value={this.state.password} />
                     {this.state.error && <p className="error-warn">Login Fails , please check again</p>}
                     {this.state.processing ? <Spinner /> : <button className="btn__auth__in">Sign In</button>}
                 </form>
