@@ -30,11 +30,12 @@ class Header extends Component {
     componentDidMount() {
         if (isLogin()) {
             this.handleLoadRestaurants()
+                .then(this.handleLoadUsers)
+                .then(this.handleLoadRestaurantUser)
                 .then(this.handleLoadFoods)
                 .then(this.handleLoadOrder)
                 .then(this.handleLoadRestaurantEmail)
-                .then(this.handleLoadUsers)
-                .then(this.handleLoadRestaurantUser)
+                
         }
 
     }

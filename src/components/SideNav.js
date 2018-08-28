@@ -14,11 +14,9 @@ class SideNav extends Component {
         return (
             <nav className="navigation">
                 <ul className="navigation__list">
+                    
                     <li className="navigation__item">
-                        <NavLink exact activeClassName="active-item" to="/" className="navigation__link">Restaurant</NavLink>
-                    </li>
-                    <li className="navigation__item">
-                        <NavLink exact activeClassName="active-item" to="/caterogy" className="navigation__link">Categories</NavLink>
+                        <NavLink exact activeClassName="active-item" to="/" className="navigation__link">Categories</NavLink>
                     </li>
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/foods" className="navigation__link">Foods</NavLink>
@@ -32,6 +30,9 @@ class SideNav extends Component {
 
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/payment" className="navigation__link">Payment</NavLink>
+                    </li>
+                    <li className="navigation__item">
+                        <NavLink exact activeClassName="active-item" to="/restaurants" className="navigation__link">Restaurant</NavLink>
                     </li>
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/restaurant_users" className="navigation__link">Restaurant Users</NavLink>

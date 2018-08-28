@@ -865,7 +865,7 @@ export const havePermission = (id, type) => {
     let result = -1;
     let permission = false;
     if (user && list) {
-
+        console.log("in if")
         switch (type) {
             case 'RESTAURANT':
                 result = list.data.findIndex(item => item.restaurant_id === id && item.user_id === user.id)

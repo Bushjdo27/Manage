@@ -259,7 +259,7 @@ body {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-size: 1.8rem;
+          font-size: 1.6rem;
           color: #EAA750; }
       .admin__data table tbody tr td.spinDel {
         display: inline-block;

@@ -51,9 +51,8 @@ class AppRoute extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/login" component={Auth} />
-                    <Route exact path="/" component={RestaurantPage} />
-                    <Route exact path="/restaurant/:id/" component={EditRestaurant} />
-                    <Route exact path="/caterogy" component={CategoryPage} />
+                    
+                    <Route exact path="/" component={CategoryPage} />
                     <Route exact path="/caterogy/:id/" component={EditCategories} />
 
                     <Route exact path="/food_options" component={Food_OptionPage} />
@@ -68,6 +67,9 @@ class AppRoute extends Component {
                     <Route exact path="/order" component={OrderPage} />
                     <Route exact path="/payment" component={PaymentPage} />
                     <Route exact path="/payment/:id/" component={EditPayment} />
+
+                    <Route exact path="/restaurants" component={RestaurantPage} />
+                    <Route exact path="/restaurants/:id/" component={EditRestaurant} />
 
                     <Route exact path="/restaurant_emails" component={Restaurant_EmailPage} />
                     <Route exact path="/restaurant_emails/:id/" component={EditRestaurantEmail} />
