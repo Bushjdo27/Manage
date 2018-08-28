@@ -36,7 +36,7 @@ class CreateRestaurantEmail extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create RestaurantUser')
+        //console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
         const { email, restaurant_id } = this.state;
         const data = {

@@ -8,7 +8,7 @@ export const authSignIn = async (req) => {
     //const userData = await axios.post('')
     const res = await signIn(req.email, req.password);
     //console.log(`${data.headers}`)
-    console.log(res)
+    //console.log(res)
     if (res) {
         const user = {
             email: res.data.email,

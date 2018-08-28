@@ -37,7 +37,7 @@ class RestaurantEmailPage extends Component {
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
     }
     handleSearch = (search) => {
-        console.log(search)
+        //console.log(search)
         this.setState(() => ({ search }))
     }
     hideCreateForm = () => {
@@ -50,7 +50,7 @@ class RestaurantEmailPage extends Component {
             const data = this.props.Restaurant_Email.filter((item) => {
                 return item.email.toLowerCase().includes(search.toLowerCase())
             });
-            console.log(data)
+            //console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }

@@ -54,21 +54,21 @@ class CreatePayment extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create payment')
+        //console.log('in create payment')
         //console.log(e.target.elements.photo.files[0])
         //createPaymentInfos()
         const { restaurant_id, payment_type, full_name, card_number, expiry_month, expiry_year, cvv } = this.state;
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
-                restaurant_id: parseInt(restaurant_id , 10),
+                restaurant_id: parseInt(restaurant_id, 10),
                 payment_type,
                 full_name,
 
                 card_id: this.props.data.card_account.id
             }
             if (!checkDataRequest(data)) {
-                console.log("preparing update...")
+                //console.log("preparing update...")
                 this.props.dispatch(updatePaymentInfo(this.props.data.id, data)).then(() => { this.props.back() })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -77,7 +77,7 @@ class CreatePayment extends Component {
         } else {
 
             const data = {
-                restaurant_id: parseInt(restaurant_id , 10),
+                restaurant_id: parseInt(restaurant_id, 10),
                 payment_type,
                 full_name,
                 card_number: parseInt(card_number, 10),

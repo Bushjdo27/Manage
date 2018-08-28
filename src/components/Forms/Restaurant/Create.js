@@ -30,7 +30,7 @@ class CreateRestaurant extends Component {
     }
 
     handleNameChange = (e) => {
-        console.log("Name changing..")
+        //console.log("Name changing..")
         const value = e.target.value;
         this.setState(() => {
             return {
@@ -89,8 +89,6 @@ class CreateRestaurant extends Component {
         })
     }
     handleIconChange = (e) => {
-        const type = typeof e.target.value;
-        console.log(type)
         const value = e.target.value;
         this.setState(() => {
             return {
@@ -101,10 +99,9 @@ class CreateRestaurant extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const type = typeof e.target.elements.photo.files[0];
         const { name, fbUrl, ytUrl, instaUrl, address, phone } = this.state;
-        console.log(type !== null)
-        console.log(type)
+        //console.log(type !== null)
+        //console.log(type)
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             const data = {
@@ -121,7 +118,7 @@ class CreateRestaurant extends Component {
                 icon_id: this.props.data.icon.id
             }
             if (!checkDataRequest(data)) {
-                console.log(data)
+                //console.log(data)
                 this.props.dispatch(updateRestaurant(this.props.data.id, data)).then((res) => {
                     ManageStorage(RESTAURANTS, UPDATE, res)
                     removetDataEdit(EDIT_RESTAURANTS)
@@ -135,7 +132,7 @@ class CreateRestaurant extends Component {
 
         } else {
             //this.props.dispatch(createRestaurant({ ...this.state, photo: e.target.elements.photo.files[0], icon: e.target.elements.icon.files[0] })).then(() => { this.props.hideCreate() })
-            console.log("Creating")
+            //console.log("Creating")
             const data = {
                 name,
                 fbUrl,
@@ -147,7 +144,7 @@ class CreateRestaurant extends Component {
                 icon: e.target.elements.icon.files[0]
             }
             if (!checkDataRequest(data)) {
-                console.log("requesting")
+                //console.log("requesting")
                 this.props.dispatch(createRestaurant(data)).then((res) => {
                     ManageStorage(RESTAURANTS, CREATE, res)
                     this.props.hideCreate()

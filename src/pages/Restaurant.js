@@ -69,9 +69,6 @@ class RestaurantPage extends Component {
     handleBack = () => {
         this.setState(() => ({ showCreate: false }))
     }
-    backToTable = () => {
-        console.log("submit done")
-    }
     render() {
         //console.log(this.props.Restaurants);
         //console.log(this.state.currentPage)

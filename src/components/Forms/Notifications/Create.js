@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { createNotification, updateNotification } from '../../../actions/notificationActions'
 import { connect } from 'react-redux';
-import { checkDataRequest } from '../../../utils';
+import { checkDataRequest, removetDataEdit } from '../../../utils';
+import { EDIT_NOTIFICATIONS } from '../../../actions/constantType'
 
 import Spinner from '../../Spinner';
 //error update
@@ -17,6 +18,11 @@ class CreateNotification extends Component {
             clickSumit: false,
             reqFail: false
 
+        }
+    }
+    componentDidMount() {
+        if (this.props.type === "edit" && !this.props.data) {
+            this.props.navigate("/notification")
         }
     }
 
@@ -40,16 +46,18 @@ class CreateNotification extends Component {
         const data = {
             subject,
             message,
-            restaurant_id: parseInt(restaurant_id , 10),
+            restaurant_id: parseInt(restaurant_id, 10),
             photo: e.target.elements.photo.files[0]
         }
         this.setState(() => ({ clickSumit: true, error: false }))
         if (this.props.data) {
             if (!checkDataRequest(data)) {
-                this.props.dispatch(updateNotification(this.props.data.id, {...data , photo_id: this.props.data.photo.id})).then(() => { 
-                    this.props.back() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                this.props.dispatch(updateNotification(this.props.data.id, { ...data, photo_id: this.props.data.photo.id })).then(() => {
+                    //this.props.back()
+                    removetDataEdit(EDIT_NOTIFICATIONS)
+                    this.props.back()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
             } else {
                 this.setState(() => ({ clickSumit: false, error: true }))
@@ -60,10 +68,10 @@ class CreateNotification extends Component {
 
             if (!checkDataRequest(data)) {
 
-                this.props.dispatch(createNotification(data)).then(() => { 
-                    this.props.hideCreate() 
-                }).catch(()=>{
-                    this.setState(()=>({reqFail: true , clickSumit:false}))
+                this.props.dispatch(createNotification(data)).then(() => {
+                    this.props.hideCreate()
+                }).catch(() => {
+                    this.setState(() => ({ reqFail: true, clickSumit: false }))
                 })
                 //return
             } else {
@@ -79,7 +87,7 @@ class CreateNotification extends Component {
         }
     }
     render() {
-        const { subject, message, clickSumit, error , reqFail } = this.state
+        const { subject, message, clickSumit, error, reqFail } = this.state
         return (
             <div className={this.props.edit ? "container-form" : "container-form"}>
                 <form onSubmit={this.handleSubmit} className="form">

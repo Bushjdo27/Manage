@@ -10,7 +10,7 @@ export const getListRestaurants = async () => {
     //console.log("fetching data")
     const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/restaurants`)
     //console.log(result);
-    console.log(result.data)
+    //console.log(result.data)
     return result;
 }
 
@@ -58,7 +58,7 @@ export const updateRestaurants = async (id, data = {}) => {
         fd.append("restaurant[icon_attributes][photo]", icon);
         try {
             const result = await Api('patch', `/restaurants/${id}`, fd)
-            console.log(result)
+            //console.log(result)
             return result;
         } catch (e) {
             // console.log(e.getMessage)
@@ -493,19 +493,19 @@ export const deletePaymentInfos = async (id) => {
 export const getListRestaurantUsers = async () => {
     //const result = await axios.get(`${corsURL}http://tastebagdev.herokuapp.com/order_foods`);
     const result = await Api('get', '/restaurant_users?all=true')
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
 export const createRestaurantUsers = async (resUser) => {
     const { user_id, restaurant_id } = resUser;
-    console.log(resUser)
+    //console.log(resUser)
     const fd = new FormData();
     fd.append("restaurant_user[user_id]", user_id);
     fd.append("restaurant_user[restaurant_id]", restaurant_id);
 
     const result = await Api('post', '/restaurant_users', fd);
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -671,14 +671,15 @@ export const signIn = async (email, password) => {
 }
 
 export const signOut = () => {
-    localStorage.removeItem(USER)
+    localStorage.removeItem(USER);
     localStorage.removeItem(HEADERS)
     localStorage.removeItem(RESTAURANTS)
     localStorage.removeItem(FOODS)
     localStorage.removeItem(ORDERS)
     localStorage.removeItem(RESTAURANT_EMAILS)
     localStorage.removeItem(USER_RESTAURANT)
-    localStorage.removeItem(LIST_ADMIN)
+    localStorage.removeItem(LIST_ADMIN);
+    localStorage.clear();
 }
 
 
@@ -865,7 +866,7 @@ export const havePermission = (id, type) => {
     let result = -1;
     let permission = false;
     if (user && list) {
-        console.log("in if")
+        //console.log("in if")
         switch (type) {
             case 'RESTAURANT':
                 result = list.data.findIndex(item => item.restaurant_id === id && item.user_id === user.id)
@@ -879,7 +880,7 @@ export const havePermission = (id, type) => {
                 const listRes = JSON.parse(localStorage.getItem(USER_RESTAURANT))
                 result = listRes.data.findIndex(item => item.uid === user.uid && item.id === user.id)
                 if (result > -1) {
-                    console.log(result)
+                    //console.log(result)
                     permission = true
                 } else {
                     permission = false
@@ -889,7 +890,7 @@ export const havePermission = (id, type) => {
                 break;
         }
     }
-    console.log(permission)
+    //console.log(permission)
     return permission;
 }
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 class SideNav extends Component {
 
     handleSignOut = () => {
-        console.log(this.props)
+        //console.log(this.props)
         this.props.dispatch(SignOutUser());
         this.props.redirect()
 
@@ -14,7 +14,7 @@ class SideNav extends Component {
         return (
             <nav className="navigation">
                 <ul className="navigation__list">
-                    
+
                     <li className="navigation__item">
                         <NavLink exact activeClassName="active-item" to="/" className="navigation__link">Categories</NavLink>
                     </li>

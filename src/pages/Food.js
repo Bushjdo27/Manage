@@ -37,7 +37,7 @@ class FoodPage extends Component {
         this.setState((prevState) => ({ currentPage: prevState.currentPage - 1 }))
     }
     handleSearch = (search) => {
-        console.log(search)
+        //console.log(search)
         this.setState(() => ({ search }))
     }
     hideCreateForm = () => {
@@ -50,7 +50,7 @@ class FoodPage extends Component {
             const data = this.props.Foods.filter((item) => {
                 return item.name.toLowerCase().includes(search.toLowerCase())
             });
-            console.log(data)
+            //console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }

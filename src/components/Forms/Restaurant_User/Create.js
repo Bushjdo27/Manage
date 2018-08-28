@@ -28,7 +28,7 @@ class CreateRestaurantUser extends Component {
     handleUserIDChange = (e) => {
         const element = e.target.value;
         const value = parseInt(element, 10)
-        console.log(value)
+        //console.log(value)
         this.setState(() => ({ user_id: value }))
     }
 
@@ -41,10 +41,10 @@ class CreateRestaurantUser extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('in create RestaurantUser')
+        //console.log('in create RestaurantUser')
         //console.log(e.target.elements.photo.files[0])
         const { user_id, restaurant_id } = this.state;
-        console.log(this.state)
+        //console.log(this.state)
         const data = { user_id, restaurant_id };
 
         this.setState(() => ({ clickSumit: true, error: false }))

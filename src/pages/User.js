@@ -38,7 +38,7 @@ class UserPage extends Component {
     }
 
     handleSearch = (search) => {
-        console.log(search)
+        //console.log(search)
         this.setState(() => ({ search }))
     }
 
@@ -48,7 +48,7 @@ class UserPage extends Component {
             const data = this.props.Users.filter((item) => {
                 return item.email.toLowerCase().includes(search.toLowerCase())
             });
-            console.log(data)
+            //console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }

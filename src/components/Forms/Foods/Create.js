@@ -29,7 +29,7 @@ class CreateFoods extends Component {
     }
 
     handleCateIDChange = (e) => {
-        console.log(e.target.value)
+        //console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         this.setState(() => ({ category_id: value, reqFail: false }))
 
@@ -62,7 +62,7 @@ class CreateFoods extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submiting...")
+        //console.log("submiting...")
         //createFoods(e.target.elements.photo.files[0]);
         const { category_id, name, description, price } = this.state
         this.setState(() => ({ clickSumit: true, error: false }))

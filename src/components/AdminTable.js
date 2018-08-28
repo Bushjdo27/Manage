@@ -46,14 +46,20 @@ class AdminTable extends Component {
                         <td>{res.updated_at.substring(0, 10)}</td>
                         <td>
                             {havePermission(res.id, 'RESTAURANT') ?
-                                <Link to={`/restaurant/${res.id}/`}>
+                                <Link to={`/restaurants/${res.id}/`}>
                                     Edit
                                 </Link>
                                 : <span>No Permission</span>}
 
                         </td>
                         {
-                            (this.state.clickDelete && (this.state.itemClick) === res.id) ? <td><SpinnerDelete /></td> : <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}><p>Delete</p></td>
+                            havePermission(res.id, 'RESTAURANT') ?
+                                (this.state.clickDelete && (this.state.itemClick) === res.id) ?
+                                    <td><SpinnerDelete /></td> :
+                                    <td className="rowDelete" onClick={() => { this.handleRemove(res.id) }}>
+                                        <p>Delete</p>
+                                    </td>
+                                : <span>No Permission</span>
                         }
 
                     </tr>
@@ -324,6 +330,7 @@ class AdminTable extends Component {
     */
     typeRestaurantUsers = () => {
         if (this.props.data.length > 0) {
+            //console.log(this.props.data)
             return this.props.data.map((res) => {
                 return (
                     <tr key={res.id}>

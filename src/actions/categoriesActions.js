@@ -19,11 +19,11 @@ export const getCategories = () => {
 
 
 export const createCategory = (data) => {
-    console.log("in create category")
+    //console.log("in create category")
     return async (dispatch) => {
-        console.log('prepare call utils....')
+        //console.log('prepare call utils....')
         let payload = await createCategories(data);
-        console.log("got payload")
+        //console.log("got payload")
         checkErrorResponse(payload, CATEGOREIS_ADD, dispatch)
     }
 }

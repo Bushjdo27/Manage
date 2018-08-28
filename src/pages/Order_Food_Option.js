@@ -27,7 +27,7 @@ class OrderFoodOptionPage extends Component {
         }
     }
     handleSearch = (search) => {
-        console.log(search)
+        //console.log(search)
         this.setState(() => ({ search }))
     }
     handleNext = () => {
@@ -49,7 +49,7 @@ class OrderFoodOptionPage extends Component {
             const data = this.props.Order_Foods_Options.filter((item) => {
                 return item.name.toLowerCase().includes(search.toLowerCase())
             });
-            console.log(data)
+            //console.log(data)
             //this.setState(()=>({data})) Menu Item 1
             return data;
         }

@@ -51,7 +51,7 @@ class CreateCategories extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submiting..");
+        //console.log("Submiting..");
         const { name, category_type, restaurant_id } = this.state;
 
         this.setState(() => ({ clickSumit: true, error: false }))

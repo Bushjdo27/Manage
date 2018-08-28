@@ -61,7 +61,7 @@ class CreateUser extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         //console.log('in create payment')
-        console.log(this.props.data)
+        //console.log(this.props.data)
         const { nickname, name, phone, address, restaurant_id, email, password } = this.state;
         const data = { nickname, name, phone, address, restaurant_id: parseInt(restaurant_id, 10), email, password }
         this.setState(() => ({ clickSumit: true, error: false, isTaken: false }))
@@ -69,7 +69,7 @@ class CreateUser extends Component {
             // this.props.dispatch(updateUser(this.props.data.id, data)).then(() => { this.props.history.goBack() })
 
             const updateData = { ...data, address_id: parseInt(this.props.data.address.id, 10), address: this.props.data.address.address }
-            console.log(updateData)
+            //console.log(updateData)
             if (!checkDataRequest(updateData)) {
                 if (!this.validateEmails()) {
                     this.props.dispatch(updateUser(this.props.data.id, updateData)).then((res) => {
